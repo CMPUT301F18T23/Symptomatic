@@ -1,2 +1,6 @@
+<<<<<<< HEAD
 Edit 1: by ahzam1
 Edit 2: by Amy
+=======
+Edit 1: by ahzam1
+>>>>>>> c49f84c9d2e9ae4c541c8b0151b3c5cbf24b83c2
