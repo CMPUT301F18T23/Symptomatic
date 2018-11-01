@@ -1,6 +1,6 @@
 package ca.ualberta.symptomaticapp;
 
-import org.w3c.dom.Comment;
+
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -8,30 +8,78 @@ import java.util.Date;
 public class Record {
     protected String recordTitle;
     protected String recordComment;
+    protected String geolocation;
     protected ArrayList<String> bodyLocation;
+    protected ArrayList<String> photos;
     private Date recordDate;
 
-    public Record(String recordTitle, Date date, String comment, ArrayList bodyLocation) {
-        this.recordTitle = recordTitle;
-        this.recordDate = date;
-        this.recordComment = comment;
-        this.bodyLocation = bodyLocation;
+    public Record(Date date) {
+      this.recordDate = date;
+    }
+
+
+    public Date getTimeStamp() {
+        return this.recordDate;
+    }
+
+    public void addTitle(String title) {
+        this.recordTitle = title;
+    }
+
+    public void removeTitle(String title) {
+        this.recordTitle = null;
     }
 
     public String getTitle() {
         return this.recordTitle;
     }
 
-    public Date getTimeStamp() {
-        return this.recordDate;
+    public void addComment(String comment) {
+        this.recordComment = comment;
+    }
+
+    public void removeComment(String comment) {
+        this.recordComment = null;
     }
 
     public String getComment() {
         return this.recordComment;
+    }
 
+    public void addBodyLocation(ArrayList<String> bodyLocation) {
+        this.bodyLocation = bodyLocation;
     }
 
     public ArrayList<String> getBodyLocation() {
         return this.bodyLocation;
+    }
+
+
+    public void removeBodyLocation(String bodyLocation) {
+        this.bodyLocation.remove(bodyLocation);
+    }
+
+    public void addPhoto(ArrayList<String> photos) {
+        this.photos = photos;
+    }
+
+    public ArrayList<String> getPhoto() {
+        return this.photos;
+    }
+
+    public void removePhoto(String photo) {
+        this.photos.remove(photo);
+    }
+
+    public void addGeolocation(String location) {
+        this.geolocation = location;
+    }
+
+    public String getGeolocation() {
+        return this.geolocation;
+    }
+
+    public void removeGeolocation(String location) {
+        this.geolocation = null;
     }
 }

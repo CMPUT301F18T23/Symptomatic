@@ -2,7 +2,7 @@ package ca.ualberta.symptomaticapp;
 
 import junit.framework.TestCase;
 
-import java.util.ArrayList;
+
 import java.util.Collection;
 import java.util.Date;
 
@@ -15,11 +15,8 @@ public class RecordListTest extends TestCase {
 
     public void testAddRecord() {
         RecordList recordList = new RecordList();
-        String recordTitle = "A record";
         Date date = new Date();
-        String comment = "comment";
-        ArrayList<String> bodyLocation = new ArrayList<>();
-        Record testRecord = new Record(recordTitle, date, comment, bodyLocation);
+        Record testRecord = new Record(date);
         recordList.addRecord(testRecord);
         Collection<Record> records = recordList.getRecords();
         assertTrue("Record list size == 1", records.size() == 1);
@@ -28,11 +25,8 @@ public class RecordListTest extends TestCase {
 
     public void testDeleteRecord() {
         RecordList recordList = new RecordList();
-        String recordTitle = "A record";
         Date date = new Date();
-        String comment = "comment";
-        ArrayList<String> bodyLocation = new ArrayList<>();
-        Record testRecord = new Record(recordTitle, date, comment, bodyLocation);
+        Record testRecord = new Record(date);
         recordList.addRecord(testRecord);
         recordList.deleteRecord(testRecord);
         Collection<Record> records = recordList.getRecords();

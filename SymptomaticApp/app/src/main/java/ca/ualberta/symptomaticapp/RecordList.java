@@ -8,7 +8,7 @@ public class RecordList {
     protected ArrayList<Record> recordList;
 
     public RecordList() {
-        recordList = new ArrayList<Record>();
+        recordList = new ArrayList<>();
     }
 
 
