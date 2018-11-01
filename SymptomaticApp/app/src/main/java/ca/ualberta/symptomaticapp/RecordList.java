@@ -1,0 +1,27 @@
+package ca.ualberta.symptomaticapp;
+
+import java.util.ArrayList;
+import java.util.Collection;
+
+public class RecordList {
+
+    protected ArrayList<Record> recordList;
+
+    public RecordList() {
+        recordList = new ArrayList<Record>();
+    }
+
+
+    public Collection<Record> getRecords() {
+        return recordList;
+    }
+
+    public void addRecord(Record testRecord) {
+        recordList.add(testRecord);
+
+    }
+
+    public void deleteRecord(Record testRecord) {
+        recordList.remove(testRecord);
+    }
+}
