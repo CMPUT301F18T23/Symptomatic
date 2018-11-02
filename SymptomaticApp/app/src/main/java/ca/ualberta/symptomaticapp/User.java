@@ -107,5 +107,13 @@ public class User {
         return (pattern.matcher(input_email).matches()); //returns whether or not the format matches
     }
 
+    /**
+     * Gets the problem list of the user
+     * @return The problem list of the user
+     */
+    public ArrayList<Problem> returnProblemList(){
+        return this.problems;
+    }
+
 
 }
