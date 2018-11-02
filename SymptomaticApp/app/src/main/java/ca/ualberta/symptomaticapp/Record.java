@@ -26,8 +26,8 @@ public class Record {
         this.recordTitle = title;
     }
 
-    public void removeTitle(String title) {
-        this.recordTitle = null;
+    public void removeTitle() {
+        this.recordTitle = "";
     }
 
     public String getTitle() {
@@ -38,8 +38,8 @@ public class Record {
         this.recordComment = comment;
     }
 
-    public void removeComment(String comment) {
-        this.recordComment = null;
+    public void removeComment() {
+        this.recordComment = "";
     }
 
     public String getComment() {

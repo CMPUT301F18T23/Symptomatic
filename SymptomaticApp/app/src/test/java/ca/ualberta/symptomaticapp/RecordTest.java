@@ -31,8 +31,8 @@ public class RecordTest extends TestCase {
         String title = "A records title";
         Record record = new Record(date);
         record.addTitle(title);
-        record.removeTitle(title);
-        assertTrue("Title is not null", record.getTitle() == null);
+        record.removeTitle();
+        assertTrue("Title is not null", record.getTitle().isEmpty());
     }
 
 
@@ -50,8 +50,8 @@ public class RecordTest extends TestCase {
         String comment = "A records comment";
         Record record = new Record(date);
         record.addComment(comment);
-        record.removeComment(comment);
-        assertTrue( "comment is not null", record.getComment() == null);
+        record.removeComment();
+        assertTrue( "comment is not null", record.getComment().isEmpty());
 
     }
 
@@ -99,8 +99,11 @@ public class RecordTest extends TestCase {
 
     }
 
+
+
     public void testAddGeolocation(){
         Date date = new Date();
+        
         String location = "A geolocation";
         Record record = new Record(date);
         record.addGeolocation(location);
