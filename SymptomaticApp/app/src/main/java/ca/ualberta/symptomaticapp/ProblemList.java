@@ -21,4 +21,9 @@ public class ProblemList {
     public void deleteProblem(Problem problem) {
         problemList.remove(problem);
     }
+
+    public Problem getProblem(Problem problem) {
+        int index = problemList.indexOf(problem);
+        return problemList.get(index);
+    }
 }
