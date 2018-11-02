@@ -26,12 +26,15 @@ public class RecordListTest extends TestCase {
     public void testDeleteRecord() {
         RecordList recordList = new RecordList();
         Date date = new Date();
-        Record testRecord = new Record(date);
-        recordList.addRecord(testRecord);
-        recordList.deleteRecord(testRecord);
+        Record testRecord1 = new Record(date);
+        Record testRecord2 = new Record(date);
+        Record testRecord3 = new Record(date);
+        recordList.addRecord(testRecord1);
+        recordList.addRecord(testRecord2);
+        recordList.addRecord(testRecord3);
+        recordList.deleteRecord(testRecord2);
         Collection<Record> records = recordList.getRecords();
-        assertTrue("Record list size == 0", records.size() == 0);
-        assertFalse("", records.contains(testRecord));
+        assertFalse("", records.contains(testRecord2));
     }
 }
 
