@@ -80,11 +80,12 @@ public class RecordTest extends TestCase {
 
     public void testAddBodyLocation(){
         Date date = new Date();
-        ArrayList<String> bodyLocation = new ArrayList<>();
-        bodyLocation.add("A body location");
+        ArrayList<String> bodyLocations = new ArrayList<>();
+        String bodyLocation = "A body location";
+        bodyLocations.add(bodyLocation);
         Record record = new Record(date);
-        record.addBodyLocation(bodyLocation);
-        assertTrue("Body location is not equal", bodyLocation.get(0).equals(record.getBodyLocation().get(0)));
+        record.addBodyLocation(bodyLocations);
+        assertTrue("Body location did not add", record.getBodyLocation().contains(bodyLocation));
     }
 
     public void testRemoveBodyLocation(){
@@ -134,25 +135,58 @@ public class RecordTest extends TestCase {
     public void testAddPhoto(){
         Date date = new Date();
         ArrayList<String> photos = new ArrayList<>();
-        photos.add("A photo");
+        String photo = "A photo";
+        photos.add(photo);
         Record record = new Record(date);
         record.addPhoto(photos);
-        assertTrue("Photo is not equal", photos.get(0).equals(record.getPhoto().get(0)));
+        assertTrue("Photo is not added", record.photos.contains(photo));
         }
 
 
 
-    public void testRemovePhoto(){
+    public void testRemovePhoto1(){
         Date date = new Date();
         ArrayList<String> photos = new ArrayList<>();
-        photos.add("A photo");
+        String photo1 = "A photo";
+        photos.add(photo1);
         Record record = new Record(date);
         record.addPhoto(photos);
-        record.removePhoto("A photo");
-        assertTrue("Photo array is not empty", record.getPhoto().isEmpty() == true);
+        record.removePhoto(photo1);
+        assertTrue("Photo array is not empty", record.getPhoto().isEmpty());
 
     }
 
+    // removing an non-existent photo
+    // should fail
+    public void testRemovePhoto2(){
+        Date date = new Date();
+        ArrayList<String> photos = new ArrayList<>();
+        String photo1 = "A photo";
+        String photo2 = "Another photo";
+        photos.add(photo1);
+        Record record = new Record(date);
+        record.addPhoto(photos);
+        record.removePhoto(photo2);
+        assertTrue("Photo does not exist", record.getPhoto().isEmpty());
+
+    }
+
+    // making sure the right photo is removed
+    public void testRemovePhoto3(){
+        Date date = new Date();
+        ArrayList<String> photos = new ArrayList<>();
+        String photo1 = "A photo";
+        String photo2 = "A photo";
+        String photo3 = "A photo";
+        photos.add(photo1);
+        photos.add(photo2);
+        photos.add(photo3);
+        Record record = new Record(date);
+        record.addPhoto(photos);
+        record.removePhoto(photo2);
+        assertTrue("Photo did not get removed", record.getPhoto().contains(photo2));
+
+    }
 
     // Currently working on best way to store geolocations
     // Using a string for testing purposes
@@ -181,7 +215,7 @@ public class RecordTest extends TestCase {
         Record record = new Record(date);
         record.addGeolocation(location);
         record.removeGeolocation(location);
-        assertTrue("Geolocation is not null", record.getGeolocation() == null);
+        assertTrue("Geolocation is not null", record.getGeolocation().isEmpty());
 
     }
 }

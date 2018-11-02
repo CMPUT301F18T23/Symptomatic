@@ -80,7 +80,7 @@ public class Record {
     }
 
     public void removeGeolocation(String location) {
-        this.geolocation = null;
+        this.geolocation = "";
     }
 
 
