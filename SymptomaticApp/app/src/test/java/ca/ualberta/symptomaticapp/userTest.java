@@ -43,17 +43,17 @@ public class userTest extends TestCase {
         User user = new User("ryan1234", "(780)585-3905", "freddy@hotmail.com");
 
         //Text not updating invalid field
-            //Invalid emails
+        //Invalid emails
         assertTrue("Incorrect Email updated 1",!user.changeEmail("freddy@hotmail"));
         assertTrue("Incorrect Email updated 2",!user.changeEmail("freddyhotmail.com"));
         assertTrue("Incorrect Email updated 3",!user.changeEmail("freddyhotmail"));
 
-            //Invalid phone numbers
+        //Invalid phone numbers
         assertTrue("Incorrect Phone updated 1",!user.changePhone("780)585-3905"));
         assertTrue("Incorrect Phone updated 2",!user.changePhone("(780585-3905"));
         assertTrue("Incorrect Phone updated 3",!user.changePhone("(780)5853905"));
 
-            //Ensure values are the same as it was before changes
+        //Ensure values are the same as it was before changes
         assertTrue("Incorrect Phone Updated Final",user.returnPhone().equals("(780)585-3905"));
         assertTrue("Incorrect Email Updated Final",user.returnEmail().equals("freddy@hotmail.com"));
 
