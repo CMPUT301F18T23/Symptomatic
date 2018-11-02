@@ -24,4 +24,7 @@ public class RecordList {
     public void deleteRecord(Record testRecord) {
         recordList.remove(testRecord);
     }
+
+
 }
+

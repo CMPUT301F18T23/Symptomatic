@@ -6,6 +6,7 @@ public class Problem {
     protected  String title;
     protected Date date;
     protected String comment;
+    protected RecordList recordList = new RecordList();
 
     public Problem (String title, Date date, String comment){
         this.title = title;
@@ -35,5 +36,9 @@ public class Problem {
 
     public String getComment() {
         return comment;
+    }
+
+    public RecordList getRecordList() {
+        return recordList;
     }
 }

@@ -3,6 +3,7 @@ package ca.ualberta.symptomaticapp;
 import junit.framework.TestCase;
 import ca.ualberta.symptomaticapp.Problem;
 import java.util.Calendar;
+import java.util.Collection;
 import java.util.Date;
 
 public class ProblemTest extends TestCase {
@@ -108,6 +109,25 @@ public class ProblemTest extends TestCase {
         problem.setComment(problemComment2);
         assertTrue("update Problem date is not equal", problemComment2.equals(problem.getComment()));
     }
+
+    public void testGetProblemRecords(){
+        String problemTitle = "Rash";
+        Date problemDate = Calendar.getInstance().getTime();
+        String problemComment = "I have a rash";
+        Problem problem = new Problem(problemTitle, problemDate, problemComment);
+
+        RecordList problemRecords = problem.getRecordList();
+        Date date = Calendar.getInstance().getTime();
+        Record record = new Record(date);
+        problemRecords.addRecord(record);
+
+        problemRecords = problem.getRecordList();
+        Collection<Record> records = problemRecords.getRecords();
+        assertTrue("Problem doesn't have record", records.iterator().next() ==record);
+
+    }
+
+
 
 
 }
