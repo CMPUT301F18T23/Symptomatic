@@ -82,4 +82,18 @@ public class Record {
     public void removeGeolocation(String location) {
         this.geolocation = null;
     }
+
+
+    public void updateTitle(String title) {
+        this.recordTitle = title;
+    }
+
+    public void updateComment(String comment) {
+        this.recordComment = comment;
+
+    }
+
+    public void updateGeolocation(String location) {
+        this.geolocation = location;
+    }
 }
