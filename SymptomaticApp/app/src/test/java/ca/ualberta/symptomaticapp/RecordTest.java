@@ -106,14 +106,16 @@ public class RecordTest extends TestCase {
         Date date = new Date();
         ArrayList<String> bodyLocation = new ArrayList<>();
         String location1 = "A body location";
-        String location2 = "Another body location";
+        String location2 = "A body location2";
+        String location3 = "A body location3";
         bodyLocation.add(location1);
         bodyLocation.add(location2);
+        bodyLocation.add(location3);
         Record record = new Record(date);
         record.addBodyLocation(bodyLocation);
         record.removeBodyLocation(location2);
-        assertFalse("location2 is not deleted ", record.getBodyLocation().contains(location2));
-        assertTrue("location1 is deleted ", record.getBodyLocation().contains(location1));
+        assertFalse("location is not deleted ", record.getBodyLocation().contains(location2));
+
 
         }
 
@@ -175,16 +177,16 @@ public class RecordTest extends TestCase {
     public void testRemovePhoto3(){
         Date date = new Date();
         ArrayList<String> photos = new ArrayList<>();
-        String photo1 = "A photo";
-        String photo2 = "A photo";
-        String photo3 = "A photo";
+        String photo1 = "A photo1";
+        String photo2 = "A photo2";
+        String photo3 = "A photo3";
         photos.add(photo1);
         photos.add(photo2);
         photos.add(photo3);
         Record record = new Record(date);
         record.addPhoto(photos);
         record.removePhoto(photo2);
-        assertTrue("Photo did not get removed", record.getPhoto().contains(photo2));
+        assertFalse("Photo did not get removed", record.getPhoto().contains(photo2));
 
     }
 
