@@ -6,7 +6,8 @@
     <string name="enter_start_date">Enter a start date for the problem:</string>
     <string name="enter_description">Enter a brief description:</string>
     <string name="choose_date">Click here to select date</string>
-    <string name="enter_description2">Enter description here</string>
+    <string name="enter_description2">Enter description here (max 300 characters)</string>
     <string name="add_problem">Add Problem</string>
     <string name="save_problem">Save Problem</string>
+    <string name="add_record">Add Record</string>
 </resources>

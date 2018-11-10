@@ -7,6 +7,7 @@ public class Problem {
     protected Date date;
     protected String comment;
     protected RecordList recordList = new RecordList();
+    protected int numberRecords;
 
     public Problem (String title, Date date, String comment){
         this.title = title;
@@ -39,6 +40,15 @@ public class Problem {
     }
 
     public RecordList getRecordList() {
-        return recordList;
+        return this.recordList;
+    }
+
+    public int getRecordListSize() {
+        this.numberRecords = this.recordList.size();
+        return this.numberRecords;
+    }
+
+    public String toString() {
+        return this.title + "\n" + this.date.toString() + "\n" + " Number of records:" + " " + this.getRecordListSize();
     }
 }

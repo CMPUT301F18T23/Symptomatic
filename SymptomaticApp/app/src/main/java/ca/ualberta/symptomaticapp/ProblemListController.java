@@ -2,7 +2,7 @@ package ca.ualberta.symptomaticapp;
 
 public class ProblemListController {
     private static ProblemList problemList = null;
-    public ProblemList getProblemList(){
+    public static ProblemList getProblemList(){
         if (problemList == null){
             problemList = new ProblemList();
         }
@@ -11,6 +11,10 @@ public class ProblemListController {
 
     public void addProblem(Problem problem) {
         getProblemList().addProblem(problem);
+    }
+
+    public void getSize() {
+        getProblemList().getSize();
     }
 
 

@@ -26,4 +26,9 @@ public class ProblemList {
         int index = problemList.indexOf(problem);
         return problemList.get(index);
     }
+
+    public int getSize() {
+        return problemList.size();
+    }
+
 }

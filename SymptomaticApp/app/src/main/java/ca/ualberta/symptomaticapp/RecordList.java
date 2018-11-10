@@ -26,5 +26,8 @@ public class RecordList {
     }
 
 
+    public int size() {
+        return recordList.size();
+    }
 }
 
