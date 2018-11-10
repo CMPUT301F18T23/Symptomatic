@@ -20,16 +20,25 @@ public class MainActivity extends AppCompatActivity {
         TextView textView = (TextView) findViewById(R.id.HelloUserTextView);
         textView.setText("Hello <User> !");
 
-        Button AddRecordButton = (Button) findViewById(R.id.AddProblemButton);
-        AddRecordButton.setOnClickListener(new View.OnClickListener() {
+        Button AddProblemButton = (Button) findViewById(R.id.AddProblemButton);
+        AddProblemButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, AddProblemActivity.class);
                 startActivity(intent);
-
-
             }
         });
+
+        Button AddRecordButton = (Button) findViewById(R.id.AddRecordButton);
+        AddRecordButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, AddRecordActivity.class);
+                startActivity(intent);
+            }
+        });
+
+
 
     }
 

@@ -10,4 +10,8 @@
     <string name="add_problem">Add Problem</string>
     <string name="save_problem">Save Problem</string>
     <string name="add_record">Add Record</string>
+    <string name="problem">Problem:</string>
+    <string name="time_stamp">Time Stamp: (current date)</string>
+    <string name="change_date">Select to change date</string>
+    <string name="add_comment">Include a comment:</string>
 </resources>
