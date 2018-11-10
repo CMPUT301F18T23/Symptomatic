@@ -1,11 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android">
-
-    <item
-        android:id="@+id/edit_account"
-        android:title="Edit Account" />
-
+    
     <item
         android:id="@+id/add_problem"
         android:title="Add Problem"
@@ -15,5 +11,10 @@
         android:id="@+id/view_problems"
         android:title="View Problems"
         android:onClick="viewViewProblems"
+        />
+    <item
+        android:id="@+id/add_record"
+        android:title="Add Record"
+        android:onClick="viewAddRecord"
         />
 </menu>
