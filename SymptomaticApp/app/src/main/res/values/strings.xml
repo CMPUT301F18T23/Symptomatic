@@ -1,3 +1,12 @@
 <resources>
     <string name="app_name">SymptomaticApp</string>
+    <string name="title_activity_add_problem">AddProblemActivity</string>
+    <string name="enter_title">Enter title here</string>
+    <string name="enter_title2">Enter a title for the problem:</string>
+    <string name="enter_start_date">Enter a start date for the problem:</string>
+    <string name="enter_description">Enter a brief description:</string>
+    <string name="choose_date">Click here to select date</string>
+    <string name="enter_description2">Enter description here</string>
+    <string name="add_problem">Add Problem</string>
+    <string name="save_problem">Save Problem</string>
 </resources>
