@@ -24,9 +24,6 @@ public class AddProblemActivity extends AppCompatActivity {
     private int month;
     private int day;
 
-
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

@@ -21,7 +21,9 @@
             android:label="@string/title_activity_add_problem"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
         <activity android:name=".ListProblemsActivity" />
-        <activity android:name=".AddRecordActivity"></activity>
+        <activity android:name=".AddRecordActivity" />
+        <activity android:name=".CViewProblems" />
+        <activity android:name=".CViewRecords"></activity>
     </application>
 
 </manifest>
