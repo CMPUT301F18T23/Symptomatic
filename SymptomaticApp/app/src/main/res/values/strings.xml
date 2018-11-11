@@ -27,4 +27,5 @@
     <string name="enter_number">Enter phone number here</string>
     <string name="specify_role">Please specify role</string>
     <string name="create_account">Create Account</string>
+    <string name="view_full_problem">View full problem</string>
 </resources>
