@@ -14,4 +14,7 @@
     <string name="time_stamp">Time Stamp: (current date)</string>
     <string name="change_date">Select to change date</string>
     <string name="add_comment">Include a comment:</string>
+    <string name="view_patient_problems">View</string>
+    <string name="select_patient_first">Please select a patient</string>
+    <string name="viewcontactinfo">View Contact Info</string>
 </resources>
