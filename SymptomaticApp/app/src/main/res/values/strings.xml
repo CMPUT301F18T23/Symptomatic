@@ -33,4 +33,8 @@
     <string name="add_photos">Upload Photos: </string>
     <string name="saved_photo">Add Saved Photo</string>
     <string name="new_photo">Take New Photo</string>
+    <string name="add_geolocation">Include your Geo-Location: </string>
+    <string name="add_bodylocationphotos">Add</string>
+    <string name="save_record">Save Record</string>
+
 </resources>

@@ -25,4 +25,6 @@ public class AddRecordActivity extends AppCompatActivity {
         spinner.setAdapter(problemAdapter);
 
     }
+
+
 }
