@@ -29,4 +29,8 @@
     <string name="create_account">Create Account</string>
     <string name="view_full_problem">View full problem</string>
     <string name="title_activity_create_account">createAccount</string>
+    <string name="add_bodylocation">Include a body location: </string>
+    <string name="add_photos">Upload Photos: </string>
+    <string name="saved_photo">Add Saved Photo</string>
+    <string name="new_photo">Take New Photo</string>
 </resources>
