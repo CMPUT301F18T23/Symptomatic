@@ -23,7 +23,11 @@
         <activity android:name=".ListProblemsActivity" />
         <activity android:name=".AddRecordActivity" />
         <activity android:name=".CViewProblems" />
-        <activity android:name=".CViewRecords"></activity>
+        <activity android:name=".CViewRecords" />
+        <activity android:name=".Login" />
+        <activity
+            android:name=".createAccount"
+            android:label="@string/title_activity_create_account"></activity>
     </application>
 
 </manifest>

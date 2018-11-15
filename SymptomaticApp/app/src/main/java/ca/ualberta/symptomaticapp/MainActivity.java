@@ -10,12 +10,25 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
+import java.util.HashMap;
+import java.util.Map;
+
 public class MainActivity extends AppCompatActivity {
+
+    public static FirebaseDatabase database;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        database = FirebaseDatabase.getInstance();
+
+        DatabaseReference userRef = database.getReference("users");
+        userRef.child("alanisawesome").setValue(new User("alanisawesome","(780)481-3905","alan@hotmail.com"));
 
         TextView textView = (TextView) findViewById(R.id.HelloUserTextView);
         textView.setText("Hello <User> !");
@@ -38,6 +51,8 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        Intent login = new Intent(this, Login.class);
+        startActivity(login);
 
 
     }

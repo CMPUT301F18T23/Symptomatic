@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "643115006542",
+    "firebase_url": "https://symptomaticapp-6fe5a.firebaseio.com",
+    "project_id": "symptomaticapp-6fe5a",
+    "storage_bucket": "symptomaticapp-6fe5a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:643115006542:android:a8f468cde51880ab",
+        "android_client_info": {
+          "package_name": "ca.ualberta.symptomaticapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "643115006542-hulng05j1j3f36cb3s1vbc0g0tpgbbac.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "ca.ualberta.symptomaticapp",
+            "certificate_hash": "7253c679b35c2d934e26039f0935275f0420ae1b"
+          }
+        },
+        {
+          "client_id": "643115006542-00qqdcpcmpmuqipjjovmscvq3gnctock.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBUmqJHJUASGSuYuBZsSMEDhZ_JXYRTjTQ"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "643115006542-00qqdcpcmpmuqipjjovmscvq3gnctock.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
