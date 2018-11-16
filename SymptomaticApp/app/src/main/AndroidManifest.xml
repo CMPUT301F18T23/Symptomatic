@@ -3,6 +3,9 @@
     package="ca.ualberta.symptomaticapp">
     <uses-feature android:name="android.hardware.camera"
         android:required="false" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+        <!--If want to keep the photos prviate to the app, uncomment line below-->
+        <!--android:maxSdkVersion="18" />-->
 
     <application
         android:allowBackup="true"
