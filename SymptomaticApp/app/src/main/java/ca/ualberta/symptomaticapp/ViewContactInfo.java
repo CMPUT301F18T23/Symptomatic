@@ -1,3 +1,7 @@
+/*
+Activity for any user to be able to view the contact information for a user.
+ */
+
 package ca.ualberta.symptomaticapp;
 
 import android.content.Intent;
