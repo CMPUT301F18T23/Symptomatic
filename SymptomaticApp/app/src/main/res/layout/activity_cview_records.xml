@@ -8,7 +8,7 @@
 
     <Spinner
         android:id="@+id/sp_Patient"
-        android:layout_width="220"
+        android:layout_width="220dp"
         android:layout_height="40dp"
         android:layout_marginLeft="24dp"
         android:layout_marginStart="24dp"
@@ -33,7 +33,7 @@
 
     <Spinner
         android:id="@+id/sp_Problems"
-        android:layout_width="220"
+        android:layout_width="220dp"
         android:layout_height="40dp"
         android:layout_marginLeft="24dp"
         android:layout_marginStart="24dp"

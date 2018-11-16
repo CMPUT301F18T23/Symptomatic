@@ -42,5 +42,7 @@
     <string name="edit_problem2">Edit Problem</string>
     <string name="view_problems">View Patient</string>
     <string name="view_photo_album">View Photo Album</string>
+    <string name="add_patient">Add Patient</string>
+    <string name="patuser">Patient Username:</string>
 
 </resources>

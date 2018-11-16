@@ -1,12 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="ca.ualberta.symptomaticapp">
-    <uses-feature android:name="android.hardware.camera"
-        android:required="false" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
-        <!--If want to keep the photos prviate to the app, uncomment line below-->
-        <!--android:maxSdkVersion="18" />-->
 
+    <uses-feature
+        android:name="android.hardware.camera"
+        android:required="false" />
+
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
+    <!-- If want to keep the photos prviate to the app, uncomment line below -->
+    <!-- android:maxSdkVersion="18" /> -->
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -36,7 +39,9 @@
             android:name=".createAccount"
             android:label="@string/title_activity_create_account" />
         <activity android:name=".ViewFullProblemActivity" />
-        <activity android:name=".EditProblemActivity"></activity>
+        <activity android:name=".EditProblemActivity" />
+        <activity android:name=".ViewPatients" />
+        <activity android:name=".AddPatient"></activity>
     </application>
 
 </manifest>
