@@ -29,7 +29,7 @@ public class AddRecordActivity extends AppCompatActivity implements View.OnClick
         spinner.setAdapter(problemAdapter);
 
         final Button savedPhoto = findViewById(R.id.savedPhoto);
-        final Button takePhoto = findViewById(R.id.newPhoto);
+        final Button takePhoto = findViewById(R.id.takePhoto);
 
         savedPhoto.setOnClickListener(this);
         takePhoto.setOnClickListener(this);
@@ -38,18 +38,26 @@ public class AddRecordActivity extends AppCompatActivity implements View.OnClick
 
     }
 
-//    Gets images from gallery - Reference:https://en.proft.me/2017/07/1/how-get-image-gallery-or-camera-android/
     public void onClick(View v){
         int viewId = v.getId();
-
+        // Gets images from gallery - Reference: https://en.proft.me/2017/07/1/how-get-image-gallery-or-camera-android/
         if (viewId == R.id.savedPhoto){
 
             Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
             intent.setType("image/*");
 
             startActivityForResult(intent, PICK_IMAGE_REQUEST);
+        }
 
-            }
+        // If the user wants to take a photo using their camera
+        if (viewId == R.id.takePhoto){
+
+            Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
+//            intent.setType("image/*");
+
+//            startActivityForResult(intent, PICK_IMAGE_REQUEST);
+        }
+
 
 
 
