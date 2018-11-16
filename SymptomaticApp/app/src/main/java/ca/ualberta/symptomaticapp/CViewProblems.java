@@ -1,3 +1,9 @@
+/*
+An activity that only the caregiver will be able to see and is used for viewing the problems of a specific patient.
+The caregiver will select a patient through the spinner, press the View button and be presented with a list of
+problems associated with that patient. The caregiver can also view that patients' contact information.
+ */
+
 package ca.ualberta.symptomaticapp;
 
 import android.support.v7.app.AppCompatActivity;
@@ -25,7 +31,6 @@ public class CViewProblems extends AppCompatActivity {
                 // take current selected patient and populate list view using their problems
                 viewcontactinfo.setEnabled(true); //allow view contact info to be able to be pressed
                 String selection = patient.getSelectedItem().toString(); //get current selection
-
             }
         });
     }

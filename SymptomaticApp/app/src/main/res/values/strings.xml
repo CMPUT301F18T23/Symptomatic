@@ -40,5 +40,7 @@
     <string name="view_records">View Records</string>
     <string name="edit_problem">Edit</string>
     <string name="edit_problem2">Edit Problem</string>
+    <string name="view_problems">View Patient</string>
+    <string name="view_photo_album">View Photo Album</string>
 
 </resources>
