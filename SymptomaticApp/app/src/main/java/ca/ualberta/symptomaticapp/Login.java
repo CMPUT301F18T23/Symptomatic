@@ -1,15 +1,22 @@
 package ca.ualberta.symptomaticapp;
 
 import android.content.Intent;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
-import com.google.firebase.database.DatabaseReference;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.Query;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 
-import static ca.ualberta.symptomaticapp.MainActivity.database;
 
 public class Login extends AppCompatActivity implements View.OnClickListener{
 
@@ -17,14 +24,12 @@ public class Login extends AppCompatActivity implements View.OnClickListener{
     TextView input_user;
     Intent next_activity;
 
-    DatabaseReference userRef;
+    public static User thisUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-
-        userRef = database.getReference("users");
 
         create_button = findViewById(R.id.login_create_acc_button);
         login_button = findViewById(R.id.login_button);
@@ -41,11 +46,45 @@ public class Login extends AppCompatActivity implements View.OnClickListener{
 
         if (viewId == R.id.login_create_acc_button){
             next_activity = new Intent(this,createAccount.class);
-        } else if (viewId == R.id.login_button){
-            next_activity = new Intent(this,MainActivity.class);
-        }
-        if (next_activity != null) {
             startActivity(next_activity);
+        } else if (viewId == R.id.login_button){
+            //Get the input from the login
+            String inputuser = input_user.getText().toString();
+
+            //Access Firestore database
+            FirebaseFirestore db = FirebaseFirestore.getInstance();
+
+            //Build the query
+            CollectionReference active_users = db.collection("users");
+            Query query = active_users
+                    .whereEqualTo("username",inputuser);
+
+            query.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                //If Query Worked on not
+                @Override
+                public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                    if(task.isSuccessful()){
+                        //Query Worked
+                        if (task.getResult().size() == 1){
+                            //A user with that username exists
+                            Toast.makeText(Login.this, "Logging In...", Toast.LENGTH_SHORT).show();
+                            for(QueryDocumentSnapshot document: task.getResult()){
+                                thisUser = document.toObject(User.class);
+                            }
+                            next_activity = new Intent(Login.this,MainActivity.class);
+                            startActivity(next_activity);
+
+                        } else {
+                            //No users with that username exists
+                            Toast.makeText(Login.this, "User Does Not Exist", Toast.LENGTH_SHORT).show();
+                        }
+                    } else {
+                        //Query Did not Work
+                        Toast.makeText(Login.this, "Load Error", Toast.LENGTH_SHORT).show();
+                    }
+                }
+            });
+
         }
     }
 }

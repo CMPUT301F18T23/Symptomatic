@@ -1,18 +1,29 @@
 package ca.ualberta.symptomaticapp;
 
+import android.content.Context;
 import android.support.annotation.NonNull;
 import android.util.Log;
+import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.IgnoreExtraProperties;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.regex.Pattern;
+
+import android.os.Bundle;
+import android.app.Activity;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Toast;
 
 import static android.content.ContentValues.TAG;
 
@@ -21,6 +32,7 @@ import static android.content.ContentValues.TAG;
  * has contact information including an email, a phone number, and a username.
  * Furthermore, it will have a list of problems associated with the account
  */
+@IgnoreExtraProperties
 public class User {
 
     String email = " ",phone = "",username = "",userType = ""; //The contact information of the user, as well as their userType
@@ -34,33 +46,31 @@ public class User {
      * @param input_email: The email inputted by the user
      */
     public User (String input_name,String input_phone,String input_email){
-        FirebaseFirestore db = FirebaseFirestore.getInstance();
-
         this.username = input_name; //Sets the username to the inputted value
         changePhone(input_phone); //Sets the phone number, and checks its validity
         changeEmail(input_email); //Sets the email, and checks its validity
         this.userType = "Patient"; //Defaults the user to a Patient userType
-
-        Map<String, Object> user = new HashMap<>();
-        user.put("username",username);
-        user.put("phone",phone);
-        user.put("email",email);
-        user.put("userType",userType);
-        db.collection("users").document(username).set(user)
-                .addOnSuccessListener(new OnSuccessListener<Void>() {
-                @Override
-                public void onSuccess(Void aVoid) {
-                    Log.d(TAG, "DocumentSnapshot successfully written!");
-                }
-                })
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Log.w(TAG, "Error writing document", e);
-                    }
-                });
     }
 
+    public User(){}
+
+    public static User createNewUser(String username, String phone, String email, String userType){
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+
+        DocumentReference newUser = db.collection("users")
+                .document();
+
+        User user = new User (username,phone,email);
+
+        newUser.set(user).addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+                int x = 1;
+            }
+        });
+
+        return user;
+    }
 
     /**
      *Gets the username of the user
@@ -155,6 +165,5 @@ public class User {
     public ArrayList<Problem> returnProblemList(){
         return this.problems;
     }
-
 
 }
