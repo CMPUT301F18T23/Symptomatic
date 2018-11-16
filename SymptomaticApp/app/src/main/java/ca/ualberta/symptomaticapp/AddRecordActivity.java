@@ -2,6 +2,7 @@ package ca.ualberta.symptomaticapp;
 
 import android.content.Intent;
 import android.net.Uri;
+import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -14,7 +15,8 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 public class AddRecordActivity extends AppCompatActivity implements View.OnClickListener {
-    private static final int PICK_IMAGE_REQUEST = 100;
+    private static final int PICK_IMAGE_REQUEST = 100; // to access the gallery to choose an image
+    static final int REQUEST_IMAGE_CAPTURE = 1; // to access the camera to take an image
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,12 +52,12 @@ public class AddRecordActivity extends AppCompatActivity implements View.OnClick
         }
 
         // If the user wants to take a photo using their camera
+        // Reference: https://developer.android.com/training/camera/photobasics#java
         if (viewId == R.id.takePhoto){
-
-            Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
-//            intent.setType("image/*");
-
-//            startActivityForResult(intent, PICK_IMAGE_REQUEST);
+            Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+            if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
+                startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
+            }
         }
 
 

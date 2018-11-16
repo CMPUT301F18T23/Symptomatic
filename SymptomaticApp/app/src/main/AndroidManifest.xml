@@ -2,7 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="ca.ualberta.symptomaticapp">
     <uses-feature android:name="android.hardware.camera"
-        android:required="true" />
+        android:required="false" />
 
     <application
         android:allowBackup="true"
