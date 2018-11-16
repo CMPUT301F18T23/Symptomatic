@@ -1,7 +1,20 @@
 package ca.ualberta.symptomaticapp;
 
+import android.support.annotation.NonNull;
+import android.util.Log;
+
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
+
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.regex.Pattern;
+
+import static android.content.ContentValues.TAG;
 
 /**
  * A user is a user of the application who will have an account, which
@@ -21,11 +34,33 @@ public class User {
      * @param input_email: The email inputted by the user
      */
     public User (String input_name,String input_phone,String input_email){
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+
         this.username = input_name; //Sets the username to the inputted value
         changePhone(input_phone); //Sets the phone number, and checks its validity
         changeEmail(input_email); //Sets the email, and checks its validity
         this.userType = "Patient"; //Defaults the user to a Patient userType
+
+        Map<String, Object> user = new HashMap<>();
+        user.put("username",username);
+        user.put("phone",phone);
+        user.put("email",email);
+        user.put("userType",userType);
+        db.collection("users").document(username).set(user)
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                @Override
+                public void onSuccess(Void aVoid) {
+                    Log.d(TAG, "DocumentSnapshot successfully written!");
+                }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.w(TAG, "Error writing document", e);
+                    }
+                });
     }
+
 
     /**
      *Gets the username of the user
@@ -87,12 +122,18 @@ public class User {
         }
     }
 
+    public static boolean validateUser(String username){
+        //TODO: create boolean whether or not the username exists in the database
+        return true;
+    }
+
     /**
      *Validates a phone number to a specific format (XXX)XXX-XXXX
      * @param input_phone: The phone number to be validated
      * @return True if the format is correct, False if the format is not correct
      */
-    private boolean validatePhone(String input_phone){
+
+    public static boolean validatePhone(String input_phone){
         Pattern pattern = Pattern.compile("^\\((\\d{3})\\)(\\d{3})[- ](\\d{4})$"); //An open bracket, followed by 3 numbers, then a closed bracket, then 3 more numbers, then a dash, then 4 more numbers
         return (pattern.matcher(input_phone).matches()); //returns whether or not the format matches
     }
@@ -102,7 +143,7 @@ public class User {
      * @param input_email: The email to be validated
      * @return rue if the format is correct, False if the format is not correct
      */
-    private boolean validateEmail(String input_email){
+    public static boolean validateEmail(String input_email){
         Pattern pattern = Pattern.compile("^[a-zA-Z0-9]+@[a-zA-Z0-9]+\\.[a-zA-Z]{1,6}$"); //A various number of numbers or letters, followed by an '@' followed by a various number of numbers or letters, followed by a '.' followed by 1 to 6 letters
         return (pattern.matcher(input_email).matches()); //returns whether or not the format matches
     }

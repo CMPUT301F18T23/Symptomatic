@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.design.circularreveal.CircularRevealRelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<RelativeLayout xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Login">
@@ -37,7 +37,7 @@
         </android.support.design.widget.TextInputLayout>
 
         <Button
-            android:id="@+id/create_acc_button"
+            android:id="@+id/login_create_acc_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
@@ -55,4 +55,4 @@
             android:text="Login" />
     </RelativeLayout>
 
-</android.support.design.circularreveal.CircularRevealRelativeLayout>
+</RelativeLayout>

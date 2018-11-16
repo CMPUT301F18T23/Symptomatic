@@ -26,7 +26,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener{
 
         userRef = database.getReference("users");
 
-        create_button = findViewById(R.id.create_acc_button);
+        create_button = findViewById(R.id.login_create_acc_button);
         login_button = findViewById(R.id.login_button);
 
         create_button.setOnClickListener(this);
@@ -39,7 +39,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener{
     public void onClick(View v) {
         int viewId = v.getId();
 
-        if (viewId == R.id.create_acc_button){
+        if (viewId == R.id.login_create_acc_button){
             next_activity = new Intent(this,createAccount.class);
         } else if (viewId == R.id.login_button){
             next_activity = new Intent(this,MainActivity.class);
