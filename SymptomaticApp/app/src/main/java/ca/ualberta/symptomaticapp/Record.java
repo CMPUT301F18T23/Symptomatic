@@ -11,12 +11,12 @@ public class Record {
     protected String geolocation;
     protected ArrayList<String> bodyLocation;
     protected ArrayList<String> photos;
+    protected ArrayList<Photo> photoList;
     private Date recordDate;
 
     public Record(Date date) {
       this.recordDate = date;
     }
-
 
     public Date getTimeStamp() {
         return this.recordDate;
