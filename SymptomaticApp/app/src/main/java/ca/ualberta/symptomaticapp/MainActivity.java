@@ -10,8 +10,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.HashMap;
@@ -19,7 +17,6 @@ import java.util.Map;
 
 public class MainActivity extends AppCompatActivity {
 
-    public static FirebaseDatabase database;
     public User thisUser;
 
     @Override
@@ -27,18 +24,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        FirebaseFirestore db = FirebaseFirestore.getInstance();
-
-
-
-
-        database = FirebaseDatabase.getInstance();
-
-        DatabaseReference userRef = database.getReference("users");
-        userRef.child("alanisawesome").setValue(new User("alanisawesome","(780)481-3905","alan@hotmail.com"));
-
         TextView textView = (TextView) findViewById(R.id.HelloUserTextView);
-        textView.setText("Hello <User> !");
 
         Button AddProblemButton = (Button) findViewById(R.id.AddProblemButton);
         AddProblemButton.setOnClickListener(new View.OnClickListener() {
@@ -58,8 +44,12 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        Intent login = new Intent(this, Login.class);
-        startActivity(login);
+        if (Login.thisUser == null) {
+            Intent login = new Intent(this, Login.class);
+            startActivity(login);
+        } else {
+            textView.setText("Hello "+Login.thisUser.returnUsername()+"!");
+        }
 
 
     }

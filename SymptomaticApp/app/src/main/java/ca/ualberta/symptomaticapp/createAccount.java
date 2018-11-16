@@ -1,5 +1,6 @@
 package ca.ualberta.symptomaticapp;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.app.Activity;
 import android.view.View;
@@ -15,6 +16,8 @@ public class createAccount extends Activity implements View.OnClickListener {
     String errormsg;
 
     Toast toast;
+
+    Intent next_activity;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,12 +39,14 @@ public class createAccount extends Activity implements View.OnClickListener {
         create_account.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v){
                 errormsg = "";
+                //Validate the username
                 if (User.validateUser(username.getText().toString())) {
                     usernameOk = true;
                 } else {
                     errormsg += "Username Already in Use, Please Choose Another";
                 }
 
+                //Validate the Email
                 if (User.validateEmail(email.getText().toString())) {
                     emailOk = true;
                 } else {
@@ -52,6 +57,7 @@ public class createAccount extends Activity implements View.OnClickListener {
                     }
                 }
 
+                //Validate the Phone
                 if (User.validatePhone(phone.getText().toString())){
                     phoneOk = true;
                 } else {
@@ -62,10 +68,15 @@ public class createAccount extends Activity implements View.OnClickListener {
                     }
                 }
 
+                //Check all validations
                 if (errormsg.equals("")){
-                    User newUser = new User(username.getText().toString(),phone.getText().toString(),email.getText().toString());
-                    //TODO push user to the cloud
+                    //No errors, proceed with the creation of a user
+                    User newUser = User.createNewUser(username.getText().toString(),phone.getText().toString(),email.getText().toString(),"Patient");
+                    Login.thisUser = newUser;
+                    next_activity = new Intent(createAccount.this,MainActivity.class);
+                    startActivity(next_activity);
                 } else {
+                    //Errors found, post messages to correct
                     toast = Toast.makeText(getApplication(),errormsg,Toast.LENGTH_LONG);
                     toast.show();
                 }
