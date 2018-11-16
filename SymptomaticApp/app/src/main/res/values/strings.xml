@@ -36,5 +36,9 @@
     <string name="add_geolocation">Include your Geo-Location: </string>
     <string name="add_bodylocationphotos">Add</string>
     <string name="save_record">Save Record</string>
+    <string name="view_all_problems">View All Problems</string>
+    <string name="view_records">View Records</string>
+    <string name="edit_problem">Edit</string>
+    <string name="edit_problem2">Edit Problem</string>
 
 </resources>

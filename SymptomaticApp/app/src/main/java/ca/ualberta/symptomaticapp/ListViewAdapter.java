@@ -1,6 +1,8 @@
 package ca.ualberta.symptomaticapp;
 
 import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -54,6 +56,11 @@ public class ListViewAdapter extends BaseAdapter implements ListAdapter {
         viewFullProblemButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
+                Intent intent = new Intent(context, ViewFullProblemActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putInt("position", position);
+                intent.putExtras(bundle);
+                context.startActivity(intent);
 
 
             }
@@ -61,6 +68,8 @@ public class ListViewAdapter extends BaseAdapter implements ListAdapter {
         addRecordButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
+                Intent intent = new Intent(context, AddRecordActivity.class);
+                context.startActivity(intent);
             }
         });
 

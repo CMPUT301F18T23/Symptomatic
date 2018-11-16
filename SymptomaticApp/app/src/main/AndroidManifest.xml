@@ -21,13 +21,17 @@
             android:label="@string/title_activity_add_problem"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
         <activity android:name=".ListProblemsActivity" />
-        <activity android:name=".AddRecordActivity" android:exported="true" />
+        <activity
+            android:name=".AddRecordActivity"
+            android:exported="true" />
         <activity android:name=".CViewProblems" />
         <activity android:name=".CViewRecords" />
         <activity android:name=".Login" />
         <activity
             android:name=".createAccount"
-            android:label="@string/title_activity_create_account"></activity>
+            android:label="@string/title_activity_create_account" />
+        <activity android:name=".ViewFullProblemActivity" />
+        <activity android:name=".EditProblemActivity"></activity>
     </application>
 
 </manifest>

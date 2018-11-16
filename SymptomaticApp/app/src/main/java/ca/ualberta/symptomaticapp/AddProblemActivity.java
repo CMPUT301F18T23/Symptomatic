@@ -3,6 +3,7 @@ package ca.ualberta.symptomaticapp;
 
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.support.v7.app.AppCompatActivity;
@@ -99,7 +100,8 @@ public class AddProblemActivity extends AppCompatActivity {
             ProblemListController pt = new ProblemListController();
             Problem newProblem = new Problem(title, cal.getTime(), description);
             pt.addProblem(newProblem);
-            Toast.makeText(this, title + cal.getTime().toString() + description, Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(AddProblemActivity.this, ListProblemsActivity.class);
+            startActivity(intent);
         }
 
 

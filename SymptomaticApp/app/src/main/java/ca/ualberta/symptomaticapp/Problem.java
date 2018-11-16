@@ -49,6 +49,6 @@ public class Problem {
     }
 
     public String toString() {
-        return this.title+ "\n" + this.date.toString() + "\n" + " Number of records:" + " " + this.getRecordListSize();
+        return this.title+ "\n" + this.date.toString() + "\n" + "Number of records:" + " " + this.getRecordListSize();
     }
 }
