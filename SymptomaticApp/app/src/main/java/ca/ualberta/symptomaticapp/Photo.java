@@ -8,6 +8,7 @@ public class Photo {
     protected Integer photoSize;
 
     public Photo(String photoPath, Date timestamp, Integer photoSize){
+        // Initialize the Photo object
         this.photoPath = photoPath;
         this.timestamp = timestamp;
         this.photoSize = photoSize;
