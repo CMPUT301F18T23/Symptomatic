@@ -28,7 +28,7 @@ public class Photo {
         return this.photoSize;
     }
 
-    public void compressImage() {
+    public void compressPhoto() {
         // If the photo's size exceeds 65536 bytes, compress the image.
         return;
     }
