@@ -41,7 +41,8 @@
         <activity android:name=".ViewFullProblemActivity" />
         <activity android:name=".EditProblemActivity" />
         <activity android:name=".ViewPatients" />
-        <activity android:name=".AddPatient"></activity>
+        <activity android:name=".AddPatient" />
+        <activity android:name=".ViewContactInfo"></activity>
     </application>
 
 </manifest>
