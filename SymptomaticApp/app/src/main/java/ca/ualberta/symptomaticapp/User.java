@@ -39,6 +39,8 @@ public class User {
 
     public ArrayList<Problem> problems = new ArrayList<>(); //An list of all problems associated to the user
 
+    private Toast toast;
+
     /**
      * Creates the instance of a user object
      * @param input_name: The username inputted by the user
@@ -65,7 +67,7 @@ public class User {
         newUser.set(user).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
-                int x = 1;
+                int x=1; //dummy activity
             }
         });
 

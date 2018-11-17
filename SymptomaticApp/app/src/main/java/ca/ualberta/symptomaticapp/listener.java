@@ -1,6 +1,6 @@
 package ca.ualberta.symptomaticapp;
 
-public interface Listener {
+interface Listener {
     void update();
 }
 

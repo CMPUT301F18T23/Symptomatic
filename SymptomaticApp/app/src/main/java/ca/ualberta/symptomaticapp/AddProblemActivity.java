@@ -93,7 +93,7 @@ public class AddProblemActivity extends AppCompatActivity {
             goodProblem = false;
         }
 
-        if (goodProblem == true) {
+        if (goodProblem) {
             ProblemListController pt = new ProblemListController();
             Problem newProblem = new Problem(title, cal.getTime(), description);
             pt.addProblem(newProblem);
