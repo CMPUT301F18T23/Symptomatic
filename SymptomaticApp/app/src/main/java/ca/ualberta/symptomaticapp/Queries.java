@@ -1,6 +1,9 @@
 package ca.ualberta.symptomaticapp;
 
+<<<<<<< HEAD:SymptomaticApp/app/src/main/java/ca/ualberta/symptomaticapp/Queries.java
 import android.provider.Settings;
+=======
+>>>>>>> a603444937e2f661db68247192821bf9434f73e5:SymptomaticApp/app/src/main/java/ca/ualberta/symptomaticapp/query.java
 import android.support.annotation.NonNull;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -11,7 +14,12 @@ import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
+<<<<<<< HEAD:SymptomaticApp/app/src/main/java/ca/ualberta/symptomaticapp/Queries.java
 public class Queries {
+=======
+
+public class query {
+>>>>>>> a603444937e2f661db68247192821bf9434f73e5:SymptomaticApp/app/src/main/java/ca/ualberta/symptomaticapp/query.java
     public static ProblemList theseProblems;
 
     public static RecordList theseRecords;
