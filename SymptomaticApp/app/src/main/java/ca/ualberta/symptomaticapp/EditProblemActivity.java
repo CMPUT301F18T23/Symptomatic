@@ -1,6 +1,9 @@
 package ca.ualberta.symptomaticapp;
 
+import android.app.AlertDialog;
 import android.app.DatePickerDialog;
+import android.app.Dialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
@@ -102,22 +105,36 @@ public class EditProblemActivity extends AppCompatActivity {
     }
 
     public void deleteProblem(View v){
-        Collection<Problem> problems = ProblemListController.getProblemList().getProblems();
+        final Collection<Problem> problems = ProblemListController.getProblemList().getProblems();
         final ArrayList<Problem> problemList = new ArrayList<>(problems);
 
         Bundle bundle = getIntent().getExtras();
         final int position = bundle.getInt("position");
 
-        ProblemListController.getProblemList().deleteProblem(problemList.get(position));
-
-        problemList.clear();
-        problemList.addAll(problems);
-
-        Intent intent = new Intent(EditProblemActivity.this, ListProblemsActivity.class);
-        startActivity(intent);
 
 
+        AlertDialog.Builder deleteDialog = new AlertDialog.Builder(EditProblemActivity.this);
+        deleteDialog.setMessage("Are you sure you want to delete this problem?");
 
+        deleteDialog.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                ProblemListController.getProblemList().deleteProblem(problemList.get(position));
+
+                problemList.clear();
+                problemList.addAll(problems);
+                Intent intent = new Intent(EditProblemActivity.this, ListProblemsActivity.class);
+                startActivity(intent);
+
+            }
+        });
+
+        deleteDialog.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+            }
+        });
+        deleteDialog.show();
     }
-
 }
