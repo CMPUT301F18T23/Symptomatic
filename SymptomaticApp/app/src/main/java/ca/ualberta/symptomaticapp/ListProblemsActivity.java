@@ -36,13 +36,11 @@ public class ListProblemsActivity extends AppCompatActivity {
         //final ArrayList<Problem> problemList = new ArrayList<>(problems);
 
 
-
-        ListView listView = findViewById(R.id.problemsListView);
+        /*ListView listView = findViewById(R.id.problemsListView);
         Collection<Problem> problems = Queries.getProbFromDb(Login.thisUser.username).getProblems();
         ArrayList<Problem> problemList = new ArrayList<>(problems);
         final ListViewAdapter adapter = new ListViewAdapter(problemList, this);
-
-        listView.setAdapter(adapter);
+        listView.setAdapter(adapter);*/
 
     }
 }

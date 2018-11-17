@@ -10,12 +10,12 @@ import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
+import java.util.ArrayList;
+
 public class Queries {
     public static ProblemList theseProblems;
 
     public static RecordList theseRecords;
-
-    public static User currUser;
 
     public static ProblemList getProbFromDb(String username) {
         theseProblems = null;
@@ -84,35 +84,5 @@ public class Queries {
         return theseRecords;
     }
 
-    public static User getUserFromDb(String username) {
-        //Access Firestore database
-        FirebaseFirestore db = FirebaseFirestore.getInstance();
-
-        //Build the query
-        CollectionReference active_users = db.collection("users");
-        Query query = active_users
-                .whereEqualTo("username", username);
-
-        query.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-            //If Query Worked on not
-            @Override
-            public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                if (task.isSuccessful()) {
-                    //Query Worked
-                    if (task.getResult().size() == 1) {
-                        //A user with that username exists
-                        for (QueryDocumentSnapshot document : task.getResult()) {
-                            Login.thisUser = document.toObject(User.class);
-                        }
-                    } else {
-                        //No users with that username exists
-                    }
-                } else {
-                    //Query Did not Work
-                }
-            }
-        });
-        return Login.thisUser;
-    }
 }
 
