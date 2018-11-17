@@ -101,4 +101,23 @@ public class EditProblemActivity extends AppCompatActivity {
 
     }
 
+    public void deleteProblem(View v){
+        Collection<Problem> problems = ProblemListController.getProblemList().getProblems();
+        final ArrayList<Problem> problemList = new ArrayList<>(problems);
+
+        Bundle bundle = getIntent().getExtras();
+        final int position = bundle.getInt("position");
+
+        ProblemListController.getProblemList().deleteProblem(problemList.get(position));
+
+        problemList.clear();
+        problemList.addAll(problems);
+
+        Intent intent = new Intent(EditProblemActivity.this, ListProblemsActivity.class);
+        startActivity(intent);
+
+
+
+    }
+
 }
