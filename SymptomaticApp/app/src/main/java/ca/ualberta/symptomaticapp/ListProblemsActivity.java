@@ -32,10 +32,16 @@ public class ListProblemsActivity extends AppCompatActivity {
         String active_problem_count = "Number of active problems:" + " " + ProblemListController.getProblemList().getSize();
         textView.setText(active_problem_count);
 
+        //final Collection<Problem> problems = ProblemListController.getProblemList().getProblems();
+        //final ArrayList<Problem> problemList = new ArrayList<>(problems);
+
+
+
         ListView listView = findViewById(R.id.problemsListView);
-        final Collection<Problem> problems = ProblemListController.getProblemList().getProblems();
-        final ArrayList<Problem> problemList = new ArrayList<>(problems);
+        Collection<Problem> problems = query.getProbFromDb(Login.thisUser.username).getProblems();
+        ArrayList<Problem> problemList = new ArrayList<>(problems);
         final ListViewAdapter adapter = new ListViewAdapter(problemList, this);
+
         listView.setAdapter(adapter);
 
     }
