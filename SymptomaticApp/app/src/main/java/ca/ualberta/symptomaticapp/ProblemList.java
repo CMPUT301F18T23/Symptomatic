@@ -14,15 +14,15 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 public class ProblemList {
-    protected static ArrayList<Problem> problemList;
-    protected static transient ArrayList<Listener> listeners;
+    protected  ArrayList<Problem> problemList;
+    protected  transient ArrayList<Listener> listeners;
 
     public ProblemList(){
         problemList = new ArrayList<Problem>();
         listeners = new ArrayList<Listener>();
     }
 
-    private static ArrayList<Listener> getListeners(){
+    private ArrayList<Listener> getListeners(){
         if (listeners == null) {
             listeners = new ArrayList<Listener>();
         }
@@ -30,7 +30,6 @@ public class ProblemList {
     }
 
     public Collection<Problem> getProblems() {
-        problemList = getListFromDb();
         return problemList;
     }
 
@@ -59,44 +58,10 @@ public class ProblemList {
         return problemList.size();
     }
 
-    public static void notifyListeners(){
+    public void notifyListeners(){
         for (Listener listener: getListeners()) {
             listener.update();
         }
-    }
-
-    public static ArrayList<Problem> getListFromDb(String username) {
-        //Access Firestore database
-        FirebaseFirestore db = FirebaseFirestore.getInstance();
-
-        //Build the query
-        CollectionReference problems = db.collection("problems");
-        Query query = problems
-                .whereEqualTo("user", username);
-
-        query.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-            //If Query Worked on not
-            @Override
-            public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                if (task.isSuccessful()) {
-                    //Query Worked
-                    if (task.getResult().size() >= 1) {
-                        //A user with that username exists
-                        for (QueryDocumentSnapshot document : task.getResult()) {
-                            Problem thisProblem = document.toObject(Problem.class);
-                            problemList.add(thisProblem);
-                        }
-
-                    } else {
-                        //No users with that username exists
-                    }
-                } else {
-                    //Query Did not Work
-                }
-            }
-        });
-        notifyListeners();
-        return problemList;
     }
 
     public void addListener(Listener l) {

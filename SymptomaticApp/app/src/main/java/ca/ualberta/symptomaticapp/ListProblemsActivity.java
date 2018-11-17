@@ -29,11 +29,11 @@ public class ListProblemsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_list_problems);
 
         TextView textView = (TextView) findViewById(R.id.NumberProblemsTextView);
-        String active_problem_count = "Number of active problems:" + " " + ProblemListController.getProblemList(Login.thisUser.username).getSize();
+        String active_problem_count = "Number of active problems:" + " " + ProblemListController.getProblemList().getSize();
         textView.setText(active_problem_count);
 
         ListView listView = findViewById(R.id.problemsListView);
-        final Collection<Problem> problems = ProblemListController.getProblemList(Login.thisUser.username).getProblems();
+        final Collection<Problem> problems = ProblemListController.getProblemList().getProblems();
         final ArrayList<Problem> problemList = new ArrayList<>(problems);
         final ListViewAdapter adapter = new ListViewAdapter(problemList, this);
         listView.setAdapter(adapter);

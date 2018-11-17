@@ -14,19 +14,18 @@ import com.google.firebase.firestore.QuerySnapshot;
 public class ProblemListController {
     private static ProblemList problemList = null;
 
-    public static ProblemList getProblemList(String username){
+    public static ProblemList getProblemList(){
         if (problemList == null){
             problemList = new ProblemList();
-            problemList.getProblems();
         }
         return problemList;
     }
 
-    public static void addProblem(Problem problem) {
-        getProblemList(Login.thisUser.username).addProblem(problem);
+    public void addProblem(Problem problem) {
+        getProblemList().addProblem(problem);
     }
 
-    public void getSize() {getProblemList(Login.thisUser.username).getSize();
+    public void getSize() {getProblemList().getSize();
     }
 
 }
