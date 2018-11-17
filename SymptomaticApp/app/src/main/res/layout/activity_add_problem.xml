@@ -136,7 +136,6 @@
             android:layout_marginEnd="8dp"
             android:layout_marginRight="8dp"
             android:layout_marginBottom="8dp"
-            android:onClick="getDate"
             android:text="@string/choose_date"
             app:layout_constraintBottom_toTopOf="@+id/EnterDescriptionTextView"
             app:layout_constraintEnd_toEndOf="parent"

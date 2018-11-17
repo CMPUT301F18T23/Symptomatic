@@ -22,8 +22,8 @@ public class ViewFullProblemActivity extends AppCompatActivity {
         final ArrayList<Problem> problemList = new ArrayList<>(problems);
 
 
-        Bundle bundle = getIntent().getExtras();
-        int position = bundle.getInt("position");
+        final Bundle bundle = getIntent().getExtras();
+        final int position = bundle.getInt("position");
 
         TextView textView1 = findViewById(R.id.titleTextView);
         textView1.setText("Title: " + problemList.get(position).title);
@@ -49,6 +49,18 @@ public class ViewFullProblemActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(ViewFullProblemActivity.this, ListProblemsActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        Button EditProblemButton = findViewById(R.id.editButton);
+        EditProblemButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(ViewFullProblemActivity.this, EditProblemActivity.class);
+                Bundle newBundle = new Bundle();
+                newBundle.putInt("position", position);
+                intent.putExtras(newBundle);
                 startActivity(intent);
             }
         });

@@ -44,6 +44,10 @@
     <string name="view_photo_album">View Photo Album</string>
     <string name="add_patient">Add Patient</string>
     <string name="patuser">Patient Username:</string>
-    <string name="return">Go Back</string>
+    <string name="edit_title">Modify the problem\'s title:</string>
+    <string name="edit_date">Modify the start date for the problem:</string>
+    <string name="edit_description">Modify the description:</string>
+    <string name="delete_problem">Delete Problem</string>
+
 
 </resources>

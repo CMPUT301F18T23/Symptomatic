@@ -58,6 +58,18 @@ public class ListViewAdapter extends BaseAdapter implements ListAdapter {
         //Handle buttons
         Button viewFullProblemButton = view.findViewById(R.id.viewFullProblemButton);
         Button addRecordButton = view.findViewById(R.id.addRecordButton);
+        Button editRecordButton = view.findViewById(R.id.editRecordButton);
+
+        editRecordButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context, EditProblemActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putInt("position", position);
+                intent.putExtras(bundle);
+                context.startActivity(intent);
+            }
+        });
 
         viewFullProblemButton.setOnClickListener(new View.OnClickListener(){
             @Override
@@ -75,9 +87,11 @@ public class ListViewAdapter extends BaseAdapter implements ListAdapter {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(context, AddRecordActivity.class);
+
                 context.startActivity(intent);
             }
         });
+
 
         return view;
     }

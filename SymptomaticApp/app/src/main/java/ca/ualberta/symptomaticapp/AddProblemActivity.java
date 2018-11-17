@@ -36,9 +36,7 @@ public class AddProblemActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_problem);
 
-    }
 
-    public void getDate(View v){
         Button dateButton = findViewById(R.id.AddDateButton);
         dateButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -57,6 +55,9 @@ public class AddProblemActivity extends AppCompatActivity {
             }
         });
 
+
+
+
         DateSetListener = new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker view, int year1, int month1, int dayOfMonth1) {
@@ -73,8 +74,8 @@ public class AddProblemActivity extends AppCompatActivity {
 
     }
 
-
     public void addProblem(View v){
+
         EditText editTextTitle = findViewById(R.id.EnterTitleEditText);
         String title = editTextTitle.getText().toString();
         EditText editTextDescription = findViewById(R.id.EnterDescriptionEditText);

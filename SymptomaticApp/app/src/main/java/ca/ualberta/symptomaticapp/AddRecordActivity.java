@@ -13,6 +13,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 import java.io.File;
 import java.io.IOException;
@@ -41,6 +42,9 @@ public class AddRecordActivity extends AppCompatActivity implements View.OnClick
         problemAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         Spinner spinner = (Spinner) findViewById(R.id.ProblemsSpinner);
         spinner.setAdapter(problemAdapter);
+
+
+
 
         // ------------------------------ WORKING ON SAVING PHOTOS -------------------------------
         // CURRENT STATUS: Not working!
