@@ -32,7 +32,7 @@ public class EditProblemActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_problem);
 
-        Collection<Problem> problems = ProblemListController.getProblemList().getProblems();
+        Collection<Problem> problems = ProblemListController.getProblemList(Login.thisUser.username).getProblems();
         final ArrayList<Problem> problemList = new ArrayList<>(problems);
 
         Bundle bundle = getIntent().getExtras();
@@ -76,7 +76,7 @@ public class EditProblemActivity extends AppCompatActivity {
     }
     public void saveProblem(View v){
 
-        Collection<Problem> problems = ProblemListController.getProblemList().getProblems();
+        Collection<Problem> problems = ProblemListController.getProblemList(Login.thisUser.username).getProblems();
         final ArrayList<Problem> problemList = new ArrayList<>(problems);
 
         Bundle bundle = getIntent().getExtras();
@@ -105,7 +105,7 @@ public class EditProblemActivity extends AppCompatActivity {
     }
 
     public void deleteProblem(View v){
-        final Collection<Problem> problems = ProblemListController.getProblemList().getProblems();
+        final Collection<Problem> problems = ProblemListController.getProblemList(Login.thisUser.username).getProblems();
         final ArrayList<Problem> problemList = new ArrayList<>(problems);
 
         Bundle bundle = getIntent().getExtras();
@@ -119,7 +119,7 @@ public class EditProblemActivity extends AppCompatActivity {
         deleteDialog.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                ProblemListController.getProblemList().deleteProblem(problemList.get(position));
+                ProblemListController.getProblemList(Login.thisUser.username).deleteProblem(problemList.get(position));
 
                 problemList.clear();
                 problemList.addAll(problems);

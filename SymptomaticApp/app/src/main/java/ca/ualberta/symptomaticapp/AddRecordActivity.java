@@ -36,7 +36,7 @@ public class AddRecordActivity extends AppCompatActivity implements View.OnClick
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_record);
 
-        Collection<Problem> problems = ProblemListController.getProblemList().getProblems();
+        Collection<Problem> problems = ProblemListController.getProblemList(Login.thisUser.username).getProblems();
         ArrayList<Problem> problemList = new ArrayList<>(problems);
         ArrayAdapter<Problem> problemAdapter = new ArrayAdapter<Problem>(this, android.R.layout.simple_spinner_dropdown_item, problemList);
         problemAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);

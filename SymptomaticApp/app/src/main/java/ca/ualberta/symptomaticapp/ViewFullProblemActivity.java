@@ -18,7 +18,7 @@ public class ViewFullProblemActivity extends AppCompatActivity {
         setContentView(R.layout.activity_view_full_problem);
 
 
-        final Collection<Problem> problems = ProblemListController.getProblemList().getProblems();
+        final Collection<Problem> problems = ProblemListController.getProblemList(Login.thisUser.username).getProblems();
         final ArrayList<Problem> problemList = new ArrayList<>(problems);
 
 

@@ -2,6 +2,13 @@ package ca.ualberta.symptomaticapp;
 
 
 
+import android.support.annotation.NonNull;
+
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
+
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -13,9 +20,26 @@ public class Record {
     protected ArrayList<String> photos;
     protected ArrayList<Photo> photoList;
     private Date recordDate;
+    protected String user;
+    protected String problem;
 
-    public Record(Date date) {
+    public Record(String probName,Date date) {
       this.recordDate = date;
+      this.problem = probName;
+    }
+
+    public Record addRecord(Record record) {
+        //add record to the database
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+
+        DocumentReference newUser = db.collection("records")
+                .document();
+
+        newUser.set(record).addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) { }});
+
+        return record;
     }
 
     public Date getTimeStamp() {

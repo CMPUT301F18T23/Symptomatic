@@ -79,8 +79,6 @@ public class ListViewAdapter extends BaseAdapter implements ListAdapter {
                 bundle.putInt("position", position);
                 intent.putExtras(bundle);
                 context.startActivity(intent);
-
-
             }
         });
         addRecordButton.setOnClickListener(new View.OnClickListener(){
