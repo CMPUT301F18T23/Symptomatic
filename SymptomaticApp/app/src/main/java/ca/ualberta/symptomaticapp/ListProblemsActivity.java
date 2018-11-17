@@ -23,9 +23,9 @@ public class ListProblemsActivity extends AppCompatActivity {
         ListView listView = findViewById(R.id.problemsListView);
         final Collection<Problem> problems = ProblemListController.getProblemList().getProblems();
         final ArrayList<Problem> problemList = new ArrayList<>(problems);
-        //final ArrayAdapter<Problem> problemAdapter = new ArrayAdapter<Problem>(this, android.R.layout.simple_list_item_1, problemList);
-        //listView.setAdapter(problemAdapter);
-        ListViewAdapter adapter = new ListViewAdapter(problemList, this);
+        final ListViewAdapter adapter = new ListViewAdapter(problemList, this);
         listView.setAdapter(adapter);
+
+
     }
 }
