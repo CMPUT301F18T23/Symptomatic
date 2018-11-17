@@ -1,9 +1,5 @@
 package ca.ualberta.symptomaticapp;
 
-<<<<<<< HEAD:SymptomaticApp/app/src/main/java/ca/ualberta/symptomaticapp/Queries.java
-import android.provider.Settings;
-=======
->>>>>>> a603444937e2f661db68247192821bf9434f73e5:SymptomaticApp/app/src/main/java/ca/ualberta/symptomaticapp/query.java
 import android.support.annotation.NonNull;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -14,12 +10,7 @@ import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
-<<<<<<< HEAD:SymptomaticApp/app/src/main/java/ca/ualberta/symptomaticapp/Queries.java
 public class Queries {
-=======
-
-public class query {
->>>>>>> a603444937e2f661db68247192821bf9434f73e5:SymptomaticApp/app/src/main/java/ca/ualberta/symptomaticapp/query.java
     public static ProblemList theseProblems;
 
     public static RecordList theseRecords;
@@ -59,7 +50,8 @@ public class query {
         });
         return theseProblems;
     }
-    public static RecordList getRecFromDb(String username,String probName) {
+
+    public static RecordList getRecFromDb(String username, String probName) {
         theseRecords = null;
         //Access Firestore database
         FirebaseFirestore db = FirebaseFirestore.getInstance();
@@ -67,7 +59,7 @@ public class query {
         //Build the query
         CollectionReference problems = db.collection("records");
         Query query = problems
-                .whereEqualTo("user", username).whereEqualTo("problem",probName);
+                .whereEqualTo("user", username).whereEqualTo("problem", probName);
 
         query.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             //If Query Worked on not
@@ -92,7 +84,7 @@ public class query {
         return theseRecords;
     }
 
-    public static User getUserFromDb (String username) {
+    public static User getUserFromDb(String username) {
         //Access Firestore database
         FirebaseFirestore db = FirebaseFirestore.getInstance();
 
@@ -123,3 +115,4 @@ public class query {
         return Login.thisUser;
     }
 }
+

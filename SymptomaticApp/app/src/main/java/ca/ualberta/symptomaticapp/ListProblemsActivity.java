@@ -38,7 +38,7 @@ public class ListProblemsActivity extends AppCompatActivity {
 
 
         ListView listView = findViewById(R.id.problemsListView);
-        Collection<Problem> problems = query.getProbFromDb(Login.thisUser.username).getProblems();
+        Collection<Problem> problems = Queries.getProbFromDb(Login.thisUser.username).getProblems();
         ArrayList<Problem> problemList = new ArrayList<>(problems);
         final ListViewAdapter adapter = new ListViewAdapter(problemList, this);
 
