@@ -42,32 +42,22 @@ public class AddProblemActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Calendar cal = Calendar.getInstance();
-                int year = cal.get(Calendar.YEAR);
-                int month = cal.get(Calendar.MONTH);
-                int day = cal.get(Calendar.DAY_OF_MONTH);
+                int currentYear = cal.get(Calendar.YEAR);
+                int currentMonth = cal.get(Calendar.MONTH);
+                int currentDay = cal.get(Calendar.DAY_OF_MONTH);
 
-                DatePickerDialog dialog = new DatePickerDialog(AddProblemActivity.this, android.R.style.Theme_DeviceDefault_Dialog, DateSetListener, year, month, day);
+                DatePickerDialog dialog = new DatePickerDialog(AddProblemActivity.this, android.R.style.Theme_DeviceDefault_Dialog, DateSetListener, currentYear, currentMonth, currentDay);
                 dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.BLACK));
                 dialog.show();
-
-
-
             }
         });
 
-
-
-
         DateSetListener = new DatePickerDialog.OnDateSetListener() {
             @Override
-            public void onDateSet(DatePicker view, int year1, int month1, int dayOfMonth1) {
-                year = year1;
-                month = month1;
-                day = dayOfMonth1;
-
-
-
-
+            public void onDateSet(DatePicker view, int chosenYear, int chosenMonth, int chosenDay) {
+                year = chosenYear;
+                month = chosenMonth;
+                day = chosenDay;
             }
         };
 
