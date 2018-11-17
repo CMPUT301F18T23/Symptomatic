@@ -1,5 +1,6 @@
 package ca.ualberta.symptomaticapp;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 public class Problem {

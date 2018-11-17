@@ -22,7 +22,7 @@ public class createAccount extends Activity implements View.OnClickListener {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_create_account2);
+        setContentView(R.layout.activity_create_account);
 
         username = findViewById(R.id.enterUsernameEditText);
         email = findViewById(R.id.enterEmailEditText);

@@ -25,7 +25,7 @@
     <string name="enter_email">Enter email address here</string>
     <string name="enter_number_please">Please enter your phone number</string>
     <string name="enter_number">Enter phone number here</string>
-    <string name="specify_role">Please specify role</string>
+    <string name="specify_role">Please specify your  role</string>
     <string name="create_account">Create Account</string>
     <string name="view_full_problem">View full problem</string>
     <string name="title_activity_create_account">createAccount</string>
@@ -48,6 +48,9 @@
     <string name="edit_date">Modify the start date for the problem:</string>
     <string name="edit_description">Modify the description:</string>
     <string name="delete_problem">Delete Problem</string>
+    <string name="Patient" />
+    <string name="patient">Patient</string>
+    <string name="care_provider">Care Provider</string>
 
 
 </resources>
