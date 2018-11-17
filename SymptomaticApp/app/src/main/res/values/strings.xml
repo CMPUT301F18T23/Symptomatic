@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">SymptomaticApp</string>
     <string name="title_activity_add_problem">AddProblemActivity</string>
-    <string name="enter_title">Enter title here</string>
+    <string name="enter_title">Enter title here (max 30 characters)</string>
     <string name="enter_title2">Enter a title for the problem:</string>
     <string name="enter_start_date">Enter a start date for the problem:</string>
     <string name="enter_description">Enter a brief description:</string>
@@ -51,6 +51,9 @@
     <string name="Patient" />
     <string name="patient">Patient</string>
     <string name="care_provider">Care Provider</string>
+    <string name="title">Title:</string>
+    <string name="date">Date:</string>
+    <string name="description">Description:</string>
 
 
 </resources>

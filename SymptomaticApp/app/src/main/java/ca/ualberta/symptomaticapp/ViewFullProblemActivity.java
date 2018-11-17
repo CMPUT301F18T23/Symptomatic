@@ -26,14 +26,14 @@ public class ViewFullProblemActivity extends AppCompatActivity {
         final int position = bundle.getInt("position");
 
         TextView textView1 = findViewById(R.id.titleTextView);
-        textView1.setText("Title: " + problemList.get(position).title);
+        textView1.setText(problemList.get(position).title);
 
         TextView textView2 = findViewById(R.id.dateTextView);
-        textView2.setText("Date: " + problemList.get(position).date.toString());
+        textView2.setText(problemList.get(position).date.toString());
 
 
         TextView textView3 = findViewById(R.id.descriptionTextView);
-        textView3.setText("Description: " + problemList.get(position).comment);
+        textView3.setText(problemList.get(position).comment);
 
         Button AddProblemButton = (Button) findViewById(R.id.addRecordButton);
         AddProblemButton.setOnClickListener(new View.OnClickListener() {
