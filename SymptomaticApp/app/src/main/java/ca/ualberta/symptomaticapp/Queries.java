@@ -1,8 +1,7 @@
 package ca.ualberta.symptomaticapp;
 
-import android.content.Intent;
+import android.provider.Settings;
 import android.support.annotation.NonNull;
-import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -12,15 +11,12 @@ import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
-import java.util.ArrayList;
-
-
-public class query {
+public class Queries {
     public static ProblemList theseProblems;
 
     public static RecordList theseRecords;
 
-    private static User currUser;
+    public static User currUser;
 
     public static ProblemList getProbFromDb(String username) {
         theseProblems = null;
@@ -106,7 +102,7 @@ public class query {
                     if (task.getResult().size() == 1) {
                         //A user with that username exists
                         for (QueryDocumentSnapshot document : task.getResult()) {
-                            currUser = document.toObject(User.class);
+                            Login.thisUser = document.toObject(User.class);
                         }
                     } else {
                         //No users with that username exists
@@ -116,8 +112,6 @@ public class query {
                 }
             }
         });
-        return currUser;
+        return Login.thisUser;
     }
-
 }
-

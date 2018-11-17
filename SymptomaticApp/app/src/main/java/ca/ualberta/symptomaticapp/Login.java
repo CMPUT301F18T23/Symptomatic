@@ -1,6 +1,5 @@
 package ca.ualberta.symptomaticapp;
 
-import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
@@ -24,10 +23,6 @@ public class Login extends AppCompatActivity implements View.OnClickListener{
     Button create_button, login_button;
     TextView input_user;
     Intent next_activity;
-
-    Context context = this;
-
-    Toast toast;
 
     public static User thisUser;
 
@@ -56,19 +51,41 @@ public class Login extends AppCompatActivity implements View.OnClickListener{
             //Get the input from the login
             String inputuser = input_user.getText().toString();
 
-            Login.thisUser = query.getUserFromDb(inputuser);
+            //Access Firestore database
+            FirebaseFirestore db = FirebaseFirestore.getInstance();
 
-            int temp = 1;
+            //Build the query
+            CollectionReference active_users = db.collection("users");
+            Query query = active_users
+                    .whereEqualTo("username",inputuser);
 
-            if(Login.thisUser != null) {
-                next_activity = new Intent(Login.this, MainActivity.class);
-                startActivity(next_activity);
-            } else {
-                toast = Toast.makeText(getApplication(),"The entered username does not exist",Toast.LENGTH_LONG);
-                toast.show();
+            query.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                //If Query Worked on not
+                @Override
+                public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                    if(task.isSuccessful()){
+                        //Query Worked
+                        if (task.getResult().size() == 1){
+                            //A user with that username exists
+                            Toast.makeText(Login.this, "Logging In...", Toast.LENGTH_SHORT).show();
+                            for(QueryDocumentSnapshot document: task.getResult()){
+                                thisUser = document.toObject(User.class);
+                            }
+                            next_activity = new Intent(Login.this,MainActivity.class);
+                            startActivity(next_activity);
 
-            }
+                        } else {
+                            //No users with that username exists
+                            Toast.makeText(Login.this, "User Does Not Exist", Toast.LENGTH_SHORT).show();
+                        }
+                    } else {
+                        //Query Did not Work
+                        Toast.makeText(Login.this, "Load Error", Toast.LENGTH_SHORT).show();
+                    }
+                }
+            });
 
         }
     }
 }
+
