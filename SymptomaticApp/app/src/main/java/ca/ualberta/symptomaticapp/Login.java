@@ -25,7 +25,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener{
     Intent next_activity;
 
     public static User thisUser;
-
+    public static Caregiver caregiver;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -69,7 +69,11 @@ public class Login extends AppCompatActivity implements View.OnClickListener{
                             //A user with that username exists
                             Toast.makeText(Login.this, "Logging In...", Toast.LENGTH_SHORT).show();
                             for(QueryDocumentSnapshot document: task.getResult()){
-                                thisUser = document.toObject(User.class);
+                                if (document.toObject(User.class).userType=="Patient"){
+                                    thisUser = document.toObject(User.class);
+                                } else{
+                                    caregiver = document.toObject(Caregiver.class);
+                                }
                             }
                             next_activity = new Intent(Login.this,MainActivity.class);
                             startActivity(next_activity);
