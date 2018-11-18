@@ -5,6 +5,10 @@ import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -34,6 +38,9 @@ public class ListProblemsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_problems);
+        Toolbar toolbar = findViewById(R.id.listProblem_toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle("View Problems");
 
         TextView textView = (TextView) findViewById(R.id.NumberProblemsTextView);
         listView = findViewById(R.id.problemsListView);
@@ -53,6 +60,24 @@ public class ListProblemsActivity extends AppCompatActivity {
         /*final Collection<Problem> problems = ProblemListController.getProblemList().getProblems();
         final ArrayList<Problem> problemList = new ArrayList<>(problems);*/
     }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.view_problems_menu, menu);
+        return true;
+    }
+    public void viewHome(MenuItem menu) {
+        Intent intent = new Intent(ListProblemsActivity.this, MainActivity.class);
+        startActivity(intent);
+    }
+
+    public void viewAddProblem(MenuItem menu) {
+        Intent intent = new Intent(ListProblemsActivity.this, AddProblemActivity.class);
+        startActivity(intent);
+    }
+
+
 
 }
 

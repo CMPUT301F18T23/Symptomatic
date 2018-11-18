@@ -11,16 +11,14 @@
         <menu>
 
             <item android:id="@+id/action_home"
-                android:title="@string/home" />
+                android:title="@string/home"
+                android:onClick="viewHome"/>
 
             <item android:id="@+id/action_addProblem"
                 android:title="@string/add_problem"
+                android:onClick="viewAddProblem"
                 />
 
-
-            <item android:id="@+id/action_addRecord"
-                android:title="@string/add_record"
-                />
 
         </menu>
 

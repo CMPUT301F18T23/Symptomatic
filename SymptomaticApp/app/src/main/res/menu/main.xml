@@ -12,9 +12,4 @@
         android:title="View Problems"
         android:onClick="viewViewProblems"
         />
-    <item
-        android:id="@+id/add_record"
-        android:title="Add Record"
-        android:onClick="viewAddRecord"
-        />
 </menu>

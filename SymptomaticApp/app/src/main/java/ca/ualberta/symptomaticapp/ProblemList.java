@@ -1,3 +1,11 @@
+/*
+ * ProblemList.java
+ *
+ *
+ *
+ *
+ */
+
 package ca.ualberta.symptomaticapp;
 
 import android.support.annotation.NonNull;
