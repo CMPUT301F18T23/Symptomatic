@@ -12,6 +12,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ListView;
 
 import java.util.ArrayList;
 
@@ -23,7 +24,7 @@ public class ViewPatients extends AppCompatActivity {
         setContentView(R.layout.activity_view_patients);
         caregiver= Login.caregiver; //fetch current caregiver.
         ArrayList<User> patients = caregiver.getPatients();
-
+        ListView patientsview = (ListView) findViewById(R.id.lv_Patients);
         Button addpatient = (Button) findViewById(R.id.btn_AddPatient);
         addpatient.setOnClickListener(new View.OnClickListener() {
             @Override
