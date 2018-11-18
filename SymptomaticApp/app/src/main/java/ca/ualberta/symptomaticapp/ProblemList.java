@@ -14,15 +14,15 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 public class ProblemList {
-    protected  ArrayList<Problem> problemList;
-    protected  transient ArrayList<Listener> listeners;
+    public  ArrayList<Problem> problemList;
+    public  static transient ArrayList<Listener> listeners;
 
     public ProblemList(){
         problemList = new ArrayList<Problem>();
         listeners = new ArrayList<Listener>();
     }
 
-    private ArrayList<Listener> getListeners(){
+    private static ArrayList<Listener> getListeners(){
         if (listeners == null) {
             listeners = new ArrayList<Listener>();
         }
@@ -34,19 +34,13 @@ public class ProblemList {
     }
 
     public void addProblem(Problem problem) {
-        problemList.add(problem);
+        this.problemList.add(problem);
         notifyListeners();
     }
 
     public void deleteProblem(Problem problem) {
         problemList.remove(problem);
         notifyListeners();
-    }
-
-    public void clearProblems(){
-        for (Problem problem: problemList){
-            problem = null;
-        }
     }
 
     public Problem getProblem(Problem problem) {
@@ -58,10 +52,42 @@ public class ProblemList {
         return problemList.size();
     }
 
-    public void notifyListeners(){
+    public static void notifyListeners(){
         for (Listener listener: getListeners()) {
             listener.update();
         }
+    }
+
+    public void getFromDb() {
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+
+        //Build the query
+        CollectionReference problems = db.collection("problems");
+        Query query = problems
+                .whereEqualTo("user", Login.thisUser.username);
+
+        query.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            //If Query Worked on not
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                if (task.isSuccessful()) {
+                    //Query Worked
+                    int z = task.getResult().size();
+                    if (task.getResult().size() >= 1) {
+                        //A user with that username exists
+                        for (QueryDocumentSnapshot document : task.getResult()) {
+                            Problem thisProblem = document.toObject(Problem.class);
+                            addProblem(thisProblem);
+                        }
+                        notify();
+                    } else {
+                        //No users with that username exists
+                    }
+                } else {
+                    //Query Did not Work
+                }
+            }
+        });
     }
 
     public void addListener(Listener l) {

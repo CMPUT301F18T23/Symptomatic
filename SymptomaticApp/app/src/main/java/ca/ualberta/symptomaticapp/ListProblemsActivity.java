@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.RecyclerView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -23,26 +24,36 @@ import java.util.Collection;
 
 public class ListProblemsActivity extends AppCompatActivity {
 
+    private ListViewAdapter listadapter;
+
+    ListView listView;
+
+    ProblemList displayList;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_problems);
 
         TextView textView = (TextView) findViewById(R.id.NumberProblemsTextView);
-        String active_problem_count = "Number of active problems:" + " " + ProblemListController.getProblemList().getSize();
+        listView = findViewById(R.id.problemsListView);
+
+        displayList = new ProblemList();
+
+        displayList.getFromDb();
+
+        String active_problem_count = "Number of active problems:" + " " + displayList.getProblems().size();
         textView.setText(active_problem_count);
 
-        //final Collection<Problem> problems = ProblemListController.getProblemList().getProblems();
-        //final ArrayList<Problem> problemList = new ArrayList<>(problems);
+        final Collection<Problem> problem_list = displayList.getProblems();
+        final ArrayList<Problem> problemList = new ArrayList<>(problem_list);
+        listadapter = new ListViewAdapter(problemList, this);
+        listView.setAdapter(listadapter);
 
-
-        /*ListView listView = findViewById(R.id.problemsListView);
-        Collection<Problem> problems = Queries.getProbFromDb(Login.thisUser.username).getProblems();
-        ArrayList<Problem> problemList = new ArrayList<>(problems);
-        final ListViewAdapter adapter = new ListViewAdapter(problemList, this);
-        listView.setAdapter(adapter);*/
-
+        /*final Collection<Problem> problems = ProblemListController.getProblemList().getProblems();
+        final ArrayList<Problem> problemList = new ArrayList<>(problems);*/
     }
+
 }
 
 

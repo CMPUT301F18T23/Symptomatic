@@ -13,12 +13,17 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
-public class ViewPatients extends AppCompatActivity {
+import java.util.ArrayList;
 
+public class ViewPatients extends AppCompatActivity {
+    public Caregiver caregiver;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_patients);
+        caregiver= Login.caregiver; //fetch current caregiver.
+        ArrayList<User> patients = caregiver.getPatients();
+
         Button addpatient = (Button) findViewById(R.id.btn_AddPatient);
         addpatient.setOnClickListener(new View.OnClickListener() {
             @Override
