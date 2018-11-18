@@ -40,11 +40,11 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        Button AddRecordButton = (Button) findViewById(R.id.AddRecordButton);
+        Button AddRecordButton = (Button) findViewById(R.id.ViewProblemsButton);
         AddRecordButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, AddRecordActivity.class);
+                Intent intent = new Intent(MainActivity.this, ListProblemsActivity.class);
                 startActivity(intent);
             }
         });
@@ -75,16 +75,4 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(MainActivity.this, ListProblemsActivity.class);
         startActivity(intent);
     }
-    public void viewAddRecord(MenuItem menu) {
-        Intent intent = new Intent(MainActivity.this, AddRecordActivity.class);
-        startActivity(intent);
-    }
-
-
-
-
-
-
-
-
 }

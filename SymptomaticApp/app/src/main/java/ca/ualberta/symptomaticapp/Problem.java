@@ -1,3 +1,12 @@
+/*
+ * Problem.java
+ *
+ *
+ *
+ *
+ */
+
+
 package ca.ualberta.symptomaticapp;
 
 import android.support.annotation.NonNull;
@@ -9,6 +18,9 @@ import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.time.LocalDate;
 import java.util.Date;
+
+import ca.ualberta.symptomaticapp.Login;
+import ca.ualberta.symptomaticapp.RecordList;
 
 public class Problem {
     protected  String title;
@@ -25,7 +37,6 @@ public class Problem {
         this.user = Login.thisUser.username;
     }
 
-    public Problem(){};
 
     public static void addProbToDb(Problem problem){
         FirebaseFirestore db = FirebaseFirestore.getInstance();

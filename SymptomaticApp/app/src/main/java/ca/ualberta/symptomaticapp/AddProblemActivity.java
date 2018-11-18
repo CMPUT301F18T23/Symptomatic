@@ -77,16 +77,12 @@ public class AddProblemActivity extends AppCompatActivity {
         return true;
     }
     public void viewHome(MenuItem menu) {
-        Intent intent = new Intent(AddProblemActivity.this, AddProblemActivity.class);
+        Intent intent = new Intent(AddProblemActivity.this, MainActivity.class);
         startActivity(intent);
     }
 
     public void viewViewProblems(MenuItem menu) {
         Intent intent = new Intent(AddProblemActivity.this, ListProblemsActivity.class);
-        startActivity(intent);
-    }
-    public void viewAddRecord(MenuItem menu) {
-        Intent intent = new Intent(AddProblemActivity.this, AddRecordActivity.class);
         startActivity(intent);
     }
 

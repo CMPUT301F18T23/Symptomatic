@@ -20,13 +20,6 @@
                 android:onClick="viewViewProblems"
                 />
 
-
-
-            <item android:id="@+id/action_addRecord"
-                android:title="@string/add_record"
-                android:onClick="viewAddRecord"
-                />
-
         </menu>
 
     </item>
