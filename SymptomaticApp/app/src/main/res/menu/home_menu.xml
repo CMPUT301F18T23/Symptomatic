@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/homeMenuItem"
+        android:title="new"
+        android:orderInCategory="101"
+        android:icon="@drawable/menu_image"
+        app:showAsAction="always">
+
+        <menu>
+
+            <item android:id="@+id/action_addProblem"
+                android:title="@string/add_problem"
+                android:onClick="viewAddProblem"
+                />
+
+            <item android:id="@+id/action_viewProblems"
+                android:title="@string/view_problems"
+                android:onClick="viewViewProblems"
+                />
+
+
+
+            <item android:id="@+id/action_addRecord"
+                android:title="@string/add_record"
+                android:onClick="viewAddRecord"
+                />
+
+        </menu>
+
+    </item>
+
+</menu>

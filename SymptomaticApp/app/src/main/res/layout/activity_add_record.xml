@@ -6,6 +6,16 @@
     android:layout_height="match_parent"
     tools:context=".AddRecordActivity">
 
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/addRecord_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="?attr/colorPrimary"
+        android:elevation="4dp"
+        android:theme="@style/AppTheme"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+        app:titleTextColor="@android:color/background_light" />
+
     <Spinner
         android:id="@+id/ProblemsSpinner"
         android:layout_width="256dp"

@@ -9,6 +9,10 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
@@ -35,7 +39,9 @@ public class AddProblemActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_problem);
-
+        Toolbar toolbar = findViewById(R.id.addProblem_toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle("Add Problem");
 
         Button dateButton = findViewById(R.id.AddDateButton);
         dateButton.setOnClickListener(new View.OnClickListener() {
@@ -63,6 +69,27 @@ public class AddProblemActivity extends AppCompatActivity {
 
 
     }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.add_problem_menu, menu);
+        return true;
+    }
+    public void viewHome(MenuItem menu) {
+        Intent intent = new Intent(AddProblemActivity.this, AddProblemActivity.class);
+        startActivity(intent);
+    }
+
+    public void viewViewProblems(MenuItem menu) {
+        Intent intent = new Intent(AddProblemActivity.this, ListProblemsActivity.class);
+        startActivity(intent);
+    }
+    public void viewAddRecord(MenuItem menu) {
+        Intent intent = new Intent(AddProblemActivity.this, AddRecordActivity.class);
+        startActivity(intent);
+    }
+
 
     public void addProblem(View v){
 
@@ -101,11 +128,9 @@ public class AddProblemActivity extends AppCompatActivity {
             Intent intent = new Intent(AddProblemActivity.this, ListProblemsActivity.class);
             startActivity(intent);
         }
-
-
-
-
     }
+
+
 
 
 

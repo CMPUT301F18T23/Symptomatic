@@ -16,7 +16,7 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
+        android:theme="@style/Theme.AppCompat.Light.NoActionBar">
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -25,9 +25,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".AddProblemActivity"
-            android:label="@string/title_activity_add_problem"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+            android:name=".AddProblemActivity" />
         <activity android:name=".ListProblemsActivity" />
         <activity
             android:name=".AddRecordActivity"

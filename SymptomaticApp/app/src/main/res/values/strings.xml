@@ -54,6 +54,9 @@
     <string name="title">Title:</string>
     <string name="date">Date:</string>
     <string name="description">Description:</string>
+    <string name="home">Home</string>
+    <string name="home_page">Home Page</string>
+    <string name="view_problems3">View Problems</string>
 
 
 </resources>

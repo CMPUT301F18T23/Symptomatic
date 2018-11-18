@@ -7,7 +7,11 @@ import android.provider.MediaStore;
 import android.support.v4.content.FileProvider;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -35,6 +39,9 @@ public class AddRecordActivity extends AppCompatActivity implements View.OnClick
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_record);
+        Toolbar toolbar = findViewById(R.id.addRecord_toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle("Add Record");
 
         Collection<Problem> problems = ProblemListController.getProblemList().getProblems();
         ArrayList<Problem> problemList = new ArrayList<>(problems);
@@ -66,6 +73,27 @@ public class AddRecordActivity extends AppCompatActivity implements View.OnClick
 
 
     }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.add_record_menu, menu);
+        return true;
+    }
+    public void viewHome(MenuItem menu) {
+        Intent intent = new Intent(AddRecordActivity.this, AddProblemActivity.class);
+        startActivity(intent);
+    }
+
+    public void viewViewProblems(MenuItem menu) {
+        Intent intent = new Intent(AddRecordActivity.this, ListProblemsActivity.class);
+        startActivity(intent);
+    }
+    public void viewAddProblem(MenuItem menu) {
+        Intent intent = new Intent(AddRecordActivity.this, AddProblemActivity.class);
+        startActivity(intent);
+    }
+
 
     // ---------------------------------- PHOTO FUNCTIONALITY ----------------------------------
     public void onClick(View v){
