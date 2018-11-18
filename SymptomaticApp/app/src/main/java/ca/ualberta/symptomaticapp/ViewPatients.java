@@ -11,10 +11,12 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class ViewPatients extends AppCompatActivity {
     public Caregiver caregiver;
@@ -26,6 +28,14 @@ public class ViewPatients extends AppCompatActivity {
         ArrayList<User> patients = caregiver.getPatients();
         ListView patientsview = (ListView) findViewById(R.id.lv_Patients);
         Button addpatient = (Button) findViewById(R.id.btn_AddPatient);
+
+        List<String> usernames = new ArrayList<String>();
+        for(User patient : patients){
+            usernames.add(patient.returnUsername());
+        }
+        ArrayAdapter<String> patientsadapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, usernames);
+        patientsview.setAdapter(patientsadapter);
+
         addpatient.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
