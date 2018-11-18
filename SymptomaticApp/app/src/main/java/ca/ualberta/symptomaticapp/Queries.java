@@ -18,7 +18,6 @@ public class Queries {
     public static RecordList theseRecords;
 
     public static ProblemList getProbFromDb(String username) {
-        theseProblems = null;
 
         //Access Firestore database
         FirebaseFirestore db = FirebaseFirestore.getInstance();
@@ -38,7 +37,7 @@ public class Queries {
                         //A user with that username exists
                         for (QueryDocumentSnapshot document : task.getResult()) {
                             Problem thisProblem = document.toObject(Problem.class);
-                            theseProblems.addProblem(thisProblem);
+                            Queries.theseProblems.addProblem(thisProblem);
                         }
                     } else {
                         //No users with that username exists
@@ -48,6 +47,7 @@ public class Queries {
                 }
             }
         });
+        ProblemList textProbs = Queries.theseProblems;
         return theseProblems;
     }
 
