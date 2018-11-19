@@ -28,6 +28,8 @@ public class Caregiver extends User {
         this.userType = "Caregiver";
     }
 
+    public Caregiver(){}
+
     public static Caregiver createNewCaregiver(String username, String phone, String email){
         FirebaseFirestore db = FirebaseFirestore.getInstance();
 

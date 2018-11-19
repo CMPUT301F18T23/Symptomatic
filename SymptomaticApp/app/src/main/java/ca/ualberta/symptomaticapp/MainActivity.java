@@ -49,7 +49,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        if (Login.thisUser == null) {
+        if (Login.thisUser == null && Login.thisCaregiver == null) {
             Intent login = new Intent(this, Login.class);
             startActivity(login);
         } else {
@@ -73,6 +73,13 @@ public class MainActivity extends AppCompatActivity {
 
     public void viewViewProblems(MenuItem menu) {
         Intent intent = new Intent(MainActivity.this, ListProblemsActivity.class);
+        startActivity(intent);
+    }
+
+    public void viewLogout(MenuItem menu){
+        Login.thisCaregiver = null;
+        Login.thisUser = null;
+        Intent intent = new Intent(MainActivity.this, MainActivity.class);
         startActivity(intent);
     }
 }

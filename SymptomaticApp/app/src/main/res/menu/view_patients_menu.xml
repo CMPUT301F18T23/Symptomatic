@@ -10,9 +10,10 @@
 
         <menu>
 
-            <item android:id="@+id/action_home"
-                android:title="@string/home"
-                android:onClick="viewHome"/>
+            <item android:id="@+id/action_logout"
+                android:title="@string/logout"
+                android:onClick="viewLogout"
+                />
 
         </menu>
 

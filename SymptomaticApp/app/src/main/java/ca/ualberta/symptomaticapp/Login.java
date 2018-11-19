@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -17,12 +18,16 @@ import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
+import java.util.Collection;
+
 
 public class Login extends AppCompatActivity implements View.OnClickListener{
 
     Button create_button, login_button;
     TextView input_user;
     Intent next_activity;
+
+    RadioButton patientLogin,caregiverLogin;
 
     public static User thisUser;
     public static Caregiver thisCaregiver;
@@ -38,6 +43,9 @@ public class Login extends AppCompatActivity implements View.OnClickListener{
         login_button.setOnClickListener(this);
 
         input_user = findViewById(R.id.enter_user);
+
+        patientLogin = findViewById(R.id.patientLoginButton);
+        caregiverLogin = findViewById(R.id.careproviderLoginButton);
     }
 
     @Override
@@ -53,9 +61,15 @@ public class Login extends AppCompatActivity implements View.OnClickListener{
 
             //Access Firestore database
             FirebaseFirestore db = FirebaseFirestore.getInstance();
+            CollectionReference active_users;
+
+            if (caregiverLogin.isChecked()){
+                active_users = db.collection("caregivers");
+            } else {
+                active_users = db.collection("users");
+            }
 
             //Build the query
-            CollectionReference active_users = db.collection("users");
             Query query = active_users
                     .whereEqualTo("username",inputuser);
 
@@ -69,9 +83,19 @@ public class Login extends AppCompatActivity implements View.OnClickListener{
                             //A user with that username exists
                             Toast.makeText(Login.this, "Logging In...", Toast.LENGTH_SHORT).show();
                             for(QueryDocumentSnapshot document: task.getResult()){
-                                thisUser = document.toObject(User.class);
+                                if (patientLogin.isChecked()) {
+                                    thisUser = document.toObject(User.class);
+                                    thisCaregiver = null;
+                                } else {
+                                    thisCaregiver = document.toObject(Caregiver.class);
+                                    thisUser = null;
+                                }
                             }
-                            next_activity = new Intent(Login.this,MainActivity.class);
+                            if (patientLogin.isChecked()) {
+                                next_activity = new Intent(Login.this,MainActivity.class);
+                            } else {
+                                next_activity = new Intent(Login.this,ViewPatients.class);
+                            }
                             startActivity(next_activity);
 
                         } else {

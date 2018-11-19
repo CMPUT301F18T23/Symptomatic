@@ -24,6 +24,7 @@ import java.util.List;
 
 public class ViewPatients extends AppCompatActivity {
     public Caregiver caregiver;
+    ArrayList<String> patients;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,26 +34,34 @@ public class ViewPatients extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("View Patients");
 
+        if (Login.thisUser == null && Login.thisCaregiver == null) {
+            Intent login = new Intent(this, Login.class);
+            startActivity(login);
+        }
 
         caregiver= Login.thisCaregiver; //fetch current caregiver.
-        ArrayList<String> patients = caregiver.getPatients();
-        ListView patientsview = (ListView) findViewById(R.id.lv_Patients);
-        Button addpatient = (Button) findViewById(R.id.btn_AddPatient);
-
-        List<String> usernames = new ArrayList<String>();
-        for(String patient : patients){
-            usernames.add(patient);
-        }
-        ArrayAdapter<String> patientsadapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, usernames);
-        patientsview.setAdapter(patientsadapter);
-
-        addpatient.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(ViewPatients.this, AddPatient.class));
+        if (caregiver != null) {
+            patients = caregiver.getPatients();
+            ListView patientsview = (ListView) findViewById(R.id.lv_Patients);
+            Button addpatient = (Button) findViewById(R.id.btn_AddPatient);
+            List<String> usernames = new ArrayList<String>();
+            for(String patient : patients){
+                usernames.add(patient);
             }
-        });
+            ArrayAdapter<String> patientsadapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, usernames);
+            patientsview.setAdapter(patientsadapter);
+
+            addpatient.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    startActivity(new Intent(ViewPatients.this, AddPatient.class));
+                }
+            });
+        } else {
+            patients = null;
+        }
     }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -60,8 +69,11 @@ public class ViewPatients extends AppCompatActivity {
         inflater.inflate(R.menu.view_patients_menu, menu);
         return true;
     }
-    public void viewHome(MenuItem menu) {
-        Intent intent = new Intent(ViewPatients.this, MainActivity.class);
+
+    public void viewLogout(MenuItem menu){
+        Login.thisCaregiver = null;
+        Login.thisUser = null;
+        Intent intent = new Intent(ViewPatients.this, ViewPatients.class);
         startActivity(intent);
     }
 }
