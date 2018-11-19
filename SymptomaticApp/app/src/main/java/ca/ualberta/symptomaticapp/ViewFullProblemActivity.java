@@ -105,6 +105,7 @@ public class ViewFullProblemActivity extends AppCompatActivity {
 
     public void viewAddProblem(MenuItem menu){
         Intent intent = new Intent(ViewFullProblemActivity.this, AddProblemActivity.class);
+        startActivity(intent);
     }
 
     public void viewViewProblems(MenuItem menu) {
