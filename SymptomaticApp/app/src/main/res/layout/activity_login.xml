@@ -105,14 +105,16 @@
             android:layout_height="wrap_content"
             android:checked="true"
             android:clickable="true"
-            android:text="@string/patient" />
+            android:text="@string/patient"
+            android:buttonTint="@color/logoColor"/>
 
         <RadioButton
             android:id="@+id/careproviderLoginButton"
             android:layout_width="133dp"
             android:layout_height="wrap_content"
             android:clickable="true"
-            android:text="@string/care_provider" />
+            android:text="@string/care_provider"
+            android:buttonTint="@color/logoColor"/>
 
     </RadioGroup>
 
