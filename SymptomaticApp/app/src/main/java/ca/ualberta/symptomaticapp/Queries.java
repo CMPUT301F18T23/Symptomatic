@@ -13,9 +13,9 @@ import com.google.firebase.firestore.QuerySnapshot;
 import java.util.ArrayList;
 
 public class Queries {
-    public static ProblemList theseProblems;
+    private static ProblemList theseProblems;
 
-    public static RecordList theseRecords;
+    private static RecordList theseRecords;
 
     public static ProblemList getProbFromDb(String username) {
 

@@ -17,15 +17,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import java.util.Calendar;
-import java.util.Date;
-
-import ca.ualberta.symptomaticapp.ListProblemsActivity;
-import ca.ualberta.symptomaticapp.Problem;
-import ca.ualberta.symptomaticapp.ProblemListController;
-import ca.ualberta.symptomaticapp.R;
 
 
 public class AddProblemActivity extends AppCompatActivity {
@@ -117,9 +110,7 @@ public class AddProblemActivity extends AppCompatActivity {
         }
 
         if (goodProblem) {
-            ProblemListController pt = new ProblemListController();
             Problem newProblem = new Problem(title, cal.getTime(), description);
-            pt.addProblem(newProblem);
             Problem.addProbToDb(newProblem);
             Intent intent = new Intent(AddProblemActivity.this, ListProblemsActivity.class);
             startActivity(intent);

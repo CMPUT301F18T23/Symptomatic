@@ -7,6 +7,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -15,30 +16,34 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.Query;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
+
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collection;
 
 public class EditProblemActivity extends AppCompatActivity {
-
+/*
     private DatePickerDialog.OnDateSetListener DateSetListener;
     private int year;
     private int month;
     private int day;
 
-
+    private Problem thisProblem;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_problem);
 
-
-        Collection<Problem> problems = ProblemListController.getProblemList().getProblems();
-        final ArrayList<Problem> problemList = new ArrayList<>(problems);
-
         Bundle bundle = getIntent().getExtras();
-        final int position = bundle.getInt("position");
+        final Problem prob = bundle.getProblem("problem");
 
 
 
@@ -139,4 +144,38 @@ public class EditProblemActivity extends AppCompatActivity {
         });
         deleteDialog.show();
     }
+
+    private void getProblems(String username){
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+
+        CollectionReference problems = db.collection("problems");
+
+        Query problemsQuery = problems.whereEqualTo("user",username);
+
+        problemsQuery.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                if(task.isSuccessful()){
+                    int y = task.getResult().size();
+                    for(QueryDocumentSnapshot document: task.getResult()){
+                        Problem problem = document.toObject(Problem.class);
+                        displayList.add(problem);
+                    }
+                    listadapter.notifyDataSetChanged();
+                    if (displayList != null) {
+                        active_problem_count = "Number of active problems:"+" " + displayList.size();;
+                        textView.setText(active_problem_count);
+                    } else {
+                        active_problem_count = "Number of active problems: 0";
+                        textView.setText(active_problem_count);
+                    }
+                } else {
+                    AlertDialog.Builder badUsernameDialog = new AlertDialog.Builder(ListProblemsActivity.this);
+                    badUsernameDialog.setMessage("Data Load Error");
+                    badUsernameDialog.show();
+                }
+            }
+        });
+
+    }*/
 }

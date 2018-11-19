@@ -17,7 +17,7 @@ public class ViewFullProblemActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_full_problem);
 
-
+/*
         final Collection<Problem> problems = ProblemListController.getProblemList().getProblems();
         final ArrayList<Problem> problemList = new ArrayList<>(problems);
 
@@ -66,5 +66,6 @@ public class ViewFullProblemActivity extends AppCompatActivity {
         });
 
 
+    }*/
     }
 }

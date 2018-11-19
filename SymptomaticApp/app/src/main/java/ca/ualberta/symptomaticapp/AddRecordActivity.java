@@ -1,9 +1,11 @@
 package ca.ualberta.symptomaticapp;
 
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.support.annotation.NonNull;
 import android.support.v4.content.FileProvider;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -19,6 +21,14 @@ import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.Query;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
+
 import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
@@ -30,9 +40,14 @@ public class AddRecordActivity extends AppCompatActivity implements View.OnClick
     private static final int PICK_IMAGE_REQUEST = 100; // to access the gallery to choose an image
     static final int REQUEST_IMAGE_CAPTURE = 1; // to access the camera to take an image
     static final int REQUEST_TAKE_PHOTO = 1;
+
     String mCurrentPhotoPath; // the photo's file path
 
+    ArrayList<Problem> availableProblems;
 
+    ArrayAdapter<Problem> problemAdapter;
+
+    Spinner spinner;
 
 
     @Override
@@ -43,14 +58,12 @@ public class AddRecordActivity extends AppCompatActivity implements View.OnClick
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("Add Record");
 
-        Collection<Problem> problems = ProblemListController.getProblemList().getProblems();
-        ArrayList<Problem> problemList = new ArrayList<>(problems);
-        ArrayAdapter<Problem> problemAdapter = new ArrayAdapter<Problem>(this, android.R.layout.simple_spinner_dropdown_item, problemList);
-        problemAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        Spinner spinner = (Spinner) findViewById(R.id.ProblemsSpinner);
-        spinner.setAdapter(problemAdapter);
+        spinner = (Spinner) findViewById(R.id.ProblemsSpinner);
+        availableProblems = new ArrayList<Problem>();
 
+        initAdapter();
 
+        getProblems(Login.thisUser.returnUsername());
 
 
         // ------------------------------ WORKING ON SAVING PHOTOS -------------------------------
@@ -68,9 +81,6 @@ public class AddRecordActivity extends AppCompatActivity implements View.OnClick
 
         savedPhoto.setOnClickListener(this);
         takePhoto.setOnClickListener(this);
-
-
-
 
     }
 
@@ -92,6 +102,14 @@ public class AddRecordActivity extends AppCompatActivity implements View.OnClick
     public void viewAddProblem(MenuItem menu) {
         Intent intent = new Intent(AddRecordActivity.this, AddProblemActivity.class);
         startActivity(intent);
+    }
+
+    private void initAdapter(){
+        if(problemAdapter == null){
+            problemAdapter = new ArrayAdapter<Problem>(this, android.R.layout.simple_spinner_dropdown_item, availableProblems);
+        }
+        problemAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner.setAdapter(problemAdapter);
     }
 
 
@@ -180,7 +198,28 @@ public class AddRecordActivity extends AppCompatActivity implements View.OnClick
         }
     }
 
+    private void getProblems(String username){
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
 
+        CollectionReference problems = db.collection("problems");
 
+        Query problemsQuery = problems.whereEqualTo("user",username);
 
+        problemsQuery.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                if(task.isSuccessful()){
+                    for(QueryDocumentSnapshot document: task.getResult()){
+                        Problem problem = document.toObject(Problem.class);
+                        availableProblems.add(problem);
+                    }
+                    problemAdapter.notifyDataSetChanged();
+                } else {
+                    AlertDialog.Builder badUsernameDialog = new AlertDialog.Builder(AddRecordActivity.this);
+                    badUsernameDialog.setMessage("Data Load Error");
+                    badUsernameDialog.show();
+                }
+            }
+        });
+    }
 }

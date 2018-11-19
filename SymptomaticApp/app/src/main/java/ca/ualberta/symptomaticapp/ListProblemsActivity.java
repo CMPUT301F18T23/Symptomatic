@@ -1,9 +1,11 @@
 package ca.ualberta.symptomaticapp;
 
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
@@ -30,10 +32,13 @@ public class ListProblemsActivity extends AppCompatActivity {
 
     private ListViewAdapter listadapter;
 
-    ListView listView;
+    private ListView listView;
 
-    ProblemList displayList;
+    private ArrayList<Problem> displayList;
 
+    private String active_problem_count;
+
+    private TextView textView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,20 +47,15 @@ public class ListProblemsActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("View Problems");
 
-        TextView textView = (TextView) findViewById(R.id.NumberProblemsTextView);
         listView = findViewById(R.id.problemsListView);
+        displayList = new ArrayList<Problem>();
+        textView = (TextView) findViewById(R.id.NumberProblemsTextView);
 
-        displayList = new ProblemList();
-
-        displayList.getFromDb();
-
-        String active_problem_count = "Number of active problems:" + " " + displayList.getProblems().size();
+        active_problem_count = "Number of active problems:";
         textView.setText(active_problem_count);
 
-        final Collection<Problem> problem_list = displayList.getProblems();
-        final ArrayList<Problem> problemList = new ArrayList<>(problem_list);
-        listadapter = new ListViewAdapter(problemList, this);
-        listView.setAdapter(listadapter);
+        initListView();
+        getProblems(Login.thisUser.username);
 
         /*final Collection<Problem> problems = ProblemListController.getProblemList().getProblems();
         final ArrayList<Problem> problemList = new ArrayList<>(problems);*/
@@ -77,6 +77,47 @@ public class ListProblemsActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    private void initListView(){
+        if(listadapter == null){
+            listadapter = new ListViewAdapter(displayList, this);
+        }
+        listView.setAdapter(listadapter);
+    }
+
+    private void getProblems(String username){
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+
+        CollectionReference problems = db.collection("problems");
+
+        Query problemsQuery = problems.whereEqualTo("user",username);
+
+        problemsQuery.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                if(task.isSuccessful()){
+                    for(QueryDocumentSnapshot document: task.getResult()){
+                        Problem problem = document.toObject(Problem.class);
+                        displayList.add(problem);
+                    }
+                    listadapter.notifyDataSetChanged();
+                    if (displayList != null) {
+                        active_problem_count = "Number of active problems:"+" " + displayList.size();;
+                        textView.setText(active_problem_count);
+                    } else {
+                        active_problem_count = "Number of active problems: 0";
+                        textView.setText(active_problem_count);
+                    }
+                } else {
+                    AlertDialog.Builder badUsernameDialog = new AlertDialog.Builder(ListProblemsActivity.this);
+                    badUsernameDialog.setMessage("Data Load Error");
+                    badUsernameDialog.show();
+                }
+            }
+        });
+        for(Problem problem: displayList){
+            problem.updateRecords();
+        }
+    }
 
 
 }

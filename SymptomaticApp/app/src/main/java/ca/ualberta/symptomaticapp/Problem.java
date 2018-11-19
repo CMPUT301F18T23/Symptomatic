@@ -9,12 +9,17 @@
 
 package ca.ualberta.symptomaticapp;
 
+import android.app.AlertDialog;
 import android.support.annotation.NonNull;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.Query;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import java.time.LocalDate;
 import java.util.Date;
@@ -23,20 +28,21 @@ import ca.ualberta.symptomaticapp.Login;
 import ca.ualberta.symptomaticapp.RecordList;
 
 public class Problem {
-    protected  String title;
-    protected Date date;
-    protected String comment;
-    protected RecordList recordList = new RecordList();
-    protected int numberRecords;
-    protected String user;
+    private String title;
+    private Date date;
+    private String comment;
+    private static int numberRecords;
+    private String user;
 
     public Problem (String title, Date date, String comment){
         this.title = title;
         this.date = date;
         this.comment = comment;
         this.user = Login.thisUser.username;
+        this.numberRecords = 0;
     }
 
+    public Problem (){}
 
     public static void addProbToDb(Problem problem){
         FirebaseFirestore db = FirebaseFirestore.getInstance();
@@ -75,13 +81,8 @@ public class Problem {
         return comment;
     }
 
-    public RecordList getRecordList() {
-        return this.recordList;
-    }
-
     public int getRecordListSize() {
-        this.numberRecords = this.recordList.size();
-        return this.numberRecords;
+        return numberRecords;
     }
 
     public String getUser(){return this.user;}
@@ -89,4 +90,31 @@ public class Problem {
     public String toString() {
         return this.title+ "\n" + this.date.toString() + "\n" + "Number of records:" + " " + this.getRecordListSize();
     }
+
+    public void setNumberRecords(int num){
+        this.numberRecords = num;
+    }
+
+    public void updateRecords(){
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+
+        final CollectionReference records = db.collection("records");
+
+        Query recordsQuery = records.whereEqualTo("problem",this.getTitle());
+
+        recordsQuery.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                if(task.isSuccessful()){
+                    int x = 0;
+                    for(QueryDocumentSnapshot document: task.getResult()){
+                        Record record = document.toObject(Record.class);
+                        numberRecords += 1;
+                    }
+                } else {
+                }
+            }
+        });
+    }
+
 }
