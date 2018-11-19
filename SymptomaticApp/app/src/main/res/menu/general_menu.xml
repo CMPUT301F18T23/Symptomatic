@@ -24,9 +24,9 @@
                 android:onClick="viewViewProblems"
                 />
 
-            <item android:id="@+id/action_addRecord"
-                android:title="@string/add_record"
-                android:onClick="viewAddRecord"
+            <item android:id="@+id/action_logout"
+                android:title="@string/logout"
+                android:onClick="viewLogout"
                 />
 
         </menu>

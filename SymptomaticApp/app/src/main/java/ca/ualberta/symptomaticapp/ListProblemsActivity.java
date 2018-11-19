@@ -77,6 +77,13 @@ public class ListProblemsActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    public void viewLogout(MenuItem menu){
+        Login.thisCaregiver = null;
+        Login.thisUser = null;
+        Intent intent = new Intent(ListProblemsActivity.this, MainActivity.class);
+        startActivity(intent);
+    }
+
     private void initListView(){
         if(listadapter == null){
             listadapter = new ListViewAdapter(displayList, this);

@@ -1,9 +1,11 @@
 
 package ca.ualberta.symptomaticapp;
 
+import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +13,14 @@ import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.ListAdapter;
 import android.widget.TextView;
+
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.Query;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 
@@ -20,8 +30,10 @@ import ca.ualberta.symptomaticapp.R;
 import ca.ualberta.symptomaticapp.ViewFullProblemActivity;
 
 public class ListViewAdapter extends BaseAdapter implements ListAdapter {
-    ArrayList<Problem> problemList;
+    private ArrayList<Problem> problemList;
     private Context context;
+
+
 
     public ListViewAdapter(ArrayList<Problem> list, Context context) {
         this.problemList = list;
@@ -43,6 +55,8 @@ public class ListViewAdapter extends BaseAdapter implements ListAdapter {
         return 0;
     }
 
+
+
     @Override
     public View getView(final int position, View convertView, ViewGroup parent) {
         View view = convertView;
@@ -50,6 +64,10 @@ public class ListViewAdapter extends BaseAdapter implements ListAdapter {
             LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             view = inflater.inflate(R.layout.custom_listview, null);
         }
+
+
+
+
 
         //Handle TextView and display string from your list
         TextView listItemText = view.findViewById(R.id.list_item_string);
@@ -64,9 +82,9 @@ public class ListViewAdapter extends BaseAdapter implements ListAdapter {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(context, EditProblemActivity.class);
-                Bundle bundle = new Bundle();
-                bundle.putInt("position", position);
-                intent.putExtras(bundle);
+                //Bundle bundle = new Bundle();
+                //bundle.putSerializable("problem", problemList.get(position));
+                intent.putExtra("problem", problemList.get(position));
                 context.startActivity(intent);
             }
         });
@@ -75,9 +93,7 @@ public class ListViewAdapter extends BaseAdapter implements ListAdapter {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(context, ViewFullProblemActivity.class);
-                Bundle bundle = new Bundle();
-                bundle.putInt("position", position);
-                intent.putExtras(bundle);
+                intent.putExtra("problem", problemList.get(position));
                 context.startActivity(intent);
             }
         });
@@ -93,5 +109,7 @@ public class ListViewAdapter extends BaseAdapter implements ListAdapter {
 
         return view;
     }
+
+
 }
 
