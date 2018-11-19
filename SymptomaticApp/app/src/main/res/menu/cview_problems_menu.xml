@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/homeMenuItem"
+        android:title="new"
+        android:orderInCategory="101"
+        android:icon="@drawable/menu_image"
+        app:showAsAction="always">
+
+        <menu>
+            <item android:id="@+id/action_home"
+                android:title="@string/home"
+                android:onClick="viewHome"/>
+
+            <item android:id="@+id/action_viewRecords"
+                android:title="@string/view_records"
+                android:onClick="viewViewRecords"
+                />
+
+            <item android:id="@+id/action_viewPatients"
+                android:title="@string/view_patients"
+                android:onClick="viewViewPatients"
+                />
+
+        </menu>
+
+    </item>
+
+</menu>

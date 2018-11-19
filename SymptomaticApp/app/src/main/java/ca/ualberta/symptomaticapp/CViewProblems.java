@@ -6,8 +6,13 @@ problems associated with that patient. The caregiver can also view that patients
 
 package ca.ualberta.symptomaticapp;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -24,6 +29,12 @@ public class CViewProblems extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cview_problems);
+
+        Toolbar toolbar = findViewById(R.id.cviewProblems_toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle("View Problems of Patient");
+
+
         TextView numproblems = (TextView) findViewById(R.id.tv_ProbNum); //need to change this text when view button pressed
         final Spinner patient = (Spinner) findViewById(R.id.sp_Patients); //need to get selections
         Button viewproblems = (Button) findViewById(R.id.btn_View);
@@ -52,4 +63,23 @@ public class CViewProblems extends AppCompatActivity {
             }
         });
     }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.view_patients_menu, menu);
+        return true;
+    }
+    public void viewHome(MenuItem menu) {
+        Intent intent = new Intent(CViewProblems.this, MainActivity.class);
+        startActivity(intent);
+    }
+    public void viewViewRecords(MenuItem menu) {
+        Intent intent = new Intent(CViewProblems.this, CViewRecords.class);
+        startActivity(intent);
+    }public void viewViewPatients(MenuItem menu) {
+        Intent intent = new Intent(CViewProblems.this, ViewPatients.class);
+        startActivity(intent);
+    }
+
 }

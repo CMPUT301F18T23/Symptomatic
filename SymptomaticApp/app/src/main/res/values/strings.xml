@@ -60,6 +60,7 @@
     <string name="enter_username2">Enter Username</string>
     <string name="username">Username</string>
     <string name="login">Login</string>
+    <string name="view_patients">View Patients</string>
 
 
 </resources>

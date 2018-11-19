@@ -6,6 +6,16 @@
     android:layout_height="match_parent"
     tools:context=".CViewProblems">
 
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/cviewProblems_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?android:attr/actionBarSize"
+        android:background="@color/colorPrimary"
+        android:elevation="4dp"
+        android:theme="@style/AppTheme"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+        app:titleTextColor="@android:color/background_light" />
+
     <Spinner
         android:id="@+id/sp_Patients"
         android:layout_width="203dp"
