@@ -24,8 +24,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".AddProblemActivity" />
+        <activity android:name=".AddProblemActivity" />
         <activity android:name=".ListProblemsActivity" />
         <activity
             android:name=".AddRecordActivity"
@@ -36,12 +35,13 @@
         <activity
             android:name=".createAccount"
             android:label="@string/title_activity_create_account"
-            android:parentActivityName=".Login"/>
+            android:parentActivityName=".Login" />
         <activity android:name=".ViewFullProblemActivity" />
         <activity android:name=".EditProblemActivity" />
         <activity android:name=".ViewPatients" />
         <activity android:name=".AddPatient" />
-        <activity android:name=".ViewContactInfo"></activity>
+        <activity android:name=".ViewContactInfo" />
+        <activity android:name=".CaregiverHome"></activity>
     </application>
 
 </manifest>

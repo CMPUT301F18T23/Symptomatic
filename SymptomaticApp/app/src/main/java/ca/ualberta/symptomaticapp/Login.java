@@ -93,7 +93,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener{
                             if (patientLogin.isChecked()) {
                                 next_activity = new Intent(Login.this,MainActivity.class);
                             } else {
-                                next_activity = new Intent(Login.this,ViewPatients.class);
+                                next_activity = new Intent(Login.this,CaregiverHome.class);
                             }
                             startActivity(next_activity);
 
