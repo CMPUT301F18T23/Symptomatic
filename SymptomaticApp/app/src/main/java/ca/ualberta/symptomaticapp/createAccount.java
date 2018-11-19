@@ -80,7 +80,7 @@ public class createAccount extends Activity implements View.OnClickListener {
                 if (User.validatePhone(phone.getText().toString())) {
                     phoneOk = true;
                 } else if (phone.getText().toString().length() == 0) {
-                    phoneError = "Phone number cannot be empty";
+                    phoneError = "Phone number cannot be empty.";
                     goodUser = false;
                 } else {
                     phoneError = "Invalid phone number. Should be in (XXX)XXX-XXXX format.";

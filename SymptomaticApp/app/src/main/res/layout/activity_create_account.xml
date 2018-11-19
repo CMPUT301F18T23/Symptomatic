@@ -198,7 +198,8 @@
                 android:id="@+id/patientRadioButton"
                 android:layout_width="102dp"
                 android:layout_height="wrap_content"
-                android:text="@string/patient" />
+                android:text="@string/patient"
+                android:checked="true"/>
 
             <RadioButton
                 android:id="@+id/careProviderRadioButton"

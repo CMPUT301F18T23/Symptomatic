@@ -33,8 +33,9 @@
                                   </option>
                                   <option name="values">
                                     <map>
-                                      <entry key="outputName" value="menu_image" />
-                                      <entry key="theme" value="HOLO_DARK" />
+                                      <entry key="assetType" value="IMAGE" />
+                                      <entry key="imageAsset" value="$PROJECT_DIR$/../../Systomatic_artwork.png" />
+                                      <entry key="outputName" value="logo_image" />
                                     </map>
                                   </option>
                                 </PersistentState>
@@ -46,18 +47,14 @@
                                   <option name="values">
                                     <map>
                                       <entry key="backgroundLayerName" value="ic_launcher_background" />
+                                      <entry key="foregroundImage" value="$PROJECT_DIR$/../../Systomatic_artwork.jpg" />
                                       <entry key="foregroundLayerName" value="ic_launcher_foreground" />
-                                      <entry key="outputName" value="ic_action_overflow" />
+                                      <entry key="outputName" value="app_icon" />
                                     </map>
                                   </option>
                                 </PersistentState>
                               </value>
                             </entry>
-                          </map>
-                        </option>
-                        <option name="values">
-                          <map>
-                            <entry key="outputIconType" value="ACTIONBAR" />
                           </map>
                         </option>
                       </PersistentState>

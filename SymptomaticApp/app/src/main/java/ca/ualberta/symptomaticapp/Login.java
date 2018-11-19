@@ -57,7 +57,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener{
             startActivity(next_activity);
         } else if (viewId == R.id.login_button){
             //Get the input from the login
-            String inputuser = input_user.getText().toString();
+            final String inputuser = input_user.getText().toString();
 
             //Access Firestore database
             FirebaseFirestore db = FirebaseFirestore.getInstance();
@@ -81,7 +81,6 @@ public class Login extends AppCompatActivity implements View.OnClickListener{
                         //Query Worked
                         if (task.getResult().size() == 1){
                             //A user with that username exists
-                            Toast.makeText(Login.this, "Logging In...", Toast.LENGTH_SHORT).show();
                             for(QueryDocumentSnapshot document: task.getResult()){
                                 if (patientLogin.isChecked()) {
                                     thisUser = document.toObject(User.class);
@@ -98,9 +97,15 @@ public class Login extends AppCompatActivity implements View.OnClickListener{
                             }
                             startActivity(next_activity);
 
-                        } else {
+                        } else if (inputuser.isEmpty()) {
                             //No users with that username exists
-                            Toast.makeText(Login.this, "User Does Not Exist", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(Login.this, "Username not entered.", Toast.LENGTH_SHORT).show();
+
+                        }
+
+                        else {
+                            //No users with that username exists
+                            Toast.makeText(Login.this, "User Does Not Exist.", Toast.LENGTH_SHORT).show();
                         }
                     } else {
                         //Query Did not Work
