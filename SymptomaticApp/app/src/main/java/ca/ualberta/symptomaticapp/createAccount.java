@@ -4,13 +4,17 @@ import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.app.Activity;
+
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.Toast;
 
-public class createAccount extends Activity implements View.OnClickListener {
+public class createAccount extends AppCompatActivity implements View.OnClickListener {
 
     EditText username, email, phone;
     Button create_account;
@@ -29,6 +33,17 @@ public class createAccount extends Activity implements View.OnClickListener {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_account);
+        Toolbar toolbar = findViewById(R.id.createAccount_toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle("Create Account");
+
+        // Get a support ActionBar corresponding to this toolbar
+        ActionBar ab = getSupportActionBar();
+
+        // Enable the Up button
+        ab.setDisplayHomeAsUpEnabled(true);
+
+
 
         username = findViewById(R.id.enterUsernameEditText);
         email = findViewById(R.id.enterEmailEditText);
@@ -80,7 +95,7 @@ public class createAccount extends Activity implements View.OnClickListener {
                 if (User.validatePhone(phone.getText().toString())) {
                     phoneOk = true;
                 } else if (phone.getText().toString().length() == 0) {
-                    phoneError = "Phone number cannot be empty";
+                    phoneError = "Phone number cannot be empty.";
                     goodUser = false;
                 } else {
                     phoneError = "Invalid phone number. Should be in (XXX)XXX-XXXX format.";
@@ -126,9 +141,6 @@ public class createAccount extends Activity implements View.OnClickListener {
             }
         });
     }
-
-
-
 
 
 

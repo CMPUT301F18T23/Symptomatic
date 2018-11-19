@@ -18,31 +18,46 @@
         tools:layout_editor_absoluteX="15dp"
         tools:layout_editor_absoluteY="1dp">
 
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/createAccount_toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="@color/logoColor"
+            android:elevation="4dp"
+            android:theme="@style/AppTheme"
+            app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+            app:titleTextColor="@android:color/background_light" />
+
+
         <TextView
             android:id="@+id/SymptomaticTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginLeft="8dp"
-            android:layout_marginTop="44dp"
+            android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
             android:layout_marginRight="8dp"
+            android:layout_marginBottom="16dp"
             android:text="@string/symptomatic"
             android:textColor="@android:color/black"
             android:textSize="30sp"
+            app:layout_constraintBottom_toTopOf="@+id/enterUsernameTextView"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.463"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toBottomOf="@+id/createAccount_toolbar" />
 
         <TextView
             android:id="@+id/enterUsernameTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
+            android:layout_marginTop="8dp"
             android:text="@string/enter_username_please"
             android:textColor="@android:color/black"
             android:textSize="15sp"
             android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@+id/uniqueUsernameTextView"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/SymptomaticTextView" />
@@ -198,13 +213,16 @@
                 android:id="@+id/patientRadioButton"
                 android:layout_width="102dp"
                 android:layout_height="wrap_content"
-                android:text="@string/patient" />
+                android:text="@string/patient"
+                android:checked="true"
+                android:buttonTint="@color/logoColor"/>
 
             <RadioButton
                 android:id="@+id/careProviderRadioButton"
                 android:layout_width="133dp"
                 android:layout_height="wrap_content"
-                android:text="@string/care_provider" />
+                android:text="@string/care_provider"
+                android:buttonTint="@color/logoColor"/>
 
         </RadioGroup>
 
