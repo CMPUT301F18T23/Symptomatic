@@ -18,7 +18,8 @@ public class CaregiverHome extends AppCompatActivity {
 
         Button addpat = (Button) findViewById(R.id.btn_addpatient);
         Button viewpat = (Button) findViewById(R.id.btn_viewpatients);
-
+        Button openviewprob = (Button) findViewById(R.id.btn_openviewproblems);
+        Button openviewrecords = (Button) findViewById(R.id.btn_openviewrecords);
         addpat.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -31,6 +32,22 @@ public class CaregiverHome extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(CaregiverHome.this, ViewPatients.class);
+                startActivity(intent);
+            }
+        });
+
+        openviewprob.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(CaregiverHome.this, CViewProblems.class);
+                startActivity(intent);
+            }
+        });
+
+        openviewrecords.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(CaregiverHome.this, CViewRecords.class);
                 startActivity(intent);
             }
         });

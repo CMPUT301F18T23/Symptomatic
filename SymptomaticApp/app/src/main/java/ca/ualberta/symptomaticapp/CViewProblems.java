@@ -33,8 +33,6 @@ public class CViewProblems extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.cviewProblems_toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("View Problems of Patient");
-
-
         TextView numproblems = (TextView) findViewById(R.id.tv_ProbNum); //need to change this text when view button pressed
         final Spinner patient = (Spinner) findViewById(R.id.sp_Patients); //need to get selections
         Button viewproblems = (Button) findViewById(R.id.btn_View);
@@ -67,11 +65,11 @@ public class CViewProblems extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.view_patients_menu, menu);
+        inflater.inflate(R.menu.cview_problems_menu, menu);
         return true;
     }
     public void viewHome(MenuItem menu) {
-        Intent intent = new Intent(CViewProblems.this, MainActivity.class);
+        Intent intent = new Intent(CViewProblems.this, CaregiverHome.class);
         startActivity(intent);
     }
     public void viewViewRecords(MenuItem menu) {

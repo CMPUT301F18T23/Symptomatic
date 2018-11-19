@@ -18,6 +18,7 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -40,10 +41,15 @@ public class ViewPatients extends AppCompatActivity {
         }
 
         caregiver= Login.thisCaregiver; //fetch current caregiver.
+        ListView patientsview = (ListView) findViewById(R.id.lv_Patients);
+        Button addpatient = (Button) findViewById(R.id.btn_AddPatient);
+        TextView numpat = (TextView) findViewById(R.id.tv_NumPatients);
+
         if (caregiver != null) {
             patients = caregiver.getPatients();
-            ListView patientsview = (ListView) findViewById(R.id.lv_Patients);
-            Button addpatient = (Button) findViewById(R.id.btn_AddPatient);
+
+            numpat.setText("Number of patients: " + patients.size());
+
             List<String> usernames = new ArrayList<String>();
             for(String patient : patients){
                 usernames.add(patient);
@@ -73,7 +79,7 @@ public class ViewPatients extends AppCompatActivity {
     public void viewLogout(MenuItem menu){
         Login.thisCaregiver = null;
         Login.thisUser = null;
-        Intent intent = new Intent(ViewPatients.this, ViewPatients.class);
+        Intent intent = new Intent(ViewPatients.this, Login.class);
         startActivity(intent);
     }
 }

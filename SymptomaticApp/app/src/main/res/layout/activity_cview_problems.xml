@@ -6,6 +6,11 @@
     android:layout_height="match_parent"
     tools:context=".CViewProblems">
 
+    <Space
+        android:id="@+id/space2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
     <android.support.v7.widget.Toolbar
         android:id="@+id/cviewProblems_toolbar"
         android:layout_width="match_parent"
@@ -22,9 +27,9 @@
         android:layout_height="40dp"
         android:layout_marginLeft="32dp"
         android:layout_marginStart="32dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="64dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/space2" />
 
     <Button
         android:id="@+id/btn_View"
@@ -34,12 +39,12 @@
         android:layout_marginLeft="32dp"
         android:layout_marginRight="32dp"
         android:layout_marginStart="32dp"
-        android:layout_marginTop="32dp"
-        android:text="Button"
+        android:layout_marginTop="64dp"
+
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/sp_Patients"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:text="@string/view_patient_problems" />
+        app:layout_constraintTop_toBottomOf="@+id/space2"
+        android:text="@string/view_patient_problems" />
 
     <TextView
         android:id="@+id/tv_ProbNum"
@@ -50,12 +55,12 @@
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
         android:layout_marginStart="8dp"
-        android:text="TextView"
+
         app:layout_constraintBottom_toTopOf="@+id/lv_problems"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btn_viewcontactinfo"
-        tools:text="@string/select_patient_first" />
+        android:text="@string/select_patient_first" />
 
     <ListView
         android:id="@+id/lv_problems"
@@ -72,9 +77,9 @@
         android:layout_height="40dp"
         android:layout_marginTop="8dp"
         android:enabled="false"
-        android:text="Button"
+
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/sp_Patients"
-        tools:text="@string/viewcontactinfo" />
+        android:text="@string/viewcontactinfo" />
 </android.support.constraint.ConstraintLayout>
