@@ -36,13 +36,13 @@
 
     <Button
         android:id="@+id/AddProblemButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="135dp"
+        android:layout_height="45dp"
         android:layout_marginStart="50dp"
         android:layout_marginLeft="50dp"
         android:layout_marginTop="300dp"
-        android:layout_marginEnd="100dp"
-        android:layout_marginRight="100dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
         android:layout_marginBottom="100dp"
         android:text="@string/add_problem"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -52,8 +52,8 @@
 
     <Button
         android:id="@+id/ViewProblemsButton"
-        android:layout_width="wrap_content"
-        android:layout_height="49dp"
+        android:layout_width="135dp"
+        android:layout_height="45dp"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginTop="300dp"
