@@ -1,5 +1,6 @@
 package ca.ualberta.symptomaticapp;
 
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.app.Activity;
@@ -62,9 +63,9 @@ public class createAccount extends Activity implements View.OnClickListener {
                     phoneOk = true;
                 } else {
                     if (errormsg.equals("")){
-                        errormsg += "Invalid phone entered, please fix";
+                        errormsg += "Phone number must be in (xxx)xxxxxxx format";
                     } else {
-                        errormsg += "\nInvalid phone entered, please fix";
+                        errormsg += "\nPhone number must be in (xxx)xxxxxxx format";
                     }
                 }
 
@@ -77,8 +78,9 @@ public class createAccount extends Activity implements View.OnClickListener {
                     startActivity(next_activity);
                 } else {
                     //Errors found, post messages to correct
-                    toast = Toast.makeText(getApplication(),errormsg,Toast.LENGTH_LONG);
-                    toast.show();
+                    AlertDialog.Builder noDateDialog = new AlertDialog.Builder(createAccount.this);
+                    noDateDialog.setMessage(errormsg);
+                    noDateDialog.show();
                 }
             }
         });
