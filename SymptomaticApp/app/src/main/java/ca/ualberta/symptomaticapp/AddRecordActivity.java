@@ -173,7 +173,6 @@ public class AddRecordActivity extends AppCompatActivity implements View.OnClick
         return image;
     }
 
-    // TODO: Edit
     // Reference: https://developer.android.com/training/camera/photobasics#java
     private void dispatchTakePictureIntent() {
         Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
