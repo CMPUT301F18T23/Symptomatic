@@ -54,7 +54,7 @@ public class User {
 
     public User(){}
 
-    public static User createNewUser(String username, String phone, String email, String userType){
+    public static User createNewUser(String username, String phone, String email){
         FirebaseFirestore db = FirebaseFirestore.getInstance();
 
         DocumentReference newUser = db.collection("users")

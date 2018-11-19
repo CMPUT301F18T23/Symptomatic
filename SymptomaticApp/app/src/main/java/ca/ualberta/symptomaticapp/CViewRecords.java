@@ -39,12 +39,12 @@ public class CViewRecords extends AppCompatActivity {
         TextView numprob = (TextView) findViewById(R.id.tv_numprob);
         ListView recordview = (ListView) findViewById(R.id.lv_records);
         //
-        Caregiver caregiver = Login.caregiver;
-        ArrayList<User> patients = caregiver.getPatients();
+        Caregiver caregiver = Login.thisCaregiver;
+        ArrayList<String> patients = caregiver.getPatients();
 
         final List<String> usernames = new ArrayList<String>();;
-        for(User user : patients){
-            usernames.add(user.returnUsername());
+        for(String user : patients){
+            usernames.add(user);
         }
 
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(

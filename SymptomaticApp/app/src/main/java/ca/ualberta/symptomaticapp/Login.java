@@ -25,7 +25,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener{
     Intent next_activity;
 
     public static User thisUser;
-    public static Caregiver caregiver;
+    public static Caregiver thisCaregiver;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

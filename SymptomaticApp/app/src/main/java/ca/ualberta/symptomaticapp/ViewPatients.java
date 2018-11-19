@@ -34,14 +34,14 @@ public class ViewPatients extends AppCompatActivity {
         getSupportActionBar().setTitle("View Patients");
 
 
-        caregiver= Login.caregiver; //fetch current caregiver.
-        ArrayList<User> patients = caregiver.getPatients();
+        caregiver= Login.thisCaregiver; //fetch current caregiver.
+        ArrayList<String> patients = caregiver.getPatients();
         ListView patientsview = (ListView) findViewById(R.id.lv_Patients);
         Button addpatient = (Button) findViewById(R.id.btn_AddPatient);
 
         List<String> usernames = new ArrayList<String>();
-        for(User patient : patients){
-            usernames.add(patient.returnUsername());
+        for(String patient : patients){
+            usernames.add(patient);
         }
         ArrayAdapter<String> patientsadapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, usernames);
         patientsview.setAdapter(patientsadapter);

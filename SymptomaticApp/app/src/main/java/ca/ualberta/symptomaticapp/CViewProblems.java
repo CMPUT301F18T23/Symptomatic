@@ -40,11 +40,11 @@ public class CViewProblems extends AppCompatActivity {
         Button viewproblems = (Button) findViewById(R.id.btn_View);
         final Button viewcontactinfo = (Button) findViewById(R.id.btn_viewcontactinfo);
         ListView problemview = (ListView) findViewById(R.id.lv_problems);
-        Caregiver caregiver = Login.caregiver;
-        ArrayList<User> patients = caregiver.getPatients();
+        Caregiver caregiver = Login.thisCaregiver;
+        ArrayList<String> patients = caregiver.getPatients();
         final List<String> usernames = new ArrayList<String>();;
-        for(User user : patients){
-            usernames.add(user.returnUsername());
+        for(String user : patients){
+            usernames.add(user);
         }
 
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(

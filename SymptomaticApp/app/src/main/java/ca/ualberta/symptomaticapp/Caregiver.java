@@ -1,5 +1,12 @@
 package ca.ualberta.symptomaticapp;
 
+import android.support.annotation.NonNull;
+
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
+
 import java.util.ArrayList;
 
 import static java.lang.System.in;
@@ -8,7 +15,7 @@ import static java.lang.System.in;
  *
  */
 public class Caregiver extends User {
-    private ArrayList<User> patients = new ArrayList<User>(); //A list of the caregiver's patients
+    private ArrayList<String> patients = new ArrayList<String>(); //A list of the caregiver's patients
 
     /**
      * Creates a User object with the specified parameters, and sets the userType to Caregiver
@@ -21,12 +28,30 @@ public class Caregiver extends User {
         this.userType = "Caregiver";
     }
 
+    public static Caregiver createNewCaregiver(String username, String phone, String email){
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+
+        DocumentReference newUser = db.collection("caregivers")
+                .document();
+
+        Caregiver caregiver = new Caregiver (username,phone,email);
+
+        newUser.set(caregiver).addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+                int x=1; //dummy activity
+            }
+        });
+
+        return caregiver;
+    }
+
     /**
      *Adds a patient to the caregiver's patient list
      * @param patient: The patient to be added.
      * @return True if the patient did not already exist in the patient list and could be added, false if not.
      */
-    public boolean addPatient(User patient){
+    public boolean addPatient(String patient){
         if (this.patients.contains(patient)){
             return false;
         } else {
@@ -39,7 +64,7 @@ public class Caregiver extends User {
      * Gets the patient list of the caregiver
      * @return The patient list of the caregiver
      */
-    public ArrayList<User> getPatients(){
+    public ArrayList<String> getPatients(){
         return this.patients;
     }
 
@@ -48,7 +73,7 @@ public class Caregiver extends User {
      * @param patient: The patient to be deleted.
      * @return True if the patient existed in the patient list and could be deleted, false if not.
      */
-    public boolean deletePatient(User patient){
+    public boolean deletePatient(String patient){
         if (this.patients.contains(patient)){
             this.patients.remove(patient);
             return true;

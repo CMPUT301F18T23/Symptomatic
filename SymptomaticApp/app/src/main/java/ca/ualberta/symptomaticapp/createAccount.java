@@ -1,17 +1,17 @@
 package ca.ualberta.symptomaticapp;
 
-import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.app.Activity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RadioButton;
 import android.widget.Toast;
 
 public class createAccount extends Activity implements View.OnClickListener {
 
-    EditText username,email,phone,role;
+    EditText username,email,phone;
     Button create_account;
     boolean usernameOk,emailOk,phoneOk;
     String errormsg;
@@ -19,6 +19,8 @@ public class createAccount extends Activity implements View.OnClickListener {
     Toast toast;
 
     Intent next_activity;
+
+    RadioButton caregiverButton,patientButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +36,9 @@ public class createAccount extends Activity implements View.OnClickListener {
         usernameOk = false;
         emailOk = false;
         phoneOk = false;
+
+        caregiverButton = findViewById(R.id.careProviderRadioButton);
+        patientButton = findViewById(R.id.patientRadioButton);
 
         errormsg = "";
 
@@ -63,24 +68,31 @@ public class createAccount extends Activity implements View.OnClickListener {
                     phoneOk = true;
                 } else {
                     if (errormsg.equals("")){
-                        errormsg += "Phone number must be in (xxx)xxxxxxx format";
+                        errormsg += "Invalid phone entered, please fix";
                     } else {
-                        errormsg += "\nPhone number must be in (xxx)xxxxxxx format";
+                        errormsg += "\nInvalid phone entered, please fix";
                     }
                 }
 
                 //Check all validations
                 if (errormsg.equals("")){
                     //No errors, proceed with the creation of a user
-                    User newUser = User.createNewUser(username.getText().toString(),phone.getText().toString(),email.getText().toString(),"Patient");
-                    Login.thisUser = newUser;
-                    next_activity = new Intent(createAccount.this,MainActivity.class);
+                    if (patientButton.isChecked()) {
+                        User newUser = User.createNewUser(username.getText().toString(), phone.getText().toString(), email.getText().toString());
+                        Login.thisUser = newUser;
+                        Login.thisCaregiver = null;
+                        next_activity = new Intent(createAccount.this,MainActivity.class);
+                    } else {
+                        Caregiver newCaregiver = Caregiver.createNewCaregiver(username.getText().toString(), phone.getText().toString(), email.getText().toString());
+                        Login.thisUser = null;
+                        Login.thisCaregiver = newCaregiver;
+                        next_activity = new Intent(createAccount.this,ViewPatients.class);
+                    }
                     startActivity(next_activity);
                 } else {
                     //Errors found, post messages to correct
-                    AlertDialog.Builder noDateDialog = new AlertDialog.Builder(createAccount.this);
-                    noDateDialog.setMessage(errormsg);
-                    noDateDialog.show();
+                    toast = Toast.makeText(getApplication(),errormsg,Toast.LENGTH_LONG);
+                    toast.show();
                 }
             }
         });
