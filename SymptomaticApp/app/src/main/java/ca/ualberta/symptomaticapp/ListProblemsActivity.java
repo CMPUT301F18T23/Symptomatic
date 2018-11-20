@@ -55,6 +55,7 @@ public class ListProblemsActivity extends AppCompatActivity {
         textView.setText(active_problem_count);
 
         initListView();
+
         getProblems(Login.thisUser.username);
 
         /*final Collection<Problem> problems = ProblemListController.getProblemList().getProblems();
