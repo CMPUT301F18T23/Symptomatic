@@ -1,18 +1,24 @@
 /*
  * Problem.java
  *
+ * Version 1
  *
+ * November, 20, 2018.
  *
+ * This file is subject to the terms and conditions defined in
+ * file 'LICENSE', which is part of this source code package.
+ *
+ * Represents a patient problem. Each problem is composed of a title, date, and comment.
+ *
+ * Issues: Currently unable to edit problems in the database.
  *
  */
-
 
 package ca.ualberta.symptomaticapp;
 
 import android.app.AlertDialog;
 import android.content.Context;
 import android.support.annotation.NonNull;
-
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.CollectionReference;
@@ -21,11 +27,9 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
-
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.Date;
-
 import ca.ualberta.symptomaticapp.Login;
 import ca.ualberta.symptomaticapp.RecordList;
 
