@@ -162,13 +162,6 @@ public class EditProblemActivity extends AppCompatActivity {
                         displayList.add(problem);
                     }
                     listadapter.notifyDataSetChanged();
-                    if (displayList != null) {
-                        active_problem_count = "Number of active problems:"+" " + displayList.size();;
-                        textView.setText(active_problem_count);
-                    } else {
-                        active_problem_count = "Number of active problems: 0";
-                        textView.setText(active_problem_count);
-                    }
                 } else {
                     AlertDialog.Builder badUsernameDialog = new AlertDialog.Builder(ListProblemsActivity.this);
                     badUsernameDialog.setMessage("Data Load Error");

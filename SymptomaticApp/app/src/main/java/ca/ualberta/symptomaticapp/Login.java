@@ -19,6 +19,7 @@ import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.Collection;
+import java.util.concurrent.TimeUnit;
 
 
 public class Login extends AppCompatActivity implements View.OnClickListener{
@@ -28,6 +29,8 @@ public class Login extends AppCompatActivity implements View.OnClickListener{
     Intent next_activity;
 
     RadioButton patientLogin,caregiverLogin;
+
+    String thisUserType;
 
     public static User thisUser;
     public static Caregiver thisCaregiver;
@@ -58,6 +61,12 @@ public class Login extends AppCompatActivity implements View.OnClickListener{
         } else if (viewId == R.id.login_button){
             //Get the input from the login
             final String inputuser = input_user.getText().toString();
+
+            if (caregiverLogin.isChecked()){
+                thisUserType = "Caregiver";
+            } else {
+                thisUserType = "Patient";
+            }
 
             //Access Firestore database
             FirebaseFirestore db = FirebaseFirestore.getInstance();
