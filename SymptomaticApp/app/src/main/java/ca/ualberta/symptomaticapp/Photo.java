@@ -4,23 +4,22 @@ import java.util.Date;
 
 public class Photo {
     protected String photoPath;
-    protected String timestamp;
+    protected Date timestamp;
     protected Integer photoSize;
-    protected byte[] photoByteArray;
 
-    public Photo(byte[] photoByteArray, String timestamp){
+    public Photo(String photoPath, Date timestamp, Integer photoSize){
         // Initialize the Photo object
+        this.photoPath = photoPath;
         this.timestamp = timestamp;
-        this.photoByteArray = photoByteArray;
+        this.photoSize = photoSize;
     }
-
 
     public String getPhotoPath() {
         // Return the photo's file path as a String
         return this.photoPath;
     }
 
-    public String getTimestamp() {
+    public Date getTimestamp() {
         // Return the timestamp the photo was added as a Date
         return this.timestamp;
     }
@@ -33,9 +32,5 @@ public class Photo {
     public void compressPhoto() {
         // If the photo's size exceeds 65536 bytes, compress the image.
         return;
-    }
-
-    public byte[] getPhotoByteArray (){
-        return this.photoByteArray;
     }
 }
