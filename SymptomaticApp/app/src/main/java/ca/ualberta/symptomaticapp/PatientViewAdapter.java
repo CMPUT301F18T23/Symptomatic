@@ -60,7 +60,7 @@ public class PatientViewAdapter extends BaseAdapter implements ListAdapter {
 
         viewProblems.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
+            public void onClick(View v) { //opens view problems activity with the focused patient
                 Intent intent = new Intent(context, CViewProblems.class);
                 intent.putExtra("username", patientList.get(position));
                 context.startActivity(intent);
@@ -69,7 +69,7 @@ public class PatientViewAdapter extends BaseAdapter implements ListAdapter {
 
         viewContactInfo.setOnClickListener(new View.OnClickListener(){
             @Override
-            public void onClick(View v) {
+            public void onClick(View v) { //opens view contact info
                 Intent intent = new Intent(context, ViewContactInfo.class);
                 intent.putExtra("username", patientList.get(position));
                 intent.putExtra("usertype", "user");

@@ -44,7 +44,7 @@ public class ViewContactInfo extends AppCompatActivity {
         phone = (TextView) findViewById(R.id.tv_Phone);
         Button goback = (Button) findViewById(R.id.btn_return);
         //
-        getuserinfo();
+        getuserinfo(); //updates textviews by fetching user information
 
 
         goback.setOnClickListener(new View.OnClickListener() {
