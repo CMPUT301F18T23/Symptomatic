@@ -40,6 +40,7 @@ public class AddRecordActivity extends AppCompatActivity implements View.OnClick
     private static final int PICK_IMAGE_REQUEST = 100; // to access the gallery to choose an image
     static final int REQUEST_IMAGE_CAPTURE = 1; // to access the camera to take an image
     static final int REQUEST_TAKE_PHOTO = 1;
+    protected byte[] photoByteArray;
 
     String mCurrentPhotoPath; // the photo's file path
 
@@ -128,23 +129,41 @@ public class AddRecordActivity extends AppCompatActivity implements View.OnClick
         // If the user wants to take a photo using their camera
         // Reference: https://developer.android.com/training/camera/photobasics#java
         if (viewId == R.id.takePhoto){
-            Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-            if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
-                startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
-            }
-            File newPhotoFile = null;
+            Intent takePictureintent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
             try {
-                newPhotoFile = createImageFile();
-            } catch (IOException ex) {
-                // Error occurred while creating the File
-                System.out.println("Error in creating the file for the image");
+                File photoDir = createImageFile();
+            } catch (IOException e) {
+                e.printStackTrace();
             }
+            Log.d("Photo Directory:", mCurrentPhotoPath);
+//
+//            File file = new File(Environment.getExternalStorageDirectory(), String.valueOf(System.currentTimeMillis()) + ".jpg");
+//            Uri uri = FileProvider.getUriForFile(this, getApplicationContext().getPackageName() + ".provider", file);
+//            Log.wtf("URI:", uri.toString());
+            //            takePictureintent.putExtra(android.provider.MediaStore.EXTRA_OUTPUT, uri);
+
+            startActivityForResult(takePictureintent, REQUEST_IMAGE_CAPTURE);
+
+
+//            Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+//            if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
+//                startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
+//            }
+//            File newPhotoFile = null;
+//            try {
+//                newPhotoFile = createImageFile();
+//            } catch (IOException ex) {
+//                // Error occurred while creating the File
+//                System.out.println("Error in creating the file for the image");
+//            }
         }
+
 
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        convertBitmapToByteArray(data);
         switch(requestCode){
             case PICK_IMAGE_REQUEST:
 
@@ -152,7 +171,20 @@ public class AddRecordActivity extends AppCompatActivity implements View.OnClick
                     Uri selectedImage = data.getData();
 
                 }
+
+            case REQUEST_IMAGE_CAPTURE:
+                if (resultCode == RESULT_OK) {
+
+                }
+
         }
+    }
+
+    protected byte[] convertBitmapToByteArray(Intent intentData) {
+        Uri selectedImage = intentData.getData();
+
+
+        return photoByteArray;
     }
 
     // TODO: Edit
