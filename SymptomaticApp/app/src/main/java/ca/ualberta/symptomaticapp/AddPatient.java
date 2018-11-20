@@ -98,12 +98,12 @@ public class AddPatient extends AppCompatActivity {
         return true;
     }
     public void viewHome(MenuItem menu) {
-        Intent intent = new Intent(AddPatient.this, MainActivity.class);
+        Intent intent = new Intent(AddPatient.this, CaregiverHome.class);
         startActivity(intent);
     }
 
-    public void viewAddPatients(MenuItem menu) {
-        Intent intent = new Intent(AddPatient.this, AddPatient.class);
+    public void viewViewPatients(MenuItem menu) {
+        Intent intent = new Intent(AddPatient.this, ViewPatients.class);
         startActivity(intent);
     }
     public void viewLogout(MenuItem menu){

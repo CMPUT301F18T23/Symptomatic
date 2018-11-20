@@ -81,9 +81,7 @@ public class ListViewAdapter extends BaseAdapter implements ListAdapter {
         editRecordButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(context, EditProblemActivity.class);
-                intent.putExtra("problem", problemList.get(position));
-                context.startActivity(intent);
+
             }
         });
 
