@@ -1,11 +1,24 @@
+/*
+ * bodyPart.java
+ *
+ * Version 1
+ *
+ * November, 20, 2018.
+ *
+ * This file is subject to the terms and conditions defined in
+ * file 'LICENSE', which is part of this source code package.
+ *
+ * Creates the instance of a body part, which will have a name, a front photo and a back photo
+ * of the body part.
+ *
+ * Issues:
+ *
+ */
+
 package ca.ualberta.symptomaticapp;
 
 import java.util.ArrayList;
 
-/**
- * Creates the instance of a body part, which will have a name, a front photo and a back photo
- * of the body part.
- */
 public class bodyPart {
 
     String name; //The name of the body part

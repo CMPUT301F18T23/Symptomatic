@@ -1,3 +1,20 @@
+/*
+ * Comment.java
+ *
+ * Version 1
+ *
+ * November, 20, 2018.
+ *
+ * This file is subject to the terms and conditions defined in
+ * file 'LICENSE', which is part of this source code package.
+ *
+ * Represents a caregiver comment on a patients record.
+ * Each comment is composed of a user, a date, and a comment string.
+ *
+ * Issues: Not currently utilized.
+ *
+ */
+
 package ca.ualberta.symptomaticapp;
 
 
