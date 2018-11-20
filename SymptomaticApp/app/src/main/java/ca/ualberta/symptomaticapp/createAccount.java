@@ -66,7 +66,7 @@ public class createAccount extends AppCompatActivity implements View.OnClickList
         create_account.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
 
-                //Validate the username
+                //Validate the data
                 validateUser();
                 validatePhone();
                 validateEmail();
@@ -121,9 +121,11 @@ public class createAccount extends AppCompatActivity implements View.OnClickList
     public void validateUser(){
         //check_unique();
         if (username.getText().toString().length() == 0) {
+            //username is empty
             usernameError = "Username cannot be empty.";
             usernameOk = false;
         } else if (username.getText().toString().length() < 8){
+            //username is less than 8 characters
             usernameError = "Username size must be a minimum of 8 characters.";
             usernameOk = false;
         }/* else if (!isUserUnique) {
@@ -139,9 +141,11 @@ public class createAccount extends AppCompatActivity implements View.OnClickList
         if (User.validatePhone(phone.getText().toString())) {
             phoneOk = true;
         } else if (phone.getText().toString().length() == 0) {
+            //phone number is empty
             phoneOk = false;
             phoneError = "Phone number cannot be empty.";
         } else {
+            //invalid phone number format
             phoneOk = false;
             phoneError = "Invalid phone number. Should be in (XXX)XXX-XXXX format.";
         }
@@ -152,9 +156,11 @@ public class createAccount extends AppCompatActivity implements View.OnClickList
         if (User.validateEmail(email.getText().toString())) {
             emailOk = true;
         } else if (email.getText().toString().length() == 0) {
+            //email is empty
             emailOk = false;
             emailError = "Email cannot be empty.";
         } else {
+            //email address not in a good format
             emailOk = false;
             emailError = "Invalid email entered.";
         }
