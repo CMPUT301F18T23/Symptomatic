@@ -29,23 +29,27 @@ import java.util.Calendar;
 import java.util.Collection;
 
 public class EditProblemActivity extends AppCompatActivity {
-/*
-    private DatePickerDialog.OnDateSetListener DateSetListener;
+
+/*    private DatePickerDialog.OnDateSetListener DateSetListener;
     private int year;
     private int month;
     private int day;
 
     private Problem thisProblem;
 
+    private String thisProblemName;
+
+    static FirebaseFirestore db;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_problem);
 
+        db = FirebaseFirestore.getInstance();
+
         Bundle bundle = getIntent().getExtras();
-        final Problem prob = bundle.getProblem("problem");
-
-
+        final Problem prob = bundle.deleteProblem("problem");
 
 
         Button dateButton = findViewById(R.id.selectNewDateButton);
@@ -143,32 +147,5 @@ public class EditProblemActivity extends AppCompatActivity {
             }
         });
         deleteDialog.show();
-    }
-
-    private void getProblems(String username){
-        FirebaseFirestore db = FirebaseFirestore.getInstance();
-
-        CollectionReference problems = db.collection("problems");
-
-        Query problemsQuery = problems.whereEqualTo("user",username);
-
-        problemsQuery.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                if(task.isSuccessful()){
-                    int y = task.getResult().size();
-                    for(QueryDocumentSnapshot document: task.getResult()){
-                        Problem problem = document.toObject(Problem.class);
-                        displayList.add(problem);
-                    }
-                    listadapter.notifyDataSetChanged();
-                } else {
-                    AlertDialog.Builder badUsernameDialog = new AlertDialog.Builder(ListProblemsActivity.this);
-                    badUsernameDialog.setMessage("Data Load Error");
-                    badUsernameDialog.show();
-                }
-            }
-        });
-
     }*/
 }

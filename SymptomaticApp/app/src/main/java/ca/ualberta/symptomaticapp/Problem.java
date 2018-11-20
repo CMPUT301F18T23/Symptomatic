@@ -10,6 +10,7 @@
 package ca.ualberta.symptomaticapp;
 
 import android.app.AlertDialog;
+import android.content.Context;
 import android.support.annotation.NonNull;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -29,11 +30,14 @@ import ca.ualberta.symptomaticapp.Login;
 import ca.ualberta.symptomaticapp.RecordList;
 
 public class Problem implements Serializable {
-    private String title;
+    private static String title;
     private Date date;
     private String comment;
     private static int numberRecords;
     private String user;
+    Context thisContext;
+
+    static FirebaseFirestore db;
 
     public Problem (String title, Date date, String comment){
         this.title = title;
@@ -41,12 +45,13 @@ public class Problem implements Serializable {
         this.comment = comment;
         this.user = Login.thisUser.username;
         this.numberRecords = 0;
+        db = FirebaseFirestore.getInstance();
     }
 
     public Problem (){}
 
     public static void addProbToDb(Problem problem){
-        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        db = FirebaseFirestore.getInstance();
 
         DocumentReference newUser = db.collection("problems")
                 .document();
@@ -97,7 +102,7 @@ public class Problem implements Serializable {
     }
 
     public void updateRecords(){
-        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        db = FirebaseFirestore.getInstance();
 
         final CollectionReference records = db.collection("records");
 
@@ -116,6 +121,33 @@ public class Problem implements Serializable {
                 }
             }
         });
+    }
+    private void deleteProblem(String username, Context inputContext){
+        thisContext = inputContext;
+
+        db = FirebaseFirestore.getInstance();
+
+        CollectionReference problems = db.collection("problems");
+
+        Query problemsQuery = problems.whereEqualTo("user",username).whereEqualTo("title",title);
+
+        problemsQuery.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                if(task.isSuccessful()){
+                    int y = task.getResult().size();
+                    for(QueryDocumentSnapshot document: task.getResult()){
+                        String document_id = document.getId();
+                        db.collection("problems").document(document_id).delete();
+                    }
+                } else {
+                    AlertDialog.Builder badUsernameDialog = new AlertDialog.Builder(thisContext);
+                    badUsernameDialog.setMessage("Data Load Error");
+                    badUsernameDialog.show();
+                }
+            }
+        });
+
     }
 
 }
