@@ -79,17 +79,17 @@ public class userTest extends TestCase {
      *      1. Do not already exist in the caregivers patient list
      *      2. Already exist in the caregivers patient list
      */
-  /*  public void testPatientAdd(){
+    public void testPatientAdd(){
         User user = new User("ryan1234", "(780)481-3905", "ryan@hotmail.com");
         Caregiver caregiver = new Caregiver("doctorphil", "(780)911-9111", "drphil@doctors.com");
 
         //Add Patient to a Caregiver
-        assertTrue("Patient not added that doesn't already exist in caregivers patient list",caregiver.addPatient(user));
-        ArrayList<User> caregiverPatients = caregiver.getPatients();
+        assertTrue("Patient not added that doesn't already exist in caregivers patient list",caregiver.addPatient(user.username));
+        ArrayList<String> caregiverPatients = caregiver.getPatients();
         assertTrue("Invalid patient list length",caregiverPatients.size()==1); //Should be 1 patient in the caregivers patient list after the addition
 
         //Add patient that already exists in the caregiver's patient list
-        assertFalse("Patient added that is already in the caregiver's patient list",caregiver.addPatient(user));
+        assertFalse("Patient added that is already in the caregiver's patient list",caregiver.addPatient(user.username));
         caregiverPatients = caregiver.getPatients();
         assertTrue("Invalid patient list length",caregiverPatients.size()==1); //Should be 1 patient in the caregivers patient list after the addition
 
@@ -100,21 +100,21 @@ public class userTest extends TestCase {
      *      1. Exist in the caregivers patient list
      *      2. Do not exist in the caregivers patient list
      */
-   /* public void testPatientDelete(){
+   public void testPatientDelete(){
         User user = new User("ryan1234", "(780)481-3905", "ryan@hotmail.com");
         Caregiver caregiver = new Caregiver("doctorphil", "(780)911-9111", "drphil@doctors.com");
-        caregiver.addPatient(user);
-        ArrayList<User> caregiverPatients = caregiver.getPatients();
+        caregiver.addPatient(user.username);
+        ArrayList<String> caregiverPatients = caregiver.getPatients();
 
         //User exists in caregivers patient list
-        assertTrue("User exists but was not deleted",caregiver.deletePatient(user));
+        assertTrue("User exists but was not deleted",caregiver.deletePatient(user.username));
         caregiverPatients = caregiver.getPatients();
         assertTrue("Invalid patient list length",caregiverPatients.size()==0); //Should be no patients in the caregiver's patient list after the deletion
 
         //User does not exist in the caregivers patient list
-        assertFalse("Invalid deletion of non-existent user",caregiver.deletePatient(user));
+        assertFalse("Invalid deletion of non-existent user",caregiver.deletePatient(user.username));
         caregiverPatients = caregiver.getPatients();
         assertTrue("Invalid patient list length",caregiverPatients.size()==0); //Should be no patients in the caregiver's patient list after the deletion
 
-    } */
+    }
 }

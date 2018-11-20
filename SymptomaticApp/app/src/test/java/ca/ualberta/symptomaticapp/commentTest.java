@@ -17,7 +17,7 @@ public class commentTest extends TestCase {
 
     }
 
-    public void testTimeStamp() {
+    public void testAuthor() {
         User user = new User("Name", "phone", "email");
         Date date = new Date();
         String newComment = "A comment";
