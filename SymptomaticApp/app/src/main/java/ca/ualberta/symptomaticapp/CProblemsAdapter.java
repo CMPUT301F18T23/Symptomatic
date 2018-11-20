@@ -77,7 +77,7 @@ public class CProblemsAdapter extends BaseAdapter implements ListAdapter {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(context, CViewRecords.class);
-                intent.putExtra("problem", problemList.get(position));
+                intent.putExtra("problem", position);
                 intent.putExtra("username", CViewProblems.currentpatient);
                 context.startActivity(intent);
             }

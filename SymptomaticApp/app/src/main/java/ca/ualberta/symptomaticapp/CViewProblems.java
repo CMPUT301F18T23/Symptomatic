@@ -83,10 +83,19 @@ public class CViewProblems extends AppCompatActivity {
         viewproblems.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 // take current selected patient and populate list view using their problems
-                viewcontactinfo.setEnabled(true); //allow view contact info to be able to be pressed
+
                 currentpatient= patient.getSelectedItem().toString(); //get current selection
                 displayList.clear();
                 getProblems(currentpatient);
+            }
+        });
+        viewcontactinfo.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+
+                Intent intent = new Intent(CViewProblems.this, ViewContactInfo.class);
+                intent.putExtra("username", currentpatient);
+                intent.putExtra("usertype", "user");
+                startActivity(intent);
             }
         });
     }

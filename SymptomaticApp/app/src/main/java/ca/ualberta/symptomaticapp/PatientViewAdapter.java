@@ -72,6 +72,7 @@ public class PatientViewAdapter extends BaseAdapter implements ListAdapter {
             public void onClick(View v) {
                 Intent intent = new Intent(context, ViewContactInfo.class);
                 intent.putExtra("username", patientList.get(position));
+                intent.putExtra("usertype", "user");
                 context.startActivity(intent);
             }
         });
