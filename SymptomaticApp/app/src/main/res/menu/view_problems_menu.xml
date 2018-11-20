@@ -19,6 +19,11 @@
                 android:onClick="viewAddProblem"
                 />
 
+            <item android:id="@+id/action_logout"
+                android:title="@string/logout"
+                android:onClick="viewLogout"
+                />
+
 
         </menu>
 

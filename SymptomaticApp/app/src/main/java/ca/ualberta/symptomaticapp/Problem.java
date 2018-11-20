@@ -21,13 +21,14 @@ import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.Date;
 
 import ca.ualberta.symptomaticapp.Login;
 import ca.ualberta.symptomaticapp.RecordList;
 
-public class Problem {
+public class Problem implements Serializable {
     private String title;
     private Date date;
     private String comment;

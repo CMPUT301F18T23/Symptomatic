@@ -29,25 +29,25 @@ import ca.ualberta.symptomaticapp.Problem;
 import ca.ualberta.symptomaticapp.R;
 import ca.ualberta.symptomaticapp.ViewFullProblemActivity;
 
-public class ListViewAdapter extends BaseAdapter implements ListAdapter {
-    private ArrayList<Problem> problemList;
+public class RecordListViewAdapter extends BaseAdapter implements ListAdapter {
+    private ArrayList<Record> recordList;
     private Context context;
 
 
 
-    public ListViewAdapter(ArrayList<Problem> list, Context context) {
-        this.problemList = list;
+    public RecordListViewAdapter(ArrayList<Record> list, Context context) {
+        this.recordList = list;
         this.context = context;
     }
 
     @Override
     public int getCount() {
-        return problemList.size();
+        return recordList.size();
     }
 
     @Override
     public Object getItem(int pos) {
-        return problemList.get(pos);
+        return recordList.get(pos);
     }
 
     @Override
@@ -62,47 +62,33 @@ public class ListViewAdapter extends BaseAdapter implements ListAdapter {
         View view = convertView;
         if (view == null) {
             LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            view = inflater.inflate(R.layout.custom_listview, null);
+            view = inflater.inflate(R.layout.record_listview, null);
         }
 
 
-
-
-
         //Handle TextView and display string from your list
-        TextView listItemText = view.findViewById(R.id.list_item_string);
-        listItemText.setText(problemList.get(position).toString());
+        TextView listItemText = view.findViewById(R.id.recordList_item_string);
+        listItemText.setText(recordList.get(position).toString());
 
         //Handle buttons
-        Button viewFullProblemButton = view.findViewById(R.id.viewFullProblemButton);
-        Button addRecordButton = view.findViewById(R.id.addRecordButton);
         Button editRecordButton = view.findViewById(R.id.editRecordButton);
+        Button viewFullRecordButton = view.findViewById(R.id.viewFullRecordButton);
+
 
         editRecordButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(context, EditProblemActivity.class);
-                intent.putExtra("problem", problemList.get(position));
-                context.startActivity(intent);
+
             }
         });
 
-        viewFullProblemButton.setOnClickListener(new View.OnClickListener(){
+        viewFullRecordButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(context, ViewFullProblemActivity.class);
-                intent.putExtra("problem", problemList.get(position));
-                context.startActivity(intent);
+
             }
         });
-        addRecordButton.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(context, AddRecordActivity.class);
-                intent.putExtra("problem", problemList.get(position));
-                context.startActivity(intent);
-            }
-        });
+
 
 
         return view;
@@ -110,4 +96,3 @@ public class ListViewAdapter extends BaseAdapter implements ListAdapter {
 
 
 }
-

@@ -78,6 +78,12 @@ public class AddProblemActivity extends AppCompatActivity {
         Intent intent = new Intent(AddProblemActivity.this, ListProblemsActivity.class);
         startActivity(intent);
     }
+    public void viewLogout(MenuItem menu){
+        Login.thisCaregiver = null;
+        Login.thisUser = null;
+        Intent intent = new Intent(AddProblemActivity.this, MainActivity.class);
+        startActivity(intent);
+    }
 
 
     public void addProblem(View v){

@@ -5,16 +5,12 @@ import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -25,12 +21,11 @@ import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
-import java.util.Collection;
 
 
 public class ListProblemsActivity extends AppCompatActivity {
 
-    private ListViewAdapter listadapter;
+    private ListViewAdapter listAdapter;
 
     private ListView listView;
 
@@ -49,7 +44,7 @@ public class ListProblemsActivity extends AppCompatActivity {
 
         listView = findViewById(R.id.problemsListView);
         displayList = new ArrayList<Problem>();
-        textView = (TextView) findViewById(R.id.NumberProblemsTextView);
+        textView = (TextView) findViewById(R.id.NumberRecordsTextView);
 
         active_problem_count = "Number of active problems:";
         textView.setText(active_problem_count);
@@ -77,11 +72,18 @@ public class ListProblemsActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    public void viewLogout(MenuItem menu){
+        Login.thisCaregiver = null;
+        Login.thisUser = null;
+        Intent intent = new Intent(ListProblemsActivity.this, MainActivity.class);
+        startActivity(intent);
+    }
+
     private void initListView(){
-        if(listadapter == null){
-            listadapter = new ListViewAdapter(displayList, this);
+        if(listAdapter == null){
+            listAdapter = new ListViewAdapter(displayList, this);
         }
-        listView.setAdapter(listadapter);
+        listView.setAdapter(listAdapter);
     }
 
     private void getProblems(String username){
@@ -99,7 +101,7 @@ public class ListProblemsActivity extends AppCompatActivity {
                         Problem problem = document.toObject(Problem.class);
                         displayList.add(problem);
                     }
-                    listadapter.notifyDataSetChanged();
+                    listAdapter.notifyDataSetChanged();
                     if (displayList != null) {
                         active_problem_count = "Number of active problems:"+" " + displayList.size();;
                         textView.setText(active_problem_count);

@@ -1,7 +1,10 @@
 package ca.ualberta.symptomaticapp;
 
 import android.app.AlertDialog;
+import android.app.DatePickerDialog;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Environment;
 import android.provider.MediaStore;
@@ -17,6 +20,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -33,6 +37,7 @@ import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Collection;
 import java.util.Date;
 
@@ -43,13 +48,11 @@ public class AddRecordActivity extends AppCompatActivity implements View.OnClick
     protected byte[] photoByteArray;
 
     String mCurrentPhotoPath; // the photo's file path
-
-    ArrayList<Problem> availableProblems;
-
-    ArrayAdapter<Problem> problemAdapter;
-
-    Spinner spinner;
-
+    Problem problem;
+    int year;
+    int month;
+    int day;
+    private DatePickerDialog.OnDateSetListener DateSetListener;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,20 +61,46 @@ public class AddRecordActivity extends AppCompatActivity implements View.OnClick
         Toolbar toolbar = findViewById(R.id.addRecord_toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("Add Record");
+        final Calendar cal = Calendar.getInstance();
 
-        spinner = (Spinner) findViewById(R.id.ProblemsSpinner);
-        availableProblems = new ArrayList<Problem>();
+        problem = (Problem)getIntent().getSerializableExtra("problem");
 
-        initAdapter();
+        TextView textView = findViewById(R.id.InputProblemTextView);
+        textView.setText(problem.getTitle());
 
-        getProblems(Login.thisUser.returnUsername());
+        year = cal.get(Calendar.YEAR);
+        month = cal.get(Calendar.MONTH);
+        day = cal.get(Calendar.DAY_OF_MONTH);
 
+
+        Button dateButton = findViewById(R.id.changeDateButton);
+        dateButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int currentYear = cal.get(Calendar.YEAR);
+                int currentMonth = cal.get(Calendar.MONTH);
+                int currentDay = cal.get(Calendar.DAY_OF_MONTH);
+
+                DatePickerDialog dialog = new DatePickerDialog(AddRecordActivity.this, android.R.style.Theme_DeviceDefault_Dialog, DateSetListener, currentYear, currentMonth, currentDay);
+                dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.BLACK));
+                dialog.show();
+            }
+        });
+
+        DateSetListener = new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker view, int chosenYear, int chosenMonth, int chosenDay) {
+                year = chosenYear;
+                month = chosenMonth;
+                day = chosenDay;
+            }
+        };
 
         // ------------------------------ WORKING ON SAVING PHOTOS -------------------------------
         // CURRENT STATUS: Not working!
         // Set the file path
         File path = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES);
-        File outputFile = new File(path,"Symptomatic");
+        File outputFile = new File(path, "Symptomatic");
         // If the directory doesn't exist, create it
         if (!outputFile.exists()) {
             outputFile.mkdir();
@@ -91,6 +120,7 @@ public class AddRecordActivity extends AppCompatActivity implements View.OnClick
         inflater.inflate(R.menu.add_record_menu, menu);
         return true;
     }
+
     public void viewHome(MenuItem menu) {
         Intent intent = new Intent(AddRecordActivity.this, AddProblemActivity.class);
         startActivity(intent);
@@ -100,25 +130,25 @@ public class AddRecordActivity extends AppCompatActivity implements View.OnClick
         Intent intent = new Intent(AddRecordActivity.this, ListProblemsActivity.class);
         startActivity(intent);
     }
+
     public void viewAddProblem(MenuItem menu) {
         Intent intent = new Intent(AddRecordActivity.this, AddProblemActivity.class);
         startActivity(intent);
     }
 
-    private void initAdapter(){
-        if(problemAdapter == null){
-            problemAdapter = new ArrayAdapter<Problem>(this, android.R.layout.simple_spinner_dropdown_item, availableProblems);
-        }
-        problemAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinner.setAdapter(problemAdapter);
+    public void viewLogout(MenuItem menu){
+        Login.thisCaregiver = null;
+        Login.thisUser = null;
+        Intent intent = new Intent(AddRecordActivity.this, MainActivity.class);
+        startActivity(intent);
     }
 
 
     // ---------------------------------- PHOTO FUNCTIONALITY ----------------------------------
-    public void onClick(View v){
+    public void onClick(View v) {
         int viewId = v.getId();
         // Gets images from gallery - Reference: https://en.proft.me/2017/07/1/how-get-image-gallery-or-camera-android/
-        if (viewId == R.id.savedPhoto){
+        if (viewId == R.id.savedPhoto) {
 
             Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
             intent.setType("image/*");
@@ -127,11 +157,20 @@ public class AddRecordActivity extends AppCompatActivity implements View.OnClick
 
         // If the user wants to take a photo using their camera
         // Reference: https://developer.android.com/training/camera/photobasics#java
+<<<<<<< HEAD
         if (viewId == R.id.takePhoto){
             // Start the intent to take the photo
             Intent takePictureintent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
 
             // Create the name of the file for the photo
+=======
+        if (viewId == R.id.takePhoto) {
+            Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+            if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
+                startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
+            }
+            File newPhotoFile = null;
+>>>>>>> 049ed7a3384fbff89106a25b146e2572f7f53377
             try {
                 File photoDir = createImageFile();
                 // for testing: Print the photo's path
@@ -149,11 +188,15 @@ public class AddRecordActivity extends AppCompatActivity implements View.OnClick
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+<<<<<<< HEAD
         convertBitmapToByteArray(data);
         switch(requestCode){
+=======
+        switch (requestCode) {
+>>>>>>> 049ed7a3384fbff89106a25b146e2572f7f53377
             case PICK_IMAGE_REQUEST:
 
-                if(resultCode == RESULT_OK){
+                if (resultCode == RESULT_OK) {
                     Uri selectedImage = data.getData();
 
                 }
@@ -221,28 +264,4 @@ public class AddRecordActivity extends AppCompatActivity implements View.OnClick
         }
     }
 
-    private void getProblems(String username){
-        FirebaseFirestore db = FirebaseFirestore.getInstance();
-
-        CollectionReference problems = db.collection("problems");
-
-        Query problemsQuery = problems.whereEqualTo("user",username);
-
-        problemsQuery.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                if(task.isSuccessful()){
-                    for(QueryDocumentSnapshot document: task.getResult()){
-                        Problem problem = document.toObject(Problem.class);
-                        availableProblems.add(problem);
-                    }
-                    problemAdapter.notifyDataSetChanged();
-                } else {
-                    AlertDialog.Builder badUsernameDialog = new AlertDialog.Builder(AddRecordActivity.this);
-                    badUsernameDialog.setMessage("Data Load Error");
-                    badUsernameDialog.show();
-                }
-            }
-        });
-    }
 }

@@ -28,10 +28,10 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/NumberProblemsTextView" />
+        app:layout_constraintTop_toBottomOf="@+id/NumberRecordsTextView" />
 
     <TextView
-        android:id="@+id/NumberProblemsTextView"
+        android:id="@+id/NumberRecordsTextView"
         android:layout_width="374dp"
         android:layout_height="32dp"
         android:layout_marginStart="8dp"
