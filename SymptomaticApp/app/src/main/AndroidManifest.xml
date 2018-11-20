@@ -57,7 +57,7 @@
                 android:resource="@xml/file_paths"></meta-data>
         </provider>
 
-        
+
         <activity android:name=".ListRecordsActivity"></activity>
 
     </application>
