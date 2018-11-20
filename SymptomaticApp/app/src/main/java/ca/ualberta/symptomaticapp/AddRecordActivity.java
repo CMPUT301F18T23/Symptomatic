@@ -122,7 +122,6 @@ public class AddRecordActivity extends AppCompatActivity implements View.OnClick
 
             Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
             intent.setType("image/*");
-
             startActivityForResult(intent, PICK_IMAGE_REQUEST);
         }
 
@@ -167,6 +166,9 @@ public class AddRecordActivity extends AppCompatActivity implements View.OnClick
         }
     }
 
+    protected void saveImageFile() {
+
+    }
     protected byte[] convertBitmapToByteArray(Intent intentData) {
         Uri selectedImage = intentData.getData();
 
@@ -174,26 +176,25 @@ public class AddRecordActivity extends AppCompatActivity implements View.OnClick
         return photoByteArray;
     }
 
-    // TODO: Edit
     // Reference: https://developer.android.com/training/camera/photobasics#java
     private File createImageFile() throws IOException {
         // Create the image file name with its timestamp
         String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
-        String imageFileName = "JPEG_" + timeStamp + "_";
+        String photoFileName = "JPEG_" + timeStamp + "_";
 
         // Get the app's directory for photos
-        File storageDir = getExternalFilesDir(Environment.DIRECTORY_PICTURES);
+        File picturesDir = getExternalFilesDir(Environment.DIRECTORY_PICTURES);
 
         // Create the file
-        File image = File.createTempFile(
-                imageFileName,  /* prefix */
+        File photo = File.createTempFile(
+                photoFileName,  /* prefix */
                 ".jpg",         /* suffix */
-                storageDir      /* directory */
+                picturesDir      /* directory */
         );
 
         // Store the photo's path name and return the image File
-        mCurrentPhotoPath = image.getAbsolutePath();
-        return image;
+        mCurrentPhotoPath = photo.getAbsolutePath();
+        return photo;
     }
 
     // Reference: https://developer.android.com/training/camera/photobasics#java
