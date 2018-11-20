@@ -38,15 +38,19 @@ public class Login extends AppCompatActivity implements View.OnClickListener{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-
+        
+        //initialize buttons
         create_button = findViewById(R.id.login_create_acc_button);
         login_button = findViewById(R.id.login_button);
-
+        
+        //set buttons to be on a click listener
         create_button.setOnClickListener(this);
         login_button.setOnClickListener(this);
 
+        //initialize input text
         input_user = findViewById(R.id.enter_user);
-
+        
+        //initialize radio buttons to specify a user type
         patientLogin = findViewById(R.id.patientLoginButton);
         caregiverLogin = findViewById(R.id.careproviderLoginButton);
     }
@@ -54,34 +58,34 @@ public class Login extends AppCompatActivity implements View.OnClickListener{
     @Override
     public void onClick(View v) {
         int viewId = v.getId();
-
+        
+        //check which button is clicked
         if (viewId == R.id.login_create_acc_button){
+            //the create account button was clicked, and sends user to the create account activity
             next_activity = new Intent(this,createAccount.class);
             startActivity(next_activity);
         } else if (viewId == R.id.login_button){
-            //Get the input from the login
+            //The login button was clicked, and first gets the input from the login
             final String inputuser = input_user.getText().toString();
-
-            if (caregiverLogin.isChecked()){
-                thisUserType = "Caregiver";
-            } else {
-                thisUserType = "Patient";
-            }
 
             //Access Firestore database
             FirebaseFirestore db = FirebaseFirestore.getInstance();
             CollectionReference active_users;
-
+            
+            //checks to see which radio button is checked, which specifies a user type
             if (caregiverLogin.isChecked()){
+                thisUserType = "Caregiver";
                 active_users = db.collection("caregivers");
             } else {
+                thisUserType = "Patient";
                 active_users = db.collection("users");
             }
 
             //Build the query
             Query query = active_users
                     .whereEqualTo("username",inputuser);
-
+           
+            //retrieves the query
             query.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                 //If Query Worked on not
                 @Override
@@ -100,8 +104,10 @@ public class Login extends AppCompatActivity implements View.OnClickListener{
                                 }
                             }
                             if (patientLogin.isChecked()) {
+                                //sends the user to the main activity page if the patient radio button is checked
                                 next_activity = new Intent(Login.this,MainActivity.class);
                             } else {
+                                //sends the user to the Caregiver homepage if the caregiver button is checked
                                 next_activity = new Intent(Login.this,CaregiverHome.class);
                             }
                             startActivity(next_activity);
@@ -109,7 +115,6 @@ public class Login extends AppCompatActivity implements View.OnClickListener{
                         } else if (inputuser.isEmpty()) {
                             //No users with that username exists
                             Toast.makeText(Login.this, "Username not entered.", Toast.LENGTH_SHORT).show();
-
                         }
 
                         else {
