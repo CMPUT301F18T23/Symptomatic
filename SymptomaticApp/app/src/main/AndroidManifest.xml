@@ -43,7 +43,7 @@
         <activity android:name=".ViewPatients" />
         <activity android:name=".AddPatient" />
         <activity android:name=".ViewContactInfo" />
-<<<<<<< HEAD
+
         <activity android:name=".CaregiverHome"></activity>
 
         <!--To use FileProvider for Photos-->
@@ -56,10 +56,10 @@
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/file_paths"></meta-data>
         </provider>
-=======
-        <activity android:name=".CaregiverHome" />
+
+        
         <activity android:name=".ListRecordsActivity"></activity>
->>>>>>> 049ed7a3384fbff89106a25b146e2572f7f53377
+
     </application>
 
 </manifest>

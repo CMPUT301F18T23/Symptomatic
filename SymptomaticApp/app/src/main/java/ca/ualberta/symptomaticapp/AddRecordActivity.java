@@ -52,11 +52,8 @@ public class AddRecordActivity extends AppCompatActivity implements View.OnClick
 
     String mCurrentPhotoPath; // the photo's file path
 
-    ArrayList<Problem> availableProblems;
+    Problem problem;
 
-    ArrayAdapter<Problem> problemAdapter;
-
-    Spinner spinner;
 
 
     @Override
@@ -67,12 +64,14 @@ public class AddRecordActivity extends AppCompatActivity implements View.OnClick
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("Add Record");
 
-        spinner = (Spinner) findViewById(R.id.ProblemsSpinner);
-        availableProblems = new ArrayList<Problem>();
+        problem = (Problem)getIntent().getSerializableExtra("problem");
 
-        initAdapter();
+        TextView textView = findViewById(R.id.InputProblemTextView);
+        textView.setText(problem.getTitle());
 
-        getProblems(Login.thisUser.returnUsername());
+
+
+
 
 
         // ------------------------------ WORKING ON SAVING PHOTOS -------------------------------
@@ -115,13 +114,6 @@ public class AddRecordActivity extends AppCompatActivity implements View.OnClick
         startActivity(intent);
     }
 
-    private void initAdapter(){
-        if(problemAdapter == null){
-            problemAdapter = new ArrayAdapter<Problem>(this, android.R.layout.simple_spinner_dropdown_item, availableProblems);
-        }
-        problemAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinner.setAdapter(problemAdapter);
-    }
 
 
     // ---------------------------------- PHOTO FUNCTIONALITY ----------------------------------
@@ -159,7 +151,7 @@ public class AddRecordActivity extends AppCompatActivity implements View.OnClick
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        convertBitmapToByteArray(data);
+        //convertBitmapToByteArray(data);
         switch(requestCode){
             case PICK_IMAGE_REQUEST:
 
@@ -253,28 +245,4 @@ public class AddRecordActivity extends AppCompatActivity implements View.OnClick
         }
     }
 
-    private void getProblems(String username){
-        FirebaseFirestore db = FirebaseFirestore.getInstance();
-
-        CollectionReference problems = db.collection("problems");
-
-        Query problemsQuery = problems.whereEqualTo("user",username);
-
-        problemsQuery.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                if(task.isSuccessful()){
-                    for(QueryDocumentSnapshot document: task.getResult()){
-                        Problem problem = document.toObject(Problem.class);
-                        availableProblems.add(problem);
-                    }
-                    problemAdapter.notifyDataSetChanged();
-                } else {
-                    AlertDialog.Builder badUsernameDialog = new AlertDialog.Builder(AddRecordActivity.this);
-                    badUsernameDialog.setMessage("Data Load Error");
-                    badUsernameDialog.show();
-                }
-            }
-        });
-    }
 }
