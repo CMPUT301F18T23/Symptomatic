@@ -11,6 +11,12 @@ import java.util.Date;
 
 public class ProblemListTest extends TestCase {
 
+    public void testConstructor(){
+        ProblemList problemList = new ProblemList();
+        assertTrue("Not constructed", problemList != null);
+
+    }
+
     public void testEmptyProblemList(){
         ProblemList problemList = new ProblemList();
         Collection<Problem> problems = problemList.getProblems();

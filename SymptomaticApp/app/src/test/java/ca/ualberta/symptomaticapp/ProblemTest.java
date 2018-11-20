@@ -8,8 +8,19 @@ import java.util.Date;
 
 public class ProblemTest extends TestCase {
 
+    public void testConstructor() {
+        String problemTitle = "Rash";
+        Date problemDate = Calendar.getInstance().getTime();
+        String problemComment = "I have a rash";
+        Problem problem = new Problem(problemTitle, problemDate, problemComment);
+        assertTrue("Title is not equal", problemTitle.equals(problem.getTitle()));
+        assertTrue("Date is not equal", problemDate.equals(problem.getDate()));
+        assertTrue("Comment is not equal", problemComment.equals(problem.getComment()));
 
-    public void testProblemTitle (){
+    }
+
+
+    public void testProblemTitle(){
         String problemTitle = "Rash";
         Date problemDate = Calendar.getInstance().getTime();
         String problemComment = "I have a rash";

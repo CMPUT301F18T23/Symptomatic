@@ -8,6 +8,12 @@ import java.util.Date;
 
 public class RecordListTest extends TestCase {
 
+    public void testConstructor(){
+        RecordList recordList = new RecordList();
+        assertTrue("Not constructed", recordList != null);
+
+    }
+
     public void testEmptyRecordList() {
         RecordList recordList = new RecordList();
         Collection<Record> records = recordList.getRecords();
