@@ -55,7 +55,7 @@ public class PatientViewAdapter extends BaseAdapter implements ListAdapter {
 
         //Handle buttons
         Button viewProblems = view.findViewById(R.id.viewProblems);
-        Button viewContactInfo = view.findViewById(R.id.viewProblems);
+        Button viewContactInfo = view.findViewById(R.id.viewContactInfo);
 
 
         viewProblems.setOnClickListener(new View.OnClickListener() {
