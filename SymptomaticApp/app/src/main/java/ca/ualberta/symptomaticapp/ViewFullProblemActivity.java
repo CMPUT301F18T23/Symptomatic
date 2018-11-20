@@ -29,8 +29,6 @@ import java.util.List;
 
 public class ViewFullProblemActivity extends AppCompatActivity {
 
-    ArrayList<Problem> problemsList;
-    ArrayAdapter<Problem> problemAdapter;
     Problem problem;
 
     @Override

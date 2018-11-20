@@ -82,8 +82,6 @@ public class ListViewAdapter extends BaseAdapter implements ListAdapter {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(context, EditProblemActivity.class);
-                //Bundle bundle = new Bundle();
-                //bundle.putSerializable("problem", problemList.get(position));
                 intent.putExtra("problem", problemList.get(position));
                 context.startActivity(intent);
             }
@@ -101,7 +99,7 @@ public class ListViewAdapter extends BaseAdapter implements ListAdapter {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(context, AddRecordActivity.class);
-
+                intent.putExtra("problem", problemList.get(position));
                 context.startActivity(intent);
             }
         });
