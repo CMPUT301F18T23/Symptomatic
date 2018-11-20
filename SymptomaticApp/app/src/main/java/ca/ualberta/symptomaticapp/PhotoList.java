@@ -23,7 +23,7 @@ public class PhotoList {
     protected ArrayList<Photo> photoList;
 
     public PhotoList(){
-        // Initialize the PhotoList
+        // Initialize the PhotoList to be an array of Photo objects
         photoList = new ArrayList<Photo>();
     }
 
