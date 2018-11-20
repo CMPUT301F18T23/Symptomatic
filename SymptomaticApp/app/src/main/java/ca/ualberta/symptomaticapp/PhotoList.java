@@ -1,3 +1,19 @@
+/*
+ * PhotoList.java
+ *
+ * Version 1
+ *
+ * November, 20, 2018.
+ *
+ * This file is subject to the terms and conditions defined in
+ * file 'LICENSE', which is part of this source code package.
+ *
+ * A list of photo that gets created when adding records.
+ *
+ * Issues:
+ *
+ */
+
 package ca.ualberta.symptomaticapp;
 
 import java.util.ArrayList;
