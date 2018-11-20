@@ -70,17 +70,8 @@ public class CProblemsAdapter extends BaseAdapter implements ListAdapter {
         listItemText.setText(problemList.get(position).toString());
 
         //Handle buttons
-        Button viewFullProblemButton = view.findViewById(R.id.viewFullProblemButton);
-        Button viewRecordsButton = view.findViewById(R.id.viewRecordsButton);
-        viewFullProblemButton.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(context, ViewFullProblemActivity.class);
-                intent.putExtra("problem", problemList.get(position));
 
-                context.startActivity(intent);
-            }
-        });
+        Button viewRecordsButton = view.findViewById(R.id.viewRecordsButton);
 
         viewRecordsButton.setOnClickListener(new View.OnClickListener(){
             @Override

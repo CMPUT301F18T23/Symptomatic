@@ -6,6 +6,7 @@ records associated with that patient's problem. The caregiver can also view that
 
 package ca.ualberta.symptomaticapp;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -23,10 +24,14 @@ import java.util.List;
 public class CViewRecords extends AppCompatActivity {
     int selectedpatient;
     int selectedproblem;
+    String passeduser;
+    Problem passedprob;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cview_records);
+        Intent intent = getIntent();
+        passeduser = intent.getExtras().getString("username");
 
         // get all ui elements
         final Spinner selectpatient = (Spinner) findViewById(R.id.sp_Patient);

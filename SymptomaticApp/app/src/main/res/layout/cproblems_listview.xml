@@ -15,24 +15,13 @@
         android:textStyle="bold" />
 
     <Button
-        android:id="@+id/viewFullProblemButton"
+        android:id="@+id/viewRecordsButton"
         android:layout_width="95dp"
         android:layout_height="62dp"
         android:layout_alignParentRight="true"
         android:layout_alignParentBottom="true"
         android:layout_marginRight="6dp"
         android:layout_marginBottom="120dp"
-        android:text="@string/view_full_problem" />
-
-
-    <Button
-        android:id="@+id/viewRecordsButton"
-        android:layout_width="95dp"
-        android:layout_height="62dp"
-        android:layout_alignParentBottom="true"
-        android:layout_marginRight="7dp"
-        android:layout_marginBottom="120dp"
-        android:layout_toLeftOf="@id/viewFullProblemButton"
         android:text="@string/view_records" />
 
 </RelativeLayout>

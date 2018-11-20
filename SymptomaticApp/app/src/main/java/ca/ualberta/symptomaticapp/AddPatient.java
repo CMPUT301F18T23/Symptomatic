@@ -70,7 +70,8 @@ public class AddPatient extends AppCompatActivity {
                                     addedpatient = document.toObject(User.class);
                                     caregiver.addPatient(addedpatient.returnUsername());
                                     Toast.makeText(AddPatient.this, "Patient added!", Toast.LENGTH_SHORT).show();
-                                    finish();
+                                    Intent intent = new Intent(AddPatient.this, ViewPatients.class);
+                                    startActivity(intent);
                                 }
                             } else if (content.isEmpty()) {
                                 //No users with that username exists
