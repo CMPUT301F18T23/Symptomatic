@@ -1,6 +1,8 @@
 
 package ca.ualberta.symptomaticapp;
-
+/*
+ListView adapter customized for displaying problems from a caregiver's point of view.
+ */
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
@@ -30,13 +32,11 @@ import ca.ualberta.symptomaticapp.R;
 import ca.ualberta.symptomaticapp.ViewFullProblemActivity;
 
 public class CProblemsAdapter extends BaseAdapter implements ListAdapter {
-    private ArrayList<Problem> problemList;
+    private ArrayList<Problem> problemList; //data to display
     private Context context;
 
-
-
-    public CProblemsAdapter(ArrayList<Problem> list, Context context) {
-        this.problemList = list;
+    public CProblemsAdapter(ArrayList<Problem> list, Context context) { //constructor
+        this.problemList = list; //assign given data to be the data that will be displayed
         this.context = context;
     }
 
@@ -48,43 +48,36 @@ public class CProblemsAdapter extends BaseAdapter implements ListAdapter {
     @Override
     public Object getItem(int pos) {
         return problemList.get(pos);
-    }
+    } //fetch function
 
     @Override
     public long getItemId(int pos) {
         return 0;
     }
 
-
-
     @Override
     public View getView(final int position, View convertView, ViewGroup parent) {
         View view = convertView;
         if (view == null) {
             LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            view = inflater.inflate(R.layout.cproblems_listview, null);
+            view = inflater.inflate(R.layout.cproblems_listview, null); //using our custom XML file instead of default
         }
 
-        //Handle TextView and display string from your list
+        //Handle UI elements and assign them the correct values
         TextView listItemText = view.findViewById(R.id.list_item_string);
         listItemText.setText(problemList.get(position).toString());
-
-        //Handle buttons
-
         Button viewRecordsButton = view.findViewById(R.id.viewRecordsButton);
 
         viewRecordsButton.setOnClickListener(new View.OnClickListener(){
             @Override
-            public void onClick(View v) {
+            public void onClick(View v) { //view records button to open the view records page
                 Intent intent = new Intent(context, CViewRecords.class);
+                //pass selected problem and patient to view records.
                 intent.putExtra("problem", position);
                 intent.putExtra("username", CViewProblems.currentpatient);
-                context.startActivity(intent);
+                context.startActivity(intent); //open the activity
             }
         });
-
-
-
         return view;
     }
 
