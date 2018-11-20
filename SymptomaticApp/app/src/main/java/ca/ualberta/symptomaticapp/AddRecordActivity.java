@@ -135,6 +135,13 @@ public class AddRecordActivity extends AppCompatActivity implements View.OnClick
         startActivity(intent);
     }
 
+    public void viewLogout(MenuItem menu){
+        Login.thisCaregiver = null;
+        Login.thisUser = null;
+        Intent intent = new Intent(AddRecordActivity.this, MainActivity.class);
+        startActivity(intent);
+    }
+
 
     // ---------------------------------- PHOTO FUNCTIONALITY ----------------------------------
     public void onClick(View v) {
