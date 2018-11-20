@@ -11,9 +11,19 @@ import java.util.Date;
 
 public class RecordTest extends TestCase {
 
+    public void testConstructor(){
+        Date date = new Date();
+        Problem problem = new Problem();
+        Record record = new Record(problem.getTitle(), date);
+        assertTrue("Problem title is not equal", problem.getTitle().equals(record.problem));
+        assertTrue("Date is not equal", date.equals(record.recordDate));
+
+    }
+
     public void testTimeStamp(){
         Date date = new Date();
-        Record record = new Record(date);
+        Problem problem = new Problem();
+        Record record = new Record(problem.getTitle(), date);
         assertTrue("Date is not equal", date.equals(record.getTimeStamp()));
 
     }
@@ -21,7 +31,8 @@ public class RecordTest extends TestCase {
     public void testAddTitle(){
         Date date = new Date();
         String title = "A records title";
-        Record record = new Record(date);
+        Problem problem = new Problem();
+        Record record = new Record(problem.getTitle(), date);
         record.addTitle(title);
         assertTrue("Title is not equal", title.equals(record.getTitle()));
 
@@ -30,7 +41,8 @@ public class RecordTest extends TestCase {
     public void testUpdateTitle(){
         Date date = new Date();
         String title = "A records title";
-        Record record = new Record(date);
+        Problem problem = new Problem();
+        Record record = new Record(problem.getTitle(), date);
         record.addTitle(title);
         String title2 = "A new title";
         record.updateTitle(title2);
@@ -41,7 +53,8 @@ public class RecordTest extends TestCase {
     public void testDeleteTitle(){
         Date date = new Date();
         String title = "A records title";
-        Record record = new Record(date);
+        Problem problem = new Problem();
+        Record record = new Record(problem.getTitle(), date);
         record.addTitle(title);
         record.removeTitle();
         assertTrue("Title is not null", record.getTitle().isEmpty());
@@ -51,7 +64,8 @@ public class RecordTest extends TestCase {
     public void testAddComment(){
         Date date = new Date();
         String comment = "A records comment";
-        Record record = new Record(date);
+        Problem problem = new Problem();
+        Record record = new Record(problem.getTitle(), date);
         record.addComment(comment);
         assertTrue("Comment is not equal", comment.equals(record.getComment()));
 
@@ -60,7 +74,8 @@ public class RecordTest extends TestCase {
     public void testUpdateComment(){
         Date date = new Date();
         String comment = "A records comment";
-        Record record = new Record(date);
+        Problem problem = new Problem();
+        Record record = new Record(problem.getTitle(), date);
         String comment2 = "A new comment";
         record.addComment(comment);
         record.updateComment(comment2);
@@ -71,7 +86,8 @@ public class RecordTest extends TestCase {
     public void testRemoveComment(){
         Date date = new Date();
         String comment = "A records comment";
-        Record record = new Record(date);
+        Problem problem = new Problem();
+        Record record = new Record(problem.getTitle(), date);
         record.addComment(comment);
         record.removeComment();
         assertTrue( "comment is not null", record.getComment().isEmpty());
@@ -83,7 +99,8 @@ public class RecordTest extends TestCase {
         ArrayList<String> bodyLocations = new ArrayList<>();
         String bodyLocation = "A body location";
         bodyLocations.add(bodyLocation);
-        Record record = new Record(date);
+        Problem problem = new Problem();
+        Record record = new Record(problem.getTitle(), date);
         record.addBodyLocation(bodyLocations);
         assertTrue("Body location did not add", record.getBodyLocation().contains(bodyLocation));
     }
@@ -92,7 +109,8 @@ public class RecordTest extends TestCase {
         Date date = new Date();
         ArrayList<String> bodyLocation = new ArrayList<>();
         bodyLocation.add("A body location");
-        Record record = new Record(date);
+        Problem problem = new Problem();
+        Record record = new Record(problem.getTitle(), date);
         record.addBodyLocation(bodyLocation);
         record.removeBodyLocation("A body location");
         assertTrue("Body location array is not empty", record.getBodyLocation().isEmpty() == true);
@@ -111,7 +129,8 @@ public class RecordTest extends TestCase {
         bodyLocation.add(location1);
         bodyLocation.add(location2);
         bodyLocation.add(location3);
-        Record record = new Record(date);
+        Problem problem = new Problem();
+        Record record = new Record(problem.getTitle(), date);
         record.addBodyLocation(bodyLocation);
         record.removeBodyLocation(location2);
         assertFalse("location is not deleted ", record.getBodyLocation().contains(location2));
@@ -125,7 +144,8 @@ public class RecordTest extends TestCase {
         Date date = new Date();
         ArrayList<String> bodyLocations = new ArrayList<>();
         String bodylocation = "A body location";
-        Record record = new Record(date);
+        Problem problem = new Problem();
+        Record record = new Record(problem.getTitle(), date);
         record.addBodyLocation(bodyLocations);
         record.removeBodyLocation(bodylocation);
         assertTrue("Body location does not exist", record.getBodyLocation().contains(bodylocation));
@@ -139,7 +159,8 @@ public class RecordTest extends TestCase {
         ArrayList<String> photos = new ArrayList<>();
         String photo = "A photo";
         photos.add(photo);
-        Record record = new Record(date);
+        Problem problem = new Problem();
+        Record record = new Record(problem.getTitle(), date);
         record.addPhoto(photos);
         assertTrue("Photo is not added", record.photos.contains(photo));
         }
@@ -151,7 +172,8 @@ public class RecordTest extends TestCase {
         ArrayList<String> photos = new ArrayList<>();
         String photo1 = "A photo";
         photos.add(photo1);
-        Record record = new Record(date);
+        Problem problem = new Problem();
+        Record record = new Record(problem.getTitle(), date);
         record.addPhoto(photos);
         record.removePhoto(photo1);
         assertTrue("Photo array is not empty", record.getPhoto().isEmpty());
@@ -166,7 +188,8 @@ public class RecordTest extends TestCase {
         String photo1 = "A photo";
         String photo2 = "Another photo";
         photos.add(photo1);
-        Record record = new Record(date);
+        Problem problem = new Problem();
+        Record record = new Record(problem.getTitle(), date);
         record.addPhoto(photos);
         record.removePhoto(photo2);
         assertTrue("Photo does not exist", record.getPhoto().isEmpty());
@@ -183,7 +206,8 @@ public class RecordTest extends TestCase {
         photos.add(photo1);
         photos.add(photo2);
         photos.add(photo3);
-        Record record = new Record(date);
+        Problem problem = new Problem();
+        Record record = new Record(problem.getTitle(), date);
         record.addPhoto(photos);
         record.removePhoto(photo2);
         assertFalse("Photo did not get removed", record.getPhoto().contains(photo2));
@@ -195,7 +219,8 @@ public class RecordTest extends TestCase {
     public void testAddGeolocation(){
         Date date = new Date();
         String location = "A geolocation";
-        Record record = new Record(date);
+        Problem problem = new Problem();
+        Record record = new Record(problem.getTitle(), date);
         record.addGeolocation(location);
         assertTrue("Geolocation is not equal", location.equals(record.getGeolocation()));
     }
@@ -203,7 +228,8 @@ public class RecordTest extends TestCase {
     public void testUpdateGeolocation(){
         Date date = new Date();
         String location1 = "A geolocation";
-        Record record = new Record(date);
+        Problem problem = new Problem();
+        Record record = new Record(problem.getTitle(), date);
         record.addGeolocation(location1);
         String location2 = "A new geolocation";
         record.updateGeolocation(location2);
@@ -214,7 +240,8 @@ public class RecordTest extends TestCase {
     public void testRemoveGeolocation(){
         Date date = new Date();
         String location = "A geolocation";
-        Record record = new Record(date);
+        Problem problem = new Problem();
+        Record record = new Record(problem.getTitle(), date);
         record.addGeolocation(location);
         record.removeGeolocation(location);
         assertTrue("Geolocation is not null", record.getGeolocation().isEmpty());

@@ -25,7 +25,7 @@ public class ProblemList {
     private ArrayList<Problem> thisProblemList;
 
     public ProblemList(){
-        thisProblemList = new ArrayList<Problem>();
+        thisProblemList = new ArrayList<>();
     }
 
     public ArrayList<Problem> getProblems() {

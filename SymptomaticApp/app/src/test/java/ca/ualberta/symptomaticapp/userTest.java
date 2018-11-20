@@ -79,7 +79,7 @@ public class userTest extends TestCase {
      *      1. Do not already exist in the caregivers patient list
      *      2. Already exist in the caregivers patient list
      */
-    public void testPatientAdd(){
+  /*  public void testPatientAdd(){
         User user = new User("ryan1234", "(780)481-3905", "ryan@hotmail.com");
         Caregiver caregiver = new Caregiver("doctorphil", "(780)911-9111", "drphil@doctors.com");
 
@@ -100,7 +100,7 @@ public class userTest extends TestCase {
      *      1. Exist in the caregivers patient list
      *      2. Do not exist in the caregivers patient list
      */
-    public void testPatientDelete(){
+   /* public void testPatientDelete(){
         User user = new User("ryan1234", "(780)481-3905", "ryan@hotmail.com");
         Caregiver caregiver = new Caregiver("doctorphil", "(780)911-9111", "drphil@doctors.com");
         caregiver.addPatient(user);
@@ -116,5 +116,5 @@ public class userTest extends TestCase {
         caregiverPatients = caregiver.getPatients();
         assertTrue("Invalid patient list length",caregiverPatients.size()==0); //Should be no patients in the caregiver's patient list after the deletion
 
-    }
+    } */
 }

@@ -19,7 +19,7 @@ public class Record {
     protected ArrayList<String> bodyLocation;
     protected ArrayList<String> photos;
     protected ArrayList<Photo> photoList;
-    private Date recordDate;
+    protected Date recordDate;
     protected String user;
     protected String problem;
 
@@ -119,5 +119,9 @@ public class Record {
 
     public void updateGeolocation(String location) {
         this.geolocation = location;
+    }
+
+    public String getProblem() {
+        return this.problem;
     }
 }
