@@ -6,22 +6,34 @@
     android:layout_height="match_parent"
     tools:context=".AddPatient">
 
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/addPatient_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?android:attr/actionBarSize"
+        android:background="@color/logoColor"
+        android:elevation="4dp"
+        android:theme="@style/AppTheme"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+        app:titleTextColor="@android:color/background_light" />
+
     <TextView
         android:id="@+id/tv_PatientUser"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="48dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
 
+        android:layout_marginRight="8dp"
+        android:text="@string/patuser"
+        android:textColor="@android:color/black"
         android:textSize="24sp"
+        android:textStyle="bold"
         android:visibility="visible"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:text="@string/patuser" />
+        app:layout_constraintTop_toBottomOf="@+id/addPatient_toolbar" />
 
     <EditText
         android:id="@+id/et_username"
@@ -38,28 +50,35 @@
 
     <Button
         android:id="@+id/btn_Cancel"
-        android:layout_width="87dp"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
-        android:layout_marginLeft="82dp"
-        android:layout_marginRight="16dp"
-        android:layout_marginStart="82dp"
+        android:layout_width="120dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
         android:layout_marginTop="16dp"
 
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginBottom="300dp"
+        android:text="@android:string/cancel"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/btn_addpatient"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/et_username"
-        android:text="@android:string/cancel" />
+        app:layout_constraintTop_toBottomOf="@+id/et_username" />
 
     <Button
         android:id="@+id/btn_addpatient"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="24dp"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="16dp"
+        android:layout_width="120dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="16dp"
 
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginBottom="300dp"
+        android:text="@string/add_patient"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/btn_Cancel"
-        app:layout_constraintTop_toBottomOf="@+id/et_username"
-        android:text="@string/add_patient" />
+        app:layout_constraintTop_toBottomOf="@+id/et_username" />
 </android.support.constraint.ConstraintLayout>

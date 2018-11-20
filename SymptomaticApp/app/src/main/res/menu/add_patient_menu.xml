@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/homeMenuItem"
+        android:title="new"
+        android:orderInCategory="101"
+        android:icon="@drawable/menu_image"
+        app:showAsAction="always">
+
+        <menu>
+
+            <item android:id="@+id/action_caregiver_home"
+                android:title="@string/home"
+                android:onClick="viewHome"
+                />
+
+            <item android:id="@+id/action_addPatient"
+                android:title="@string/add_patient"
+                android:onClick="viewAddPatients"
+                />
+            <item android:id="@+id/action_logout"
+                android:title="@string/logout"
+                android:onClick="viewLogout"
+                />
+
+
+        </menu>
+
+    </item>
+
+</menu>
