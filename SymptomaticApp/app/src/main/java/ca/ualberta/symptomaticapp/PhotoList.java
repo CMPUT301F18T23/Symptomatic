@@ -1,4 +1,10 @@
-/*
+
+package ca.ualberta.symptomaticapp;
+
+import java.util.ArrayList;
+import java.util.Collection;
+
+/**
  * PhotoList.java
  *
  * Version 1
@@ -14,34 +20,47 @@
  *
  */
 
-package ca.ualberta.symptomaticapp;
-
-import java.util.ArrayList;
-import java.util.Collection;
-
 public class PhotoList {
     protected ArrayList<Photo> photoList;
 
+    /**
+     * Constructor for PhotoList
+     */
     public PhotoList(){
         // Initialize the PhotoList
         photoList = new ArrayList<Photo>();
     }
 
+    /**
+     * Photo getter
+     * @return a list of photo
+     */
     public Collection<Photo> getPhotos() {
-        // Return the list of photo's for a record
         return photoList;
     }
 
+    /**
+     * Adds a photo into the list
+     * @param newPhoto
+     */
     public void addPhoto(Photo newPhoto) {
         // Add a photo to the list for a record
         photoList.add(newPhoto);
     }
 
+    /**
+     * Deletes a photo from the photo list
+     * @param deletePhoto
+     */
     public void deletePhoto(Photo deletePhoto) {
         // Delete a photo from the list for a record
         photoList.remove(deletePhoto);
     }
 
+    /**
+     * gets the photoListSize
+     * @return an integer containing the photolist size
+     */
     public int getPhotoListSize() {
         // Return the size of the photoList currently
         return photoList.size();
