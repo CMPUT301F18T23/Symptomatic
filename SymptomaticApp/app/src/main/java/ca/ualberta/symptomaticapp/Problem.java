@@ -1,4 +1,4 @@
-/*
+/**
  * Problem.java
  *
  * Version 1
@@ -45,6 +45,12 @@ public class Problem implements Serializable {
     private RecordList recordList;
 
 
+    /**
+     * Creates the instance of a problem object
+     * @param title: The title of the problem
+     * @param date: The date of the problem
+     * @param comment: The comment of the problem
+     */
     public Problem (String title, Date date, String comment){
         this.title = title;
         this.date = date;
@@ -70,36 +76,73 @@ public class Problem implements Serializable {
         });
     }
 
+    /**
+     * Sets the title of the problem
+     * @param  title
+     */
     public void setTitle(String title){
         this.title = title;
     }
 
+    /**
+     * Sets the title of the problem
+     * @param  date
+     */
     public void setDate(Date date){
         this.date = date;
     }
 
+    /**
+     * Sets the comment of the problem
+     * @param  comment
+     */
     public void setComment(String comment){
         this.comment = comment;
     }
 
+    /**
+     * Gets the problem title
+     * @return problem title
+     */
     public String getTitle() {
         return title;
     }
 
+    /**
+     * Gets the problem date
+     * @return problem date
+     */
     public Date getDate() {
         return date;
     }
 
+
+    /**
+     * Gets the problem comment
+     * @return problem comment
+     */
     public String getComment() {
         return comment;
     }
 
+    /**
+     * Gets the problem's record list size
+     * @return The number of records
+     */
     public int getRecordListSize() {
         return numberRecords;
     }
 
+    /**
+     * Gets the user
+     * @return this.user
+     */
     public String getUser(){return this.user;}
 
+    /**
+     * Creates a problem string
+     * @return A string representing a problem
+     */
     public String toString() {
         return this.title+ "\n" + this.date.toString() + "\n" + "Number of records:" + " " + this.getRecordListSize();
     }
@@ -108,6 +151,9 @@ public class Problem implements Serializable {
         this.numberRecords = num;
     }
 
+    /**
+     * Updates records in database
+     */
     public void updateRecords(){
         db = FirebaseFirestore.getInstance();
 
@@ -129,6 +175,12 @@ public class Problem implements Serializable {
             }
         });
     }
+
+    /**
+     * Deletes problem from database
+     * @param username
+     * @param inputContext 
+     */
     private void deleteProblem(String username, Context inputContext){
         thisContext = inputContext;
 
@@ -157,6 +209,10 @@ public class Problem implements Serializable {
 
     }
 
+    /**
+     * Gets the recordList of a problem
+     * @return this.recordList
+     */
     public RecordList getRecordList() {
         return this.recordList;
     }

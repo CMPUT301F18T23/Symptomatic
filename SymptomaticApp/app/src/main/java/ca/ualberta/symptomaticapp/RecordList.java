@@ -23,28 +23,44 @@ import java.util.Collection;
 
 public class RecordList implements Serializable {
 
-
     protected ArrayList<Record> recordList;
 
+    /**
+     * Creates the instance of a record list object
+     */
     public RecordList() {
         recordList = new ArrayList<>();
     }
 
-
+    /**
+     * Gets the record list
+     * @return this.recordList
+     */
     public Collection<Record> getRecords() {
         return recordList;
     }
 
+    /**
+     * Adds a record to record list
+     * @param testRecord
+     */
     public void addRecord(Record testRecord) {
         recordList.add(testRecord);
 
     }
 
+    /**
+     * Deletes record from record list
+     * @param testRecord
+     */
     public void deleteRecord(Record testRecord) {
         recordList.remove(testRecord);
     }
 
-
+    /**
+     * Gets the size of record list
+     * @return record list size
+     */
     public int size() {
         return recordList.size();
     }

@@ -32,27 +32,50 @@ import java.util.Collection;
 public class ProblemList {
     private ArrayList<Problem> thisProblemList;
 
+    /**
+     * Creates the instance of a problem list object
+     */
     public ProblemList(){
         thisProblemList = new ArrayList<>();
     }
 
+    /**
+     * Gets the problem list
+     * @return thisProblemList
+     */
     public ArrayList<Problem> getProblems() {
         return thisProblemList;
     }
 
+    /**
+     * Adds a problem to the problemList
+     * @param  problem
+     */
     public void addProblem(Problem problem) {
         thisProblemList.add(problem);
     }
 
+    /**
+     * Deletes a problem from the problemList
+     * @param  problem
+     */
     public void deleteProblem(Problem problem) {
         thisProblemList.remove(problem);
     }
 
+    /**
+     * Returns a problem if it is in the problem list
+     * @param  problem
+     */
     public Problem getProblem(Problem problem) {
         int index = thisProblemList.indexOf(problem);
         return thisProblemList.get(index);
     }
 
+    /**
+     * Get the size of the problem list
+     * @return Problem list size
+     */
     public int getSize() {
         return thisProblemList.size();
     }
