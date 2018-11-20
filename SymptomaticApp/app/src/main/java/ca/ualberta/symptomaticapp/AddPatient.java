@@ -31,28 +31,31 @@ public class AddPatient extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_patient);
+        //setup our custom toolbar
         Toolbar toolbar = findViewById(R.id.addPatient_toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("Add Patient");
+        //end of toolbar setup.
 
 
-        final Caregiver caregiver = Login.thisCaregiver;
+        final Caregiver caregiver = Login.thisCaregiver; //get caregiver from login page.
+        //get buttons from UI
         Button cancel = (Button) findViewById(R.id.btn_Cancel);
         Button addpatient = (Button) findViewById(R.id.btn_addpatient);
         cancel.setOnClickListener(new View.OnClickListener() { // on cancel click
             @Override
-            public void onClick(View v) {
+            public void onClick(View v) { //cancel button listener
                 finish(); //finish this activity and go back, dont want to do intents, because couldve come from several places
             }
         });
 
         addpatient.setOnClickListener(new View.OnClickListener() { //on add patient click
             @Override
-            public void onClick(View v) {
+            public void onClick(View v) { //add patient button listener
                 EditText entry = (EditText) findViewById(R.id.et_username); //find the edittext
                 final String content= entry.getText().toString(); //get their entry
-                FirebaseFirestore db = FirebaseFirestore.getInstance();
-                CollectionReference active_users = db.collection("users");
+                FirebaseFirestore db = FirebaseFirestore.getInstance(); //get our db
+                CollectionReference active_users = db.collection("users"); //looking at collection patients
 
                 //Build the query
                 Query query = active_users
@@ -67,11 +70,11 @@ public class AddPatient extends AppCompatActivity {
                             if (task.getResult().size() == 1){
                                 //A user with that username exists
                                 for(QueryDocumentSnapshot document: task.getResult()){
-                                    addedpatient = document.toObject(User.class);
-                                    caregiver.addPatient(addedpatient.returnUsername());
-                                    Toast.makeText(AddPatient.this, "Patient added!", Toast.LENGTH_SHORT).show();
+                                    addedpatient = document.toObject(User.class); //get patient object from db
+                                    caregiver.addPatient(addedpatient.returnUsername()); //add the patient
+                                    Toast.makeText(AddPatient.this, "Patient added!", Toast.LENGTH_SHORT).show(); //display message.
                                     Intent intent = new Intent(AddPatient.this, ViewPatients.class);
-                                    startActivity(intent);
+                                    startActivity(intent); //go to the view patients activity.
                                 }
                             } else if (content.isEmpty()) {
                                 //No users with that username exists
@@ -91,23 +94,23 @@ public class AddPatient extends AppCompatActivity {
             }
         });
     }
-
+    //toolbar methods
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.add_patient_menu, menu);
         return true;
     }
-    public void viewHome(MenuItem menu) {
+    public void viewHome(MenuItem menu) { //opens home page for caregiver
         Intent intent = new Intent(AddPatient.this, CaregiverHome.class);
         startActivity(intent);
     }
 
-    public void viewViewPatients(MenuItem menu) {
+    public void viewViewPatients(MenuItem menu) { //opens view patients for caregiver
         Intent intent = new Intent(AddPatient.this, ViewPatients.class);
         startActivity(intent);
     }
-    public void viewLogout(MenuItem menu){
+    public void viewLogout(MenuItem menu){ //logs user out, and sends them to the login screen
         Login.thisCaregiver = null;
         Login.thisUser = null;
         Intent intent = new Intent(AddPatient.this, MainActivity.class);
