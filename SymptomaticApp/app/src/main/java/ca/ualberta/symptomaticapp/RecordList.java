@@ -3,7 +3,7 @@ package ca.ualberta.symptomaticapp;
 import java.util.ArrayList;
 import java.util.Collection;
 
-public class RecordList {
+public class RecordList  {
 
     protected ArrayList<Record> recordList;
 
