@@ -1,10 +1,4 @@
-
-package ca.ualberta.symptomaticapp;
-
-import java.util.ArrayList;
-import java.util.Collection;
-
-/**
+/*
  * PhotoList.java
  *
  * Version 1
@@ -14,10 +8,18 @@ import java.util.Collection;
  * This file is subject to the terms and conditions defined in
  * file 'LICENSE', which is part of this source code package.
  *
- * A list of photo that gets created when adding records.
  *
  * Issues:
  *
+ */
+package ca.ualberta.symptomaticapp;
+
+import java.util.ArrayList;
+import java.util.Collection;
+
+
+/**
+ *  A list of photo that gets created when adding records.
  */
 
 public class PhotoList {

@@ -1,9 +1,4 @@
-package ca.ualberta.symptomaticapp;
-
-
-import java.util.Date;
-
-/**
+/*
  * Comment.java
  *
  * Version 1
@@ -13,11 +8,19 @@ import java.util.Date;
  * This file is subject to the terms and conditions defined in
  * file 'LICENSE', which is part of this source code package.
  *
- * Represents a caregiver comment on a patients record.
- * Each comment is composed of a user, a date, and a comment string.
  *
  * Issues: Not currently utilized.
  *
+ */
+
+package ca.ualberta.symptomaticapp;
+
+
+import java.util.Date;
+
+/**
+ * Represents a caregiver comment on a patients record.
+ * Each comment is composed of a user, a date, and a comment string.
  */
 
 public class Comment {
