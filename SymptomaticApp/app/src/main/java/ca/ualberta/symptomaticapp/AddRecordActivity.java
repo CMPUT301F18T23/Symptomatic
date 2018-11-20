@@ -105,11 +105,12 @@ public class AddRecordActivity extends AppCompatActivity{
                 day = chosenDay;
             }
         };
+    }
 
 
 
 
-        // ------------------------------ WORKING ON SAVING PHOTOS -------------------------------
+      /*  // ------------------------------ WORKING ON SAVING PHOTOS -------------------------------
         // CURRENT STATUS: Not working!
         // Set the file path
         File path = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES);
@@ -127,7 +128,7 @@ public class AddRecordActivity extends AppCompatActivity{
         //takePhoto.setOnClickListener(this);
 
 
-    }
+    } */
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -150,6 +151,14 @@ public class AddRecordActivity extends AppCompatActivity{
         Intent intent = new Intent(AddRecordActivity.this, AddProblemActivity.class);
         startActivity(intent);
     }
+
+    public void viewLogout(MenuItem menu){
+        Login.thisCaregiver = null;
+        Login.thisUser = null;
+        Intent intent = new Intent(AddRecordActivity.this, MainActivity.class);
+        startActivity(intent);
+    }
+
 
     // ---------------------------------- PHOTO FUNCTIONALITY ----------------------------------
     /*public void onClick(View v) {
