@@ -26,6 +26,7 @@ import java.util.List;
 public class ViewPatients extends AppCompatActivity {
     public Caregiver caregiver;
     ArrayList<String> patients;
+    private PatientViewAdapter patientsAdapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,8 +55,8 @@ public class ViewPatients extends AppCompatActivity {
             for(String patient : patients){
                 usernames.add(patient);
             }
-            ArrayAdapter<String> patientsadapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, usernames);
-            patientsview.setAdapter(patientsadapter);
+            patientsAdapter = new PatientViewAdapter(usernames, this);
+            patientsview.setAdapter(patientsAdapter);
 
             addpatient.setOnClickListener(new View.OnClickListener() {
                 @Override

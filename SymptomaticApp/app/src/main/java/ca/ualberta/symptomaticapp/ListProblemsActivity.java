@@ -103,7 +103,7 @@ public class ListProblemsActivity extends AppCompatActivity {
                     }
                     listAdapter.notifyDataSetChanged();
                     if (displayList != null) {
-                        active_problem_count = "Number of active problems:"+" " + displayList.size();;
+                        active_problem_count = "Number of active problems:"+" " + displayList.size();
                         textView.setText(active_problem_count);
                     } else {
                         active_problem_count = "Number of active problems: 0";

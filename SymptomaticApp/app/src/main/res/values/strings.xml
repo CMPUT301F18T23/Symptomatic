@@ -66,6 +66,8 @@
     <string name="enter_username2">Enter Username:</string>
     <string name="edit_record">Edit Record</string>
     <string name="view_full_record">View Full Record</string>
+    <string name="problems">Problems</string>
+    <string name="contactinfo">Contact Info</string>
 
 
 </resources>
