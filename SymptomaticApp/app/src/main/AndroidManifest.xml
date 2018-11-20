@@ -36,13 +36,15 @@
             android:name=".createAccount"
             android:label="@string/title_activity_create_account"
             android:parentActivityName=".Login" />
-        <activity android:name=".ViewFullProblemActivity"
-            android:parentActivityName=".ListProblemsActivity"/>
+        <activity
+            android:name=".ViewFullProblemActivity"
+            android:parentActivityName=".ListProblemsActivity" />
         <activity android:name=".EditProblemActivity" />
         <activity android:name=".ViewPatients" />
         <activity android:name=".AddPatient" />
         <activity android:name=".ViewContactInfo" />
-        <activity android:name=".CaregiverHome"></activity>
+        <activity android:name=".CaregiverHome" />
+        <activity android:name=".ListRecordsActivity"></activity>
     </application>
 
 </manifest>
