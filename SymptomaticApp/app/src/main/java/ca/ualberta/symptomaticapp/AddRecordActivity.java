@@ -105,30 +105,45 @@ public class AddRecordActivity extends AppCompatActivity{
                 day = chosenDay;
             }
         };
-    }
-
-
-
-
-      /*  // ------------------------------ WORKING ON SAVING PHOTOS -------------------------------
-        // CURRENT STATUS: Not working!
-        // Set the file path
-        File path = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES);
-        File outputFile = new File(path, "Symptomatic");
-        // If the directory doesn't exist, create it
-        if (!outputFile.exists()) {
-            outputFile.mkdir();
-        }
 
         final Button savedPhoto = findViewById(R.id.savedPhoto);
         final Button takePhoto = findViewById(R.id.takePhoto);
         iv = (ImageView) findViewById(R.id.iv);
 
-       // savedPhoto.setOnClickListener(this);
-        //takePhoto.setOnClickListener(this);
+        savedPhoto.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
+                intent.setType("image/*");
+                startActivityForResult(intent, PICK_IMAGE_REQUEST);
+
+            }
+
+        });
+
+        takePhoto.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Start the intent to take the photo
+                Intent takePictureintent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
+
+                // Create the name of the file for the photo
+                try {
+                    File photoDir = createImageFile();
+                    // for testing: Print the photo's path
+                    Log.d("Photo Directory:", mCurrentPhotoPath);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
+                // Start the camera for the photo to be taken
+                startActivityForResult(takePictureintent, REQUEST_IMAGE_CAPTURE);
+
+            }
+        });
+    }
 
 
-    } */
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -160,39 +175,97 @@ public class AddRecordActivity extends AppCompatActivity{
     }
 
 
-    // ---------------------------------- PHOTO FUNCTIONALITY ----------------------------------
-    /*public void onClick(View v) {
-        int viewId = v.getId();
-        // Gets images from gallery - Reference: https://en.proft.me/2017/07/1/how-get-image-gallery-or-camera-android/
-        if (viewId == R.id.savedPhoto) {
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        switch(requestCode){
+            case PICK_IMAGE_REQUEST:
 
-            Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
-            intent.setType("image/*");
-            startActivityForResult(intent, PICK_IMAGE_REQUEST);
+                if(resultCode == RESULT_OK) {
+                    Uri selectedImage = data.getData();
+                    try {
+                        Bitmap bmp = MediaStore.Images.Media.getBitmap(getContentResolver(), selectedImage);
+
+                        ByteArrayOutputStream stream = new ByteArrayOutputStream();
+                        bmp.compress(Bitmap.CompressFormat.PNG, 100, stream);
+                        byteArray = stream.toByteArray();
+
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+
+
+                    String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
+                    Photo photo = new Photo(byteArray, timeStamp);
+
+                    photolist = new PhotoList();
+
+                    photolist.addPhoto(photo);
+
+
+
+                    Bitmap image = BitmapFactory.decodeByteArray(photo.getPhotoByteArray(), 0, photo.getPhotoByteArray().length);
+                    iv.setImageBitmap(image);
+
+
+
+                }
+
+            case REQUEST_IMAGE_CAPTURE:
+                if (resultCode == RESULT_OK) {
+
+                }
+
         }
+    }
 
-        // If the user wants to take a photo using their camera
-        // Reference: https://developer.android.com/training/camera/photobasics#java
-        if (viewId == R.id.takePhoto) {
-            // Start the intent to take the photo
-            Intent takePictureintent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
+    // Reference: https://developer.android.com/training/camera/photobasics#java
+    private File createImageFile() throws IOException {
+        // Create the image file name with its timestamp
+        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
+        String photoFileName = "JPEG_" + timeStamp + "_";
 
-            // Create the name of the file for the photo
+        // Get the app's directory for photos
+        File picturesDir = getExternalFilesDir(Environment.DIRECTORY_PICTURES);
+
+        // Create the file
+        File photo = File.createTempFile(
+                photoFileName,  /* prefix */
+                ".jpg",         /* suffix */
+                picturesDir      /* directory */
+        );
+
+        // Store the photo's path name and return the image File
+        mCurrentPhotoPath = photo.getAbsolutePath();
+        return photo;
+    }
+
+    // Reference: https://developer.android.com/training/camera/photobasics#java
+    private void dispatchTakePictureIntent() {
+        Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        // Ensure that there's a camera activity to handle the intent
+        if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
+            // Create the File where the photo should go
+            File photoFile = null;
             try {
-                File photoDir = createImageFile();
-                // for testing: Print the photo's path
-                Log.d("Photo Directory:", mCurrentPhotoPath);
-            } catch (IOException e) {
-                e.printStackTrace();
+                photoFile = createImageFile();
+            } catch (IOException ex) {
+                // Error occurred while creating the File
+                System.out.println("Error in creating the file for the image");
             }
-
-            // Start the camera for the photo to be taken
-            startActivityForResult(takePictureintent, REQUEST_IMAGE_CAPTURE);
+            // Continue only if the File was successfully created
+            if (photoFile != null) {
+                Uri photoURI = FileProvider.getUriForFile(this,
+                        "com.example.android.fileprovider",
+                        photoFile);
+                takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI);
+                startActivityForResult(takePictureIntent, REQUEST_TAKE_PHOTO);
+            }
         }
+    }
 
-
-    } */
 }
+
+
 
 
 
