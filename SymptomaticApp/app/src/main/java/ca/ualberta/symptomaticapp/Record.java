@@ -1,3 +1,19 @@
+/*
+ * Record.java
+ *
+ * Version 1
+ *
+ * November, 20, 2018.
+ *
+ * This file is subject to the terms and conditions defined in
+ * file 'LICENSE', which is part of this source code package.
+ *
+ * Represents a user record object. Each record is referenced by a problem name and a date.
+ *
+ * Issues:
+ *
+ */
+
 package ca.ualberta.symptomaticapp;
 
 

@@ -1,3 +1,18 @@
+/*
+ * AddRecordActivity.java
+ *
+ * Version 1
+ *
+ * November, 20, 2018.
+ *
+ * This file is subject to the terms and conditions defined in
+ * file 'LICENSE', which is part of this source code package.
+ *
+ * Adds a user input record to database.
+ *
+ * Issues: Currently do not have the database linked.
+ *
+ */
 package ca.ualberta.symptomaticapp;
 
 import android.app.AlertDialog;
