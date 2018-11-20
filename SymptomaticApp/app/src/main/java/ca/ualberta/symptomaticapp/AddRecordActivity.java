@@ -129,33 +129,20 @@ public class AddRecordActivity extends AppCompatActivity implements View.OnClick
         // If the user wants to take a photo using their camera
         // Reference: https://developer.android.com/training/camera/photobasics#java
         if (viewId == R.id.takePhoto){
+            // Start the intent to take the photo
             Intent takePictureintent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
+
+            // Create the name of the file for the photo
             try {
                 File photoDir = createImageFile();
+                // for testing: Print the photo's path
+                // Log.d("Photo Directory:", mCurrentPhotoPath);
             } catch (IOException e) {
                 e.printStackTrace();
             }
-            Log.d("Photo Directory:", mCurrentPhotoPath);
-//
-//            File file = new File(Environment.getExternalStorageDirectory(), String.valueOf(System.currentTimeMillis()) + ".jpg");
-//            Uri uri = FileProvider.getUriForFile(this, getApplicationContext().getPackageName() + ".provider", file);
-//            Log.wtf("URI:", uri.toString());
-            //            takePictureintent.putExtra(android.provider.MediaStore.EXTRA_OUTPUT, uri);
 
+            // Start the camera for the photo to be taken
             startActivityForResult(takePictureintent, REQUEST_IMAGE_CAPTURE);
-
-
-//            Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-//            if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
-//                startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
-//            }
-//            File newPhotoFile = null;
-//            try {
-//                newPhotoFile = createImageFile();
-//            } catch (IOException ex) {
-//                // Error occurred while creating the File
-//                System.out.println("Error in creating the file for the image");
-//            }
         }
 
 
@@ -190,17 +177,21 @@ public class AddRecordActivity extends AppCompatActivity implements View.OnClick
     // TODO: Edit
     // Reference: https://developer.android.com/training/camera/photobasics#java
     private File createImageFile() throws IOException {
-        // Create an image file name
+        // Create the image file name with its timestamp
         String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
         String imageFileName = "JPEG_" + timeStamp + "_";
+
+        // Get the app's directory for photos
         File storageDir = getExternalFilesDir(Environment.DIRECTORY_PICTURES);
+
+        // Create the file
         File image = File.createTempFile(
                 imageFileName,  /* prefix */
                 ".jpg",         /* suffix */
                 storageDir      /* directory */
         );
 
-        // Save a file: path for use with ACTION_VIEW intents
+        // Store the photo's path name and return the image File
         mCurrentPhotoPath = image.getAbsolutePath();
         return image;
     }
