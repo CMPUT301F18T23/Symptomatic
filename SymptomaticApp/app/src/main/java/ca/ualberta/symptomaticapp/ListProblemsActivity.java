@@ -99,7 +99,8 @@ public class ListProblemsActivity extends AppCompatActivity {
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
                 if(task.isSuccessful()){
                     for(QueryDocumentSnapshot document: task.getResult()){
-                        Problem problem = document.toObject(Problem.class);
+                        Problem problem = null;
+                        problem = document.toObject(Problem.class);
                         displayList.add(problem);
                     }
                     listAdapter.notifyDataSetChanged();
