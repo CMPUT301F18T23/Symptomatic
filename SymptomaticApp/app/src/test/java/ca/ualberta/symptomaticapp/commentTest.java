@@ -6,6 +6,17 @@ import java.util.Date;
 
 public class commentTest extends TestCase {
 
+    public void testConstructor() {
+        Date date = new Date();
+        User user = new User("Name", "phone", "email");
+        String aComment = "A comment";
+        Comment comment = new Comment(user, date, aComment);
+        assertTrue("Author is not equal", user.equals(comment.getAuthor()));
+        assertTrue("Date is not equal", date.equals(comment.getDate()));
+        assertTrue("Comment is not equal", aComment.equals(comment.getComment()));
+
+    }
+
     public void testTimeStamp() {
         User user = new User("Name", "phone", "email");
         Date date = new Date();
