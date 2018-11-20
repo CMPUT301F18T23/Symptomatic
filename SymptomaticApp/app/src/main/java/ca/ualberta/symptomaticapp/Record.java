@@ -124,7 +124,7 @@ public class Record {
     public String getProblem() {
         return this.problem;
     }
-    public static void addProbToDb(Record record){
+    public static void addRecToDb(Record record){
         db = FirebaseFirestore.getInstance();
 
         DocumentReference newUser = db.collection("records")
