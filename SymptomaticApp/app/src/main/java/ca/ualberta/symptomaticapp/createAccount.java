@@ -126,10 +126,10 @@ public class createAccount extends AppCompatActivity implements View.OnClickList
         } else if (username.getText().toString().length() < 8){
             usernameError = "Username size must be a minimum of 8 characters.";
             usernameOk = false;
-        } else if (!isUserUnique) {
+        }/* else if (!isUserUnique) {
             usernameError = "Username Already in Use, Please Choose Another.";
             usernameOk = false;
-        } else {
+        } */else {
             usernameOk = true;
         }
     }
