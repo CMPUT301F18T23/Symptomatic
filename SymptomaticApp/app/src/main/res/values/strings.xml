@@ -68,6 +68,9 @@
     <string name="view_full_record">View Full Record</string>
     <string name="problems">Problems</string>
     <string name="contactinfo">Contact Info</string>
+    <string name="slideshowprev">Previous</string>
+    <string name = "slideshownext">Next</string>
+    <string name = "slideshownull"> No Images in this Record. </string>
 
 
 </resources>

@@ -45,15 +45,20 @@ import java.util.Calendar;
 import java.util.Collection;
 import java.util.Date;
 
-public class AddRecordActivity extends AppCompatActivity{
+public class AddRecordActivity extends AppCompatActivity {
     private static final int PICK_IMAGE_REQUEST = 100; // to access the gallery to choose an image
     static final int REQUEST_IMAGE_CAPTURE = 1; // to access the camera to take an image
     static final int REQUEST_TAKE_PHOTO = 1;
     private ImageView iv;
+    private String ivId;
+    private int photoCounter;
+
+
+    Bitmap bmp;
 
     byte[] byteArray;
 
-    PhotoList photolist;
+    PhotoList photoList = new PhotoList();
 
     String mCurrentPhotoPath; // the photo's file path
 
@@ -62,6 +67,7 @@ public class AddRecordActivity extends AppCompatActivity{
     int month;
     int day;
     private DatePickerDialog.OnDateSetListener DateSetListener;
+    boolean selectedDateDone = false;
 
 
     @Override
@@ -72,6 +78,8 @@ public class AddRecordActivity extends AppCompatActivity{
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("Add Record");
         final Calendar cal = Calendar.getInstance();
+//        ListView photoListView = findViewById(R.id.photoListView);
+
 
         problem = (Problem) getIntent().getSerializableExtra("problem");
 
@@ -141,8 +149,45 @@ public class AddRecordActivity extends AppCompatActivity{
 
             }
         });
-    }
 
+
+        Button saveRecordBttn = findViewById(R.id.saveRecordBttn);
+
+        saveRecordBttn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                boolean goodRecord = true;
+                // If the record's date is not given
+                // TODO: selectedDateDone is always true for some reason...
+                if (selectedDateDone) {
+                    AlertDialog.Builder noDescriptionDialog = new AlertDialog.Builder(AddRecordActivity.this);
+                    noDescriptionDialog.setMessage("A date must be inputted");
+                    noDescriptionDialog.show();
+                    goodRecord = false;
+                }
+                // When the required information to create a record is filled out
+                if (goodRecord) {
+                    // Prepare the attributes required to instantiate the Record class
+                    RecordList currProblemRecordList = problem.getRecordList();
+                    String currProbName = problem.getTitle();
+                    Date currDate = Calendar.getInstance().getTime();
+
+                    // Create the new record
+                    Record currRecord = new Record(currProbName, currDate);
+
+                    // Add it to the problem's recordList
+                    // currProblemRecordList.addRecord(currRecord);
+                    //Log.d("Problem's Record List", problem.getRecordList().toString());
+
+                    // Switch back to the previous activity
+                    Intent intent = new Intent(AddRecordActivity.this, ListProblemsActivity.class);
+                    startActivity(intent);
+                }
+
+            }
+        });
+
+    }
 
 
     @Override
@@ -167,7 +212,7 @@ public class AddRecordActivity extends AppCompatActivity{
         startActivity(intent);
     }
 
-    public void viewLogout(MenuItem menu){
+    public void viewLogout(MenuItem menu) {
         Login.thisCaregiver = null;
         Login.thisUser = null;
         Intent intent = new Intent(AddRecordActivity.this, MainActivity.class);
@@ -177,44 +222,58 @@ public class AddRecordActivity extends AppCompatActivity{
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        switch(requestCode){
-            case PICK_IMAGE_REQUEST:
+        switch (requestCode) {
 
-                if(resultCode == RESULT_OK) {
+            // If selecting a photo from gallery
+            case PICK_IMAGE_REQUEST:
+                if (resultCode == RESULT_OK) {
                     Uri selectedImage = data.getData();
                     try {
-                        Bitmap bmp = MediaStore.Images.Media.getBitmap(getContentResolver(), selectedImage);
-
-                        ByteArrayOutputStream stream = new ByteArrayOutputStream();
-                        bmp.compress(Bitmap.CompressFormat.PNG, 100, stream);
-                        byteArray = stream.toByteArray();
+                        // Convert the photo selected from gallery into a bitmap and display it
+                        bmp = MediaStore.Images.Media.getBitmap(getContentResolver(), selectedImage);
+//                        iv.setImageBitmap(bmp);
 
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
 
+                    // Create an instance of the Photo class
+                    Photo photo = new Photo(bmp);
 
-                    String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
-                    Photo photo = new Photo(byteArray, timeStamp);
+                    // Add the photo selected from gallery onto the photoList
+                    photoList.addPhoto(photo);
 
-                    photolist = new PhotoList();
-
-                    photolist.addPhoto(photo);
-
-
-
-                    Bitmap image = BitmapFactory.decodeByteArray(photo.getPhotoByteArray(), 0, photo.getPhotoByteArray().length);
+//                    If we want to use the bitmap from the Photo class
+                    Bitmap image = photo.getPhotoBitmap();
                     iv.setImageBitmap(image);
-
-
-
+                    incrementPhotoCounter();
                 }
+                break;
 
             case REQUEST_IMAGE_CAPTURE:
+                // If capturing a photo using the camera
                 if (resultCode == RESULT_OK) {
+                    // Do try and catch
+                    try {
+                        // Convert the photo captured into a bitmap
+                        Bitmap bitmap = (Bitmap) data.getExtras().get("data");
+
+                        // Display the bitmap in the ImageView
+                        iv.setImageBitmap(bitmap);
+
+                        // Store the image as a Photo object
+                        Photo photo = new Photo(bitmap);
+
+                        // Add the new Photo object into the photoList
+                        photoList.addPhoto(photo);
+                        incrementPhotoCounter();
+                    } catch (Exception e) {
+                        Log.d("ERROR", "Captured photo could not be created.");
+                    }
+
 
                 }
-
+                break;
         }
     }
 
@@ -239,32 +298,22 @@ public class AddRecordActivity extends AppCompatActivity{
         return photo;
     }
 
-    // Reference: https://developer.android.com/training/camera/photobasics#java
-    private void dispatchTakePictureIntent() {
-        Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-        // Ensure that there's a camera activity to handle the intent
-        if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
-            // Create the File where the photo should go
-            File photoFile = null;
-            try {
-                photoFile = createImageFile();
-            } catch (IOException ex) {
-                // Error occurred while creating the File
-                System.out.println("Error in creating the file for the image");
-            }
-            // Continue only if the File was successfully created
-            if (photoFile != null) {
-                Uri photoURI = FileProvider.getUriForFile(this,
-                        "com.example.android.fileprovider",
-                        photoFile);
-                takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI);
-                startActivityForResult(takePictureIntent, REQUEST_TAKE_PHOTO);
-            }
-        }
+    private void incrementPhotoCounter() {
+        photoCounter += 1;
+//        ivId = "photo" + photoCounter;
+//        iv = (ImageView) findViewById(R.id.ivId);
+//        Collection<Photo> photos = photoList.getPhotos();
+//        for (Photo currPhoto : photos) {
+//            photoListView.
+//            //Use variable
+////            Log.d("Added another photo!", "lol");
+//            Log.d("Timestamp for Photo", currPhoto.getTimestamp());
+//
+//        }
+
+
     }
-
 }
-
 
 
 
