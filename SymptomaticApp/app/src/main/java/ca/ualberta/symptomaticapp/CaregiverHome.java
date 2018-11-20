@@ -1,8 +1,9 @@
-package ca.ualberta.symptomaticapp;
 /*
 Activity used for providing the caregiver type of users a homepage with two buttons present for them
 to choose from. Add patient and View Patient opens their respective activities.
  */
+package ca.ualberta.symptomaticapp;
+
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;

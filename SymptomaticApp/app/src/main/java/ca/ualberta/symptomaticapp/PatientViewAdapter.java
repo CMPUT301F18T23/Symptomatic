@@ -1,3 +1,18 @@
+/*
+ * PatientViewAdapter.java
+ *
+ * Version 1
+ *
+ * November, 20, 2018.
+ *
+ * This file is subject to the terms and conditions defined in
+ * file 'LICENSE', which is part of this source code package.
+ *
+ * Adapter to add buttons to a list of patients.
+ *
+ * Issues: No current issues.
+ *
+ */
 
 package ca.ualberta.symptomaticapp;
 

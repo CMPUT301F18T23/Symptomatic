@@ -1,3 +1,19 @@
+/*
+ * EditProblemActivity.java
+ *
+ * Version 1
+ *
+ * November, 20, 2018.
+ *
+ * This file is subject to the terms and conditions defined in
+ * file 'LICENSE', which is part of this source code package.
+ *
+ * Activity for a user to edit their problems. The can change the title, date, and description.
+ *
+ * Issues: Currently unable to edit problems in the database, thus code is commented out.
+ *
+ */
+
 package ca.ualberta.symptomaticapp;
 
 import android.app.AlertDialog;
