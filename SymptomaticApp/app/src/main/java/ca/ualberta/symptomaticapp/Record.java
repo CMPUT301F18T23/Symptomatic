@@ -124,4 +124,16 @@ public class Record {
     public String getProblem() {
         return this.problem;
     }
+    public static void addProbToDb(Record record){
+        db = FirebaseFirestore.getInstance();
+
+        DocumentReference newUser = db.collection("records")
+                .document();
+
+        newUser.set(record).addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+            }
+        });
+}
 }
