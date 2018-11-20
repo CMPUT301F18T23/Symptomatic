@@ -159,7 +159,6 @@ public class AddRecordActivity extends AppCompatActivity implements View.OnClick
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        convertBitmapToByteArray(data);
         switch(requestCode){
             case PICK_IMAGE_REQUEST:
 
