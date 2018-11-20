@@ -28,6 +28,10 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import java.util.ArrayList;
 import java.util.Date;
 
+
+/**
+ * Represents a user record object. Each record is referenced by a problem name and a date.
+ */
 public class Record {
     protected String recordTitle;
     protected String recordComment;

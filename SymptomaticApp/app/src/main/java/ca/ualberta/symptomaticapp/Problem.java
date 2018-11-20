@@ -8,10 +8,6 @@
  * This file is subject to the terms and conditions defined in
  * file 'LICENSE', which is part of this source code package.
  *
- * Represents a patient problem. Each problem is composed of a title, date, and comment.
- *
- * Issues: Currently unable to edit problems in the database.
- *
  */
 
 package ca.ualberta.symptomaticapp;
@@ -32,6 +28,13 @@ import java.time.LocalDate;
 import java.util.Date;
 import ca.ualberta.symptomaticapp.Login;
 import ca.ualberta.symptomaticapp.RecordList;
+
+/**
+ * Represents a patient problem. Each problem is composed of a title, date, and comment.
+ *
+ * Issues: Currently unable to edit problems in the database.
+ *
+ */
 
 public class Problem implements Serializable {
     private static String title;
@@ -179,7 +182,7 @@ public class Problem implements Serializable {
     /**
      * Deletes problem from database
      * @param username
-     * @param inputContext 
+     * @param inputContext
      */
     private void deleteProblem(String username, Context inputContext){
         thisContext = inputContext;

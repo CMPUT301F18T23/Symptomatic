@@ -21,6 +21,9 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 
+/**
+ * A list of records that gets created from the database.
+ */
 public class RecordList implements Serializable {
 
     protected ArrayList<Record> recordList;

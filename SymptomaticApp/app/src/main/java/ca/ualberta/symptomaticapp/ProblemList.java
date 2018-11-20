@@ -8,10 +8,6 @@
  * This file is subject to the terms and conditions defined in
  * file 'LICENSE', which is part of this source code package.
  *
- * Represents a list of user problems.
- *
- * Issues: No current issues.
- *
  */
 
 package ca.ualberta.symptomaticapp;
@@ -28,6 +24,13 @@ import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 import java.util.Collection;
+
+/** Represents a list of user problems.
+ *
+ *
+ * Issues: No current issues.
+ *
+ */
 
 public class ProblemList {
     private ArrayList<Problem> thisProblemList;
