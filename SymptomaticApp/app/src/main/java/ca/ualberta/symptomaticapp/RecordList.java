@@ -20,7 +20,9 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
 
+
 public class RecordList implements Serializable {
+
 
     protected ArrayList<Record> recordList;
 

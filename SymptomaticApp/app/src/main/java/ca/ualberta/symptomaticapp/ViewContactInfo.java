@@ -36,13 +36,15 @@ public class ViewContactInfo extends AppCompatActivity {
         Intent intent = getIntent();
         user = intent.getExtras().getString("username");
         type = intent.getExtras().getString("usertype");
-        // get all text views and buttons
 
+
+        // get all text views and buttons
         username = (TextView) findViewById(R.id.tv_User);
         email = (TextView) findViewById(R.id.tv_Email);
         phone = (TextView) findViewById(R.id.tv_Phone);
         Button goback = (Button) findViewById(R.id.btn_return);
-        getuserinfo();
+        //
+        getuserinfo(); //updates textviews by fetching user information
 
 
         goback.setOnClickListener(new View.OnClickListener() {
@@ -54,16 +56,16 @@ public class ViewContactInfo extends AppCompatActivity {
 
     }
     protected void getuserinfo(){
-        FirebaseFirestore db = FirebaseFirestore.getInstance();
-        CollectionReference active_users;
-
-        if(type == "user"){
-            active_users = db.collection("users");
-        }else{
-            active_users = db.collection("caregivers");
-        }
-        Query query = active_users.whereEqualTo("username",user);
-
+//        FirebaseFirestore db = FirebaseFirestore.getInstance();
+//        CollectionReference active_users;
+//
+//        if(type == "user"){
+//            active_users = db.collection("users");
+//        }else{
+//            active_users = db.collection("caregivers");
+//        }
+//        Query query = active_users.whereEqualTo("username",user);
+//
 //        query.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
 //            //If Query Worked on not
 //            @Override
@@ -96,9 +98,9 @@ public class ViewContactInfo extends AppCompatActivity {
 //                }
 //            }
 //        });
-
-
-        //set textview values using the retrieved user.
+//
+//
+//        //set textview values using the retrieved user.
 //        if(thisCaregiver == null){ //contact is a patient
 //            username.setText("Username: " + thisUser.returnUsername());
 //            email.setText("E-mail: " + thisUser.returnEmail());

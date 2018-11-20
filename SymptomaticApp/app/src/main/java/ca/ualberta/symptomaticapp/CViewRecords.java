@@ -32,27 +32,30 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CViewRecords extends AppCompatActivity {
-    String passeduser;
-    Integer passedprob;
-    TextView numrecords;
-    private ArrayList<Problem> problemlist;
-    private ArrayList<Record> recordList;
+    private String passeduser; //for holding the passed data
+    private Integer passedprob;
+    private TextView numrecords; //textview for displaying the number of records
+    private ArrayList<Problem> problemlist; //list for holding the problems of current patient
+    private ArrayList<Record> recordList; //list for holding records of current problem
     private ArrayList<String> problemtitles;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cview_records);
+        //get data given to us through intent
         Intent intent = getIntent();
         passeduser = intent.getExtras().getString("username");
         passedprob = intent.getExtras().getInt("problem");
 
+        //declare empty lists
         problemtitles = new ArrayList<String>();
         problemlist = new ArrayList<Problem>();
         recordList = new ArrayList<Record>();
-
+        //fill problem list with the passeduser's problems
         getProblems(passeduser);
+
         for(Problem problem: problemlist){
-            problemtitles.add(problem.getTitle());
+            problemtitles.add(problem.getTitle()); //get the problems titles into a separate list for the spinner
         }
 
         // get all ui elements
@@ -60,21 +63,18 @@ public class CViewRecords extends AppCompatActivity {
         final Spinner selectpatient = (Spinner) findViewById(R.id.sp_Patient);
         final Spinner selectproblem = (Spinner) findViewById(R.id.sp_Problems);
         final Button viewproblem = (Button) findViewById(R.id.btn_ViewProblems);
-
         Button viewpatient = (Button) findViewById(R.id.btn_ViewPatient);
         Button viewphotoalbum = (Button) findViewById(R.id.btn_ViewPhotos);
         Button viewcontactinfo = (Button) findViewById(R.id.btn_ViewContactInfo);
         ListView recordview = (ListView) findViewById(R.id.lv_records);
         //
 
-        Caregiver caregiver = Login.thisCaregiver;
-        final ArrayList<String> patients = caregiver.getPatients();
+        Caregiver caregiver = Login.thisCaregiver; //get current logged in caregiver
+        final ArrayList<String> patients = caregiver.getPatients(); //get their patients.
 
-
+        //setup adapters and assign them
         ArrayAdapter<String> patientadapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, patients);
-
         final ArrayAdapter<String> problemadapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, problemtitles);
-
         patientadapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         selectpatient.setAdapter(patientadapter);
         problemadapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -111,7 +111,6 @@ public class CViewRecords extends AppCompatActivity {
             public void onClick(View v) {
                 // take current selected problem and show records related to it
                 String selection = selectproblem.getSelectedItem().toString(); //get current selection
-
             }
         });
 
@@ -120,32 +119,26 @@ public class CViewRecords extends AppCompatActivity {
                 Intent intent = new Intent(CViewRecords.this, ViewContactInfo.class);
                 intent.putExtra("username", passeduser);
                 intent.putExtra("usertype", "user");
-                startActivity(intent);
-
+                startActivity(intent); //open view contact info using the correct information
             }
         });
-
-
-
     }
 
     private void getProblems(String username){
-        FirebaseFirestore db = FirebaseFirestore.getInstance();
-
+        FirebaseFirestore db = FirebaseFirestore.getInstance(); //get db instance
+        //looking at problems
         CollectionReference problems = db.collection("problems");
-
+        //query for appropriate problems related to username
         Query problemsQuery = problems.whereEqualTo("user",username);
-
         problemsQuery.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                if(task.isSuccessful()){
+                if(task.isSuccessful()){ //query has a result
                     for(QueryDocumentSnapshot document: task.getResult()){
-                        Problem problem = document.toObject(Problem.class);
-                        problemlist.add(problem);
+                        Problem problem = document.toObject(Problem.class); //convert all found problems to problem objects
+                        problemlist.add(problem); //get all problems into our problemList
                     }
-                    if (problemlist != null) {
-                        //FIX LATER//
+                    if (problemlist != null) { //placeholder
                         numrecords.setText("Number of active records: 0");
                     }
                 } else {

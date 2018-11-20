@@ -24,40 +24,40 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ViewPatients extends AppCompatActivity {
-    public Caregiver caregiver;
-    ArrayList<String> patients;
-    private PatientViewAdapter patientsAdapter;
+    public Caregiver caregiver; //current caregiver
+    ArrayList<String> patients; //caregivers patients
+    private PatientViewAdapter patientsAdapter; //custom listtview adapter
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_patients);
-
+        //custom toolbar setup
         Toolbar toolbar = findViewById(R.id.viewPatient_toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("View Patients");
+        //
 
+        //check if anyone is currently logged in and if not, redirect to login page.
         if (Login.thisUser == null && Login.thisCaregiver == null) {
             Intent login = new Intent(this, Login.class);
             startActivity(login);
         }
 
         caregiver= Login.thisCaregiver; //fetch current caregiver.
+
+        // fetch ui elements
         ListView patientsview = (ListView) findViewById(R.id.lv_Patients);
         Button addpatient = (Button) findViewById(R.id.btn_AddPatient);
         TextView numpat = (TextView) findViewById(R.id.tv_NumPatients);
 
         if (caregiver != null) {
+            //get the associated patients
             patients = caregiver.getPatients();
-
+            //set textview value
             numpat.setText("Number of patients: " + patients.size());
 
-            List<String> usernames = new ArrayList<String>();
-            for(String patient : patients){
-                usernames.add(patient);
-            }
-            patientsAdapter = new PatientViewAdapter(usernames, this);
+            patientsAdapter = new PatientViewAdapter(patients, this);
             patientsview.setAdapter(patientsAdapter);
-
             addpatient.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -72,7 +72,7 @@ public class ViewPatients extends AppCompatActivity {
     @Override
     public void onResume(){
         super.onResume();
-        patientsAdapter.notifyDataSetChanged();
+        patientsAdapter.notifyDataSetChanged(); //when coming back from add patient, update incase a patient was added
     }
 
 
@@ -92,7 +92,7 @@ public class ViewPatients extends AppCompatActivity {
         Intent intent = new Intent(ViewPatients.this, AddPatient.class);
         startActivity(intent);
     }
-    public void viewLogout(MenuItem menu){
+    public void viewLogout(MenuItem menu){ //logs user out
         Login.thisCaregiver = null;
         Login.thisUser = null;
         Intent intent = new Intent(ViewPatients.this, Login.class);
