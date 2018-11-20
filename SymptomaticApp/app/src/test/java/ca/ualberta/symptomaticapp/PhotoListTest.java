@@ -27,25 +27,32 @@ public class PhotoListTest extends TestCase {
         Bitmap testBitmap = BitmapFactory.decodeResource(context.getResources(), R.mipmap.app_icon);
         Photo testPhoto = new Photo(testBitmap);
         PhotoList photoList = new PhotoList();
+
+        // Add the dummy Photo object the photoList
         photoList.addPhoto(testPhoto);
         Collection<Photo> photos = photoList.getPhotos();
+
+        // Test if the dummy Photo object has been added and is within the photoList
         assertTrue("Photo List Size", photos.size() == 1);
         assertTrue("Photo Not Contained", photos.contains(testPhoto));
     }
 
     public void testDeletePhoto(){
-        // Use a dummy image to delete from photoList
+        // Use a dummy photo to delete from photoList
         Bitmap testBitmap = BitmapFactory.decodeResource(context.getResources(), R.mipmap.app_icon);
         Photo testPhoto = new Photo(testBitmap);
         PhotoList photoList = new PhotoList();
-        photoList.addPhoto(testPhoto); // Add the photo
+
+        // Add the photo
+        photoList.addPhoto(testPhoto);
         Collection<Photo> photos = photoList.getPhotos();
         assertTrue("Photo List Size", photos.size() == 1);
         assertTrue("Photo Not Contained", photos.contains(testPhoto));
 
-        photoList.deletePhoto(testPhoto); // Then delete it
+        // Then delete it
+        photoList.deletePhoto(testPhoto);
         Collection<Photo> photos2 = photoList.getPhotos();
-        assertTrue("Photo List Size", photos.size() == 1);
+        assertTrue("Photo List Size", photos.size() == 0;
         assertTrue("Photo Not Contained", photos.contains(testPhoto));
     }
 
@@ -54,33 +61,32 @@ public class PhotoListTest extends TestCase {
         Bitmap testBitmap1 = BitmapFactory.decodeResource(context.getResources(), R.mipmap.app_icon);
         Photo testPhoto1 = new Photo(testBitmap1);
         PhotoList photoList = new PhotoList();
-        photoList.addPhoto(testPhoto1);
+        photoList.addPhoto(testPhoto1); // Add the photo
 
 
         Bitmap testBitmap2 = BitmapFactory.decodeResource(context.getResources(), R.mipmap.app_icon);
         Photo testPhoto2 = new Photo(testBitmap2);
-        photoList.addPhoto(testPhoto2);
+        photoList.addPhoto(testPhoto2); // Add another photo
         Collection<Photo> photos = photoList.getPhotos();
-
-        assertTrue("Problem1 does not match", photos.iterator().next() == testPhoto1);
+        assertTrue("Photo does not match", photos.iterator().next() == testPhoto1);
 
     }
 
     public void testHasPhoto(){
+        // Use 2 dummy photo to test whether it can be detected in the photoList
         Bitmap testBitmap = BitmapFactory.decodeResource(context.getResources(), R.mipmap.app_icon);
         Photo testPhoto = new Photo(testBitmap);
         PhotoList photoList = new PhotoList();
-        photoList.addPhoto(testPhoto);
+        photoList.addPhoto(testPhoto); // Add first photo
 
         Bitmap testBitmap2 = BitmapFactory.decodeResource(context.getResources(), R.mipmap.app_icon);
         Photo testPhoto2 = new Photo(testBitmap);
-//        PhotoList photoList2 = new PhotoList();
-        photoList.addPhoto(testPhoto2);
+        photoList.addPhoto(testPhoto2); // Add second photo
 
-        Collection<Photo> photos = photoList.getPhotos();
-        assertTrue("HasProblem List Size not big enough", photos.size() == 2);
-        assertTrue("HasProblem2 Not Contained", photos.contains(testPhoto));
-        assertTrue("HasProblem1 Not Contained", photos.contains(testPhoto2));
+        Collection<Photo> photos = photoList.getPhotos(); // Get the photoList to run the tests/asserts
+        assertTrue("hasPhoto List Size not big enough", photos.size() == 2);
+        assertTrue("hasPhoto Not Contained", photos.contains(testPhoto));
+        assertTrue("hasPhoto Not Contained", photos.contains(testPhoto2));
 
     }
 
