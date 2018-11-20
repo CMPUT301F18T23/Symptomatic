@@ -52,7 +52,7 @@ public class PhotoListTest extends TestCase {
         // Then delete it
         photoList.deletePhoto(testPhoto);
         Collection<Photo> photos2 = photoList.getPhotos();
-        assertTrue("Photo List Size", photos.size() == 0;
+        assertTrue("Photo List Size", photos.size() == 0);
         assertTrue("Photo Not Contained", photos.contains(testPhoto));
     }
 
