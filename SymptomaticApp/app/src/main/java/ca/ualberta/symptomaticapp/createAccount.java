@@ -119,7 +119,7 @@ public class createAccount extends AppCompatActivity implements View.OnClickList
     }
 
     public void validateUser(){
-        check_unique();
+        //check_unique();
         if (username.getText().toString().length() == 0) {
             usernameError = "Username cannot be empty.";
             usernameOk = false;
@@ -160,7 +160,7 @@ public class createAccount extends AppCompatActivity implements View.OnClickList
         }
     }
 
-
+/*
     public void check_unique(){
         //Access Firestore database
         FirebaseFirestore db = FirebaseFirestore.getInstance();
@@ -196,7 +196,7 @@ public class createAccount extends AppCompatActivity implements View.OnClickList
             }
         });
     }
-
+*/
     @Override
     public void onClick(View v){
 
