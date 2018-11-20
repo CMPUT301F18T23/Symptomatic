@@ -22,6 +22,7 @@ public class Record {
     protected Date recordDate;
     protected String user;
     protected String problem;
+    static FirebaseFirestore db;
 
     public Record(String probName,Date date) {
       this.recordDate = date;
