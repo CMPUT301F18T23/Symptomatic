@@ -2,6 +2,8 @@ package ca.ualberta.symptomaticapp;
 
 import android.app.AlertDialog;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Environment;
 import android.provider.MediaStore;
@@ -17,6 +19,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -29,6 +32,7 @@ import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
@@ -40,6 +44,11 @@ public class AddRecordActivity extends AppCompatActivity implements View.OnClick
     private static final int PICK_IMAGE_REQUEST = 100; // to access the gallery to choose an image
     static final int REQUEST_IMAGE_CAPTURE = 1; // to access the camera to take an image
     static final int REQUEST_TAKE_PHOTO = 1;
+    private ImageView iv;
+
+    byte[] byteArray;
+
+    PhotoList photolist;
 
     String mCurrentPhotoPath; // the photo's file path
 
@@ -78,9 +87,11 @@ public class AddRecordActivity extends AppCompatActivity implements View.OnClick
 
         final Button savedPhoto = findViewById(R.id.savedPhoto);
         final Button takePhoto = findViewById(R.id.takePhoto);
+        iv = (ImageView) findViewById(R.id.iv);
 
         savedPhoto.setOnClickListener(this);
         takePhoto.setOnClickListener(this);
+
 
     }
 
@@ -148,14 +159,45 @@ public class AddRecordActivity extends AppCompatActivity implements View.OnClick
         switch(requestCode){
             case PICK_IMAGE_REQUEST:
 
-                if(resultCode == RESULT_OK){
+                if(resultCode == RESULT_OK) {
                     Uri selectedImage = data.getData();
+                    try {
+                        Bitmap bmp = MediaStore.Images.Media.getBitmap(getContentResolver(), selectedImage);
+
+                        ByteArrayOutputStream stream = new ByteArrayOutputStream();
+                        bmp.compress(Bitmap.CompressFormat.PNG, 100, stream);
+                        byteArray = stream.toByteArray();
+
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+
+
+                    String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
+                    Photo photo = new Photo(byteArray, timeStamp);
+
+                    photolist = new PhotoList();
+
+                    photolist.addPhoto(photo);
+
+
+
+                    Bitmap image = BitmapFactory.decodeByteArray(photo.getPhotoByteArray(), 0, photo.getPhotoByteArray().length);
+                    iv.setImageBitmap(image);
+
+
+
+
+
+
+
+
 
                 }
         }
     }
 
-    // TODO: Edit
+
     // Reference: https://developer.android.com/training/camera/photobasics#java
     private File createImageFile() throws IOException {
         // Create an image file name
