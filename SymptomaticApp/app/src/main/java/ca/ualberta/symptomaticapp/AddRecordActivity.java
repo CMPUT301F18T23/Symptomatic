@@ -82,7 +82,7 @@ public class AddRecordActivity extends AppCompatActivity {
     int month;
     int day;
     private DatePickerDialog.OnDateSetListener DateSetListener;
-    boolean selectedDateDone = false;
+    boolean selectedDateDone;
 
 
     @Override
@@ -104,6 +104,8 @@ public class AddRecordActivity extends AppCompatActivity {
         year = cal.get(Calendar.YEAR);
         month = cal.get(Calendar.MONTH);
         day = cal.get(Calendar.DAY_OF_MONTH);
+
+        selectedDateDone = false;
 
 
         Button dateButton = findViewById(R.id.changeDateButton);
@@ -128,7 +130,7 @@ public class AddRecordActivity extends AppCompatActivity {
                 day = chosenDay;
             }
         };
-
+        //todo: show the chosen date
         final Button savedPhoto = findViewById(R.id.savedPhoto);
         final Button takePhoto = findViewById(R.id.takePhoto);
         iv = (ImageView) findViewById(R.id.iv);

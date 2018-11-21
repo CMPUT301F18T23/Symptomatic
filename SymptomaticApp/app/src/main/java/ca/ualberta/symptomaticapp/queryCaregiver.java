@@ -61,9 +61,9 @@ class caregiverQuery implements Callable<Caregiver> {
     public Caregiver call() {
         FirebaseFirestore db = FirebaseFirestore.getInstance();
 
-        CollectionReference users = db.collection("caregivers");
+        CollectionReference caregivers = db.collection("caregivers");
 
-        Query problemsQuery = users.whereEqualTo("username",thisUsername);
+        Query problemsQuery = caregivers.whereEqualTo("username",thisUsername);
 
         problemsQuery.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override

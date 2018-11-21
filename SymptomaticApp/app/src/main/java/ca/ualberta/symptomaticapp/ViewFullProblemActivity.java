@@ -80,6 +80,7 @@ public class ViewFullProblemActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(ViewFullProblemActivity.this, AddRecordActivity.class);
+                intent.putExtra("problem", problem);
                 startActivity(intent);
             }
         });
@@ -93,7 +94,7 @@ public class ViewFullProblemActivity extends AppCompatActivity {
             }
         });
 
-        /*Button EditProblemButton = findViewById(R.id.editButton);
+        Button EditProblemButton = findViewById(R.id.editButton);
         EditProblemButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -101,7 +102,7 @@ public class ViewFullProblemActivity extends AppCompatActivity {
                 intent.putExtra("problem", problem);
                 startActivity(intent);
             }
-        }); */
+        });
 
 
     }

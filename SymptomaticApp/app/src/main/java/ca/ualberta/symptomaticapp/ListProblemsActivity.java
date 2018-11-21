@@ -59,8 +59,9 @@ public class ListProblemsActivity extends AppCompatActivity {
         getSupportActionBar().setTitle("View Problems");
 
         listView = findViewById(R.id.problemsListView);
-        displayList = new ArrayList<Problem>();
         textView = (TextView) findViewById(R.id.NumberRecordsTextView);
+
+        displayList = new ArrayList<Problem>();
 
         active_problem_count = "Number of active problems:";
         textView.setText(active_problem_count);

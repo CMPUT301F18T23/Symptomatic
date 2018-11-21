@@ -80,10 +80,6 @@ public class ListViewAdapter extends BaseAdapter implements ListAdapter {
             view = inflater.inflate(R.layout.custom_listview, null);
         }
 
-
-
-
-
         //Handle TextView and display string from your list
         TextView listItemText = view.findViewById(R.id.list_item_string);
         listItemText.setText(problemList.get(position).toString());
@@ -96,7 +92,9 @@ public class ListViewAdapter extends BaseAdapter implements ListAdapter {
         editRecordButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Intent intent = new Intent(context, EditProblemActivity.class);
+                intent.putExtra("problem", problemList.get(position));
+                context.startActivity(intent);
             }
         });
 

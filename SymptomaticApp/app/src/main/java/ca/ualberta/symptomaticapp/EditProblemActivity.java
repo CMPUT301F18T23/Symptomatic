@@ -46,34 +46,30 @@ import java.util.Collection;
 
 public class EditProblemActivity extends AppCompatActivity {
 
-/*    private DatePickerDialog.OnDateSetListener DateSetListener;
+    private DatePickerDialog.OnDateSetListener DateSetListener;
     private int year;
     private int month;
     private int day;
 
-    private Problem thisProblem;
+    private Problem problem;
 
-    private String thisProblemName;
-
-    static FirebaseFirestore db;
+    FirebaseFirestore db;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    protected void onCreate(Bundle savedInstancesState){
+        super.onCreate(savedInstancesState);
         setContentView(R.layout.activity_edit_problem);
 
         db = FirebaseFirestore.getInstance();
 
-        Bundle bundle = getIntent().getExtras();
-        final Problem prob = bundle.deleteProblem("problem");
-
+        problem = (Problem) getIntent().getSerializableExtra("problem");
 
         Button dateButton = findViewById(R.id.selectNewDateButton);
         dateButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Calendar cal = Calendar.getInstance();
-                cal.setTime(problemList.get(position).getDate());
+                cal.setTime(problem.getDate());
                 int currentYear = cal.get(Calendar.YEAR);
                 int currentMonth = cal.get(Calendar.MONTH);
                 int currentDay = cal.get(Calendar.DAY_OF_MONTH);
@@ -84,84 +80,11 @@ public class EditProblemActivity extends AppCompatActivity {
             }
         });
 
-        DateSetListener = new DatePickerDialog.OnDateSetListener() {
-            @Override
-            public void onDateSet(DatePicker view, int chosenYear, int chosenMonth, int chosenDay) {
-                year = chosenYear;
-                month = chosenMonth;
-                day = chosenDay;
-            }
-        };
-
-
-
         EditText editTitleEditText = findViewById(R.id.editTitleEditText);
-        editTitleEditText.setText(problemList.get(position).getTitle());
+        editTitleEditText.setText(problem.getTitle());
 
         EditText editDescriptionEditText = findViewById(R.id.editDescriptionEditText);
-        editDescriptionEditText.setText(problemList.get(position).getComment());
-    }
-    public void saveProblem(View v){
-
-        Collection<Problem> problems = ProblemListController.getProblemList().getProblems();
-        final ArrayList<Problem> problemList = new ArrayList<>(problems);
-
-        Bundle bundle = getIntent().getExtras();
-        final int position = bundle.getInt("position");
-
-        EditText editTitleEditText = findViewById(R.id.editTitleEditText);
-        problemList.get(position).setTitle(editTitleEditText.getText().toString());
-
-        EditText editDescriptionEditText = findViewById(R.id.editDescriptionEditText);
-        problemList.get(position).setComment(editDescriptionEditText.getText().toString());
-
-        Calendar cal = Calendar.getInstance();
-        cal.set(year, month, day);
-
-        if (year != 0) {
-            problemList.get(position).setDate(cal.getTime());
-        }
-
-        problemList.clear();
-        problemList.addAll(problems);
-
-        Intent intent = new Intent(EditProblemActivity.this, ListProblemsActivity.class);
-        startActivity(intent);
-
+        editDescriptionEditText.setText(problem.getComment());
 
     }
-
-    public void deleteProblem(View v){
-        final Collection<Problem> problems = ProblemListController.getProblemList().getProblems();
-        final ArrayList<Problem> problemList = new ArrayList<>(problems);
-
-        Bundle bundle = getIntent().getExtras();
-        final int position = bundle.getInt("position");
-
-
-
-        AlertDialog.Builder deleteDialog = new AlertDialog.Builder(EditProblemActivity.this);
-        deleteDialog.setMessage("Are you sure you want to delete this problem?");
-
-        deleteDialog.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                ProblemListController.getProblemList().deleteProblem(problemList.get(position));
-
-                problemList.clear();
-                problemList.addAll(problems);
-                Intent intent = new Intent(EditProblemActivity.this, ListProblemsActivity.class);
-                startActivity(intent);
-
-            }
-        });
-
-        deleteDialog.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-
-            }
-        });
-        deleteDialog.show();
-    }*/
 }

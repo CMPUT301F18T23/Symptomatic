@@ -48,8 +48,6 @@ public class RecordListViewAdapter extends BaseAdapter implements ListAdapter {
     private ArrayList<Record> recordList;
     private Context context;
 
-
-
     public RecordListViewAdapter(ArrayList<Record> list, Context context) {
         this.recordList = list;
         this.context = context;
@@ -103,8 +101,6 @@ public class RecordListViewAdapter extends BaseAdapter implements ListAdapter {
 
             }
         });
-
-
 
         return view;
     }

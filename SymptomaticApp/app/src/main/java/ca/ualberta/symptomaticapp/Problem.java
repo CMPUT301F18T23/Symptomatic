@@ -37,7 +37,7 @@ import ca.ualberta.symptomaticapp.RecordList;
  */
 
 public class Problem implements Serializable {
-    private static String title;
+    private String title;
     private Date date;
     private String comment;
     private static int numberRecords;
