@@ -1,3 +1,18 @@
+/*
+ * PatientViewAdapter.java
+ *
+ * Version 1
+ *
+ * November, 20, 2018.
+ *
+ * This file is subject to the terms and conditions defined in
+ * file 'LICENSE', which is part of this source code package.
+ *
+ * Adapter to add buttons to a list of patients.
+ *
+ * Issues: No current issues.
+ *
+ */
 
 package ca.ualberta.symptomaticapp;
 
@@ -60,7 +75,7 @@ public class PatientViewAdapter extends BaseAdapter implements ListAdapter {
 
         viewProblems.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
+            public void onClick(View v) { //opens view problems activity with the focused patient
                 Intent intent = new Intent(context, CViewProblems.class);
                 intent.putExtra("username", patientList.get(position));
                 context.startActivity(intent);
@@ -69,9 +84,10 @@ public class PatientViewAdapter extends BaseAdapter implements ListAdapter {
 
         viewContactInfo.setOnClickListener(new View.OnClickListener(){
             @Override
-            public void onClick(View v) {
+            public void onClick(View v) { //opens view contact info
                 Intent intent = new Intent(context, ViewContactInfo.class);
                 intent.putExtra("username", patientList.get(position));
+                intent.putExtra("usertype", "user");
                 context.startActivity(intent);
             }
         });

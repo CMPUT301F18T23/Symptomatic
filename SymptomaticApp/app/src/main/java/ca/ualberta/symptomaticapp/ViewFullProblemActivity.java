@@ -1,3 +1,19 @@
+/*
+ * ViewFullProblemActivity.java
+ *
+ * Version 1
+ *
+ * November, 20, 2018.
+ *
+ * This file is subject to the terms and conditions defined in
+ * file 'LICENSE', which is part of this source code package.
+ *
+ * Activity to view a patients full problem.
+ *
+ * Issues: Edit problem button currently not being used.
+ *
+ */
+
 package ca.ualberta.symptomaticapp;
 
 import android.app.AlertDialog;

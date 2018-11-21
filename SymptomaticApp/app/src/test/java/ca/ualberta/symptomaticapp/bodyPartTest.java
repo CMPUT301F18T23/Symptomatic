@@ -8,7 +8,7 @@ public class bodyPartTest extends TestCase {
      * Tests the creation of a new body part, with a specified name,
      * and ensures the two blank photos are added
      */
-    public void testNewPart(){
+    public void testConstructor(){
         bodyPart bodypart = new bodyPart("Chest");
 
         assertTrue("Name Incorrect", bodypart.returnName().equals("Chest"));

@@ -1,3 +1,18 @@
+/*
+ * RecordListViewAdapter.java
+ *
+ * Version 1
+ *
+ * November, 20, 2018.
+ *
+ * This file is subject to the terms and conditions defined in
+ * file 'LICENSE', which is part of this source code package.
+ *
+ * Adapter to add buttons to a list of records.
+ *
+ * Issues: Currently not used.
+ *
+ */
 
 package ca.ualberta.symptomaticapp;
 
