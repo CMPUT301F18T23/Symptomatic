@@ -1,20 +1,3 @@
-/*
- * createAccount.java
- *
- * Version 1
- *
- * November, 20, 2018.
- *
- * This file is subject to the terms and conditions defined in
- * file 'LICENSE', which is part of this source code package.
- *
- * Allows a user to create an account.
- * Each user account is composed of a userName, a phone number, and an email.
- *
- * Issues: No current problems
- *
- */
-
 package ca.ualberta.symptomaticapp;
 
 import android.app.AlertDialog;
@@ -145,17 +128,10 @@ public class createAccount extends AppCompatActivity implements View.OnClickList
             //username is less than 8 characters
             usernameError = "Username size must be a minimum of 8 characters.";
             usernameOk = false;
-<<<<<<< HEAD
         /*} else if (!isUserUnique) {
             usernameError = "Username Already in Use, Please Choose Another.";
             usernameOk = false;*/
         } else {
-=======
-        }/* else if (!isUserUnique) {
-            usernameError = "Username Already in Use, Please Choose Another.";
-            usernameOk = false;
-        } */else {
->>>>>>> master
             usernameOk = true;
         }
     }
