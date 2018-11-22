@@ -57,7 +57,8 @@
         </provider>
 
         <activity android:name=".ListRecordsActivity" />
-        <activity android:name=".SlideShowModeActivity"></activity>
+        <activity android:name=".SlideShowModeActivity" />
+        <activity android:name=".EditAccountActivity"></activity>
     </application>
 
 </manifest>

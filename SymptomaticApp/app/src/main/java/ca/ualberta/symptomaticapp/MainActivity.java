@@ -93,6 +93,10 @@ public class MainActivity extends AppCompatActivity {
         inflater.inflate(R.menu.home_menu, menu);
         return true;
     }
+    public void viewEditAccount(MenuItem menu){
+        Intent intent = new Intent(MainActivity.this, EditAccountActivity.class);
+        startActivity(intent);
+    }
     public void viewAddProblem(MenuItem menu) {
         //adds the Add problem button to the menu
         Intent intent = new Intent(MainActivity.this, AddProblemActivity.class);

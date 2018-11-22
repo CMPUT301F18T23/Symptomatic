@@ -69,8 +69,13 @@
     <string name="problems">Problems</string>
     <string name="contactinfo">Contact Info</string>
     <string name="slideshowprev">Previous</string>
-    <string name = "slideshownext">Next</string>
-    <string name = "slideshownull"> No Images in this Record. </string>
+    <string name="slideshownext">Next</string>
+    <string name="slideshownull"> No Images in this Record. </string>
+    <string name="edit_account">Edit Account</string>
+    <string name="username2">Username:</string>
+    <string name="email_address">Email Address:</string>
+    <string name="phone_number">Phone Number:</string>
+    <string name="save_info">save Information</string>
 
 
 </resources>
