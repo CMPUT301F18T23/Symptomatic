@@ -77,7 +77,6 @@
     <string name="phone_number">Phone Number:</string>
     <string name="save_info">save Information</string>
     <string name="title_activity_maps">Map</string>
-    <string name="google_maps_key" templateMergeStrategy="preserve" translatable="false">AIzaSyCHWzOYPMeacSXYClrlipqjX9htFO9lqeM</string>
     <string name="show_map">Show Map</string>
 
 
