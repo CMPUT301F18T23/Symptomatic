@@ -130,6 +130,18 @@ public class AddRecordActivity extends AppCompatActivity {
                 day = chosenDay;
             }
         };
+
+        Button mapButton = findViewById(R.id.mapButton);
+        mapButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(AddRecordActivity.this, MapsActivity.class);
+                startActivity(intent);
+            }
+        });
+
+
+
         //todo: show the chosen date
         final Button savedPhoto = findViewById(R.id.savedPhoto);
         final Button takePhoto = findViewById(R.id.takePhoto);
