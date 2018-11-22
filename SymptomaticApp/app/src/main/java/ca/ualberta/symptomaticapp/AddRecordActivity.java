@@ -203,6 +203,7 @@ public class AddRecordActivity extends AppCompatActivity {
 
                     // Create the new record
                     Record currRecord = new Record(currProbName, currDate);
+                    Record.addRecToDb(currRecord);
 
                     // Add it to the problem's recordList
                     // currProblemRecordList.addRecord(currRecord);

@@ -41,11 +41,11 @@ import java.util.ArrayList;
 
 public class ListProblemsActivity extends AppCompatActivity {
 
-    private ListViewAdapter listAdapter;
+    public static ListViewAdapter listAdapter;
 
     private ListView listView;
 
-    private ArrayList<Problem> displayList;
+    private static ArrayList<Problem> displayList;
 
     private String active_problem_count;
 
@@ -72,6 +72,16 @@ public class ListProblemsActivity extends AppCompatActivity {
 
         /*final Collection<Problem> problems = ProblemListController.getProblemList().getProblems();
         final ArrayList<Problem> problemList = new ArrayList<>(problems);*/
+    }
+
+    @Override
+    public void onResume(){
+        super.onResume();
+        getProblems(Login.thisUser.username);
+        for (Problem thisProblem: displayList){
+            thisProblem.updateRecords();
+            listAdapter.notifyDataSetChanged();
+        }
     }
 
     @Override
@@ -107,6 +117,8 @@ public class ListProblemsActivity extends AppCompatActivity {
     private void getProblems(String username){
         FirebaseFirestore db = FirebaseFirestore.getInstance();
 
+        displayList.clear();
+
         CollectionReference problems = db.collection("problems");
 
         Query problemsQuery = problems.whereEqualTo("user",username);
@@ -115,19 +127,28 @@ public class ListProblemsActivity extends AppCompatActivity {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
                 if(task.isSuccessful()){
+                    int count = 0;
                     for(QueryDocumentSnapshot document: task.getResult()){
                         Problem problem = null;
                         problem = document.toObject(Problem.class);
                         displayList.add(problem);
+                        count++;
                     }
-                    listAdapter.notifyDataSetChanged();
+                    for(Problem problem: displayList){
+                        problem.updateRecords();
+                        listAdapter.notifyDataSetChanged();
+                    }
+                    for (Problem problem: displayList){
+                        problem.updateRecords();
+                    }
                     if (displayList != null) {
-                        active_problem_count = "Number of active problems:"+" " + displayList.size();
+                        active_problem_count = "Number of active problems:"+" " + count;
                         textView.setText(active_problem_count);
                     } else {
                         active_problem_count = "Number of active problems: 0";
                         textView.setText(active_problem_count);
                     }
+                    listAdapter.notifyDataSetChanged();
                 } else {
                     AlertDialog.Builder badUsernameDialog = new AlertDialog.Builder(ListProblemsActivity.this);
                     badUsernameDialog.setMessage("Data Load Error");
@@ -135,9 +156,6 @@ public class ListProblemsActivity extends AppCompatActivity {
                 }
             }
         });
-        for(Problem problem: displayList){
-            problem.updateRecords();
-        }
     }
 
 

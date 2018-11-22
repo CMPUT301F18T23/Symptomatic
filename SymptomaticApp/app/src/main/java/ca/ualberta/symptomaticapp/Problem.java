@@ -28,6 +28,8 @@ import java.time.LocalDate;
 import java.util.Date;
 import ca.ualberta.symptomaticapp.Login;
 import ca.ualberta.symptomaticapp.RecordList;
+import static ca.ualberta.symptomaticapp.ListProblemsActivity.listAdapter;
+
 
 /**
  * Represents a patient problem. Each problem is composed of a title, date, and comment.
@@ -40,7 +42,7 @@ public class Problem implements Serializable {
     private String title;
     private Date date;
     private String comment;
-    private static int numberRecords;
+    private int numberRecords;
     private String user;
     Context thisContext;
 
@@ -162,19 +164,16 @@ public class Problem implements Serializable {
 
         final CollectionReference records = db.collection("records");
 
-        Query recordsQuery = records.whereEqualTo("problem",this.getTitle());
+        Query recordsQuery = records.whereEqualTo("problem",this.getTitle()).whereEqualTo("user",Login.thisUser.returnUsername());
 
         recordsQuery.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
                 if(task.isSuccessful()){
                     int x = 0;
-                    for(QueryDocumentSnapshot document: task.getResult()){
-                        Record record = document.toObject(Record.class);
-                        numberRecords += 1;
-                    }
-                } else {
+                    setNumberRecords(task.getResult().size());
                 }
+                listAdapter.notifyDataSetChanged();
             }
         });
     }
