@@ -35,14 +35,18 @@ import android.widget.EditText;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
+import org.w3c.dom.Document;
+
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collection;
+import java.util.Date;
 
 public class EditProblemActivity extends AppCompatActivity {
 
@@ -50,10 +54,17 @@ public class EditProblemActivity extends AppCompatActivity {
     private int year;
     private int month;
     private int day;
+    private Date thisDate;
 
     private Problem problem;
 
     FirebaseFirestore db;
+
+    EditText editTitleEditText,editDescriptionEditText;
+
+    Calendar cal;
+
+    Button editProbButton, deleteProbButton;
 
     @Override
     protected void onCreate(Bundle savedInstancesState){
@@ -68,7 +79,7 @@ public class EditProblemActivity extends AppCompatActivity {
         dateButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Calendar cal = Calendar.getInstance();
+                cal = Calendar.getInstance();
                 cal.setTime(problem.getDate());
                 int currentYear = cal.get(Calendar.YEAR);
                 int currentMonth = cal.get(Calendar.MONTH);
@@ -80,11 +91,65 @@ public class EditProblemActivity extends AppCompatActivity {
             }
         });
 
-        EditText editTitleEditText = findViewById(R.id.editTitleEditText);
+        editTitleEditText = findViewById(R.id.editTitleEditText);
         editTitleEditText.setText(problem.getTitle());
 
-        EditText editDescriptionEditText = findViewById(R.id.editDescriptionEditText);
+        editDescriptionEditText = findViewById(R.id.editDescriptionEditText);
         editDescriptionEditText.setText(problem.getComment());
 
+        editProbButton = findViewById(R.id.saveProblemButton);
+        editProbButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                editProblem();
+            }
+        });
+        deleteProbButton = findViewById(R.id.deleteProblemButton);
+        deleteProbButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                deleteProblem();
+            }
+        });
+
+    }
+
+    public void editProblem(){
+        db = FirebaseFirestore.getInstance();
+
+        CollectionReference problems = db.collection("problems");
+
+        Query problemsQuery = problems.whereEqualTo("title",problem.getTitle());
+
+        problemsQuery.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                if (task.isSuccessful()) {
+                    for (QueryDocumentSnapshot document : task.getResult()) {
+                        String docID = document.getId();
+                        DocumentReference thisDocument = db.collection("problems").document(docID);
+                        thisDocument.update("title", editTitleEditText.getText().toString(), "date", cal.getTime(), "comment", editDescriptionEditText.getText().toString());
+                    }
+                }
+            }
+        });
+    }
+    public void deleteProblem(){
+        db = FirebaseFirestore.getInstance();
+
+        CollectionReference problems = db.collection("problems");
+
+        Query problemsQuery = problems.whereEqualTo("title",problem.getTitle());
+
+        problemsQuery.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                if (task.isSuccessful()) {
+                    for (QueryDocumentSnapshot document : task.getResult()) {
+                        String docID = document.getId();
+                        DocumentReference thisDocument = db.collection("problems").document(docID);
+                        thisDocument.update("title", editTitleEditText.getText().toString(), "date", cal.getTime(), "comment", editDescriptionEditText.getText().toString());
+                    }
+                }
+            }
+        });
     }
 }

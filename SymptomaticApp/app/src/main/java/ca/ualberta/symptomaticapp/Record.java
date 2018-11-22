@@ -53,8 +53,10 @@ public class Record {
     public Record(String probName,Date date) {
       this.recordDate = date;
       this.problem = probName;
+      this.user = Login.thisUser.returnUsername();
     }
 
+    public Record(){}
     /**
      * Adds record to the database
      * @param  record
