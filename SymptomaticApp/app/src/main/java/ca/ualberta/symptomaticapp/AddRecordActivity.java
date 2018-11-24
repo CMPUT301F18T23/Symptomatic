@@ -42,7 +42,9 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.CollectionReference;
@@ -64,6 +66,7 @@ public class AddRecordActivity extends AppCompatActivity {
     private static final int PICK_IMAGE_REQUEST = 100; // to access the gallery to choose an image
     static final int REQUEST_IMAGE_CAPTURE = 1; // to access the camera to take an image
     static final int REQUEST_TAKE_PHOTO = 1;
+    static final int GET_POSITION = 2;
     private ImageView iv;
     private String ivId;
     private int photoCounter;
@@ -83,6 +86,8 @@ public class AddRecordActivity extends AppCompatActivity {
     int day;
     private DatePickerDialog.OnDateSetListener DateSetListener;
     boolean selectedDateDone;
+
+    private LatLng latLng;
 
 
     @Override
@@ -131,14 +136,15 @@ public class AddRecordActivity extends AppCompatActivity {
             }
         };
 
-       /*Button mapButton = findViewById(R.id.mapButton);
+        Button mapButton = findViewById(R.id.mapButton);
         mapButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(AddRecordActivity.this, MapsActivity.class);
-                startActivity(intent);
+                startActivityForResult(intent, GET_POSITION);
+
             }
-        });*/
+        });
 
 
 
@@ -304,6 +310,14 @@ public class AddRecordActivity extends AppCompatActivity {
 
                 }
                 break;
+
+            case GET_POSITION:
+
+                if (resultCode == RESULT_OK) {
+                    latLng = data.getExtras().getParcelable("position");
+                    Toast.makeText(this, latLng.toString(), Toast.LENGTH_SHORT).show();
+                }
+
         }
     }
 
@@ -344,6 +358,7 @@ public class AddRecordActivity extends AppCompatActivity {
 
     }
 }
+
 
 
 

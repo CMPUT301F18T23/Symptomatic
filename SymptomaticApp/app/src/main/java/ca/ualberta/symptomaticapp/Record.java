@@ -20,6 +20,7 @@ package ca.ualberta.symptomaticapp;
 
 import android.support.annotation.NonNull;
 
+import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentReference;
@@ -35,7 +36,7 @@ import java.util.Date;
 public class Record {
     protected String recordTitle;
     protected String recordComment;
-    protected String geolocation;
+    protected LatLng geolocation;
     protected ArrayList<String> bodyLocation;
     protected ArrayList<String> photos;
     protected ArrayList<Photo> photoList;
@@ -181,7 +182,7 @@ public class Record {
      * Adds geolocation to a record
      * @param location
      */
-    public void addGeolocation(String location) {
+    public void addGeolocation(LatLng location) {
         this.geolocation = location;
     }
 
@@ -189,15 +190,15 @@ public class Record {
      * Gets geolocation to a record
      * @return geolocation
      */
-    public String getGeolocation() {
+    public LatLng getGeolocation() {
         return this.geolocation;
     }
 
     /**
      * removes geolocation to a record
      */
-    public void removeGeolocation(String location) {
-        this.geolocation = "";
+    public void removeGeolocation(LatLng location) {
+        this.geolocation = null;
     }
 
 
@@ -221,7 +222,7 @@ public class Record {
      * Updates the geolocation of a record
      * @param location
      */
-    public void updateGeolocation(String location) {
+    public void updateGeolocation(LatLng location) {
         this.geolocation = location;
     }
 
