@@ -132,7 +132,7 @@ public class AddProblemActivity extends AppCompatActivity {
 
         if (goodProblem) {
             Problem newProblem = new Problem(title, cal.getTime(), description);
-            Problem.addProbToDb(newProblem);
+            newProblem.addProbToDb();
             Intent intent = new Intent(AddProblemActivity.this, ListProblemsActivity.class);
             startActivity(intent);
         }

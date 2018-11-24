@@ -44,7 +44,7 @@ import ca.ualberta.symptomaticapp.Problem;
 import ca.ualberta.symptomaticapp.R;
 import ca.ualberta.symptomaticapp.ViewFullProblemActivity;
 
-public class ListViewAdapter extends BaseAdapter implements ListAdapter {
+public class ListViewAdapter extends BaseAdapter implements ListAdapter{
     private ArrayList<Problem> problemList;
     private Context context;
 

@@ -71,7 +71,6 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-
         //check to see if there is a user currently logged in
         if (Login.thisUser == null && Login.thisCaregiver == null) {
             //if no users are logged in, sends the user to the login page

@@ -68,13 +68,13 @@ public class Problem implements Serializable {
 
     public Problem (){}
 
-    public static void addProbToDb(Problem problem){
+    public void addProbToDb(){
         db = FirebaseFirestore.getInstance();
 
         DocumentReference newUser = db.collection("problems")
                 .document();
 
-        newUser.set(problem).addOnCompleteListener(new OnCompleteListener<Void>() {
+        newUser.set(this).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
             }

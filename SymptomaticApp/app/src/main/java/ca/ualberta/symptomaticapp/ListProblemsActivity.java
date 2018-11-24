@@ -49,6 +49,8 @@ public class ListProblemsActivity extends AppCompatActivity {
 
     private String active_problem_count;
 
+    private ProblemList thisProbList;
+
     private TextView textView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,7 +63,9 @@ public class ListProblemsActivity extends AppCompatActivity {
         listView = findViewById(R.id.problemsListView);
         textView = (TextView) findViewById(R.id.NumberRecordsTextView);
 
-        displayList = new ArrayList<Problem>();
+        thisProbList = new ProblemList();
+
+        //displayList = new ArrayList<Problem>();
 
         active_problem_count = "Number of active problems:";
         textView.setText(active_problem_count);
@@ -69,16 +73,13 @@ public class ListProblemsActivity extends AppCompatActivity {
         initListView();
 
         getProblems(Login.thisUser.username);
-
-        /*final Collection<Problem> problems = ProblemListController.getProblemList().getProblems();
-        final ArrayList<Problem> problemList = new ArrayList<>(problems);*/
     }
 
     @Override
     public void onResume(){
         super.onResume();
         getProblems(Login.thisUser.username);
-        for (Problem thisProblem: displayList){
+        for (Problem thisProblem: thisProbList.getProblems()){
             thisProblem.updateRecords();
             listAdapter.notifyDataSetChanged();
         }
@@ -109,15 +110,13 @@ public class ListProblemsActivity extends AppCompatActivity {
 
     private void initListView(){
         if(listAdapter == null){
-            listAdapter = new ListViewAdapter(displayList, this);
+            listAdapter = new ListViewAdapter(thisProbList.getProblems(), this);
         }
         listView.setAdapter(listAdapter);
     }
 
     private void getProblems(String username){
         FirebaseFirestore db = FirebaseFirestore.getInstance();
-
-        displayList.clear();
 
         CollectionReference problems = db.collection("problems");
 
@@ -127,27 +126,17 @@ public class ListProblemsActivity extends AppCompatActivity {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
                 if(task.isSuccessful()){
-                    int count = 0;
+                    thisProbList.empty();
                     for(QueryDocumentSnapshot document: task.getResult()){
-                        Problem problem = null;
-                        problem = document.toObject(Problem.class);
-                        displayList.add(problem);
-                        count++;
+                        Problem problem = document.toObject(Problem.class);
+                        thisProbList.addProblem(problem);
                     }
-                    for(Problem problem: displayList){
+                    /*for(Problem problem: thisProbList.getProblems()){
                         problem.updateRecords();
-                        listAdapter.notifyDataSetChanged();
-                    }
-                    for (Problem problem: displayList){
-                        problem.updateRecords();
-                    }
-                    if (displayList != null) {
-                        active_problem_count = "Number of active problems:"+" " + count;
-                        textView.setText(active_problem_count);
-                    } else {
-                        active_problem_count = "Number of active problems: 0";
-                        textView.setText(active_problem_count);
-                    }
+                    }*/
+                    active_problem_count = "Number of active problems:"+" " + thisProbList.getSize();
+                    textView.setText(active_problem_count);
+                    //thisProbList.sortArray();
                     listAdapter.notifyDataSetChanged();
                 } else {
                     AlertDialog.Builder badUsernameDialog = new AlertDialog.Builder(ListProblemsActivity.this);

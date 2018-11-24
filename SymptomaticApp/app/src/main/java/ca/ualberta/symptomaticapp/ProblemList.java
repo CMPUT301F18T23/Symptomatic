@@ -39,7 +39,7 @@ public class ProblemList {
      * Creates the instance of a problem list object
      */
     public ProblemList(){
-        thisProblemList = new ArrayList<>();
+        this.thisProblemList = new ArrayList<>();
     }
 
     /**
@@ -47,7 +47,7 @@ public class ProblemList {
      * @return thisProblemList
      */
     public ArrayList<Problem> getProblems() {
-        return thisProblemList;
+        return  this.thisProblemList;
     }
 
     /**
@@ -55,7 +55,9 @@ public class ProblemList {
      * @param  problem
      */
     public void addProblem(Problem problem) {
-        thisProblemList.add(problem);
+        if (!this.thisProblemList.contains(problem)) {
+            this.thisProblemList.add(problem);
+        }
     }
 
     /**
@@ -63,7 +65,7 @@ public class ProblemList {
      * @param  problem
      */
     public void deleteProblem(Problem problem) {
-        thisProblemList.remove(problem);
+        this.thisProblemList.remove(problem);
     }
 
     /**
@@ -71,8 +73,7 @@ public class ProblemList {
      * @param  problem
      */
     public Problem getProblem(Problem problem) {
-        int index = thisProblemList.indexOf(problem);
-        return thisProblemList.get(index);
+        return this.thisProblemList.get(this.thisProblemList.indexOf(problem));
     }
 
     /**
@@ -80,7 +81,32 @@ public class ProblemList {
      * @return Problem list size
      */
     public int getSize() {
-        return thisProblemList.size();
+        return this.thisProblemList.size();
+    }
+
+    public void sortArray(){
+        ArrayList<Problem> sortedArray = new ArrayList<Problem>();
+        while(this.thisProblemList.size()>0){
+            Problem largestDate = null;
+            for (Problem currProb: this.thisProblemList){
+                if(largestDate == null){
+                    largestDate = currProb;
+                } else if (largestDate.getDate().compareTo(currProb.getDate()) < 0) {
+                    largestDate = currProb;
+                }
+            }
+            this.thisProblemList.remove(largestDate);
+            sortedArray.add(largestDate);
+        }
+        this.thisProblemList = sortedArray;
+
+    }
+
+    public void empty(){
+        int i = 0;
+        while(i<this.thisProblemList.size()){
+            this.thisProblemList.remove(this.thisProblemList.get(i));
+        }
     }
 
 }

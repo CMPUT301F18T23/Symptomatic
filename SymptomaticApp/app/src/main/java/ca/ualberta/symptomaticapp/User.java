@@ -13,6 +13,7 @@ import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.IgnoreExtraProperties;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -33,9 +34,9 @@ import static android.content.ContentValues.TAG;
  * Furthermore, it will have a list of problems associated with the account
  */
 @IgnoreExtraProperties
-public class User {
+public class User implements Serializable {
 
-    String email = " ",phone = "",username = "",userType = ""; //The contact information of the user, as well as their userType
+    public String email = " ",phone = "",username = "",userType = ""; //The contact information of the user, as well as their userType
 
     private Toast toast;
 
