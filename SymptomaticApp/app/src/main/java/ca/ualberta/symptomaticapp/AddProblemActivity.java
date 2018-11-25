@@ -113,21 +113,21 @@ public class AddProblemActivity extends AppCompatActivity {
         Boolean goodProblem = true;
         if (title.length() == 0) {
             AlertDialog.Builder noTitleDialog = new AlertDialog.Builder(AddProblemActivity.this);
-            noTitleDialog.setMessage("Title cannot be empty");
+            noTitleDialog.setMessage("Title cannot be empty.");
             noTitleDialog.show();
             goodProblem = false;
         }
 
         if (cal.getTime().after(new Date())){
             AlertDialog.Builder noTitleDialog = new AlertDialog.Builder(AddProblemActivity.this);
-            noTitleDialog.setMessage("The Date cannot be in the future...");
+            noTitleDialog.setMessage("The Date cannot be in the future.");
             noTitleDialog.show();
             goodProblem = false;
         }
 
         if (description.length() == 0) {
             AlertDialog.Builder noDescriptionDialog = new AlertDialog.Builder(AddProblemActivity.this);
-            noDescriptionDialog.setMessage("Description cannot be empty");
+            noDescriptionDialog.setMessage("Description cannot be empty.");
             noDescriptionDialog.show();
             goodProblem = false;
         }
