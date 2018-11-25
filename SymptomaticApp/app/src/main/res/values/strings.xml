@@ -78,11 +78,11 @@
     <string name="save_info">save Information</string>
     <string name="title_activity_maps">Map</string>
     <string name="show_map">Show Map</string>
-<<<<<<< HEAD
+
     <string name="view_map">View Map</string>
-=======
+
     <string name="delete_photo">Delete</string>
->>>>>>> b3b811bcbab8fd03d20468d7360f8f7115dede46
+
 
 
 </resources>
