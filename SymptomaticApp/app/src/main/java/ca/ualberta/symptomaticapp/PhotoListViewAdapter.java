@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -21,7 +22,7 @@ public class PhotoListViewAdapter extends ArrayAdapter<Photo> {
     }
 
 
-    public View getView(int position, View convertView, ViewGroup parent){
+    public View getView(final int position, View convertView, ViewGroup parent){
         View view = convertView;
 
         if (convertView == null) {
@@ -35,10 +36,23 @@ public class PhotoListViewAdapter extends ArrayAdapter<Photo> {
         // Now we can fill the layout with the right values
         TextView date = (TextView) view.findViewById(R.id.photoDate);
         ImageView img = (ImageView) view.findViewById(R.id.photoImage);
-        System.out.println("Position ["+position+"]");
+//        System.out.println("Position ["+position+"]");
         Photo p = photoList.get(position);
         date.setText("" + p.getTimestamp());
         img.setImageBitmap(p.getPhotoBitmap());
+
+
+        Button deletePhoto = view.findViewById(R.id.photoDelete);
+
+        deletePhoto.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Photo p = photoList.get(position);
+                photoList.remove(p);
+                notifyDataSetChanged();
+
+            }
+        });
 
 
         return view;

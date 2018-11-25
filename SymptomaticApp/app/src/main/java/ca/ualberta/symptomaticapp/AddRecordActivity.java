@@ -35,6 +35,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
@@ -69,7 +70,7 @@ public class AddRecordActivity extends AppCompatActivity {
     private int photoCounter;
     private ListView photoListView;
     PhotoListViewAdapter photoListViewAdapter;
-    ArrayList<Photo> photos;
+    ArrayList<Photo> displayPhotos;
 
 
     Bitmap bmp;
@@ -99,8 +100,9 @@ public class AddRecordActivity extends AppCompatActivity {
 
         problem = (Problem) getIntent().getSerializableExtra("problem");
 
+
         photoListView = findViewById(R.id.photoListView);
-        photos = new ArrayList<Photo>();
+        displayPhotos = new ArrayList<Photo>();
 
         TextView textView = findViewById(R.id.InputProblemTextView);
         textView.setText(problem.getTitle());
@@ -145,6 +147,7 @@ public class AddRecordActivity extends AppCompatActivity {
         });*/
 
 
+        initListView();
 
         //todo: show the chosen date
         final Button savedPhoto = findViewById(R.id.savedPhoto);
@@ -181,7 +184,6 @@ public class AddRecordActivity extends AppCompatActivity {
 
             }
         });
-
 
         Button saveRecordBttn = findViewById(R.id.saveRecordBttn);
 
@@ -220,20 +222,48 @@ public class AddRecordActivity extends AppCompatActivity {
             }
         });
 
-        initListView();
+
 
     }
 
     public void initListView(){
         if(photoListViewAdapter == null){
-            photoListViewAdapter = new PhotoListViewAdapter(photos, this);
+            photoListViewAdapter = new PhotoListViewAdapter(displayPhotos, this);
         }
 
         photoListView.setAdapter(photoListViewAdapter);
 
     }
 
-   
+    // setListViewHeightBasedonChildren class reference:
+//    Skidan, Oleg. “ListView inside ScrollView. Solve the Problem. – Oleg Skidan – Medium.” Medium.com, Medium,
+//    5 Feb. 2016, medium.com/@skidanolegs/listview-inside-scrollview-solve-the-problem-a06fdff2a4e0.
+//    Accessed: 25th November, 2018
+    public static void setListViewHeightBasedOnChildren(ListView listView) {
+        ListAdapter listAdapter = listView.getAdapter();
+        if (listAdapter == null) return;
+        int desiredWidth = View.MeasureSpec.makeMeasureSpec(listView.getWidth(),
+                View.MeasureSpec.UNSPECIFIED);
+        int totalHeight = 0;
+        View view = null;
+        for (int i = 0; i < listAdapter.getCount(); i++) {
+            view = listAdapter.getView(i, view, listView);
+            if (i == 0) view.setLayoutParams(new
+                    ViewGroup.LayoutParams(desiredWidth,
+                    ViewGroup.LayoutParams.WRAP_CONTENT));
+
+            view.measure(desiredWidth, View.MeasureSpec.UNSPECIFIED);
+            totalHeight += view.getMeasuredHeight();
+        }
+
+        ViewGroup.LayoutParams params = listView.getLayoutParams();
+
+        params.height = totalHeight + (listView.getDividerHeight() *
+                (listAdapter.getCount() - 1));
+
+        listView.setLayoutParams(params);
+        listView.requestLayout();
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -287,8 +317,9 @@ public class AddRecordActivity extends AppCompatActivity {
 
                     // Add the photo selected from gallery onto the photoList
                     photoList.addPhoto(photo);
-                    photos.add(photo);
+                    displayPhotos.add(photo);
                     photoListViewAdapter.notifyDataSetChanged();
+                    setListViewHeightBasedOnChildren(photoListView);
 
 //                    If we want to use the bitmap from the Photo class
                     Bitmap image = photo.getPhotoBitmap();
@@ -310,8 +341,9 @@ public class AddRecordActivity extends AppCompatActivity {
                         // Store the image as a Photo object
                         Photo photo = new Photo(bitmap);
 
-                        photos.add(photo);
+                        displayPhotos.add(photo);
                         photoListViewAdapter.notifyDataSetChanged();
+                        setListViewHeightBasedOnChildren(photoListView);
 
 
                         // Add the new Photo object into the photoList
