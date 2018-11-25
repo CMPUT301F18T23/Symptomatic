@@ -57,23 +57,6 @@ public class Record {
     }
 
     public Record(){}
-    /**
-     * Adds record to the database
-     * @param  record
-     */
-    public Record addRecord(Record record) {
-        //add record to the database
-        FirebaseFirestore db = FirebaseFirestore.getInstance();
-
-        DocumentReference newUser = db.collection("records")
-                .document();
-
-        newUser.set(record).addOnCompleteListener(new OnCompleteListener<Void>() {
-            @Override
-            public void onComplete(@NonNull Task<Void> task) { }});
-
-        return record;
-    }
 
     /**
      * Gets the date of the record.

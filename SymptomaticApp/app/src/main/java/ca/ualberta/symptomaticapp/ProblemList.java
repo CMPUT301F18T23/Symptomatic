@@ -56,7 +56,14 @@ public class ProblemList {
      */
     public void addProblem(Problem problem) {
         if (!this.thisProblemList.contains(problem)) {
-            this.thisProblemList.add(problem);
+            int putPlace = this.thisProblemList.size();
+            for(Problem tempProb: this.thisProblemList){
+                if(tempProb.getDate().before(problem.getDate())){
+                    putPlace = this.thisProblemList.indexOf(tempProb);
+                    break;
+                }
+            }
+            this.thisProblemList.add(putPlace,problem);
         }
     }
 
@@ -82,24 +89,6 @@ public class ProblemList {
      */
     public int getSize() {
         return this.thisProblemList.size();
-    }
-
-    public void sortArray(){
-        ArrayList<Problem> sortedArray = new ArrayList<Problem>();
-        while(this.thisProblemList.size()>0){
-            Problem largestDate = null;
-            for (Problem currProb: this.thisProblemList){
-                if(largestDate == null){
-                    largestDate = currProb;
-                } else if (largestDate.getDate().compareTo(currProb.getDate()) < 0) {
-                    largestDate = currProb;
-                }
-            }
-            this.thisProblemList.remove(largestDate);
-            sortedArray.add(largestDate);
-        }
-        this.thisProblemList = sortedArray;
-
     }
 
     public void empty(){

@@ -42,7 +42,7 @@ public class ListRecordsActivity extends AppCompatActivity {
     ListView recordslistview;
     RecordListViewAdapter recordListViewAdapter;
 
-    ArrayList<Record> recordDisplayList;
+    RecordList thisRecordList;
 
     FirebaseFirestore db;
 
@@ -59,15 +59,16 @@ public class ListRecordsActivity extends AppCompatActivity {
 
         recordslistview = findViewById(R.id.recordsListView);
 
-        recordDisplayList = new ArrayList<Record>();
+        thisRecordList = new RecordList();
 
         initRecordView();
+
         getRecords(Login.thisUser.username);
     }
 
     private void initRecordView(){
         if(recordListViewAdapter == null){
-            recordListViewAdapter = new RecordListViewAdapter(recordDisplayList, this);
+            recordListViewAdapter = new RecordListViewAdapter(thisRecordList.getRecords(), this);
         }
         recordslistview.setAdapter(recordListViewAdapter);
     }
@@ -85,8 +86,7 @@ public class ListRecordsActivity extends AppCompatActivity {
                 if(task.isSuccessful()){
                     int x = 0;
                     for(QueryDocumentSnapshot document: task.getResult()){
-                        Record returnedRecord = document.toObject(Record.class);
-                        recordDisplayList.add(returnedRecord);
+                        thisRecordList.addRecord(document.toObject(Record.class));
                     }
                 }
                 recordListViewAdapter.notifyDataSetChanged();

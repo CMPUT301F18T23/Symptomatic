@@ -172,8 +172,8 @@ public class Problem implements Serializable {
                 if(task.isSuccessful()){
                     int x = 0;
                     setNumberRecords(task.getResult().size());
+                    listAdapter.notifyDataSetChanged();
                 }
-                listAdapter.notifyDataSetChanged();
             }
         });
     }

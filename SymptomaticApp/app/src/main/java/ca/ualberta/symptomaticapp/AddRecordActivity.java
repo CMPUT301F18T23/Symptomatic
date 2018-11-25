@@ -197,17 +197,12 @@ public class AddRecordActivity extends AppCompatActivity {
                 // When the required information to create a record is filled out
                 if (goodRecord) {
                     // Prepare the attributes required to instantiate the Record class
-                    RecordList currProblemRecordList = problem.getRecordList();
                     String currProbName = problem.getTitle();
                     Date currDate = Calendar.getInstance().getTime();
 
                     // Create the new record
                     Record currRecord = new Record(currProbName, currDate);
                     Record.addRecToDb(currRecord);
-
-                    // Add it to the problem's recordList
-                    // currProblemRecordList.addRecord(currRecord);
-                    //Log.d("Problem's Record List", problem.getRecordList().toString());
 
                     // Switch back to the previous activity
                     Intent intent = new Intent(AddRecordActivity.this, ListProblemsActivity.class);

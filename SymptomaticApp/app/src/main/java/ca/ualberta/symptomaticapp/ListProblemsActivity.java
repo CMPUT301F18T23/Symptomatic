@@ -127,16 +127,15 @@ public class ListProblemsActivity extends AppCompatActivity {
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
                 if(task.isSuccessful()){
                     thisProbList.empty();
-                    for(QueryDocumentSnapshot document: task.getResult()){
+                    for(QueryDocumentSnapshot document: task.getResult()) {
                         Problem problem = document.toObject(Problem.class);
+                        problem.updateRecords();
                         thisProbList.addProblem(problem);
                     }
-                    /*for(Problem problem: thisProbList.getProblems()){
-                        problem.updateRecords();
-                    }*/
                     active_problem_count = "Number of active problems:"+" " + thisProbList.getSize();
                     textView.setText(active_problem_count);
                     //thisProbList.sortArray();
+                    int temp = thisProbList.getSize();
                     listAdapter.notifyDataSetChanged();
                 } else {
                     AlertDialog.Builder badUsernameDialog = new AlertDialog.Builder(ListProblemsActivity.this);
@@ -146,6 +145,8 @@ public class ListProblemsActivity extends AppCompatActivity {
             }
         });
     }
+
+
 
 
 }
