@@ -226,6 +226,10 @@ public class AddRecordActivity extends AppCompatActivity {
         Intent intent = new Intent(AddRecordActivity.this, AddProblemActivity.class);
         startActivity(intent);
     }
+    public void viewEditAccount(MenuItem menu){
+        Intent intent = new Intent(AddRecordActivity.this, EditAccountActivity.class);
+        startActivity(intent);
+    }
 
     public void viewViewProblems(MenuItem menu) {
         Intent intent = new Intent(AddRecordActivity.this, ListProblemsActivity.class);

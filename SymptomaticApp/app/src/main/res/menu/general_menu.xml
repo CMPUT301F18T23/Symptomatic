@@ -13,6 +13,10 @@
             <item android:id="@+id/action_home"
                 android:title="@string/home"
                 android:onClick="viewHome"/>
+            <item android:id="@+id/action_editAccount"
+                android:title="@string/edit_account"
+                android:onClick="viewEditAccount"
+                />
 
             <item android:id="@+id/action_addProblem"
                 android:title="@string/add_problem"
@@ -22,6 +26,9 @@
             <item android:id="@+id/action_viewProblems"
                 android:title="@string/view_problems3"
                 android:onClick="viewViewProblems"
+                />
+            <item android:id="@+id/action_viewMap"
+                android:title="@string/view_map"
                 />
 
             <item android:id="@+id/action_logout"

@@ -78,6 +78,7 @@
     <string name="save_info">save Information</string>
     <string name="title_activity_maps">Map</string>
     <string name="show_map">Show Map</string>
+    <string name="view_map">View Map</string>
 
 
 </resources>

@@ -27,6 +27,9 @@ import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
@@ -71,6 +74,9 @@ public class EditProblemActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstancesState){
         super.onCreate(savedInstancesState);
         setContentView(R.layout.activity_edit_problem);
+        Toolbar toolbar = findViewById(R.id.editProblem_toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle("Edit Problem");
 
         db = FirebaseFirestore.getInstance();
 
@@ -119,6 +125,42 @@ public class EditProblemActivity extends AppCompatActivity {
         });
 
     }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.general_menu, menu);
+        return true;
+    }
+    public void viewHome(MenuItem menu) {
+        Intent intent = new Intent(EditProblemActivity.this, MainActivity.class);
+        startActivity(intent);
+    }
+    public void viewEditAccount(MenuItem menu){
+        Intent intent = new Intent(EditProblemActivity.this, EditAccountActivity.class);
+        startActivity(intent);
+    }
+
+    public void viewAddProblem(MenuItem menu){
+        Intent intent = new Intent(EditProblemActivity.this, AddProblemActivity.class);
+        startActivity(intent);
+    }
+
+    public void viewViewProblems(MenuItem menu) {
+        Intent intent = new Intent(EditProblemActivity.this, ListProblemsActivity.class);
+        startActivity(intent);
+    }
+    public void viewLogout(MenuItem menu){
+        Login.thisCaregiver = null;
+        Login.thisUser = null;
+        Intent intent = new Intent(EditProblemActivity.this, MainActivity.class);
+        startActivity(intent);
+    }
+
+
+
+
+
 
     public void editProblem(){
         db = FirebaseFirestore.getInstance();

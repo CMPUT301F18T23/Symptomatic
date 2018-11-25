@@ -95,6 +95,10 @@ public class ListProblemsActivity extends AppCompatActivity {
         Intent intent = new Intent(ListProblemsActivity.this, MainActivity.class);
         startActivity(intent);
     }
+    public void viewEditAccount(MenuItem menu){
+        Intent intent = new Intent(ListProblemsActivity.this, EditAccountActivity.class);
+        startActivity(intent);
+    }
 
     public void viewAddProblem(MenuItem menu) {
         Intent intent = new Intent(ListProblemsActivity.this, AddProblemActivity.class);

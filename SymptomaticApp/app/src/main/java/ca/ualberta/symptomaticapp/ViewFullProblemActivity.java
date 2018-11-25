@@ -118,6 +118,12 @@ public class ViewFullProblemActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    public void viewEditAccount(MenuItem menu){
+        Intent intent = new Intent(ViewFullProblemActivity.this, EditAccountActivity.class);
+        startActivity(intent);
+    }
+
+
     public void viewAddProblem(MenuItem menu){
         Intent intent = new Intent(ViewFullProblemActivity.this, AddProblemActivity.class);
         startActivity(intent);
