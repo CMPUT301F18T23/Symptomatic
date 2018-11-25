@@ -32,35 +32,41 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.TextView;
 
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 
 
 public class AddProblemActivity extends AppCompatActivity {
 
     private DatePickerDialog.OnDateSetListener DateSetListener;
-    private int year;
-    private int month;
-    private int day;
+
+    Calendar cal;
+
+    TextView chosenDate;
+
+    EditText editTextTitle,editTextDescription;
+
+    String chosenDateText,title,description;
+
+    SimpleDateFormat dateFormatter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_problem);
-        Toolbar toolbar = findViewById(R.id.addProblem_toolbar);
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle("Add Problem");
+
+        initLayout();
 
         Button dateButton = findViewById(R.id.AddDateButton);
         dateButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Calendar cal = Calendar.getInstance();
-                int currentYear = cal.get(Calendar.YEAR);
-                int currentMonth = cal.get(Calendar.MONTH);
-                int currentDay = cal.get(Calendar.DAY_OF_MONTH);
+                cal = Calendar.getInstance();
 
-                DatePickerDialog dialog = new DatePickerDialog(AddProblemActivity.this, android.R.style.Theme_DeviceDefault_Dialog, DateSetListener, currentYear, currentMonth, currentDay);
+                DatePickerDialog dialog = new DatePickerDialog(AddProblemActivity.this, android.R.style.Theme_DeviceDefault_Dialog, DateSetListener, cal.get(Calendar.YEAR), cal.get(Calendar.MONTH), cal.get(Calendar.DAY_OF_MONTH));
                 dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.BLACK));
                 dialog.show();
             }
@@ -69,9 +75,8 @@ public class AddProblemActivity extends AppCompatActivity {
         DateSetListener = new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker view, int chosenYear, int chosenMonth, int chosenDay) {
-                year = chosenYear;
-                month = chosenMonth;
-                day = chosenDay;
+                cal.set(chosenYear, chosenMonth, chosenDay);
+                updateTime();
             }
         };
 
@@ -102,13 +107,9 @@ public class AddProblemActivity extends AppCompatActivity {
 
 
     public void addProblem(View v){
+        title = editTextTitle.getText().toString();
+        description = editTextDescription.getText().toString();
 
-        EditText editTextTitle = findViewById(R.id.EnterTitleEditText);
-        String title = editTextTitle.getText().toString();
-        EditText editTextDescription = findViewById(R.id.EnterDescriptionEditText);
-        String description = editTextDescription.getText().toString();
-        Calendar cal = Calendar.getInstance();
-        cal.set(year, month, day);
         Boolean goodProblem = true;
         if (title.length() == 0) {
             AlertDialog.Builder noTitleDialog = new AlertDialog.Builder(AddProblemActivity.this);
@@ -116,10 +117,11 @@ public class AddProblemActivity extends AppCompatActivity {
             noTitleDialog.show();
             goodProblem = false;
         }
-        if (year == 0) {
-            AlertDialog.Builder noDateDialog = new AlertDialog.Builder(AddProblemActivity.this);
-            noDateDialog.setMessage("Date cannot be empty");
-            noDateDialog.show();
+
+        if (cal.getTime().after(new Date())){
+            AlertDialog.Builder noTitleDialog = new AlertDialog.Builder(AddProblemActivity.this);
+            noTitleDialog.setMessage("The Date cannot be in the future...");
+            noTitleDialog.show();
             goodProblem = false;
         }
 
@@ -133,11 +135,33 @@ public class AddProblemActivity extends AppCompatActivity {
         if (goodProblem) {
             Problem newProblem = new Problem(title, cal.getTime(), description);
             newProblem.addProbToDb();
-            Intent intent = new Intent(AddProblemActivity.this, ListProblemsActivity.class);
-            startActivity(intent);
+            finish();
+            //Intent intent = new Intent(AddProblemActivity.this, ListProblemsActivity.class);
+            //startActivity(intent);
         }
     }
 
+    private void updateTime(){
+        chosenDateText = "Chosen Date: "+dateFormatter.format(cal.getTime());
+        chosenDate.setText(chosenDateText);
+    }
+
+    private void initLayout(){
+        Toolbar toolbar = findViewById(R.id.addProblem_toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle("Add Problem");
+
+        dateFormatter = new SimpleDateFormat("dd/MM/yyyy");
+
+        editTextTitle = findViewById(R.id.EnterTitleEditText);
+        editTextDescription = findViewById(R.id.EnterDescriptionEditText);
+
+        cal = Calendar.getInstance();
+
+        chosenDate = findViewById(R.id.DateEnteredTV);
+
+        updateTime();
+    }
 
 
 

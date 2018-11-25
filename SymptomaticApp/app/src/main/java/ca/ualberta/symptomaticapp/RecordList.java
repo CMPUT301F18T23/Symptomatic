@@ -57,12 +57,14 @@ public class RecordList implements Serializable {
      */
     public void addRecord(Record thisRecord) {
         int putPlace = this.getSize();
+        /*
         for(Record tempRecord: this.recordList){
             if(tempRecord.getTimeStamp().before(tempRecord.getTimeStamp())){
                 putPlace = this.recordList.indexOf(tempRecord);
                 break;
             }
         }
+        */
         recordList.add(putPlace,thisRecord);
     }
 

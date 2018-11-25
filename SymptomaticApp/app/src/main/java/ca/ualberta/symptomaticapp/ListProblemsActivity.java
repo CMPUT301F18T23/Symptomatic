@@ -134,8 +134,6 @@ public class ListProblemsActivity extends AppCompatActivity {
                     }
                     active_problem_count = "Number of active problems:"+" " + thisProbList.getSize();
                     textView.setText(active_problem_count);
-                    //thisProbList.sortArray();
-                    int temp = thisProbList.getSize();
                     listAdapter.notifyDataSetChanged();
                 } else {
                     AlertDialog.Builder badUsernameDialog = new AlertDialog.Builder(ListProblemsActivity.this);

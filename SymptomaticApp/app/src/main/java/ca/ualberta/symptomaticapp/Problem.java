@@ -47,7 +47,6 @@ public class Problem implements Serializable {
     Context thisContext;
 
     static FirebaseFirestore db;
-    private RecordList recordList;
 
 
     /**
@@ -63,7 +62,6 @@ public class Problem implements Serializable {
         this.user = Login.thisUser.username;
         this.numberRecords = 0;
         db = FirebaseFirestore.getInstance();
-        this.recordList = new RecordList();
     }
 
     public Problem (){}
@@ -209,14 +207,6 @@ public class Problem implements Serializable {
             }
         });
 
-    }
-
-    /**
-     * Gets the recordList of a problem
-     * @return this.recordList
-     */
-    public RecordList getRecordList() {
-        return this.recordList;
     }
 
 }

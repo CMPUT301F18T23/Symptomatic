@@ -51,6 +51,7 @@ import java.util.Date;
 public class EditProblemActivity extends AppCompatActivity {
 
     private DatePickerDialog.OnDateSetListener DateSetListener;
+
     private int year;
     private int month;
     private int day;
@@ -75,21 +76,28 @@ public class EditProblemActivity extends AppCompatActivity {
 
         problem = (Problem) getIntent().getSerializableExtra("problem");
 
+        cal = Calendar.getInstance();
+        cal.setTime(problem.getDate());
+
         Button dateButton = findViewById(R.id.selectNewDateButton);
         dateButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                cal = Calendar.getInstance();
-                cal.setTime(problem.getDate());
-                int currentYear = cal.get(Calendar.YEAR);
-                int currentMonth = cal.get(Calendar.MONTH);
-                int currentDay = cal.get(Calendar.DAY_OF_MONTH);
 
-                DatePickerDialog dialog = new DatePickerDialog(EditProblemActivity.this, android.R.style.Theme_DeviceDefault_Dialog, DateSetListener, currentYear, currentMonth, currentDay);
+                cal = Calendar.getInstance();
+
+                DatePickerDialog dialog = new DatePickerDialog(EditProblemActivity.this, android.R.style.Theme_DeviceDefault_Dialog, DateSetListener, cal.get(Calendar.YEAR), cal.get(Calendar.MONTH), cal.get(Calendar.DAY_OF_MONTH));
                 dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.BLACK));
                 dialog.show();
             }
         });
+
+        DateSetListener = new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker view, int chosenYear, int chosenMonth, int chosenDay) {
+                cal.set(chosenYear, chosenMonth, chosenDay);
+            }
+        };
 
         editTitleEditText = findViewById(R.id.editTitleEditText);
         editTitleEditText.setText(problem.getTitle());
@@ -117,18 +125,37 @@ public class EditProblemActivity extends AppCompatActivity {
 
         CollectionReference problems = db.collection("problems");
 
-        Query problemsQuery = problems.whereEqualTo("title",problem.getTitle());
+        Query problemsQuery = problems.whereEqualTo("title",problem.getTitle()).whereEqualTo("user",Login.thisUser.username);
 
         problemsQuery.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
                 if (task.isSuccessful()) {
                     for (QueryDocumentSnapshot document : task.getResult()) {
-                        String docID = document.getId();
-                        DocumentReference thisDocument = db.collection("problems").document(docID);
+
+                        //update records to proper title
+                        CollectionReference records = db.collection("records");
+
+                        Query recordsQuery = records.whereEqualTo("problem",problem.getTitle()).whereEqualTo("user",Login.thisUser.username);
+
+                        recordsQuery.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                            @Override
+                            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                                for (QueryDocumentSnapshot document: task.getResult()) {
+                                    String recordDocID = document.getId();
+                                    DocumentReference thisDocument = db.collection("records").document(recordDocID);
+                                    thisDocument.update("problem",editTitleEditText.getText().toString());
+                                }
+                            }
+                        });
+
+                        //update problem to new information
+                        String problemDocID = document.getId();
+                        DocumentReference thisDocument = db.collection("problems").document(problemDocID);
                         thisDocument.update("title", editTitleEditText.getText().toString(), "date", cal.getTime(), "comment", editDescriptionEditText.getText().toString());
                     }
                 }
+                finish();
             }
         });
     }
@@ -137,18 +164,34 @@ public class EditProblemActivity extends AppCompatActivity {
 
         CollectionReference problems = db.collection("problems");
 
-        Query problemsQuery = problems.whereEqualTo("title",problem.getTitle());
+        Query problemsQuery = problems.whereEqualTo("title",problem.getTitle()).whereEqualTo("user",Login.thisUser.username);
 
         problemsQuery.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
                 if (task.isSuccessful()) {
                     for (QueryDocumentSnapshot document : task.getResult()) {
-                        String docID = document.getId();
-                        DocumentReference thisDocument = db.collection("problems").document(docID);
-                        thisDocument.update("title", editTitleEditText.getText().toString(), "date", cal.getTime(), "comment", editDescriptionEditText.getText().toString());
+                        CollectionReference records = db.collection("records");
+
+                        Query recordsQuery = records.whereEqualTo("problem",problem.getTitle()).whereEqualTo("user",Login.thisUser.username);
+
+                        recordsQuery.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                            @Override
+                            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                                for (QueryDocumentSnapshot document: task.getResult()) {
+                                    String recordDocID = document.getId();
+                                    DocumentReference thisDocument = db.collection("records").document(recordDocID);
+                                    thisDocument.delete();
+                                }
+                            }
+                        });
+
+                        String problemDocID = document.getId();
+                        DocumentReference thisDocument = db.collection("problems").document(problemDocID);
+                        thisDocument.delete();
                     }
                 }
+                finish();
             }
         });
     }
