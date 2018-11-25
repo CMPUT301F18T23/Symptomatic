@@ -145,7 +145,7 @@ public class AddRecordActivity extends AppCompatActivity {
         //todo: show the chosen date
         final Button savedPhoto = findViewById(R.id.savedPhoto);
         final Button takePhoto = findViewById(R.id.takePhoto);
-        iv = (ImageView) findViewById(R.id.iv);
+        iv = (ImageView) findViewById(R.id.photoImage);
 
         savedPhoto.setOnClickListener(new View.OnClickListener() {
             @Override
