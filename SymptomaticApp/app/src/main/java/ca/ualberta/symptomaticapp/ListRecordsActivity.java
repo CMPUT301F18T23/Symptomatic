@@ -52,6 +52,10 @@ public class ListRecordsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_records);
+        Toolbar toolbar = findViewById(R.id.listRecord_toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle("View Records");
+
 
         db = FirebaseFirestore.getInstance();
 
