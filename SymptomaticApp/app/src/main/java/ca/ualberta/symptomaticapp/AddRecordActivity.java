@@ -39,6 +39,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.ImageView;
+import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -219,7 +220,7 @@ public class AddRecordActivity extends AppCompatActivity {
             }
         });
 
-//        initListView();
+        initListView();
 
     }
 
@@ -232,6 +233,7 @@ public class AddRecordActivity extends AppCompatActivity {
 
     }
 
+   
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -286,12 +288,7 @@ public class AddRecordActivity extends AppCompatActivity {
                     // Add the photo selected from gallery onto the photoList
                     photoList.addPhoto(photo);
                     photos.add(photo);
-                    photos.add(photo);
-                    photos.add(photo);
-
-                    Log.d("pictures", String.valueOf(photos.size()));
-
-                    initListView();
+                    photoListViewAdapter.notifyDataSetChanged();
 
 //                    If we want to use the bitmap from the Photo class
                     Bitmap image = photo.getPhotoBitmap();
@@ -314,6 +311,7 @@ public class AddRecordActivity extends AppCompatActivity {
                         Photo photo = new Photo(bitmap);
 
                         photos.add(photo);
+                        photoListViewAdapter.notifyDataSetChanged();
 
 
                         // Add the new Photo object into the photoList
