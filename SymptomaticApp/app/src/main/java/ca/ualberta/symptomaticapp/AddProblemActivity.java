@@ -158,7 +158,7 @@ public class AddProblemActivity extends AppCompatActivity {
 
         cal = Calendar.getInstance();
 
-        chosenDate = findViewById(R.id.DateEnteredTV);
+        chosenDate = findViewById(R.id.dateTextView);
 
         updateTime();
     }
