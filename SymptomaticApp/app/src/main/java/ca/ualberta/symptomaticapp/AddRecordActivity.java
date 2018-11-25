@@ -44,7 +44,9 @@ import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.CollectionReference;
@@ -66,6 +68,7 @@ public class AddRecordActivity extends AppCompatActivity {
     private static final int PICK_IMAGE_REQUEST = 100; // to access the gallery to choose an image
     static final int REQUEST_IMAGE_CAPTURE = 1; // to access the camera to take an image
     static final int REQUEST_TAKE_PHOTO = 1;
+    static final int GET_GEOLOCATION = 2;
     private String ivId;
     private int photoCounter;
     private ListView photoListView;
@@ -85,6 +88,8 @@ public class AddRecordActivity extends AppCompatActivity {
     int day;
     private DatePickerDialog.OnDateSetListener DateSetListener;
     boolean selectedDateDone;
+
+    private LatLng geolocation;
 
 
     @Override
@@ -142,7 +147,8 @@ public class AddRecordActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(AddRecordActivity.this, MapsActivity.class);
-                startActivity(intent);
+                //startActivity(intent);
+                startActivityForResult(intent, GET_GEOLOCATION);
             }
         });
 
@@ -355,6 +361,13 @@ public class AddRecordActivity extends AppCompatActivity {
 
                 }
                 break;
+
+            case GET_GEOLOCATION:
+                if (resultCode == RESULT_OK){
+                    geolocation = data.getExtras().getParcelable("geolocation");
+                    Toast.makeText(this, geolocation.toString(), Toast.LENGTH_SHORT).show();
+                }
+
         }
 
 

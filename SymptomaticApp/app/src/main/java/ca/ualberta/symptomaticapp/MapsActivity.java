@@ -1,6 +1,7 @@
 package ca.ualberta.symptomaticapp;
 
 import android.Manifest;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Address;
 import android.location.Geocoder;
@@ -143,7 +144,13 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         BACK.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                finish();
+                if (marker != null) {
+                    setResult(RESULT_OK, new Intent().putExtra("geolocation", marker.getPosition()));
+                    finish();
+                }
+                else{
+                    finish();
+                }
             }
         });
 
