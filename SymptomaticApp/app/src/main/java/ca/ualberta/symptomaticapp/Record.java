@@ -200,6 +200,11 @@ public class Record {
         this.recordComment = comment;
     }
 
+
+    public String toString() {
+        return this.recordTitle+ "\n" + this.recordDate.toString();
+    }
+
     /**
      * Updates the geolocation of a record
      * @param location

@@ -205,7 +205,7 @@ public class AddRecordActivity extends AppCompatActivity {
                     Record.addRecToDb(currRecord);
 
                     // Switch back to the previous activity
-                    Intent intent = new Intent(AddRecordActivity.this, ListProblemsActivity.class);
+                    Intent intent = new Intent(AddRecordActivity.this, ListRecordsActivity.class);
                     startActivity(intent);
                 }
 

@@ -1,0 +1,717 @@
+{\rtf1\ansi\ansicpg1252\cocoartf1561\cocoasubrtf600
+{\fonttbl\f0\fnil\fcharset0 Menlo-Bold;\f1\fnil\fcharset0 Menlo-Regular;\f2\fnil\fcharset0 Menlo-Italic;
+}
+{\colortbl;\red255\green255\blue255;\red0\green0\blue109;\red0\green0\blue254;\red109\green109\blue109;
+\red15\green112\blue3;}
+{\*\expandedcolortbl;;\csgenericrgb\c0\c0\c42745;\csgenericrgb\c0\c0\c99608;\csgenericrgb\c42745\c42745\c42745;
+\csgenericrgb\c5882\c43922\c1176;}
+\margl1440\margr1440\vieww10800\viewh8400\viewkind0
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+
+\f0\b\fs24 \cf2 package 
+\f1\b0 \cf0 ca.ualberta.symptomaticapp;\
+\
+
+\f0\b \cf2 import 
+\f1\b0 \cf0 android.Manifest;\
+
+\f0\b \cf2 import 
+\f1\b0 \cf0 android.content.Intent;\
+
+\f0\b \cf2 import 
+\f1\b0 \cf0 android.content.pm.PackageManager;\
+
+\f0\b \cf2 import 
+\f1\b0 \cf0 android.location.Address;\
+
+\f0\b \cf2 import 
+\f1\b0 \cf0 android.location.Geocoder;\
+
+\f0\b \cf2 import 
+\f1\b0 \cf0 android.location.Location;\
+
+\f0\b \cf2 import 
+\f1\b0 \cf0 android.net.Uri;\
+
+\f0\b \cf2 import 
+\f1\b0 \cf0 android.support.annotation.NonNull;\
+
+\f0\b \cf2 import 
+\f1\b0 \cf0 android.support.v4.app.ActivityCompat;\
+
+\f0\b \cf2 import 
+\f1\b0 \cf0 android.support.v4.app.Fragment;\
+
+\f0\b \cf2 import 
+\f1\b0 \cf0 android.support.v4.app.FragmentActivity;\
+
+\f0\b \cf2 import 
+\f1\b0 \cf0 android.os.Bundle;\
+
+\f0\b \cf2 import 
+\f1\b0 \cf0 android.support.v4.content.ContextCompat;\
+
+\f0\b \cf2 import 
+\f1\b0 \cf0 android.util.Log;\
+
+\f0\b \cf2 import 
+\f1\b0 \cf0 android.view.KeyEvent;\
+
+\f0\b \cf2 import 
+\f1\b0 \cf0 android.view.MotionEvent;\
+
+\f0\b \cf2 import 
+\f1\b0 \cf0 android.view.View;\
+
+\f0\b \cf2 import 
+\f1\b0 \cf0 android.view.inputmethod.EditorInfo;\
+
+\f0\b \cf2 import 
+\f1\b0 \cf0 android.widget.AdapterView;\
+
+\f0\b \cf2 import 
+\f1\b0 \cf0 android.widget.AutoCompleteTextView;\
+
+\f0\b \cf2 import 
+\f1\b0 \cf0 android.widget.EditText;\
+
+\f0\b \cf2 import 
+\f1\b0 \cf0 android.widget.ImageView;\
+
+\f0\b \cf2 import 
+\f1\b0 \cf0 android.widget.TextView;\
+
+\f0\b \cf2 import 
+\f1\b0 \cf0 android.widget.Toast;\
+\
+
+\f0\b \cf2 import 
+\f1\b0 \cf0 com.google.android.gms.common.ConnectionResult;\
+
+\f0\b \cf2 import 
+\f1\b0 \cf0 com.google.android.gms.common.api.GoogleApiClient;\
+
+\f0\b \cf2 import 
+\f1\b0 \cf0 com.google.android.gms.common.api.PendingResult;\
+
+\f0\b \cf2 import 
+\f1\b0 \cf0 com.google.android.gms.common.api.ResultCallback;\
+
+\f0\b \cf2 import 
+\f1\b0 \cf0 com.google.android.gms.common.api.Status;\
+
+\f0\b \cf2 import 
+\f1\b0 \cf0 com.google.android.gms.location.FusedLocationProviderClient;\
+
+\f0\b \cf2 import 
+\f1\b0 \cf0 com.google.android.gms.location.LocationServices;\
+
+\f0\b \cf2 import 
+\f1\b0 \cf0 com.google.android.gms.location.places.AutocompletePrediction;\
+
+\f0\b \cf2 import 
+\f1\b0 \cf0 com.google.android.gms.location.places.GeoDataClient;\
+
+\f0\b \cf2 import 
+\f1\b0 \cf0 com.google.android.gms.location.places.Place;\
+
+\f0\b \cf2 import 
+\f1\b0 \cf0 com.google.android.gms.location.places.PlaceBuffer;\
+
+\f0\b \cf2 import 
+\f1\b0 \cf0 com.google.android.gms.location.places.Places;\
+
+\f0\b \cf2 import 
+\f1\b0 \cf0 com.google.android.gms.location.places.ui.PlaceAutocompleteFragment;\
+
+\f0\b \cf2 import 
+\f1\b0 \cf0 com.google.android.gms.location.places.ui.PlaceSelectionListener;\
+
+\f0\b \cf2 import 
+\f1\b0 \cf0 com.google.android.gms.maps.CameraUpdate;\
+
+\f0\b \cf2 import 
+\f1\b0 \cf0 com.google.android.gms.maps.CameraUpdateFactory;\
+
+\f0\b \cf2 import 
+\f1\b0 \cf0 com.google.android.gms.maps.GoogleMap;\
+
+\f0\b \cf2 import 
+\f1\b0 \cf0 com.google.android.gms.maps.OnMapReadyCallback;\
+
+\f0\b \cf2 import 
+\f1\b0 \cf0 com.google.android.gms.maps.SupportMapFragment;\
+
+\f0\b \cf2 import 
+\f1\b0 \cf0 com.google.android.gms.maps.model.LatLng;\
+
+\f0\b \cf2 import 
+\f1\b0 \cf0 com.google.android.gms.maps.model.LatLngBounds;\
+
+\f0\b \cf2 import 
+\f1\b0 \cf0 com.google.android.gms.maps.model.Marker;\
+
+\f0\b \cf2 import 
+\f1\b0 \cf0 com.google.android.gms.maps.model.MarkerOptions;\
+
+\f0\b \cf2 import 
+\f1\b0 \cf0 com.google.android.gms.tasks.OnCompleteListener;\
+
+\f0\b \cf2 import 
+\f1\b0 \cf0 com.google.android.gms.tasks.Task;\
+\
+
+\f0\b \cf2 import 
+\f1\b0 \cf0 java.io.IOException;\
+
+\f0\b \cf2 import 
+\f1\b0 \cf0 java.util.ArrayList;\
+
+\f0\b \cf2 import 
+\f1\b0 \cf0 java.util.List;\
+\
+
+\f0\b \cf2 public class 
+\f1\b0 \cf0 MapsActivity 
+\f0\b \cf2 extends 
+\f1\b0 \cf0 FragmentActivity 
+\f0\b \cf2 implements 
+\f1\b0 \cf0 OnMapReadyCallback, GoogleApiClient.OnConnectionFailedListener \{\
+\
+    
+\f0\b \cf2 private 
+\f1\b0 \cf0 GoogleMap mMap;\
+    
+\f0\b \cf2 private 
+\f1\b0 \cf0 FusedLocationProviderClient mFusedLocationClient;\
+    
+\f0\b \cf2 private static final 
+\f1\b0 \cf0 String FINE_LOCATION = Manifest.permission.ACCESS_FINE_LOCATION;\
+    
+\f0\b \cf2 private static final 
+\f1\b0 \cf0 String COURSE_LOCATION = Manifest.permission.ACCESS_COARSE_LOCATION;\
+    
+\f0\b \cf2 private static final int 
+\f1\b0 \cf0 LOCATION_PERMISSION_REQUEST_CODE = \cf3 1234\cf0 ;\
+    
+\f0\b \cf2 private static final float 
+\f1\b0 \cf0 DEFAULT_ZOOM = \cf3 15\cf0 ;\
+    
+\f0\b \cf2 protected 
+\f1\b0 \cf0 GoogleApiClient mGoogleApiClient;\
+    
+\f0\b \cf2 private static final 
+\f1\b0 \cf0 LatLngBounds LAT_LNG_BOUNDS = 
+\f0\b \cf2 new 
+\f1\b0 \cf0 LatLngBounds(
+\f0\b \cf2 new 
+\f1\b0 \cf0 LatLng(-\cf3 40\cf0 , -\cf3 168\cf0 ), 
+\f0\b \cf2 new 
+\f1\b0 \cf0 LatLng(\cf3 71\cf0 , \cf3 136\cf0 ));\
+\
+    
+\f2\i \cf4 //widgets\
+    
+\f0\i0\b \cf2 private 
+\f1\b0 \cf0 AutoCompleteTextView searchText;\
+    
+\f0\b \cf2 private 
+\f1\b0 \cf0 ImageView GPS;\
+    
+\f0\b \cf2 private 
+\f1\b0 \cf0 ImageView MARKER;\
+    
+\f0\b \cf2 private 
+\f1\b0 \cf0 ImageView BACK;\
+\
+    
+\f0\b \cf2 private 
+\f1\b0 \cf0 Boolean mLocationPermissionsGranted = 
+\f0\b \cf2 false
+\f1\b0 \cf0 ;\
+    
+\f0\b \cf2 private 
+\f1\b0 \cf0 PlaceAutocompleteAdapter placeAutocompleteAdapter;\
+    
+\f0\b \cf2 private 
+\f1\b0 \cf0 Place mPlace;\
+\
+    
+\f0\b \cf2 private 
+\f1\b0 \cf0 LatLng currentLatLng;\
+    
+\f0\b \cf2 private 
+\f1\b0 \cf0 String currentTitle;\
+    
+\f0\b \cf2 private 
+\f1\b0 \cf0 Boolean markerSet;\
+    
+\f0\b \cf2 private 
+\f1\b0 \cf0 Marker marker;\
+\
+\
+\
+\
+\
+\
+    @Override\
+    
+\f0\b \cf2 protected void 
+\f1\b0 \cf0 onCreate(Bundle savedInstanceState) \{\
+        
+\f0\b \cf2 super
+\f1\b0 \cf0 .onCreate(savedInstanceState);\
+        setContentView(R.layout.activity_maps);\
+        searchText = (AutoCompleteTextView) findViewById(R.id.input_search);\
+        GPS = (ImageView) findViewById(R.id.gps);\
+        MARKER = (ImageView) findViewById(R.id.marker);\
+        BACK = (ImageView) findViewById(R.id.back);\
+        getLocationPermission();\
+        markerSet = 
+\f0\b \cf2 false
+\f1\b0 \cf0 ;\
+\
+\
+    \}\
+\
+    
+\f0\b \cf2 private void 
+\f1\b0 \cf0 init()\{\
+\
+\
+        mGoogleApiClient = 
+\f0\b \cf2 new 
+\f1\b0 \cf0 GoogleApiClient\
+                .Builder(
+\f0\b \cf2 this
+\f1\b0 \cf0 )\
+                .addApi(Places.GEO_DATA_API)\
+                .addApi(Places.PLACE_DETECTION_API)\
+                .enableAutoManage(
+\f0\b \cf2 this
+\f1\b0 \cf0 , 
+\f0\b \cf2 this
+\f1\b0 \cf0 )\
+                .build();\
+\
+        searchText.setOnItemClickListener(mAutocompleteClickListner);\
+\
+\
+        placeAutocompleteAdapter = 
+\f0\b \cf2 new 
+\f1\b0 \cf0 PlaceAutocompleteAdapter(
+\f0\b \cf2 this
+\f1\b0 \cf0 , mGoogleApiClient, LAT_LNG_BOUNDS, 
+\f0\b \cf2 null
+\f1\b0 \cf0 );\
+\
+        searchText.setAdapter(placeAutocompleteAdapter);\
+\
+\
+\
+        searchText.setOnEditorActionListener(
+\f0\b \cf2 new 
+\f1\b0 \cf0 TextView.OnEditorActionListener() \{\
+            @Override\
+            
+\f0\b \cf2 public boolean 
+\f1\b0 \cf0 onEditorAction(TextView v, 
+\f0\b \cf2 int 
+\f1\b0 \cf0 actionId, KeyEvent event) \{\
+                
+\f0\b \cf2 if
+\f1\b0 \cf0 (actionId == EditorInfo.IME_ACTION_SEARCH || actionId == EditorInfo.IME_ACTION_DONE || event.getAction() == KeyEvent.ACTION_DOWN || event.getAction() == KeyEvent.KEYCODE_ENTER);\{\
+                    geoLocate();\
+                \}\
+                
+\f0\b \cf2 return false
+\f1\b0 \cf0 ;\
+            \}\
+        \});\
+\
+        GPS.setOnClickListener(
+\f0\b \cf2 new 
+\f1\b0 \cf0 View.OnClickListener() \{\
+            @Override\
+            
+\f0\b \cf2 public void 
+\f1\b0 \cf0 onClick(View v) \{\
+                getDeviceLocation();\
+            \}\
+        \});\
+\
+        MARKER.setOnClickListener(
+\f0\b \cf2 new 
+\f1\b0 \cf0 View.OnClickListener() \{\
+            @Override\
+            
+\f0\b \cf2 public void 
+\f1\b0 \cf0 onClick(View v) \{\
+                
+\f0\b \cf2 if 
+\f1\b0 \cf0 (markerSet == 
+\f0\b \cf2 false
+\f1\b0 \cf0 )\{\
+                    MarkerOptions options = 
+\f0\b \cf2 new 
+\f1\b0 \cf0 MarkerOptions().position(currentLatLng).title(currentTitle);\
+                    marker = mMap.addMarker(options);\
+                    mMap.addMarker(options);\
+                    markerSet = 
+\f0\b \cf2 true
+\f1\b0 \cf0 ;\}\
+                
+\f0\b \cf2 else 
+\f1\b0 \cf0 \{\
+                    mMap.clear();\
+                    markerSet = 
+\f0\b \cf2 false
+\f1\b0 \cf0 ;\
+                    marker = 
+\f0\b \cf2 null
+\f1\b0 \cf0 ;\
+                \}\
+            \}\
+        \});\
+\
+        BACK.setOnClickListener(
+\f0\b \cf2 new 
+\f1\b0 \cf0 View.OnClickListener() \{\
+            @Override\
+            
+\f0\b \cf2 public void 
+\f1\b0 \cf0 onClick(View v) \{\
+                
+\f2\i \cf4 //Intent resultIntent = new Intent();\
+                //resultIntent.putExtra("position", marker.getPosition());\
+                
+\f0\i0\b \cf2 if 
+\f1\b0 \cf0 (marker != 
+\f0\b \cf2 null
+\f1\b0 \cf0 ) \{\
+                    setResult(RESULT_OK, 
+\f0\b \cf2 new 
+\f1\b0 \cf0 Intent().putExtra(
+\f0\b \cf5 "position"
+\f1\b0 \cf0 , marker.getPosition()));\
+                    finish();\
+                \}\
+                
+\f0\b \cf2 else
+\f1\b0 \cf0 \{\
+                    finish();\
+                \}\
+            \}\
+        \});\
+    \}\
+\
+    
+\f0\b \cf2 private void 
+\f1\b0 \cf0 geoLocate()\{\
+        String searchString = searchText.getText().toString();\
+        Geocoder geocoder = 
+\f0\b \cf2 new 
+\f1\b0 \cf0 Geocoder(MapsActivity.
+\f0\b \cf2 this
+\f1\b0 \cf0 );\
+        List<Address> list = 
+\f0\b \cf2 new 
+\f1\b0 \cf0 ArrayList<>();\
+        
+\f0\b \cf2 try
+\f1\b0 \cf0 \{\
+            list = geocoder.getFromLocationName(searchString,\cf3 1\cf0 );\
+\
+        \}
+\f0\b \cf2 catch
+\f1\b0 \cf0 (IOException e)\{\
+\
+        \}\
+        
+\f0\b \cf2 if
+\f1\b0 \cf0 (list.size() > \cf3 0\cf0 )\{\
+            Address address = list.get(\cf3 0\cf0 );\
+\
+            moveCamera(
+\f0\b \cf2 new 
+\f1\b0 \cf0 LatLng(address.getLatitude(), address.getLongitude()), DEFAULT_ZOOM, address.getAddressLine(\cf3 0\cf0 ));\
+\
+        \}\
+    \}\
+\
+    
+\f0\b \cf2 private void 
+\f1\b0 \cf0 getDeviceLocation() \{\
+        mFusedLocationClient = LocationServices.getFusedLocationProviderClient(
+\f0\b \cf2 this
+\f1\b0 \cf0 );\
+\
+        
+\f0\b \cf2 try 
+\f1\b0 \cf0 \{\
+            
+\f0\b \cf2 if 
+\f1\b0 \cf0 (mLocationPermissionsGranted) \{\
+                
+\f0\b \cf2 final 
+\f1\b0 \cf0 Task location = mFusedLocationClient.getLastLocation();\
+                location.addOnCompleteListener(
+\f0\b \cf2 new 
+\f1\b0 \cf0 OnCompleteListener() \{\
+                    @Override\
+                    
+\f0\b \cf2 public void 
+\f1\b0 \cf0 onComplete(@NonNull Task task) \{\
+                        
+\f0\b \cf2 if 
+\f1\b0 \cf0 (task.isSuccessful()) \{\
+                            Location currentLocation = (Location) task.getResult();\
+                            moveCamera(
+\f0\b \cf2 new 
+\f1\b0 \cf0 LatLng(currentLocation.getLatitude(), currentLocation.getLongitude()), DEFAULT_ZOOM, 
+\f0\b \cf5 "My location"
+\f1\b0 \cf0 );\
+                        \} 
+\f0\b \cf2 else 
+\f1\b0 \cf0 \{\
+\
+                        \}\
+                    \}\
+                \});\
+            \}\
+        \} 
+\f0\b \cf2 catch 
+\f1\b0 \cf0 (SecurityException e) \{\
+\
+        \}\
+    \}\
+\
+    
+\f0\b \cf2 private void 
+\f1\b0 \cf0 moveCamera(LatLng latLng, 
+\f0\b \cf2 float 
+\f1\b0 \cf0 zoom, String title) \{\
+        
+\f2\i \cf4 // moving the camera to a new lat and long\
+        
+\f1\i0 \cf0 currentLatLng = latLng;\
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, zoom));\
+        currentTitle = title;\
+\
+\
+       
+\f2\i \cf4 /* if (!title.equals("My Location"))\{\
+            MarkerOptions options = new MarkerOptions().position(latLng).title(title);\
+            mMap.addMarker(options);\
+        \} */\
+    
+\f1\i0 \cf0 \}\
+\
+    
+\f0\b \cf2 private void 
+\f1\b0 \cf0 initMap() \{\
+\
+        
+\f2\i \cf4 // Obtain the SupportMapFragment and get notified when the map is ready to be used.\
+        
+\f1\i0 \cf0 SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()\
+                .findFragmentById(R.id.map);\
+        mapFragment.getMapAsync(
+\f0\b \cf2 this
+\f1\b0 \cf0 );\
+\
+    \}\
+\
+    
+\f0\b \cf2 private void 
+\f1\b0 \cf0 getLocationPermission() \{\
+        String[] permissions = \{Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION\};\
+\
+        
+\f0\b \cf2 if 
+\f1\b0 \cf0 (ContextCompat.checkSelfPermission(
+\f0\b \cf2 this
+\f1\b0 \cf0 .getApplicationContext(), FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) \{\
+            
+\f0\b \cf2 if 
+\f1\b0 \cf0 (ContextCompat.checkSelfPermission(
+\f0\b \cf2 this
+\f1\b0 \cf0 .getApplicationContext(), COURSE_LOCATION) == PackageManager.PERMISSION_GRANTED) \{\
+                mLocationPermissionsGranted = 
+\f0\b \cf2 true
+\f1\b0 \cf0 ;\
+                initMap();\
+            \} 
+\f0\b \cf2 else 
+\f1\b0 \cf0 \{\
+                ActivityCompat.requestPermissions(
+\f0\b \cf2 this
+\f1\b0 \cf0 , permissions, LOCATION_PERMISSION_REQUEST_CODE);\
+            \}\
+        \} 
+\f0\b \cf2 else 
+\f1\b0 \cf0 \{\
+            ActivityCompat.requestPermissions(
+\f0\b \cf2 this
+\f1\b0 \cf0 , permissions, LOCATION_PERMISSION_REQUEST_CODE);\
+        \}\
+    \}\
+\
+    @Override\
+    
+\f0\b \cf2 public void 
+\f1\b0 \cf0 onRequestPermissionsResult(
+\f0\b \cf2 int 
+\f1\b0 \cf0 requestCode, @NonNull String[] permissions, @NonNull 
+\f0\b \cf2 int
+\f1\b0 \cf0 [] grantResults) \{\
+        mLocationPermissionsGranted = 
+\f0\b \cf2 false
+\f1\b0 \cf0 ;\
+\
+        
+\f0\b \cf2 switch 
+\f1\b0 \cf0 (requestCode) \{\
+            
+\f0\b \cf2 case 
+\f1\b0 \cf0 LOCATION_PERMISSION_REQUEST_CODE: \{\
+                
+\f0\b \cf2 if 
+\f1\b0 \cf0 (grantResults.length > \cf3 0\cf0 ) \{\
+                    
+\f0\b \cf2 for 
+\f1\b0 \cf0 (
+\f0\b \cf2 int 
+\f1\b0 \cf0 i = \cf3 0\cf0 ; i < grantResults.length; i++) \{\
+                        
+\f0\b \cf2 if 
+\f1\b0 \cf0 (grantResults[i] != PackageManager.PERMISSION_GRANTED) \{\
+                            mLocationPermissionsGranted = 
+\f0\b \cf2 false
+\f1\b0 \cf0 ;\
+                            
+\f0\b \cf2 return
+\f1\b0 \cf0 ;\
+                        \}\
+                    \}\
+                    mLocationPermissionsGranted = 
+\f0\b \cf2 true
+\f1\b0 \cf0 ;\
+                    initMap();\
+\
+                \}\
+\
+            \}\
+        \}\
+\
+    \}\
+\
+    
+\f2\i \cf4 /**\
+     * Manipulates the map once available.\
+     * This callback is triggered when the map is ready to be used.\
+     * This is where we can add markers or lines, add listeners or move the camera. In this case,\
+     * we just add a marker near Sydney, Australia.\
+     * If Google Play services is not installed on the device, the user will be prompted to install\
+     * it inside the SupportMapFragment. This method will only be triggered once the user has\
+     * installed Google Play services and returned to the app.\
+     */\
+    
+\f1\i0 \cf0 @Override\
+    
+\f0\b \cf2 public void 
+\f1\b0 \cf0 onMapReady(GoogleMap googleMap) \{\
+        Toast.makeText(
+\f0\b \cf2 this
+\f1\b0 \cf0 , 
+\f0\b \cf5 "Map is ready"
+\f1\b0 \cf0 , Toast.LENGTH_SHORT).show();\
+        mMap = googleMap;\
+\
+\
+       
+\f0\b \cf2 if 
+\f1\b0 \cf0 (mLocationPermissionsGranted) \{\
+            getDeviceLocation();\
+\
+            
+\f0\b \cf2 if 
+\f1\b0 \cf0 (ActivityCompat.checkSelfPermission(
+\f0\b \cf2 this
+\f1\b0 \cf0 , Manifest.permission.ACCESS_FINE_LOCATION)\
+                    != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(
+\f0\b \cf2 this
+\f1\b0 \cf0 , Manifest.permission.ACCESS_COARSE_LOCATION)\
+                    != PackageManager.PERMISSION_GRANTED) \{\
+                
+\f0\b \cf2 return
+\f1\b0 \cf0 ;\
+            \}\
+            mMap.setMyLocationEnabled(
+\f0\b \cf2 true
+\f1\b0 \cf0 );\
+            mMap.getUiSettings().setMyLocationButtonEnabled(
+\f0\b \cf2 false
+\f1\b0 \cf0 );\
+\
+            init();\
+\
+        \}\
+\
+    \}\
+\
+    @Override\
+    
+\f0\b \cf2 public void 
+\f1\b0 \cf0 onConnectionFailed(@NonNull ConnectionResult connectionResult) \{\
+\
+    \}\
+\
+    
+\f0\b \cf2 private 
+\f1\b0 \cf0 AdapterView.OnItemClickListener mAutocompleteClickListner = 
+\f0\b \cf2 new 
+\f1\b0 \cf0 AdapterView.OnItemClickListener() \{\
+        @Override\
+        
+\f0\b \cf2 public void 
+\f1\b0 \cf0 onItemClick(AdapterView<?> parent, View view, 
+\f0\b \cf2 int 
+\f1\b0 \cf0 position, 
+\f0\b \cf2 long 
+\f1\b0 \cf0 id) \{\
+\
+            
+\f0\b \cf2 final 
+\f1\b0 \cf0 AutocompletePrediction item = placeAutocompleteAdapter.getItem(position);\
+            
+\f0\b \cf2 final 
+\f1\b0 \cf0 String placeId = item.getPlaceId();\
+\
+            PendingResult<PlaceBuffer> placeResult = Places.GeoDataApi.getPlaceById(mGoogleApiClient, placeId);\
+            placeResult.setResultCallback(mUpdatePlaceDetailsCallback);\
+        \}\
+    \};\
+\
+    
+\f0\b \cf2 private 
+\f1\b0 \cf0 ResultCallback<PlaceBuffer> mUpdatePlaceDetailsCallback = 
+\f0\b \cf2 new 
+\f1\b0 \cf0 ResultCallback<PlaceBuffer>() \{\
+        @Override\
+        
+\f0\b \cf2 public void 
+\f1\b0 \cf0 onResult(@NonNull PlaceBuffer places) \{\
+            
+\f0\b \cf2 final 
+\f1\b0 \cf0 Place place = places.get(\cf3 0\cf0 );\
+            mPlace = place;\
+\
+            moveCamera(mPlace.getLatLng(), DEFAULT_ZOOM, mPlace.getName().toString());\
+\
+\
+\
+        \}\
+    \};\
+\}\
+}
