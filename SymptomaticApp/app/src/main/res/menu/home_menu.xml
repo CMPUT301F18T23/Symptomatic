@@ -25,6 +25,7 @@
                 />
             <item android:id="@+id/action_viewMap"
                 android:title="@string/view_map"
+                android:onClick="viewMap"
                 />
 
             <item android:id="@+id/action_logout"
