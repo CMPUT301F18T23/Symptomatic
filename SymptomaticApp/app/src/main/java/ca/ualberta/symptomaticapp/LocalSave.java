@@ -1,6 +1,8 @@
 package ca.ualberta.symptomaticapp;
 
 import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.net.Uri;
 import android.util.Log;
 
@@ -9,11 +11,13 @@ import java.io.IOException;
 
 public class LocalSave {
     protected Context context;
+    protected boolean offline;
 
     /*
       * When the user is offline, save changes made
         @param context
      */
+
     public LocalSave(Context context) {
         // Initialize LocalSave and pass in the activity's context
         this.context = context;
@@ -21,7 +25,7 @@ public class LocalSave {
 
     /**
      * creates a temporary cache file
-     * @return the created cache file
+     * @return void
      */
     public File createTempCacheFile(Context context, String uri) {
         // Create a temporary file in the cache
@@ -67,4 +71,33 @@ public class LocalSave {
         // Set the context
         this.context = newContext;
     }
+
+    /**
+     * Checks whether the user is connected to Internet
+     * @return true (meaning offline) or false (meaning online)
+     */
+    public boolean checkConnectivity() {
+        ConnectivityManager cm = (ConnectivityManager)context.getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
+        offline = !(activeNetwork != null &&
+                      activeNetwork.isConnectedOrConnecting());
+        return offline;
+    }
+
+    /**
+     * gets whether the user is offline
+     * @return true if they're offline, false if they're not
+     */
+    public boolean getOfflineStatus() {
+        return this.offline;
+    }
+
+    /**
+     * sets whether the user is offline
+     * @return void
+     */
+    public void setOfflineStatus(boolean newStatus) {
+        this.offline = newStatus;
+    }
 }
+

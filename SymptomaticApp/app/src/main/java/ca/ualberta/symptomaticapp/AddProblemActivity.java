@@ -53,6 +53,8 @@ public class AddProblemActivity extends AppCompatActivity {
 
     SimpleDateFormat dateFormatter;
 
+    LocalSave offlineFile;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
