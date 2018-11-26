@@ -70,6 +70,12 @@ public class CaregiverHome extends AppCompatActivity {
         startActivity(intent);
     }
 
+    public void viewViewQR(MenuItem menu) {
+        //adds the view problems button to the menu
+        Intent intent = new Intent(CaregiverHome.this, ViewQRCode.class);
+        startActivity(intent);
+    }
+
     public void viewLogout(MenuItem menu){ //log current caregiver out and open login page
         Login.thisCaregiver = null;
         Login.thisUser = null;

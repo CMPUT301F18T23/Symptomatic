@@ -34,15 +34,16 @@ import java.util.Date;
  * Represents a user record object. Each record is referenced by a problem name and a date.
  */
 public class Record {
-    protected String recordTitle;
-    protected String recordComment;
+    protected String recordTitle,recordComment,user,problem;
+
     protected LatLng geolocation;
-    protected ArrayList<String> bodyLocation;
-    protected ArrayList<String> photos;
+
+    protected ArrayList<String> bodyLocation,photos;
+
     protected ArrayList<Photo> photoList;
+
     protected Date recordDate;
-    protected String user;
-    protected String problem;
+
     static FirebaseFirestore db;
 
 
@@ -51,10 +52,16 @@ public class Record {
      * @param probName: The problem associated with the record
      * @param date: The date of the record
      */
-    public Record(String probName,Date date) {
+    public Record(String probName,Date date,String username,String title) {
       this.recordDate = date;
       this.problem = probName;
-      this.user = Login.thisUser.returnUsername();
+      this.user = username;
+      this.recordTitle = title;
+      this.bodyLocation = null;
+      this.recordComment = null;
+      this.geolocation = null;
+      this.photos = null;
+      this.photoList = null;
     }
 
     public Record(){}
@@ -224,18 +231,14 @@ public class Record {
 
     /**
      * Adds record to a database
-     * @param record
+     * @param
      */
-    public static void addRecToDb(Record record){
+    public void addRecToDb(){
         db = FirebaseFirestore.getInstance();
 
         DocumentReference newUser = db.collection("records")
                 .document();
 
-        newUser.set(record).addOnCompleteListener(new OnCompleteListener<Void>() {
-            @Override
-            public void onComplete(@NonNull Task<Void> task) {
-            }
-        });
+        newUser.set(this);
     }
 }

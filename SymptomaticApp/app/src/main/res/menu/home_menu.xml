@@ -27,6 +27,10 @@
                 android:title="@string/view_map"
                 android:onClick="viewMap"
                 />
+            <item
+                android:id="@+id/action_viewQR"
+                android:onClick="viewViewQR"
+                android:title="@string/view_qr" />
 
             <item android:id="@+id/action_logout"
                 android:title="@string/logout"
