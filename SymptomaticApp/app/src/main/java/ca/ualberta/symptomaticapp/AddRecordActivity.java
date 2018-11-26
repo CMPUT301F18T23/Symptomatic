@@ -284,7 +284,7 @@ public class AddRecordActivity extends AppCompatActivity {
     }
 
     public void viewHome(MenuItem menu) {
-        Intent intent = new Intent(AddRecordActivity.this, AddProblemActivity.class);
+        Intent intent = new Intent(AddRecordActivity.this, MainActivity.class);
         startActivity(intent);
     }
     public void viewEditAccount(MenuItem menu){
@@ -299,6 +299,10 @@ public class AddRecordActivity extends AppCompatActivity {
 
     public void viewAddProblem(MenuItem menu) {
         Intent intent = new Intent(AddRecordActivity.this, AddProblemActivity.class);
+        startActivity(intent);
+    }
+    public void viewViewQR(MenuItem menu) {
+        Intent intent = new Intent(AddRecordActivity.this, ViewQRCode.class);
         startActivity(intent);
     }
 

@@ -2,7 +2,7 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
-        android:id="@+id/editAccountMenuItem"
+        android:id="@+id/homeMenuItem"
         android:title="new"
         android:orderInCategory="101"
         android:icon="@drawable/menu_image"
@@ -13,10 +13,14 @@
             <item android:id="@+id/action_home"
                 android:title="@string/home"
                 android:onClick="viewHome"/>
+            <item android:id="@+id/action_editAccount"
+                android:title="@string/edit_account"
+                android:onClick="viewEditAccount"
+                />
 
             <item android:id="@+id/action_addProblem"
                 android:title="@string/add_problem"
-                android:onClick="viewAddProblems"
+                android:onClick="viewAddProblem"
                 />
 
             <item android:id="@+id/action_viewProblems"
@@ -26,10 +30,6 @@
             <item android:id="@+id/action_viewMap"
                 android:title="@string/view_map"
                 />
-            <item
-                android:id="@+id/action_viewQR"
-                android:onClick="viewViewQR"
-                android:title="@string/view_qr" />
 
             <item android:id="@+id/action_logout"
                 android:title="@string/logout"

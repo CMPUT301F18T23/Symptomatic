@@ -34,8 +34,6 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import java.io.File;
-import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -105,6 +103,10 @@ public class AddProblemActivity extends AppCompatActivity {
         Intent intent = new Intent(AddProblemActivity.this, ListProblemsActivity.class);
         startActivity(intent);
     }
+    public void viewViewQR(MenuItem menu) {
+        Intent intent = new Intent(AddProblemActivity.this, ViewQRCode.class);
+        startActivity(intent);
+    }
     public void viewLogout(MenuItem menu){
         Login.thisCaregiver = null;
         Login.thisUser = null;
@@ -154,7 +156,7 @@ public class AddProblemActivity extends AppCompatActivity {
     }
 
     private void initLayout(){
-        Toolbar toolbar = findViewById(R.id.addProblem_toolbar);
+        Toolbar toolbar = findViewById(R.id.viewQR_toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("Add Problem");
 

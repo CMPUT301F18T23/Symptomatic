@@ -100,6 +100,10 @@ public class ListProblemsActivity extends AppCompatActivity {
         Intent intent = new Intent(ListProblemsActivity.this, AddProblemActivity.class);
         startActivity(intent);
     }
+    public void viewViewQR(MenuItem menu) {
+        Intent intent = new Intent(ListProblemsActivity.this, ViewQRCode.class);
+        startActivity(intent);
+    }
 
     public void viewLogout(MenuItem menu){
         Login.thisCaregiver = null;
