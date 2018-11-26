@@ -71,7 +71,7 @@ public class ListRecordsActivity extends AppCompatActivity {
 
         initRecordView();
 
-        getRecords(Login.thisUser.username);
+        getRecords();
     }
 
     @Override
@@ -106,16 +106,6 @@ public class ListRecordsActivity extends AppCompatActivity {
     }
 
 
-
-
-
-
-
-
-
-
-
-
     private void initRecordView(){
         if(recordListViewAdapter == null){
             recordListViewAdapter = new RecordListViewAdapter(thisRecordList.getRecords(), this);
@@ -123,7 +113,7 @@ public class ListRecordsActivity extends AppCompatActivity {
         recordslistview.setAdapter(recordListViewAdapter);
     }
 
-    private void getRecords(String enteredUser){
+    private void getRecords(){
         db = FirebaseFirestore.getInstance();
 
         final CollectionReference records = db.collection("records");

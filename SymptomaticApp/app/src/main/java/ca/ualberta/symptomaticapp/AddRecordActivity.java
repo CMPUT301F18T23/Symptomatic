@@ -217,6 +217,7 @@ public class AddRecordActivity extends AppCompatActivity {
 
                     // Switch back to the previous activity
                     Intent intent = new Intent(AddRecordActivity.this, ListRecordsActivity.class);
+                    intent.putExtra("problem", problem);
                     startActivity(intent);
                 }
 
