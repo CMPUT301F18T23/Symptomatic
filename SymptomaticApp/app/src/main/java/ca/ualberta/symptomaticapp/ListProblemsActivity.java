@@ -45,8 +45,6 @@ public class ListProblemsActivity extends AppCompatActivity {
 
     private ListView listView;
 
-    private static ArrayList<Problem> displayList;
-
     private String active_problem_count;
 
     private ProblemList thisProbList;
@@ -65,20 +63,18 @@ public class ListProblemsActivity extends AppCompatActivity {
 
         thisProbList = new ProblemList();
 
-        //displayList = new ArrayList<Problem>();
-
         active_problem_count = "Number of active problems:";
         textView.setText(active_problem_count);
 
         initListView();
 
-        getProblems(Login.thisUser.username);
+        getProblems(Login.thisUser.returnUsername());
     }
 
     @Override
     public void onResume(){
         super.onResume();
-        getProblems(Login.thisUser.username);
+        getProblems(Login.thisUser.returnUsername());
         for (Problem thisProblem: thisProbList.getProblems()){
             thisProblem.updateRecords();
             listAdapter.notifyDataSetChanged();
