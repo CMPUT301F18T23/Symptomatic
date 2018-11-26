@@ -35,8 +35,14 @@ public final class LocalSave {
         // Create a temporary file in the cache
         // The app should be offline
 
-        // Method 1: WORKS and places in data/cache
-        File outFile = new File(context.getCacheDir(), fileName+".data");
+        // Make a folder in cache called 'Offline' if it doesn't exist
+        File offlineFolder = new File(LocalSave.this.context.getCacheDir().getAbsolutePath() + File.separator + "Offline");
+        if (!(offlineFolder.exists())) {
+            offlineFolder.mkdirs();
+        }
+
+        // Method 1: WORKS and places in data/cache/Offline
+        File outFile = new File(context.getCacheDir()+"/Offline/", fileName+".data");
         ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(outFile));
         FileOutputStream tempFile = new FileOutputStream(outFile);
 
@@ -46,7 +52,7 @@ public final class LocalSave {
 
         // Method 3: WORKS and places in data/files
 //        FileOutputStream tempFile;
-//        tempFile = context.openFileOutput(fileName+".data", Context.MODE_PRIVATE);
+//        tempFile = context.openFileOutput(fileName + ".data", Context.MODE_PRIVATE);
 
         // For testing:
 //        Log.d("Save Location", LocalSave.this.context.getCacheDir().getAbsolutePath());
