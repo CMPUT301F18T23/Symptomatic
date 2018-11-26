@@ -19,12 +19,14 @@ package ca.ualberta.symptomaticapp;
 
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -57,7 +59,7 @@ public class AddProblemActivity extends AppCompatActivity {
 
     SimpleDateFormat dateFormatter;
 
-    LocalSave localSaveProblem;
+//    LocalSave localSaveProblem;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -142,32 +144,31 @@ public class AddProblemActivity extends AppCompatActivity {
             goodProblem = false;
         }
 
-        // If it's a goodProblem BUT the user is offline
-        if ((goodProblem) && (localSaveProblem.checkConnectivity())) {
-
-
-        }
         if (goodProblem) {
             Problem newProblem = new Problem(title, cal.getTime(), description);
-            if (localSaveProblem.checkConnectivity()) {
+            Context context = this;
+            LocalSave localSaveProblem = new LocalSave(context);
+            if (!(localSaveProblem.checkConnectivity())) {
                 // If the user is offline
 
                 // Get current timestamp
                 DateFormat timestamp = new SimpleDateFormat("dd/MM/yyyy_hh:mm");
-
+//                String timestampStr = timestamp.format(timestamp);
+//
                 // Create filename
-                String fileName = "SymptomaticProblem" + timestamp;
-
-                // Create and write the file to cache
-                FileOutputStream offlineFile = localSaveProblem.createTempCacheFile(getApplicationContext(), fileName);
+                String fileName = "SymptomaticProblem" + timestamp.toString();
+//
+                // Create and write the file   to cache
+                FileOutputStream offlineFile = localSaveProblem.createTempCacheFile(fileName);
+//                Log.d("Save location", AddProblemActivity.this.getFilesDir().getAbsolutePath());
                 localSaveProblem.writeToCacheFile(offlineFile, newProblem);
+
             }
             else {
                 // The user is online. Add newProblem to database
                 newProblem.addProbToDb();
-                finish();
             }
-
+            finish();
             //Intent intent = new Intent(AddProblemActivity.this, ListProblemsActivity.class);
             //startActivity(intent);
         }
