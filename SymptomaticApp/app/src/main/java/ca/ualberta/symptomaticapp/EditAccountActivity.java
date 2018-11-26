@@ -1,6 +1,8 @@
 package ca.ualberta.symptomaticapp;
 
+import android.app.AlertDialog;
 import android.content.Intent;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -8,21 +10,32 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.TextView;
+
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.Query;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 
 public class EditAccountActivity extends AppCompatActivity {
 
-    String UName;
     String email;
     String phoneNumber;
 
-    Boolean goodName;
     Boolean goodEmail;
     Boolean goodPhone;
 
-    String nameError;
     String emailError;
     String phoneError;
+
+    TextView usernameTextView;
+
+    EditText emailTextView,phoneNumberEditText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,14 +45,23 @@ public class EditAccountActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("Edit Account");
 
-        TextView usernameTextView = findViewById(R.id.usernameEditText);
-        usernameTextView.setText(Login.thisUser.username);
+        usernameTextView = findViewById(R.id.usernameEditText);
 
-        TextView emailTextView = findViewById(R.id.emailAddressEditText);
-        emailTextView.setText(Login.thisUser.email);
+        emailTextView = findViewById(R.id.emailAddressEditText);
 
-        TextView phoneNumberEditText = findViewById(R.id.phoneNumberEditText);
-        phoneNumberEditText.setText(Login.thisUser.phone);
+
+        phoneNumberEditText = findViewById(R.id.phoneNumberEditText);
+
+        if(Login.thisUser != null) {
+            usernameTextView.setText(Login.thisUser.username);
+            emailTextView.setText(Login.thisUser.email);
+            phoneNumberEditText.setText(Login.thisUser.phone);
+        } else {
+            usernameTextView.setText(Login.thisCaregiver.username);
+            emailTextView.setText(Login.thisCaregiver.email);
+            phoneNumberEditText.setText(Login.thisCaregiver.phone);
+        }
+
     }
 
     @Override
@@ -69,35 +91,78 @@ public class EditAccountActivity extends AppCompatActivity {
 
     public void editInfo(View V) {
 
-        TextView usernameTextView = findViewById(R.id.usernameEditText);
-        UName = usernameTextView.getText().toString();
-
-        TextView emailTextView = findViewById(R.id.emailAddressEditText);
         email = emailTextView.getText().toString();
-
-        TextView phoneNumberEditText = findViewById(R.id.phoneNumberEditText);
         phoneNumber = phoneNumberEditText.getText().toString();
-
-        // Check for bad username
-        if (UName.length() == 0){
-            goodName = false;
-            nameError = "Username cannot be empty.";
-        } else if (UName.length() < 8){
-            goodName = true;
-            nameError = "Username size must be a minimum of 8 characters.";
-        }
 
         // Check for bad email
         if (email.length() == 0){
             goodEmail = false;
             emailError = "Email cannot be empty";
+        } else if (!User.validateEmail(email)){
+            goodEmail = false;
+            emailError = "Email is not in the valid format";
+        } else {
+            goodEmail = true;
         }
 
+        if (phoneNumber.length() == 0){
+            goodPhone = false;
+            emailError = "Phone cannot be empty";
+        } else if (!User.validatePhone(phoneNumber)){
+            goodPhone = false;
+            phoneError = "Phone is not in a valid format";
+        } else {
+            goodPhone = true;
+        }
 
+        if (!goodPhone){
+            AlertDialog.Builder badUsernameDialog = new AlertDialog.Builder(EditAccountActivity.this);
+            badUsernameDialog.setMessage(phoneError);
+            badUsernameDialog.show();
+        }
+        if (!goodEmail){
+            AlertDialog.Builder badUsernameDialog = new AlertDialog.Builder(EditAccountActivity.this);
+            badUsernameDialog.setMessage(emailError);
+            badUsernameDialog.show();
+        }
 
+        if (goodPhone && goodEmail){
 
+            final FirebaseFirestore db = FirebaseFirestore.getInstance();
 
+            Query userQuery;
+            CollectionReference user;
 
+            if(Login.thisUser != null) {
+                user = db.collection("users");
+                userQuery = user.whereEqualTo("username", Login.thisUser.returnUsername());
+            } else {
+                user = db.collection("caregivers");
+                userQuery = user.whereEqualTo("username", Login.thisUser.returnUsername());
+            }
+            userQuery.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                @Override
+                public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                    if (task.isSuccessful()) {
+                        for (QueryDocumentSnapshot document : task.getResult()) {
+                            if(Login.thisUser != null) {
+                                Login.thisUser = document.toObject(User.class);
+                                String userDocID = document.getId();
+                                DocumentReference thisDocument = db.collection("users").document(userDocID);
+                                thisDocument.update("phone", phoneNumber, "email", email);
+                            } else {
+                                Login.thisCaregiver = document.toObject(Caregiver.class);
+                                String userDocID = document.getId();
+                                DocumentReference thisDocument = db.collection("caregivers").document(userDocID);
+                                thisDocument.update("phone", phoneNumber, "email", email);
+                            }
+                        }
+                        finish();
+                    }
+                }
+            });
+
+        }
     }
 
 }
