@@ -7,18 +7,18 @@
         android:required="true" />
 
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.INTERNET"/>
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
-
-
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <!--
          The ACCESS_COARSE/FINE_LOCATION permissions are not required to use
          Google Maps Android API v2, but you must specify either coarse or fine
          location permissions for the 'MyLocation' functionality. 
     -->
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" /> <!-- If want to keep the photos prviate to the app, uncomment line below -->
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+
+    <!-- If want to keep the photos prviate to the app, uncomment line below -->
     <!-- android:maxSdkVersion="18" /> -->
     <application
         android:allowBackup="true"
@@ -76,10 +76,15 @@
 
         <activity
             android:name=".MapsActivity"
-            android:label="@string/title_activity_maps"></activity>
-        <uses-library android:name="org.apache.http.legacy" android:required="false"/>
+            android:label="@string/title_activity_maps" />
 
+        <uses-library
+            android:name="org.apache.http.legacy"
+            android:required="false" />
 
+        <activity
+            android:name=".MapOfRecordsActivity"
+            android:label="@string/title_activity_map_of_records"></activity>
     </application>
 
 </manifest>

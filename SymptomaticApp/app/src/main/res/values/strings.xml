@@ -84,6 +84,7 @@
     <string name="delete_photo">Delete</string>
     <string name="enter_title3">Enter Title for Record</string>
     <string name="enter_comment">Enter Comment for Record</string>
+    <string name="title_activity_map_of_records">Map2</string>
 
 
 </resources>
