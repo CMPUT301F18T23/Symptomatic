@@ -39,6 +39,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListAdapter;
 import android.widget.ListView;
@@ -91,6 +92,8 @@ public class AddRecordActivity extends AppCompatActivity {
 
     private LatLng geolocation;
 
+    EditText commentEdit,titleEdit;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -111,6 +114,8 @@ public class AddRecordActivity extends AppCompatActivity {
 
         TextView textView = findViewById(R.id.InputProblemTextView);
         textView.setText(problem.getTitle());
+        commentEdit = findViewById(R.id.addCommentEditText);
+        titleEdit = findViewById(R.id.addTitleEditText);
 
         year = cal.get(Calendar.YEAR);
         month = cal.get(Calendar.MONTH);
@@ -211,9 +216,13 @@ public class AddRecordActivity extends AppCompatActivity {
                     String currProbName = problem.getTitle();
                     Date currDate = Calendar.getInstance().getTime();
 
+                    String comment = commentEdit.getText().toString();
+                    String title = titleEdit.getText().toString();
+
                     // Create the new record
-                    Record currRecord = new Record(currProbName, currDate);
-                    Record.addRecToDb(currRecord);
+                    Record currRecord = new Record(currProbName, currDate,Login.thisUser.returnUsername(),title);
+                    currRecord.addComment(comment);
+                    currRecord.addRecToDb();
 
                     // Switch back to the previous activity
                     Intent intent = new Intent(AddRecordActivity.this, ListRecordsActivity.class);
