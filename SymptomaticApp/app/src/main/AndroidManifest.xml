@@ -84,7 +84,8 @@
 
         <activity
             android:name=".MapOfRecordsActivity"
-            android:label="@string/title_activity_map_of_records"></activity>
+            android:label="@string/title_activity_map_of_records" />
+        <activity android:name=".ViewQRCode"></activity>
     </application>
 
 </manifest>

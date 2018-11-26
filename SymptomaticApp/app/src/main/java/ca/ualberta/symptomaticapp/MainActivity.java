@@ -113,6 +113,11 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(MainActivity.this, ListProblemsActivity.class);
         startActivity(intent);
     }
+    public void viewViewQR(MenuItem menu) {
+        //adds the view problems button to the menu
+        Intent intent = new Intent(MainActivity.this, ViewQRCode.class);
+        startActivity(intent);
+    }
 
     public void viewLogout(MenuItem menu){
         //adds the logout button to the menu
