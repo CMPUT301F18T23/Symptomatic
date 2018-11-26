@@ -1,6 +1,7 @@
 package ca.ualberta.symptomaticapp;
 
 import android.Manifest;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Address;
 import android.location.Geocoder;
@@ -39,6 +40,7 @@ import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 
 import java.io.IOException;
@@ -143,7 +145,13 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         BACK.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                finish();
+                if (marker != null) {
+                    setResult(RESULT_OK, new Intent().putExtra("geolocation", marker.getPosition()));
+                    finish();
+                }
+                else{
+                    finish();
+                }
             }
         });
 
@@ -172,23 +180,17 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mFusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
 
         try{
-            if(mLocationPermissionGranted){
-                Task location = mFusedLocationProviderClient.getLastLocation();
-                location.addOnCompleteListener(new OnCompleteListener() {
+            if(mLocationPermissionGranted) {
+                Task<Location> location = mFusedLocationProviderClient.getLastLocation();
+                location.addOnSuccessListener(new OnSuccessListener<Location>() {
                     @Override
-                    public void onComplete(@NonNull Task task) {
-                        if(task.isSuccessful()){
-                            //found location
-                            Location currentLocation = (Location) task.getResult();
+                    public void onSuccess(Location location) {
+                        moveCamera(new LatLng(location.getLatitude(), location.getLongitude()), DEFAULT_ZOOM, "My location");
 
-                            moveCamera(new LatLng(currentLocation.getLatitude(), currentLocation.getLongitude()), DEFAULT_ZOOM, "My location");
-
-                        } else {
-                            // unable to get current location
-                        }
                     }
                 });
             }
+
         }catch (SecurityException e){
 
         }
