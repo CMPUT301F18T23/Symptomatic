@@ -6,12 +6,14 @@ import android.net.NetworkInfo;
 import android.net.Uri;
 import android.util.Log;
 
+import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 
 public class LocalSave {
     protected Context context;
-    protected boolean offline;
+    protected boolean isConnected;
 
     /*
       * When the user is offline, save changes made
@@ -27,13 +29,13 @@ public class LocalSave {
      * creates a temporary cache file
      * @return void
      */
-    public File createTempCacheFile(Context context, String uri) {
+    public File createTempCacheFile(Context context, String fileName) {
         // Create a temporary file in the cache
         // The app should be offline
         File tempFile;
-        String fileName = Uri.parse(uri).getLastPathSegment();
+//        String fileName = Uri.parse(uri).getLastPathSegment();
         try {
-            fileName = Uri.parse(uri).getLastPathSegment();
+//            fileName = Uri.parse(uri).getLastPathSegment();
             tempFile = File.createTempFile(fileName, null, context.getCacheDir());
         } catch (IOException e) {
             Log.d("CACHE ERROR", "Temporary file was not created.");
@@ -43,6 +45,12 @@ public class LocalSave {
         }
        return tempFile;
     }
+
+//    public void writeToCacheFile(File tempOfflineFile, ) throws IOException {
+//        FileWriter fileWriter = new FileWriter(tempOfflineFile, true);
+//        BufferedWriter bw = new BufferedWriter(fileWriter);
+//
+//    }
 
     /**
      * deletes the temporary cache file
@@ -79,25 +87,25 @@ public class LocalSave {
     public boolean checkConnectivity() {
         ConnectivityManager cm = (ConnectivityManager)context.getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
-        offline = !(activeNetwork != null &&
+        isConnected = !(activeNetwork != null &&
                       activeNetwork.isConnectedOrConnecting());
-        return offline;
+        return isConnected;
     }
 
     /**
      * gets whether the user is offline
      * @return true if they're offline, false if they're not
      */
-    public boolean getOfflineStatus() {
-        return this.offline;
+    public boolean getIsConnected() {
+        return this.isConnected;
     }
 
     /**
      * sets whether the user is offline
      * @return void
      */
-    public void setOfflineStatus(boolean newStatus) {
-        this.offline = newStatus;
+    public void setIsConnected(boolean newStatus) {
+        this.isConnected = newStatus;
     }
 }
 

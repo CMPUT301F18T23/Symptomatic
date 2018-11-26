@@ -34,6 +34,8 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import java.io.File;
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -53,7 +55,6 @@ public class AddProblemActivity extends AppCompatActivity {
 
     SimpleDateFormat dateFormatter;
 
-    LocalSave offlineFile;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
