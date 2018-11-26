@@ -82,7 +82,8 @@
     <string name="view_map">View Map</string>
 
     <string name="delete_photo">Delete</string>
-
+    <string name="enter_title3">Enter Title for Record</string>
+    <string name="enter_comment">Enter Comment for Record</string>
 
 
 </resources>
