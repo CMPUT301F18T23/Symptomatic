@@ -8,8 +8,10 @@ import android.util.Log;
 
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.ObjectOutputStream;
 
 public class LocalSave {
     protected Context context;
@@ -29,28 +31,29 @@ public class LocalSave {
      * creates a temporary cache file
      * @return void
      */
-    public File createTempCacheFile(Context context, String fileName) {
+    public FileOutputStream createTempCacheFile(Context context, String fileName) throws IOException{
         // Create a temporary file in the cache
         // The app should be offline
-        File tempFile;
-//        String fileName = Uri.parse(uri).getLastPathSegment();
-        try {
-//            fileName = Uri.parse(uri).getLastPathSegment();
-            tempFile = File.createTempFile(fileName, null, context.getCacheDir());
-        } catch (IOException e) {
-            Log.d("CACHE ERROR", "Temporary file was not created.");
-
-            // Create the file using another method
-            tempFile = new File(context.getCacheDir(), fileName);
-        }
+        FileOutputStream tempFile;
+//        try {
+            tempFile = context.openFileOutput(fileName, Context.MODE_PRIVATE);
+//        } catch (IOException e) {
+//            Log.d("CACHE ERROR", "Temporary file was not created.");
+//
+//            // Create the file using another method
+////            tempFile = new File(context.getCacheDir(), fileName);
+//        }
        return tempFile;
     }
 
-//    public void writeToCacheFile(File tempOfflineFile, ) throws IOException {
-//        FileWriter fileWriter = new FileWriter(tempOfflineFile, true);
-//        BufferedWriter bw = new BufferedWriter(fileWriter);
-//
-//    }
+
+    public void writeToCacheFile(FileOutputStream tempOfflineFile, Object object) throws IOException {
+        ObjectOutputStream newFile = new ObjectOutputStream(tempOfflineFile);
+        newFile.writeObject(object);
+        newFile.close();
+        tempOfflineFile.close();
+
+    }
 
     /**
      * deletes the temporary cache file
