@@ -35,6 +35,8 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -55,6 +57,7 @@ public class AddProblemActivity extends AppCompatActivity {
 
     SimpleDateFormat dateFormatter;
 
+    LocalSave localSaveProblem;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -113,7 +116,7 @@ public class AddProblemActivity extends AppCompatActivity {
     }
 
 
-    public void addProblem(View v){
+    public void addProblem(View v) throws IOException{
         title = editTextTitle.getText().toString();
         description = editTextDescription.getText().toString();
 
@@ -139,10 +142,32 @@ public class AddProblemActivity extends AppCompatActivity {
             goodProblem = false;
         }
 
+        // If it's a goodProblem BUT the user is offline
+        if ((goodProblem) && (localSaveProblem.checkConnectivity())) {
+
+
+        }
         if (goodProblem) {
             Problem newProblem = new Problem(title, cal.getTime(), description);
-            newProblem.addProbToDb();
-            finish();
+            if (localSaveProblem.checkConnectivity()) {
+                // If the user is offline
+
+                // Get current timestamp
+                DateFormat timestamp = new SimpleDateFormat("dd/MM/yyyy_hh:mm");
+
+                // Create filename
+                String fileName = "SymptomaticProblem" + timestamp;
+
+                // Create and write the file to cache
+                FileOutputStream offlineFile = localSaveProblem.createTempCacheFile(getApplicationContext(), fileName);
+                localSaveProblem.writeToCacheFile(offlineFile, newProblem);
+            }
+            else {
+                // The user is online. Add newProblem to database
+                newProblem.addProbToDb();
+                finish();
+            }
+
             //Intent intent = new Intent(AddProblemActivity.this, ListProblemsActivity.class);
             //startActivity(intent);
         }

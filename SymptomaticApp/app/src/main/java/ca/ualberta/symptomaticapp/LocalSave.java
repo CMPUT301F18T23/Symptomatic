@@ -35,15 +35,8 @@ public class LocalSave {
         // Create a temporary file in the cache
         // The app should be offline
         FileOutputStream tempFile;
-//        try {
-            tempFile = context.openFileOutput(fileName, Context.MODE_PRIVATE);
-//        } catch (IOException e) {
-//            Log.d("CACHE ERROR", "Temporary file was not created.");
-//
-//            // Create the file using another method
-////            tempFile = new File(context.getCacheDir(), fileName);
-//        }
-       return tempFile;
+        tempFile = context.openFileOutput(fileName, Context.MODE_PRIVATE);
+        return tempFile;
     }
 
 
@@ -52,8 +45,8 @@ public class LocalSave {
         newFile.writeObject(object);
         newFile.close();
         tempOfflineFile.close();
-
     }
+
 
     /**
      * deletes the temporary cache file
