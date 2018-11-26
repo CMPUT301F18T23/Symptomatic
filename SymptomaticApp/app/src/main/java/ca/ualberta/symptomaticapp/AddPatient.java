@@ -24,6 +24,8 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.google.zxing.integration.android.IntentIntegrator;
+import com.google.zxing.integration.android.IntentResult;
 
 public class AddPatient extends AppCompatActivity {
     public static User addedpatient;
@@ -42,6 +44,7 @@ public class AddPatient extends AppCompatActivity {
         //get buttons from UI
         Button cancel = (Button) findViewById(R.id.btn_Cancel);
         Button addpatient = (Button) findViewById(R.id.btn_addpatient);
+        Button scanqr = (Button) findViewById(R.id.btn_addpatientqr);
         cancel.setOnClickListener(new View.OnClickListener() { // on cancel click
             @Override
             public void onClick(View v) { //cancel button listener
@@ -94,6 +97,17 @@ public class AddPatient extends AppCompatActivity {
             }
         });
     }
+    public void scanqr(){
+        IntentIntegrator integrator = new IntentIntegrator(this);
+        integrator.initiateScan();
+    }
+    public void onActivityResult(int requestCode, int resultCode, Intent intent) {
+        IntentResult scanResult = IntentIntegrator.parseActivityResult(requestCode, resultCode, intent);
+        if (scanResult != null && scanResult.getContents()!=null) {
+            Toast.makeText(AddPatient.this, scanResult.getContents(), Toast.LENGTH_SHORT).show(); //display message.
+        }
+     }
+
     //toolbar methods
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
