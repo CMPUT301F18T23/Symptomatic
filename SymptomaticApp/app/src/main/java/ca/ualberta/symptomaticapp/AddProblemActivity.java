@@ -36,13 +36,12 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TextView;
 
-<<<<<<< HEAD
-=======
+
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.text.DateFormat;
->>>>>>> b1df0c23afeaaf82f5d33123a29e7ea48e5a5a5c
+
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
