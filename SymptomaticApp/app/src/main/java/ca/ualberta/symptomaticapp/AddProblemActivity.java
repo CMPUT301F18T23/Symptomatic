@@ -59,8 +59,6 @@ public class AddProblemActivity extends AppCompatActivity {
 
     SimpleDateFormat dateFormatter;
 
-//    LocalSave localSaveProblem;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -152,11 +150,11 @@ public class AddProblemActivity extends AppCompatActivity {
                 // If the user is offline
 
                 // Get current timestamp
-                DateFormat timestamp = new SimpleDateFormat("dd/MM/yyyy_hh:mm");
+                String timestampStr = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
 //                String timestampStr = timestamp.format(timestamp);
 //
                 // Create filename
-                String fileName = "SymptomaticProblem" + timestamp.toString();
+                String fileName = "SymptomaticProblem" + timestampStr;
 //
                 // Create and write the file   to cache
                 FileOutputStream offlineFile = localSaveProblem.createTempCacheFile(fileName);
