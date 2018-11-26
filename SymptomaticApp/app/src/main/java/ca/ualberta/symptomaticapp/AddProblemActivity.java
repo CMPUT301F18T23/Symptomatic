@@ -19,12 +19,14 @@ package ca.ualberta.symptomaticapp;
 
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -34,6 +36,13 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TextView;
 
+<<<<<<< HEAD
+=======
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.text.DateFormat;
+>>>>>>> b1df0c23afeaaf82f5d33123a29e7ea48e5a5a5c
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -52,7 +61,6 @@ public class AddProblemActivity extends AppCompatActivity {
     String chosenDateText,title,description;
 
     SimpleDateFormat dateFormatter;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -115,7 +123,7 @@ public class AddProblemActivity extends AppCompatActivity {
     }
 
 
-    public void addProblem(View v){
+    public void addProblem(View v) throws IOException{
         title = editTextTitle.getText().toString();
         description = editTextDescription.getText().toString();
 
@@ -143,7 +151,28 @@ public class AddProblemActivity extends AppCompatActivity {
 
         if (goodProblem) {
             Problem newProblem = new Problem(title, cal.getTime(), description);
-            newProblem.addProbToDb();
+            Context context = this;
+            LocalSave localSaveProblem = new LocalSave(context);
+            if (!(localSaveProblem.checkConnectivity())) {
+                // If the user is offline
+
+                // Get current timestamp
+                String timestampStr = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
+//                String timestampStr = timestamp.format(timestamp);
+//
+                // Create filename
+                String fileName = "SymptomaticProblem" + timestampStr;
+//
+                // Create and write the file   to cache
+                FileOutputStream offlineFile = localSaveProblem.createTempCacheFile(fileName);
+//                Log.d("Save location", AddProblemActivity.this.getFilesDir().getAbsolutePath());
+                localSaveProblem.writeToCacheFile(offlineFile, newProblem);
+
+            }
+            else {
+                // The user is online. Add newProblem to database
+                newProblem.addProbToDb();
+            }
             finish();
             //Intent intent = new Intent(AddProblemActivity.this, ListProblemsActivity.class);
             //startActivity(intent);
