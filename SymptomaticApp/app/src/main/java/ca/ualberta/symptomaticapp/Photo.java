@@ -37,7 +37,7 @@ public class Photo {
     protected Integer photoSize;
     protected byte[] photoByteArray;
     protected Bitmap photoBitmap;
-//    protected int quality;
+    protected Bitmap reducedSizeBitmap;
 
     /**
      * Constructor for photo
@@ -71,8 +71,10 @@ public class Photo {
         // for testing: Log.d("Checked Bitmap Size", "hello" );
         if (photoByteArray.length > 65536){
             int size = photoByteArray.length/65536;
-            int quality = 100/size;
-            compressPhoto(quality);
+            if (size > 0) {
+                int quality = 100 / size;
+                compressPhoto(quality);
+            }
         }
         // If bitmap doesn't exceed the maximum size, then set the photoSize
         this.setPhotoSize(photoByteArray.length);
@@ -117,7 +119,7 @@ public class Photo {
         if(photoBitmap.compress(Bitmap.CompressFormat.JPEG, quality, stream)) {
             this.photoByteArray = stream.toByteArray();
             // for testing: Log.d("COMPRESSION COUNTER:", "harry potter");
-            this.photoBitmap = BitmapFactory.decodeByteArray(photoByteArray, 0, photoByteArray.length);
+            this.reducedSizeBitmap = BitmapFactory.decodeByteArray(photoByteArray, 0, photoByteArray.length);
 
         }
         else{
