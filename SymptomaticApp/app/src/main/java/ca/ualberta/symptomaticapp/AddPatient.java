@@ -29,6 +29,7 @@ import com.google.zxing.integration.android.IntentResult;
 
 public class AddPatient extends AppCompatActivity {
     public static User addedpatient;
+    private Caregiver caregiver;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,8 +40,7 @@ public class AddPatient extends AppCompatActivity {
         getSupportActionBar().setTitle("Add Patient");
         //end of toolbar setup.
 
-
-        final Caregiver caregiver = Login.thisCaregiver; //get caregiver from login page.
+        caregiver = Login.thisCaregiver; //get caregiver from login page.
         //get buttons from UI
         Button cancel = (Button) findViewById(R.id.btn_Cancel);
         Button addpatient = (Button) findViewById(R.id.btn_addpatient);
@@ -57,56 +57,66 @@ public class AddPatient extends AppCompatActivity {
             public void onClick(View v) { //add patient button listener
                 EditText entry = (EditText) findViewById(R.id.et_username); //find the edittext
                 final String content= entry.getText().toString(); //get their entry
-                FirebaseFirestore db = FirebaseFirestore.getInstance(); //get our db
-                CollectionReference active_users = db.collection("users"); //looking at collection patients
-
-                //Build the query
-                Query query = active_users
-                        .whereEqualTo("username",content);
-
-                query.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                    //If Query Worked on not
-                    @Override
-                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                        if(task.isSuccessful()){
-                            //Query Worked
-                            if (task.getResult().size() == 1){
-                                //A user with that username exists
-                                for(QueryDocumentSnapshot document: task.getResult()){
-                                    addedpatient = document.toObject(User.class); //get patient object from db
-                                    caregiver.addPatient(addedpatient.returnUsername()); //add the patient
-                                    Toast.makeText(AddPatient.this, "Patient added!", Toast.LENGTH_SHORT).show(); //display message.
-                                    Intent intent = new Intent(AddPatient.this, ViewPatients.class);
-                                    startActivity(intent); //go to the view patients activity.
-                                }
-                            } else if (content.isEmpty()) {
-                                //No users with that username exists
-                                Toast.makeText(AddPatient.this, "Username not entered.", Toast.LENGTH_SHORT).show();
-
-                            }
-                            else {
-                                //No users with that username exists
-                                Toast.makeText(AddPatient.this, "User Does Not Exist.", Toast.LENGTH_SHORT).show();
-                            }
-                        } else {
-                            //Query Did not Work
-                            Toast.makeText(AddPatient.this, "Load Error", Toast.LENGTH_SHORT).show();
-                        }
-                    }
-                });
+                validEntry(content, "patient");
             }
         });
     }
-    public void scanqr(){
+    public void scanqr(View v){
         IntentIntegrator integrator = new IntentIntegrator(this);
         integrator.initiateScan();
     }
     public void onActivityResult(int requestCode, int resultCode, Intent intent) {
         IntentResult scanResult = IntentIntegrator.parseActivityResult(requestCode, resultCode, intent);
         if (scanResult != null && scanResult.getContents()!=null) {
-            Toast.makeText(AddPatient.this, scanResult.getContents(), Toast.LENGTH_SHORT).show(); //display message.
+            Toast.makeText(AddPatient.this, "Scan successful!", Toast.LENGTH_SHORT).show(); //display message.
         }
-     }
+        String entry = scanResult.getContents();
+        validEntry(entry.split(",")[0],entry.split(",")[1]);
+    }
+    public boolean validEntry(final String username, String type){
+        //check if scanned user is a patient/caregiver
+        if (type=="caregiver"){
+            Toast.makeText(this, "User is not a patient!", Toast.LENGTH_SHORT).show();
+        }
+        FirebaseFirestore db = FirebaseFirestore.getInstance(); //get our db
+        CollectionReference active_users = db.collection("users"); //looking at collection patients
+
+        //Build the query
+        Query query = active_users
+                .whereEqualTo("username",username);
+
+        query.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            //If Query Worked on not
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                if(task.isSuccessful()){
+                    //Query Worked
+                    if (task.getResult().size() == 1){
+                        //A user with that username exists
+                        for(QueryDocumentSnapshot document: task.getResult()){
+                            caregiver.addPatient(username); //add the patient
+                            Toast.makeText(AddPatient.this, "Patient added!", Toast.LENGTH_SHORT).show(); //display message.
+                            Intent intent = new Intent(AddPatient.this, ViewPatients.class);
+                            startActivity(intent); //go to the view patients activity.
+                        }
+                    } else if (username=="") {
+                        //No users with that username exists
+                        Toast.makeText(AddPatient.this, "Username not entered.", Toast.LENGTH_SHORT).show();
+
+                    }
+                    else {
+                        //No users with that username exists
+                        Toast.makeText(AddPatient.this, "User Does Not Exist.", Toast.LENGTH_SHORT).show();
+                    }
+                } else {
+                    //Query Did not Work
+                    Toast.makeText(AddPatient.this, "Load Error", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
+        return false;
+    }
 
     //toolbar methods
     @Override
