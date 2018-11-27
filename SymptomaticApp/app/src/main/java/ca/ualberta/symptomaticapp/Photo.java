@@ -61,7 +61,7 @@ public class Photo {
 //        this.photoByteArray = stream.toByteArray();
 
         // Check bitmap size and compress if necessary
-        this.checkBitmapSize();
+        checkBitmapSize();
     }
 
     /**
@@ -70,7 +70,9 @@ public class Photo {
     private void checkBitmapSize() {
         // for testing: Log.d("Checked Bitmap Size", "hello" );
         if (photoByteArray.length > 65536){
-            compressPhoto();
+            int size = photoByteArray.length/65536;
+            int quality = 100/size;
+            compressPhoto(quality);
         }
         // If bitmap doesn't exceed the maximum size, then set the photoSize
         this.setPhotoSize(photoByteArray.length);
@@ -108,17 +110,14 @@ public class Photo {
      * If initial photo size is larger than specified, compress the photo
      * and do so continually until the photo is under the specified size
      */
-    public void compressPhoto() {
+    public void compressPhoto(int quality) {
         // If the photo's size exceeds 65536 bytes, compress the image.
         ByteArrayOutputStream stream = new ByteArrayOutputStream();
 
-        if(photoBitmap.compress(Bitmap.CompressFormat.JPEG, 20, stream)) {
+        if(photoBitmap.compress(Bitmap.CompressFormat.JPEG, quality, stream)) {
             this.photoByteArray = stream.toByteArray();
             // for testing: Log.d("COMPRESSION COUNTER:", "harry potter");
             this.photoBitmap = BitmapFactory.decodeByteArray(photoByteArray, 0, photoByteArray.length);
-            // for testing: Log.d("Photo Size:", photoSize.toString());
-            // for testing: this.quality = this.quality - 10; // // decremnt quality if we want, assuming it doesnt go to 0
-            this.checkBitmapSize();
 
         }
         else{
