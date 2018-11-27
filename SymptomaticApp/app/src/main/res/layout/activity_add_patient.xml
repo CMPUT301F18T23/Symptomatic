@@ -75,6 +75,24 @@
 
         </LinearLayout>
 
+        <TextView
+            android:id="@+id/tv_qrscantip"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAlignment="center"
+            android:layout_marginTop="25dp"
+            android:text="@string/qrscantip" />
+
+        <Button
+            android:id="@+id/btn_addpatientqr"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAlignment="center"
+            android:text="@string/scanqr"
+            android:onClick="scanqr"
+            android:layout_marginTop="10dp"
+            android:layout_gravity="center_horizontal"/>
+
 
     </LinearLayout>
 </android.support.constraint.ConstraintLayout>

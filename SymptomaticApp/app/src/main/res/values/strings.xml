@@ -88,6 +88,8 @@
     <string name="qr_desc">This is your unique QR code!</string>
     <string name="Return">Return</string>
     <string name="view_qr">View QR Code</string>
+    <string name="qrscantip">Or, add a patient by scanning their QR code:</string>
+    <string name="scanqr">Scan QR Code</string>
 
 
 </resources>
