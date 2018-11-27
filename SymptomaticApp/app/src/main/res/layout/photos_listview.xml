@@ -8,20 +8,22 @@
         android:id="@+id/photoImage"
         android:layout_width="100dp"
         android:layout_height="80dp"
-        android:layout_alignTop="@+id/photoDate"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="5dp"
         android:adjustViewBounds="true"
-        app:srcCompat="@android:drawable/ic_menu_camera"
-        android:layout_alignParentLeft="true" />
+        android:paddingTop="3dp"
+        android:paddingBottom="3dp"
+        app:srcCompat="@android:drawable/ic_menu_camera" />
 
     <TextView
         android:id="@+id/photoDate"
-        android:layout_width="170dp"
+        android:layout_width="140dp"
         android:layout_height="wrap_content"
-        android:layout_toLeftOf="@id/photoImage"
+        android:layout_alignBaseline="@+id/photoDelete"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="105dp"
         android:paddingLeft="8dp"
-        android:layout_alignParentRight="true"
-        android:layout_marginBottom="100dp"
-        android:layout_marginRight="105dp"
         android:text="TextView" />
 
     <Button
