@@ -17,6 +17,7 @@ package ca.ualberta.symptomaticapp;
 
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
+import android.app.Dialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -36,10 +37,12 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ListAdapter;
 import android.widget.ListView;
@@ -76,6 +79,11 @@ public class AddRecordActivity extends AppCompatActivity {
     PhotoListViewAdapter photoListViewAdapter;
     ArrayList<Photo> displayPhotos;
 
+    Button addBodyPart;
+
+    Boolean backHeadSelected,backRightShoulderSelected,backLeftShoulderSelected;
+
+    ArrayList<String> bodyPartsSelected;
 
     Bitmap bmp;
 
@@ -105,9 +113,16 @@ public class AddRecordActivity extends AppCompatActivity {
         final Calendar cal = Calendar.getInstance();
 //        ListView photoListView = findViewById(R.id.photoListView);
 
+        bodyPartsSelected = new ArrayList<>();
+
+        backHeadSelected = false;
+        backRightShoulderSelected = false;
+        backLeftShoulderSelected = false;
+
 
         problem = (Problem) getIntent().getSerializableExtra("problem");
 
+        addBodyPart = findViewById(R.id.addBodyPart);
 
         photoListView = findViewById(R.id.photoListView);
         displayPhotos = new ArrayList<Photo>();
@@ -122,6 +137,13 @@ public class AddRecordActivity extends AppCompatActivity {
         day = cal.get(Calendar.DAY_OF_MONTH);
 
         selectedDateDone = false;
+
+        addBodyPart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                addBodyPartDialog();
+            }
+        });
 
 
         Button dateButton = findViewById(R.id.changeDateButton);
@@ -422,6 +444,93 @@ public class AddRecordActivity extends AppCompatActivity {
 //        }
 
 
+    }
+
+    private void addBodyPartDialog() {
+        final Dialog bodyPartDialog = new Dialog(AddRecordActivity.this);
+        bodyPartDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        bodyPartDialog.setContentView(R.layout.body_part_back);
+        bodyPartDialog.setTitle("Select Body Parts");
+
+        /*final ImageButton close = bodyPartDialog.findViewById(R.id.saveclose);
+        close.setEnabled(true);
+        close.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                bodyPartDialog.cancel();
+            }
+        });*/
+
+        final ImageButton head = bodyPartDialog.findViewById(R.id.back_head);
+        head.setEnabled(true);
+        head.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v){
+                if(backHeadSelected){
+                    head.setImageResource(R.drawable.back_head);
+                    backHeadSelected = false;
+                    bodyPartsSelected.remove("Back Head");
+                } else {
+                    head.setImageResource(R.drawable.back_head_selected);
+                    backHeadSelected = true;
+                    bodyPartsSelected.add("Back Head");
+                }
+            }
+        });
+        final ImageButton backLeftShoulder = bodyPartDialog.findViewById(R.id.back_left_shoulder);
+        backLeftShoulder.setEnabled(true);
+        backLeftShoulder.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v){
+                if(backLeftShoulderSelected){
+                    backLeftShoulder.setImageResource(R.drawable.back_left_shoulder);
+                    backLeftShoulderSelected = false;
+                    bodyPartsSelected.remove("Back Left Shoulder");
+                } else {
+                    backLeftShoulder.setImageResource(R.drawable.back_left_shoulder_selected);
+                    backLeftShoulderSelected = true;
+                    bodyPartsSelected.add("Back Left Shoulder");
+                }
+            }
+        });
+        final ImageButton backRightShoulder = bodyPartDialog.findViewById(R.id.back_right_shoulder);
+        backRightShoulder.setEnabled(true);
+        backRightShoulder.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v){
+                if(backRightShoulderSelected){
+                    backRightShoulder.setImageResource(R.drawable.back_right_shoulder);
+                    backRightShoulderSelected = false;
+                    bodyPartsSelected.remove("Back Right Shoulder");
+                } else {
+                    backRightShoulder.setImageResource(R.drawable.back_right_shoulder_selected);
+                    backRightShoulderSelected = true;
+                    bodyPartsSelected.add("Back Right Shoulder");
+                }
+            }
+        });
+
+        /* BLANK TO DO
+        final Image Button ________ = bodyPartDialog.findViewById(R.id.____)
+        ___________.setEnabled(true);
+        ___________.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v){
+                if(______________Selected){
+                    ______________.setImageResource(R.drawable._______________);
+                    ________________Selected = false;
+                    bodyPartsSelected.remove("_______");
+                } else {
+                    ______________.setImageResource(R.drawable._____________selected);
+                    ______________Selected = true;
+                    bodyPartsSelected.add("__________");
+                }
+            }
+        });
+
+         */
+
+        bodyPartDialog.show();
     }
 }
 
