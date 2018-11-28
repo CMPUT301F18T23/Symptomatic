@@ -79,7 +79,7 @@ public class AddRecordActivity extends AppCompatActivity {
     Button addBackBodyPart,addFrontBodyPart;
 
     private boolean backRightForearmSelected, leftButtoxSelected, backHeadSelected, backRightFootSelected, backLeftHandSelected, backLeftAnkleSelected, backLeftKneeSelected, leftTricepSelected, backRightShoulderSelected, backLeftFootSelected, backLeftForearmSelected, backLeftShoulderSelected, backRightAnkleSelected, lowerBackSelected, upperBackSelected, rightButtoxSelected, backRightThighSelected, rightTricepSelected, midBackSelected, backLeftCalveSelected, backRightCalveSelected, backRightHandSelected, backRightKneeSelected, backLeftThighSelected;
-    private boolean frontRightHandSelected, leftShinSelected, frontLeftFootSelected, frontRightThighSelected, frontRightFootSelected, frontLeftThighSelected, abdomenSelected, frontRightForearmSelected, frontLeftForearmSelected, upperChestSelected, rightShinSelected, rightBicepSelected, groinSelected, leftBicepSelected, frontLeftKneeSelected, frontLeftHandSelected, faceSelected, frontRightKneeSelected, rightShoulderSelected, leftShoulderSelected;
+    private boolean frontRightHandSelected, leftShinSelected, frontLeftFootSelected, frontRightThighSelected, frontRightFootSelected, frontLeftThighSelected, abdomenSelected, frontRightForearmSelected, frontLeftForearmSelected, upperChestSelected, rightShinSelected, rightBicepSelected, groinSelected, leftBicepSelected, frontLeftKneeSelected, frontLeftHandSelected, faceSelected, frontRightKneeSelected, rightShoulderSelected, leftShoulderSelected, eyesSelected, mouthSelected, hairSelected, earsSelected, noseSelected;
 
 
     ArrayList<String> bodyPartsSelected;
@@ -117,8 +117,6 @@ public class AddRecordActivity extends AppCompatActivity {
 
         backRightForearmSelected = false; leftButtoxSelected = false; backHeadSelected = false; backRightFootSelected = false; backLeftHandSelected = false; backLeftAnkleSelected = false; backLeftKneeSelected = false; leftTricepSelected = false; backRightShoulderSelected = false; backLeftFootSelected = false; backLeftForearmSelected = false; backLeftShoulderSelected = false; backRightAnkleSelected = false; lowerBackSelected = false; upperBackSelected = false; rightButtoxSelected = false; backRightThighSelected = false; rightTricepSelected = false; midBackSelected = false; backLeftCalveSelected = false; backRightCalveSelected = false; backRightHandSelected = false; backRightKneeSelected = false; backLeftThighSelected = false;
         frontRightHandSelected = false; leftShinSelected = false; frontLeftFootSelected = false; frontRightThighSelected = false; frontRightFootSelected = false; frontLeftThighSelected = false; abdomenSelected = false; frontRightForearmSelected = false; frontLeftForearmSelected = false; upperChestSelected = false; rightShinSelected = false; rightBicepSelected = false; groinSelected = false; leftBicepSelected = false; frontLeftKneeSelected = false; frontLeftHandSelected = false; faceSelected = false; frontRightKneeSelected = false; rightShoulderSelected = false; leftShoulderSelected = false;
-
-
 
         problem = (Problem) getIntent().getSerializableExtra("problem");
 
@@ -443,6 +441,15 @@ public class AddRecordActivity extends AppCompatActivity {
         frontBodyPartDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         frontBodyPartDialog.setContentView(R.layout.body_part_front);
         frontBodyPartDialog.setTitle("Select Body Parts");
+
+        final Button toBack = frontBodyPartDialog.findViewById(R.id.linkToBack);
+        toBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                backBodyPartDialog();
+                frontBodyPartDialog.dismiss();
+            }
+        });
 
         final Button close = frontBodyPartDialog.findViewById(R.id.saveclose);
         close.setOnClickListener(new View.OnClickListener() {
@@ -807,6 +814,7 @@ public class AddRecordActivity extends AppCompatActivity {
 //Gets a click for the Face button
         final ImageButton face = frontBodyPartDialog.findViewById(R.id.face);
         face.setEnabled(true);
+        final Dialog faceInfo = new Dialog(AddRecordActivity.this);
         if(faceSelected){
             face.setImageResource(R.drawable.face_selected);
         }
@@ -814,6 +822,7 @@ public class AddRecordActivity extends AppCompatActivity {
             @Override
             public void onClick(View v){
                 if(faceSelected){
+                    //faceInfo.show();
                     face.setImageResource(R.drawable.face);
                     faceSelected = false;
                     bodyPartsSelected.remove("Face");
@@ -898,7 +907,16 @@ public class AddRecordActivity extends AppCompatActivity {
         final Dialog backBodyPartDialog = new Dialog(AddRecordActivity.this);
         backBodyPartDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         backBodyPartDialog.setContentView(R.layout.body_part_back);
-        backBodyPartDialog.setTitle("Select Body Parts");
+        backBodyPartDialog.setTitle("Select Back Body Parts");
+
+        final Button toFront = backBodyPartDialog.findViewById(R.id.linkToFront);
+        toFront.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                frontBodyPartDialog();
+                backBodyPartDialog.dismiss();
+            }
+        });
 
         final Button close = backBodyPartDialog.findViewById(R.id.saveclose);
         close.setOnClickListener(new View.OnClickListener() {
