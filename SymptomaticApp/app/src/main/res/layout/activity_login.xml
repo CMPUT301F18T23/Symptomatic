@@ -54,7 +54,9 @@
             android:id="@+id/enter_user"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/username" />
+            android:hint="@string/username"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp" />
     </android.support.design.widget.TextInputLayout>
 
     <Button
@@ -117,6 +119,28 @@
             android:buttonTint="@color/logoColor"/>
 
     </RadioGroup>
+
+    <TextView
+        android:id="@+id/tv_or"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/login_button"
+        android:text="@string/or" />
+
+    <Button
+        android:id="@+id/btn_useqr"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="scanqr"
+        android:layout_marginTop="8dp"
+        android:text="@string/useqrtologin"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_or" />
 
 
 </android.support.constraint.ConstraintLayout>

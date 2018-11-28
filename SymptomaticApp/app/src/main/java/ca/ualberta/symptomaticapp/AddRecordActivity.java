@@ -71,10 +71,7 @@ import java.util.Date;
 public class AddRecordActivity extends AppCompatActivity {
     private static final int PICK_IMAGE_REQUEST = 100; // to access the gallery to choose an image
     static final int REQUEST_IMAGE_CAPTURE = 1; // to access the camera to take an image
-    static final int REQUEST_TAKE_PHOTO = 1;
     static final int GET_GEOLOCATION = 2;
-    private String ivId;
-    private int photoCounter;
     private ListView photoListView;
     PhotoListViewAdapter photoListViewAdapter;
     ArrayList<Photo> displayPhotos;
@@ -366,16 +363,13 @@ public class AddRecordActivity extends AppCompatActivity {
 
                     // Create an instance of the Photo class
                     Photo photo = new Photo(bmp);
-
-                    // Add the photo selected from gallery onto the photoList
-                    photoList.addPhoto(photo);
-                    displayPhotos.add(photo);
-                    photoListViewAdapter.notifyDataSetChanged();
-                    setListViewHeightBasedOnChildren(photoListView);
-
-//                    If we want to use the bitmap from the Photo class
-                    Bitmap image = photo.getPhotoBitmap();
-                    incrementPhotoCounter();
+                    if (displayPhotos.size() < 10) {
+                        displayPhotos.add(photo);
+                        photoListViewAdapter.notifyDataSetChanged();
+                        setListViewHeightBasedOnChildren(photoListView);
+                    } else {
+                        Toast.makeText(getApplicationContext(), "Max. 10 Photos Allowed", Toast.LENGTH_LONG).show();
+                    }
                 }
                 break;
 
@@ -387,20 +381,18 @@ public class AddRecordActivity extends AppCompatActivity {
                         // Convert the photo captured into a bitmap
                         Bitmap bitmap = (Bitmap) data.getExtras().get("data");
 
-                        // Display the bitmap in the ImageView
-//                        iv.setImageBitmap(bitmap);
 
                         // Store the image as a Photo object
                         Photo photo = new Photo(bitmap);
 
-                        displayPhotos.add(photo);
-                        photoListViewAdapter.notifyDataSetChanged();
-                        setListViewHeightBasedOnChildren(photoListView);
+                        if (displayPhotos.size() < 10) {
+                            displayPhotos.add(photo);
+                            photoListViewAdapter.notifyDataSetChanged();
+                            setListViewHeightBasedOnChildren(photoListView);
+                        } else {
+                            Toast.makeText(getApplicationContext(), "Max. 10 Photos Allowed", Toast.LENGTH_LONG).show();
+                        }
 
-
-                        // Add the new Photo object into the photoList
-                        photoList.addPhoto(photo);
-                        incrementPhotoCounter();
                     } catch (Exception e) {
                         Log.d("ERROR", "Captured photo could not be created.");
                     }
@@ -414,6 +406,7 @@ public class AddRecordActivity extends AppCompatActivity {
                     geolocation = data.getExtras().getParcelable("geolocation");
                     Toast.makeText(this, geolocation.toString(), Toast.LENGTH_SHORT).show();
                 }
+                break;
 
         }
 
@@ -441,21 +434,6 @@ public class AddRecordActivity extends AppCompatActivity {
         return photo;
     }
 
-    private void incrementPhotoCounter() {
-        photoCounter += 1;
-//        ivId = "photo" + photoCounter;
-//        iv = (ImageView) findViewById(R.id.ivId);
-//        Collection<Photo> photos = photoList.getPhotos();
-//        for (Photo currPhoto : photos) {
-//            photoListView.
-//            //Use variable
-////            Log.d("Added another photo!", "lol");
-//            Log.d("Timestamp for Photo", currPhoto.getTimestamp());
-//
-//        }
-
-
-    }
 
 
     //EVERYTHING BELOW HERE IS FOR THE BODY PART DIALOGS

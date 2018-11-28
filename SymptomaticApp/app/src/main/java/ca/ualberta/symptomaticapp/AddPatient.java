@@ -68,15 +68,18 @@ public class AddPatient extends AppCompatActivity {
     public void onActivityResult(int requestCode, int resultCode, Intent intent) {
         IntentResult scanResult = IntentIntegrator.parseActivityResult(requestCode, resultCode, intent);
         if (scanResult != null && scanResult.getContents()!=null) {
-            Toast.makeText(AddPatient.this, "Scan successful!", Toast.LENGTH_SHORT).show(); //display message.
+
+            String entry = scanResult.getContents();
+            validEntry(entry.split(",")[0],entry.split(",")[1]);
+
         }
-        String entry = scanResult.getContents();
-        validEntry(entry.split(",")[0],entry.split(",")[1]);
+
     }
     public boolean validEntry(final String username, String type){
         //check if scanned user is a patient/caregiver
-        if (type=="caregiver"){
+        if (type.contains("caregiver")){
             Toast.makeText(this, "User is not a patient!", Toast.LENGTH_SHORT).show();
+            return false;
         }
         FirebaseFirestore db = FirebaseFirestore.getInstance(); //get our db
         CollectionReference active_users = db.collection("users"); //looking at collection patients
@@ -102,6 +105,7 @@ public class AddPatient extends AppCompatActivity {
                     } else if (username=="") {
                         //No users with that username exists
                         Toast.makeText(AddPatient.this, "Username not entered.", Toast.LENGTH_SHORT).show();
+                        return;
 
                     }
                     else {
