@@ -69,9 +69,10 @@ public class AddPatient extends AppCompatActivity {
         IntentResult scanResult = IntentIntegrator.parseActivityResult(requestCode, resultCode, intent);
         if (scanResult != null && scanResult.getContents()!=null) {
             Toast.makeText(AddPatient.this, "Scan successful!", Toast.LENGTH_SHORT).show(); //display message.
+            String entry = scanResult.getContents();
+            validEntry(entry.split(",")[0],entry.split(",")[1]);
         }
-        String entry = scanResult.getContents();
-        validEntry(entry.split(",")[0],entry.split(",")[1]);
+
     }
     public boolean validEntry(final String username, String type){
         //check if scanned user is a patient/caregiver

@@ -74,7 +74,6 @@ public class Login extends AppCompatActivity implements View.OnClickListener{
     @Override
     public void onClick(View v) {
         int viewId = v.getId();
-        
         //check which button is clicked
         if (viewId == R.id.login_create_acc_button){
             //the create account button was clicked, and sends user to the create account activity
