@@ -196,17 +196,24 @@
                 app:layout_constraintTop_toBottomOf="@+id/addCommentEditText"
                 app:layout_constraintVertical_bias="0.015" />
 
-            <Button
-                android:id="@+id/addBodyPart"
-                android:text = "Add Body Part"
-                android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:layout_marginBottom="8dp"
-                android:layout_marginEnd="8dp"
-                android:layout_marginLeft="8dp"
-                android:layout_marginRight="8dp"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp" />
+            <android.support.v7.widget.LinearLayoutCompat
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_gravity="center_horizontal"
+                app:layout_constraintTop_toBottomOf="@+id/textView">
+                <Button
+                    android:id="@+id/addFrontBodyPart"
+                    android:text = "Add Front Body Part(s)"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+                <Button
+                    android:id="@+id/addBackBodyPart"
+                    android:text = "Add Back Body Part(s)"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+            </android.support.v7.widget.LinearLayoutCompat>
 
             <TextView
                 android:id="@+id/textView4"

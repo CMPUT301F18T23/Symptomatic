@@ -59,7 +59,7 @@
         android:adjustViewBounds="false"
         android:background="@null"
         android:cropToPadding="false"
-        app:layout_constraintBottom_toTopOf="@+id/back_left_buttox"
+        app:layout_constraintBottom_toTopOf="@+id/left_buttox"
         app:layout_constraintEnd_toStartOf="@+id/right_tricep"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toEndOf="@+id/left_tricep"
@@ -67,7 +67,7 @@
         app:srcCompat="@drawable/lower_back" />
 
     <ImageButton
-        android:id="@+id/back_left_buttox"
+        android:id="@+id/left_buttox"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="2dp"
@@ -76,13 +76,13 @@
         android:background="@null"
         android:cropToPadding="false"
         app:layout_constraintBottom_toTopOf="@+id/back_left_thigh"
-        app:layout_constraintEnd_toStartOf="@+id/back_right_buttox"
+        app:layout_constraintEnd_toStartOf="@+id/right_buttox"
         app:layout_constraintStart_toEndOf="@+id/back_left_forearm"
         app:layout_constraintTop_toBottomOf="@+id/lower_back"
         app:srcCompat="@drawable/back_left_buttox" />
 
     <ImageButton
-        android:id="@+id/back_right_buttox"
+        android:id="@+id/right_buttox"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:adjustViewBounds="false"
@@ -90,7 +90,7 @@
         android:cropToPadding="false"
         app:layout_constraintBottom_toTopOf="@+id/back_right_thigh"
         app:layout_constraintEnd_toStartOf="@+id/back_right_forearm"
-        app:layout_constraintStart_toEndOf="@+id/back_left_buttox"
+        app:layout_constraintStart_toEndOf="@+id/left_buttox"
         app:layout_constraintTop_toBottomOf="@+id/lower_back"
         app:srcCompat="@drawable/back_right_buttox" />
 
@@ -105,10 +105,10 @@
         android:adjustViewBounds="false"
         android:background="@null"
         android:cropToPadding="false"
-        app:layout_constraintBottom_toTopOf="@+id/back_left_calve2"
+        app:layout_constraintBottom_toTopOf="@+id/back_left_knee"
         app:layout_constraintEnd_toStartOf="@+id/back_right_thigh"
         app:layout_constraintStart_toEndOf="@+id/back_left_hand"
-        app:layout_constraintTop_toBottomOf="@+id/back_left_buttox"
+        app:layout_constraintTop_toBottomOf="@+id/left_buttox"
         app:srcCompat="@drawable/back_left_thigh" />
 
     <ImageButton
@@ -122,7 +122,7 @@
         android:cropToPadding="false"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/back_left_thigh"
-        app:layout_constraintTop_toBottomOf="@+id/back_right_buttox"
+        app:layout_constraintTop_toBottomOf="@+id/right_buttox"
         app:srcCompat="@drawable/back_right_thigh" />
 
     <ImageButton
@@ -138,7 +138,7 @@
         android:cropToPadding="false"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/back_left_calve"
-        app:layout_constraintTop_toBottomOf="@+id/back_right_ankle2"
+        app:layout_constraintTop_toBottomOf="@+id/back_right_knee"
         app:srcCompat="@drawable/back_right_calve" />
 
     <ImageButton
@@ -157,7 +157,7 @@
         app:srcCompat="@drawable/back_right_ankle" />
 
     <ImageButton
-        android:id="@+id/back_right_ankle2"
+        android:id="@+id/back_right_knee"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="25dp"
@@ -168,7 +168,7 @@
         android:background="@null"
         android:cropToPadding="false"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/back_left_calve2"
+        app:layout_constraintStart_toEndOf="@+id/back_left_knee"
         app:layout_constraintTop_toBottomOf="@+id/back_right_thigh"
         app:srcCompat="@drawable/back_right_knee" />
 
@@ -230,11 +230,11 @@
         android:cropToPadding="false"
         app:layout_constraintEnd_toStartOf="@+id/back_right_calve"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/back_left_calve2"
+        app:layout_constraintTop_toBottomOf="@+id/back_left_knee"
         app:srcCompat="@drawable/back_left_calve" />
 
     <ImageButton
-        android:id="@+id/back_left_calve2"
+        android:id="@+id/back_left_knee"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="140dp"
@@ -283,7 +283,7 @@
         android:background="@null"
         android:cropToPadding="false"
         app:layout_constraintBottom_toTopOf="@+id/back_right_hand"
-        app:layout_constraintStart_toEndOf="@+id/back_right_buttox"
+        app:layout_constraintStart_toEndOf="@+id/right_buttox"
         app:layout_constraintTop_toBottomOf="@+id/right_tricep"
         app:srcCompat="@drawable/back_right_forearm" />
 
@@ -296,7 +296,7 @@
         android:adjustViewBounds="false"
         android:background="@null"
         android:cropToPadding="false"
-        app:layout_constraintStart_toEndOf="@+id/back_right_buttox"
+        app:layout_constraintStart_toEndOf="@+id/right_buttox"
         app:layout_constraintTop_toBottomOf="@+id/back_right_forearm"
         app:srcCompat="@drawable/back_right_hand" />
 
@@ -342,7 +342,7 @@
         android:background="@null"
         android:cropToPadding="false"
         app:layout_constraintBottom_toTopOf="@+id/back_left_hand"
-        app:layout_constraintEnd_toStartOf="@+id/back_left_buttox"
+        app:layout_constraintEnd_toStartOf="@+id/left_buttox"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/left_tricep"
         app:srcCompat="@drawable/back_left_forearm" />
@@ -360,7 +360,7 @@
         android:background="@null"
         android:cropToPadding="false"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/back_left_buttox"
+        app:layout_constraintEnd_toStartOf="@+id/left_buttox"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/back_left_forearm"
         app:srcCompat="@drawable/back_left_hand" />

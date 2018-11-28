@@ -8,7 +8,7 @@
     android:layout_height="match_parent">
 
     <ImageButton
-        android:id="@+id/back_head"
+        android:id="@+id/face"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="131dp"
@@ -19,222 +19,169 @@
         android:adjustViewBounds="false"
         android:background="@null"
         android:cropToPadding="false"
-        app:layout_constraintBottom_toTopOf="@+id/upper_back"
+        app:layout_constraintBottom_toTopOf="@+id/upper_chest"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintLeft_toRightOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_chainStyle="spread_inside"
-        app:srcCompat="@drawable/back_head" />
+        app:srcCompat="@drawable/face" />
 
     <ImageButton
-        android:id="@+id/upper_back"
+        android:id="@+id/upper_chest"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:adjustViewBounds="false"
         android:background="@null"
         android:cropToPadding="false"
-        app:layout_constraintBottom_toTopOf="@+id/mid_back"
-        app:layout_constraintEnd_toStartOf="@+id/back_right_shoulder"
-        app:layout_constraintStart_toEndOf="@+id/back_left_shoulder"
-        app:layout_constraintTop_toBottomOf="@+id/back_head"
-        app:srcCompat="@drawable/upper_back" />
+        app:layout_constraintEnd_toStartOf="@+id/front_left_shoulder"
+        app:layout_constraintStart_toEndOf="@+id/front_right_shoulder"
+        app:layout_constraintTop_toBottomOf="@+id/face"
+        app:srcCompat="@drawable/upper_chest" />
 
     <ImageButton
-        android:id="@+id/mid_back"
+        android:id="@+id/abdomen"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:adjustViewBounds="false"
-        android:background="@null"
-        android:cropToPadding="false"
-        app:layout_constraintBottom_toTopOf="@+id/lower_back"
-        app:layout_constraintEnd_toStartOf="@+id/right_tricep"
-        app:layout_constraintStart_toEndOf="@+id/left_tricep"
-        app:layout_constraintTop_toBottomOf="@+id/upper_back"
-        app:srcCompat="@drawable/mid_back" />
-
-    <ImageButton
-        android:id="@+id/lower_back"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:adjustViewBounds="false"
-        android:background="@null"
-        android:cropToPadding="false"
-        app:layout_constraintBottom_toTopOf="@+id/back_left_buttox"
-        app:layout_constraintEnd_toStartOf="@+id/right_tricep"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toEndOf="@+id/left_tricep"
-        app:layout_constraintTop_toBottomOf="@+id/mid_back"
-        app:srcCompat="@drawable/lower_back" />
-
-    <ImageButton
-        android:id="@+id/back_left_buttox"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="2dp"
-        android:layout_marginLeft="2dp"
-        android:adjustViewBounds="false"
-        android:background="@null"
-        android:cropToPadding="false"
-        app:layout_constraintBottom_toTopOf="@+id/back_left_thigh"
-        app:layout_constraintEnd_toStartOf="@+id/back_right_buttox"
-        app:layout_constraintStart_toEndOf="@+id/back_left_forearm"
-        app:layout_constraintTop_toBottomOf="@+id/lower_back"
-        app:srcCompat="@drawable/back_left_buttox" />
-
-    <ImageButton
-        android:id="@+id/back_right_buttox"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:adjustViewBounds="false"
-        android:background="@null"
-        android:cropToPadding="false"
-        app:layout_constraintBottom_toTopOf="@+id/back_right_thigh"
-        app:layout_constraintEnd_toStartOf="@+id/back_right_forearm"
-        app:layout_constraintStart_toEndOf="@+id/back_left_buttox"
-        app:layout_constraintTop_toBottomOf="@+id/lower_back"
-        app:srcCompat="@drawable/back_right_buttox" />
-
-    <ImageButton
-        android:id="@+id/back_left_thigh"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="22dp"
-        android:layout_marginLeft="22dp"
+        android:layout_marginStart="1dp"
+        android:layout_marginLeft="1dp"
         android:layout_marginEnd="5dp"
         android:layout_marginRight="5dp"
         android:adjustViewBounds="false"
         android:background="@null"
         android:cropToPadding="false"
-        app:layout_constraintBottom_toTopOf="@+id/back_left_calve2"
-        app:layout_constraintEnd_toStartOf="@+id/back_right_thigh"
-        app:layout_constraintStart_toEndOf="@+id/back_left_hand"
-        app:layout_constraintTop_toBottomOf="@+id/back_left_buttox"
-        app:srcCompat="@drawable/back_left_thigh" />
+        app:layout_constraintBottom_toTopOf="@+id/groin"
+        app:layout_constraintEnd_toStartOf="@+id/front_left_forearm"
+        app:layout_constraintStart_toEndOf="@+id/right_bicep"
+        app:layout_constraintTop_toBottomOf="@+id/upper_chest"
+        app:srcCompat="@drawable/abdomen" />
 
     <ImageButton
-        android:id="@+id/back_right_thigh"
+        android:id="@+id/groin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="124dp"
-        android:layout_marginRight="124dp"
+        android:layout_marginStart="4dp"
+        android:layout_marginLeft="4dp"
         android:adjustViewBounds="false"
         android:background="@null"
         android:cropToPadding="false"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/back_left_thigh"
-        app:layout_constraintTop_toBottomOf="@+id/back_right_buttox"
+        app:layout_constraintBottom_toTopOf="@+id/front_right_thigh"
+        app:layout_constraintEnd_toStartOf="@+id/front_left_forearm"
+        app:layout_constraintStart_toEndOf="@+id/front_right_forearm"
+        app:layout_constraintTop_toBottomOf="@+id/abdomen"
+        app:srcCompat="@drawable/groin" />
+
+    <ImageButton
+        android:id="@+id/front_right_thigh"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="29dp"
+        android:layout_marginLeft="29dp"
+        android:adjustViewBounds="false"
+        android:background="@null"
+        android:cropToPadding="false"
+        app:layout_constraintEnd_toStartOf="@+id/front_left_thigh"
+        app:layout_constraintStart_toEndOf="@+id/front_right_hand"
+        app:layout_constraintTop_toBottomOf="@+id/groin"
+        app:srcCompat="@drawable/front_right_thigh" />
+
+    <ImageButton
+        android:id="@+id/front_left_thigh"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="17dp"
+        android:layout_marginRight="17dp"
+        android:adjustViewBounds="false"
+        android:background="@null"
+        android:cropToPadding="false"
+        app:layout_constraintEnd_toStartOf="@+id/front_left_hand"
+        app:layout_constraintStart_toEndOf="@+id/front_right_thigh"
+        app:layout_constraintTop_toBottomOf="@+id/groin"
         app:srcCompat="@drawable/back_right_thigh" />
 
     <ImageButton
-        android:id="@+id/back_right_calve"
+        android:id="@+id/left_shin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="7dp"
-        android:layout_marginLeft="7dp"
-        android:layout_marginEnd="140dp"
-        android:layout_marginRight="140dp"
+        android:layout_marginEnd="152dp"
+        android:layout_marginRight="152dp"
         android:adjustViewBounds="false"
         android:background="@null"
         android:cropToPadding="false"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/back_left_calve"
-        app:layout_constraintTop_toBottomOf="@+id/back_right_ankle2"
-        app:srcCompat="@drawable/back_right_calve" />
+        app:layout_constraintStart_toEndOf="@+id/right_shin"
+        app:layout_constraintTop_toBottomOf="@+id/front_left_knee"
+        app:srcCompat="@drawable/left_shin" />
 
     <ImageButton
-        android:id="@+id/back_right_ankle"
+        android:id="@+id/front_left_knee"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="17dp"
-        android:layout_marginLeft="17dp"
-        android:layout_marginBottom="9dp"
-        android:adjustViewBounds="false"
-        android:background="@null"
-        android:cropToPadding="false"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/back_left_ankle"
-        app:layout_constraintTop_toBottomOf="@+id/back_right_calve"
-        app:srcCompat="@drawable/back_right_ankle" />
-
-    <ImageButton
-        android:id="@+id/back_right_ankle2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="25dp"
-        android:layout_marginLeft="25dp"
-        android:layout_marginEnd="150dp"
-        android:layout_marginRight="150dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginEnd="155dp"
+        android:layout_marginRight="155dp"
         android:adjustViewBounds="false"
         android:background="@null"
         android:cropToPadding="false"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/back_left_calve2"
-        app:layout_constraintTop_toBottomOf="@+id/back_right_thigh"
-        app:srcCompat="@drawable/back_right_knee" />
+        app:layout_constraintStart_toEndOf="@+id/front_right_knee"
+        app:layout_constraintTop_toBottomOf="@+id/front_left_thigh"
+        app:srcCompat="@drawable/front_left_knee" />
 
     <ImageButton
-        android:id="@+id/back_right_foot"
+        android:id="@+id/front_left_foot"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="136dp"
-        android:layout_marginRight="136dp"
-        android:layout_marginBottom="9dp"
+        android:layout_marginEnd="148dp"
+        android:layout_marginRight="148dp"
+        android:layout_marginBottom="17dp"
         android:adjustViewBounds="false"
         android:background="@null"
         android:cropToPadding="false"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/back_right_ankle"
-        app:layout_constraintTop_toBottomOf="@+id/back_right_calve"
-        app:srcCompat="@drawable/back_right_foot" />
+        app:layout_constraintStart_toEndOf="@+id/front_right_foot"
+        app:layout_constraintTop_toBottomOf="@+id/left_shin"
+        app:srcCompat="@drawable/front_left_foot" />
 
     <ImageButton
-        android:id="@+id/back_left_ankle"
+        android:id="@+id/front_right_foot"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="132dp"
+        android:layout_marginLeft="132dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginRight="10dp"
         android:layout_marginBottom="9dp"
         android:adjustViewBounds="false"
         android:background="@null"
         android:cropToPadding="false"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/back_left_foot"
-        app:layout_constraintTop_toBottomOf="@+id/back_left_calve"
-        app:srcCompat="@drawable/back_left_ankle" />
-
-    <ImageButton
-        android:id="@+id/back_left_foot"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="130dp"
-        android:layout_marginLeft="130dp"
-        android:layout_marginBottom="9dp"
-        android:adjustViewBounds="false"
-        android:background="@null"
-        android:cropToPadding="false"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/back_left_ankle"
+        app:layout_constraintEnd_toStartOf="@+id/front_left_foot"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/back_left_calve"
-        app:srcCompat="@drawable/back_left_foot" />
+        app:layout_constraintTop_toBottomOf="@+id/right_shin"
+        app:layout_constraintVertical_bias="0.0"
+        app:srcCompat="@drawable/front_right_foot" />
 
     <ImageButton
-        android:id="@+id/back_left_calve"
+        android:id="@+id/right_shin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="135dp"
         android:layout_marginLeft="135dp"
-        android:layout_marginEnd="5dp"
-        android:layout_marginRight="5dp"
+        android:layout_marginEnd="7dp"
+        android:layout_marginRight="7dp"
         android:adjustViewBounds="false"
         android:background="@null"
         android:cropToPadding="false"
-        app:layout_constraintEnd_toStartOf="@+id/back_right_calve"
+        app:layout_constraintEnd_toStartOf="@+id/left_shin"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/back_left_calve2"
-        app:srcCompat="@drawable/back_left_calve" />
+        app:layout_constraintTop_toBottomOf="@+id/front_right_knee"
+        app:srcCompat="@drawable/right_shin" />
 
     <ImageButton
-        android:id="@+id/back_left_calve2"
+        android:id="@+id/front_right_knee"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="140dp"
@@ -242,126 +189,139 @@
         android:adjustViewBounds="false"
         android:background="@null"
         android:cropToPadding="false"
+        app:layout_constraintEnd_toStartOf="@+id/front_left_knee"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/back_left_thigh"
-        app:srcCompat="@drawable/back_left_knee" />
+        app:layout_constraintTop_toBottomOf="@+id/front_right_thigh"
+        app:srcCompat="@drawable/front_right_knee" />
 
     <ImageButton
-        android:id="@+id/back_right_shoulder"
+        android:id="@+id/front_left_shoulder"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="94dp"
-        android:layout_marginRight="94dp"
+        android:layout_marginTop="102dp"
+        android:layout_marginEnd="101dp"
+        android:layout_marginRight="101dp"
         android:adjustViewBounds="false"
         android:background="@null"
         android:cropToPadding="false"
-        app:layout_constraintBottom_toTopOf="@+id/mid_back"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/upper_back"
-        app:layout_constraintTop_toBottomOf="@+id/back_head"
-        app:srcCompat="@drawable/back_right_shoulder" />
+        app:layout_constraintStart_toEndOf="@+id/upper_chest"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/front_left_shoulder" />
 
     <ImageButton
-        android:id="@+id/right_tricep"
+        android:id="@+id/left_bicep"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="2dp"
+        android:layout_marginLeft="2dp"
+        android:layout_marginEnd="93dp"
+        android:layout_marginRight="93dp"
         android:adjustViewBounds="false"
         android:background="@null"
         android:cropToPadding="false"
-        app:layout_constraintBottom_toTopOf="@+id/back_right_forearm"
-        app:layout_constraintStart_toEndOf="@+id/mid_back"
-        app:layout_constraintTop_toBottomOf="@+id/back_right_shoulder"
-        app:srcCompat="@drawable/right_tricep" />
+        app:layout_constraintBottom_toTopOf="@+id/front_left_forearm"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/abdomen"
+        app:layout_constraintTop_toBottomOf="@+id/front_left_shoulder"
+        app:srcCompat="@drawable/left_bicep" />
 
     <ImageButton
-        android:id="@+id/back_right_forearm"
+        android:id="@+id/front_left_forearm"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="1dp"
-        android:layout_marginBottom="1dp"
+        android:layout_marginEnd="84dp"
+        android:layout_marginRight="84dp"
         android:adjustViewBounds="false"
         android:background="@null"
         android:cropToPadding="false"
-        app:layout_constraintBottom_toTopOf="@+id/back_right_hand"
-        app:layout_constraintStart_toEndOf="@+id/back_right_buttox"
-        app:layout_constraintTop_toBottomOf="@+id/right_tricep"
-        app:srcCompat="@drawable/back_right_forearm" />
+        app:layout_constraintBottom_toTopOf="@+id/front_left_hand"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/left_bicep"
+        app:srcCompat="@drawable/front_left_forearm" />
 
     <ImageButton
-        android:id="@+id/back_right_hand"
+        android:id="@+id/front_left_hand"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="25dp"
-        android:layout_marginLeft="25dp"
-        android:adjustViewBounds="false"
-        android:background="@null"
-        android:cropToPadding="false"
-        app:layout_constraintStart_toEndOf="@+id/back_right_buttox"
-        app:layout_constraintTop_toBottomOf="@+id/back_right_forearm"
-        app:srcCompat="@drawable/back_right_hand" />
-
-    <ImageButton
-        android:id="@+id/back_left_shoulder"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="85dp"
-        android:layout_marginLeft="85dp"
-        android:layout_marginTop="1dp"
-        android:adjustViewBounds="false"
-        android:background="@null"
-        android:cropToPadding="false"
-        app:layout_constraintBottom_toTopOf="@+id/mid_back"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/back_head"
-        app:srcCompat="@drawable/back_left_shoulder" />
-
-    <ImageButton
-        android:id="@+id/left_tricep"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="74dp"
-        android:layout_marginLeft="74dp"
-        android:adjustViewBounds="false"
-        android:background="@null"
-        android:cropToPadding="false"
-        app:layout_constraintBottom_toTopOf="@+id/back_left_forearm"
-        app:layout_constraintEnd_toStartOf="@+id/mid_back"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/back_left_shoulder"
-        app:srcCompat="@drawable/left_tricep" />
-
-    <ImageButton
-        android:id="@+id/back_left_forearm"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="68dp"
-        android:layout_marginLeft="68dp"
-        android:layout_marginEnd="2dp"
-        android:layout_marginRight="2dp"
-        android:adjustViewBounds="false"
-        android:background="@null"
-        android:cropToPadding="false"
-        app:layout_constraintBottom_toTopOf="@+id/back_left_hand"
-        app:layout_constraintEnd_toStartOf="@+id/back_left_buttox"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/left_tricep"
-        app:srcCompat="@drawable/back_left_forearm" />
-
-    <ImageButton
-        android:id="@+id/back_left_hand"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="38dp"
-        android:layout_marginLeft="38dp"
-        android:layout_marginEnd="24dp"
-        android:layout_marginRight="24dp"
-        android:layout_marginBottom="240dp"
+        android:layout_marginEnd="56dp"
+        android:layout_marginRight="56dp"
+        android:layout_marginBottom="238dp"
         android:adjustViewBounds="false"
         android:background="@null"
         android:cropToPadding="false"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/back_left_buttox"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/front_left_forearm"
+        app:srcCompat="@drawable/front_left_hand" />
+
+    <ImageButton
+        android:id="@+id/front_right_shoulder"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="67dp"
+        android:layout_marginLeft="67dp"
+        android:layout_marginTop="57dp"
+        android:adjustViewBounds="false"
+        android:background="@null"
+        android:cropToPadding="false"
+        app:layout_constraintEnd_toStartOf="@+id/upper_chest"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/back_left_forearm"
-        app:srcCompat="@drawable/back_left_hand" />
+        app:layout_constraintTop_toBottomOf="@+id/saveclose"
+        app:srcCompat="@drawable/front_right_shoulder" />
+
+    <ImageButton
+        android:id="@+id/right_bicep"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="77dp"
+        android:layout_marginLeft="77dp"
+        android:layout_marginEnd="1dp"
+        android:layout_marginRight="1dp"
+        android:adjustViewBounds="false"
+        android:background="@null"
+        android:cropToPadding="false"
+        app:layout_constraintBottom_toTopOf="@+id/front_right_forearm"
+        app:layout_constraintEnd_toStartOf="@+id/abdomen"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/front_right_shoulder"
+        app:srcCompat="@drawable/right_bicep" />
+
+    <ImageButton
+        android:id="@+id/front_right_forearm"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="50dp"
+        android:layout_marginLeft="50dp"
+        android:adjustViewBounds="false"
+        android:background="@null"
+        android:cropToPadding="false"
+        app:layout_constraintBottom_toTopOf="@+id/front_right_hand"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/right_bicep"
+        app:srcCompat="@drawable/front_right_forearm" />
+
+    <ImageButton
+        android:id="@+id/front_right_hand"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="43dp"
+        android:layout_marginLeft="43dp"
+        android:layout_marginBottom="243dp"
+        android:adjustViewBounds="false"
+        android:background="@null"
+        android:cropToPadding="false"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/front_right_forearm"
+        app:srcCompat="@drawable/front_right_hand" />
+
+    <Button
+        android:id="@+id/saveclose"
+        android:layout_width="wrap_content"
+        android:layout_height="44dp"
+        android:text="Save"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
 </android.support.constraint.ConstraintLayout>
