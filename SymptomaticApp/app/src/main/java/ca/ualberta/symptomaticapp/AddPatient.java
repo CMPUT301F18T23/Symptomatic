@@ -105,6 +105,7 @@ public class AddPatient extends AppCompatActivity {
                     } else if (username=="") {
                         //No users with that username exists
                         Toast.makeText(AddPatient.this, "Username not entered.", Toast.LENGTH_SHORT).show();
+                        return;
 
                     }
                     else {
