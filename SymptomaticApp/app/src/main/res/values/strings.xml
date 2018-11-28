@@ -90,6 +90,8 @@
     <string name="view_qr">View QR Code</string>
     <string name="qrscantip">Or, add a patient by scanning their QR code:</string>
     <string name="scanqr">Scan QR Code</string>
+    <string name="useqrtologin">Use QR to Login</string>
+    <string name="or">or</string>
 
 
 </resources>

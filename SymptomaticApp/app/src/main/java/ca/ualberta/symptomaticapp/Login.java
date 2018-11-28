@@ -33,6 +33,8 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.google.zxing.integration.android.IntentIntegrator;
+import com.google.zxing.integration.android.IntentResult;
 
 import java.util.Collection;
 import java.util.concurrent.TimeUnit;
@@ -144,6 +146,30 @@ public class Login extends AppCompatActivity implements View.OnClickListener{
             });
 
         }
+    }
+
+    public void scanqr(View v){
+        IntentIntegrator integrator = new IntentIntegrator(this);
+        integrator.initiateScan();
+    }
+
+
+    public void onActivityResult(int requestCode, int resultCode, Intent intent) {
+        IntentResult scanResult = IntentIntegrator.parseActivityResult(requestCode, resultCode, intent);
+        if (scanResult != null && scanResult.getContents()!=null) {
+            String username = scanResult.getContents().split(",")[0];
+            String type= scanResult.getContents().split(",")[1];
+            input_user.setText(username);
+            if(type.contains("patient")){
+                patientLogin.setChecked(true);
+                caregiverLogin.setChecked(false);
+            }else{
+                patientLogin.setChecked(false);
+                caregiverLogin.setChecked(true);
+            }
+            login_button.performClick();
+        }
+
     }
 }
 
