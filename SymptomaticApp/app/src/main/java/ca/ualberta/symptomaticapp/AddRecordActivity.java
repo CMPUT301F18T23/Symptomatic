@@ -18,7 +18,6 @@ package ca.ualberta.symptomaticapp;
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
-import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -32,7 +31,6 @@ import android.support.v4.content.FileProvider;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
-import android.text.format.DateFormat;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -50,7 +48,6 @@ import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.TimePicker;
 import android.widget.Toast;
 
 import com.google.android.gms.maps.model.LatLng;
@@ -94,17 +91,14 @@ public class AddRecordActivity extends AppCompatActivity {
     String mCurrentPhotoPath; // the photo's file path
 
     Problem problem;
-    int year, month, day, hour, min;
+    int year,month,
+            day;
     private DatePickerDialog.OnDateSetListener DateSetListener;
-    private TimePickerDialog.OnTimeSetListener TimeSetListener;
     boolean selectedDateDone;
 
     private LatLng geolocation;
 
     EditText commentEdit,titleEdit;
-    TextView currentTime;
-
-    Calendar cal;
 
 
 
@@ -138,9 +132,6 @@ public class AddRecordActivity extends AppCompatActivity {
         commentEdit = findViewById(R.id.addCommentEditText);
         titleEdit = findViewById(R.id.addTitleEditText);
 
-        currentTime = findViewById(R.id.currentTimeTextView);
-        currentTime.setText(cal.getTime().toString());
-
         year = cal.get(Calendar.YEAR);
         month = cal.get(Calendar.MONTH);
         day = cal.get(Calendar.DAY_OF_MONTH);
@@ -162,8 +153,6 @@ public class AddRecordActivity extends AppCompatActivity {
         });
 
 
-
-
         Button dateButton = findViewById(R.id.changeDateButton);
         dateButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -171,10 +160,6 @@ public class AddRecordActivity extends AppCompatActivity {
                 int currentYear = cal.get(Calendar.YEAR);
                 int currentMonth = cal.get(Calendar.MONTH);
                 int currentDay = cal.get(Calendar.DAY_OF_MONTH);
-
-                TimePickerDialog editTimeDialog = new TimePickerDialog(AddRecordActivity.this, android.R.style.Theme_DeviceDefault_Dialog, TimeSetListener, cal.get(Calendar.HOUR), cal.get(Calendar.MINUTE), DateFormat.is24HourFormat(AddRecordActivity.this));
-                editTimeDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.BLACK));
-                editTimeDialog.show();
 
                 DatePickerDialog dialog = new DatePickerDialog(AddRecordActivity.this, android.R.style.Theme_DeviceDefault_Dialog, DateSetListener, currentYear, currentMonth, currentDay);
                 dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.BLACK));
@@ -188,16 +173,6 @@ public class AddRecordActivity extends AppCompatActivity {
                 year = chosenYear;
                 month = chosenMonth;
                 day = chosenDay;
-            }
-
-        };
-
-        TimeSetListener = new TimePickerDialog.OnTimeSetListener() {
-            @Override
-            public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-                hour = hourOfDay;
-                min = minute;
-                updateDates();
             }
         };
 
@@ -289,14 +264,6 @@ public class AddRecordActivity extends AppCompatActivity {
         });
 
 
-
-    }
-
-    public void updateDates(){
-        cal = Calendar.getInstance();
-        cal.set(year, month, day, hour, min);
-        currentTime = findViewById(R.id.currentTimeTextView);
-        currentTime.setText(cal.getTime().toString());
 
     }
 
