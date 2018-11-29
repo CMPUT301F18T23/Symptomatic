@@ -17,10 +17,10 @@ public final class LocalSave {
     protected Context context;
     protected boolean isConnected;
 
-    /*
-      * When the user is offline, save changes made
-        @param context
-     */
+   /*
+     * When the user is offline, save changes made
+       @param context
+    */
 
     public LocalSave(Context context) {
         // Initialize LocalSave and pass in the activity's context
@@ -111,7 +111,7 @@ public final class LocalSave {
         if (cm != null) {
             NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
             isConnected = (activeNetwork != null &&
-                           activeNetwork.isConnectedOrConnecting());
+                    activeNetwork.isConnectedOrConnecting());
             return isConnected;
         }
         return isConnected;
@@ -133,4 +133,5 @@ public final class LocalSave {
         this.isConnected = newStatus;
     }
 }
+
 
