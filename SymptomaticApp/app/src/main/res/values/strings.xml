@@ -101,10 +101,12 @@
     <string name="photos">Photos:</string>
     <string name="view_all_records">View All Records</string>
     <string name="title_activity_map_of_single_record">Map</string>
-    <string name="modify_title">Modify the title for the record:</string>
+    <string name="modify_title">Modify the title:</string>
     <string name="modify_time">Modify the time stamp:</string>
     <string name="edit_timestamp">Select to Change Time Stamp</string>
     <string name="modify_comment">Modify the comment:</string>
+    <string name="delete_record">Delete Record</string>
+    <string name="modify_geolocation">Modify the geolocation:</string>
 
 
 </resources>
