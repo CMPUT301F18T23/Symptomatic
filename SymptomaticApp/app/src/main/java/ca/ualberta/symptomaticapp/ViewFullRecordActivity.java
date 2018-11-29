@@ -9,14 +9,22 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ListAdapter;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import com.google.android.gms.maps.model.LatLng;
 
+import java.util.ArrayList;
+
 public class ViewFullRecordActivity extends AppCompatActivity {
 
     Record record;
+    ArrayList<Photo> displayPhotos;
+    PhotoListViewAdapter2 photoListViewAdapter2;
+    ListView photoListView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,7 +35,10 @@ public class ViewFullRecordActivity extends AppCompatActivity {
         getSupportActionBar().setTitle("View Record Details");
 
         record = (Record) getIntent().getSerializableExtra("record");
-
+        photoListView = findViewById(R.id.fullRPhotoListView);
+        displayPhotos = record.getPhotoList();
+        initPhotoListView();
+        setListViewHeightBasedOnChildren(photoListView);
         //record.geolocation = new LatLng(-34, 151);
 
 
@@ -75,13 +86,45 @@ public class ViewFullRecordActivity extends AppCompatActivity {
 
 
 
+    }
 
+    public void initPhotoListView(){
+        if(photoListViewAdapter2 == null){
+            photoListViewAdapter2 = new PhotoListViewAdapter2(displayPhotos, this);
+        }
 
+        photoListView.setAdapter(photoListViewAdapter2);
 
+    }
 
+    // setListViewHeightBasedonChildren class reference:
+//    Skidan, Oleg. “ListView inside ScrollView. Solve the Problem. – Oleg Skidan – Medium.” Medium.com, Medium,
+//    5 Feb. 2016, medium.com/@skidanolegs/listview-inside-scrollview-solve-the-problem-a06fdff2a4e0.
+//    Accessed: 25th November, 2018
+    public static void setListViewHeightBasedOnChildren(ListView listView) {
+        ListAdapter listAdapter = listView.getAdapter();
+        if (listAdapter == null) return;
+        int desiredWidth = View.MeasureSpec.makeMeasureSpec(listView.getWidth(),
+                View.MeasureSpec.UNSPECIFIED);
+        int totalHeight = 0;
+        View view = null;
+        for (int i = 0; i < listAdapter.getCount(); i++) {
+            view = listAdapter.getView(i, view, listView);
+            if (i == 0) view.setLayoutParams(new
+                    ViewGroup.LayoutParams(desiredWidth,
+                    ViewGroup.LayoutParams.WRAP_CONTENT));
 
+            view.measure(desiredWidth, View.MeasureSpec.UNSPECIFIED);
+            totalHeight += view.getMeasuredHeight();
+        }
 
+        ViewGroup.LayoutParams params = listView.getLayoutParams();
 
+        params.height = totalHeight + (listView.getDividerHeight() *
+                (listAdapter.getCount() - 1));
+
+        listView.setLayoutParams(params);
+        listView.requestLayout();
     }
 
     @Override
