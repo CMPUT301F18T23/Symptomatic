@@ -63,6 +63,15 @@ public class ViewFullRecordActivity extends AppCompatActivity {
         });
 
 
+        Button viewRecordsButton = findViewById(R.id.viewAllRecordsBtn);
+        viewRecordsButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+
+
 
 
 

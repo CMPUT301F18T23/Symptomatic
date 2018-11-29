@@ -84,13 +84,16 @@ public class RecordListViewAdapter extends BaseAdapter implements ListAdapter {
         listItemText.setText(recordList.get(position).toString());
 
         //Handle buttons
-        Button editRecordButton = view.findViewById(R.id.editRecordButton);
+        Button editRecordButton = view.findViewById(R.id.editRecordBtn);
         Button viewFullRecordButton = view.findViewById(R.id.viewFullRecordButton);
 
 
         editRecordButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Intent intent = new Intent(context, EditRecordActivity.class);
+               // intent.putExtra("record", recordList.get(position));
+                context.startActivity(intent);
 
             }
         });

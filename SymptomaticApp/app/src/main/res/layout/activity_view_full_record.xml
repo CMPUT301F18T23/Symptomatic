@@ -26,7 +26,7 @@
                 app:titleTextColor="@android:color/background_light" />
 
             <TextView
-                android:id="@+id/ProblemTextView"
+                android:id="@+id/editTitleTextView"
                 android:layout_width="match_parent"
                 android:layout_height="29dp"
                 android:layout_marginStart="8dp"
@@ -39,7 +39,7 @@
                 android:textColor="@android:color/black"
                 android:textSize="18sp"
                 android:textStyle="bold"
-                app:layout_constraintBottom_toTopOf="@+id/TimeStampTextView"
+                app:layout_constraintBottom_toTopOf="@+id/commentTextView"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
@@ -57,14 +57,14 @@
                 android:layout_marginBottom="8dp"
                 android:textColor="@android:color/black"
                 android:textSize="18sp"
-                app:layout_constraintBottom_toTopOf="@+id/TitleTextView"
+                app:layout_constraintBottom_toTopOf="@+id/timeTextView"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/ProblemTextView" />
+                app:layout_constraintTop_toBottomOf="@+id/editTitleTextView" />
 
             <TextView
-                android:id="@+id/TitleTextView"
+                android:id="@+id/timeTextView"
                 android:layout_width="match_parent"
                 android:layout_height="23dp"
                 android:layout_marginStart="8dp"
@@ -98,11 +98,11 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/TitleTextView" />
+                app:layout_constraintTop_toBottomOf="@+id/timeTextView" />
 
 
             <TextView
-                android:id="@+id/TimeStampTextView"
+                android:id="@+id/commentTextView"
                 android:layout_width="match_parent"
                 android:layout_height="23dp"
                 android:layout_marginStart="8dp"
@@ -137,7 +137,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/TimeStampTextView" />
+                app:layout_constraintTop_toBottomOf="@+id/commentTextView" />
 
             <TextView
                 android:id="@+id/commentTextView"

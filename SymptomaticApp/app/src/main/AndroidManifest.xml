@@ -60,6 +60,7 @@
         <activity android:name=".AddPatient" />
         <activity android:name=".ViewContactInfo" />
         <activity android:name=".CaregiverHome" />
+        <activity android:name=".EditRecordActivity" />
 
         <!-- To use FileProvider for Photos -->
         <provider
