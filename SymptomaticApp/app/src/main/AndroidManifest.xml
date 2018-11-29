@@ -92,7 +92,10 @@
             android:name=".MapOfRecordsActivity"
             android:label="@string/title_activity_map_of_records" />
         <activity android:name=".ViewQRCode" />
-        <activity android:name=".ViewFullRecordActivity"></activity>
+        <activity android:name=".ViewFullRecordActivity" />
+        <activity
+            android:name=".MapOfSingleRecordActivity"
+            android:label="@string/title_activity_map_of_single_record"></activity>
     </application>
 
 </manifest>
