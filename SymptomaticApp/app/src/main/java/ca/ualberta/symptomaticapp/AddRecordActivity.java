@@ -861,7 +861,7 @@ public class AddRecordActivity extends AppCompatActivity {
         final ImageButton rightShoulder = frontBodyPartDialog.findViewById(R.id.front_right_shoulder);
         rightShoulder.setEnabled(true);
         if(rightShoulderSelected){
-            rightShoulder.setImageResource(R.drawable.right_shoulder_selected);
+            rightShoulder.setImageResource(R.drawable.front_right_shoulder_selected);
         }
         rightShoulder.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -871,7 +871,7 @@ public class AddRecordActivity extends AppCompatActivity {
                     rightShoulderSelected = false;
                     bodyPartsSelected.remove("Right Shoulder");
                 } else {
-                    rightShoulder.setImageResource(R.drawable.right_shoulder_selected);
+                    rightShoulder.setImageResource(R.drawable.front_right_shoulder_selected);
                     rightShoulderSelected = true;
                     bodyPartsSelected.add("Right Shoulder");
                 }
@@ -883,7 +883,7 @@ public class AddRecordActivity extends AppCompatActivity {
         final ImageButton leftShoulder = frontBodyPartDialog.findViewById(R.id.front_left_shoulder);
         leftShoulder.setEnabled(true);
         if(leftShoulderSelected){
-            leftShoulder.setImageResource(R.drawable.left_shoulder_selected);
+            leftShoulder.setImageResource(R.drawable.front_left_shoulder_selected);
         }
         leftShoulder.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -893,7 +893,7 @@ public class AddRecordActivity extends AppCompatActivity {
                     leftShoulderSelected = false;
                     bodyPartsSelected.remove("Left Shoulder");
                 } else {
-                    leftShoulder.setImageResource(R.drawable.left_shoulder_selected);
+                    leftShoulder.setImageResource(R.drawable.front_left_shoulder_selected);
                     leftShoulderSelected = true;
                     bodyPartsSelected.add("Left Shoulder");
                 }
