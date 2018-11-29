@@ -74,6 +74,7 @@ public class EditProblemActivity extends AppCompatActivity {
 
     Button editProbButton, deleteProbButton;
     SimpleDateFormat dateFormatter;
+    String chosenDateText;
 
     @Override
     protected void onCreate(Bundle savedInstancesState){
@@ -107,7 +108,8 @@ public class EditProblemActivity extends AppCompatActivity {
             @Override
             public void onDateSet(DatePicker view, int chosenYear, int chosenMonth, int chosenDay) {
                 cal.set(chosenYear, chosenMonth, chosenDay);
-                dateTextView.setText("Chosen date: " + dateFormatter.format(cal.getTime().toString()));
+                //chosenDateText = "Chosen date: " + dateFormatter.format(cal.getTime().toString());
+                dateTextView.setText(cal.getTime().toString());
             }
         };
 
@@ -118,7 +120,8 @@ public class EditProblemActivity extends AppCompatActivity {
         editDescriptionEditText.setText(problem.getComment());
 
         dateTextView = findViewById(R.id.currentDateTextView);
-        dateTextView.setText("Chosen date: " + dateFormatter.format(problem.getDate().toString()));
+        //chosenDateText = "Chosen date: " + dateFormatter.format(problem.getDate().toString());
+        dateTextView.setText(problem.getDate().toString());
 
         editProbButton = findViewById(R.id.saveProblemButton);
         editProbButton.setOnClickListener(new View.OnClickListener() {
@@ -134,6 +137,7 @@ public class EditProblemActivity extends AppCompatActivity {
         });
 
     }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
