@@ -79,8 +79,8 @@ public class AddRecordActivity extends AppCompatActivity {
     Button addBackBodyPart,addFrontBodyPart;
 
     private boolean backRightForearmSelected, leftButtoxSelected, backHeadSelected, backRightFootSelected, backLeftHandSelected, backLeftAnkleSelected, backLeftKneeSelected, leftTricepSelected, backRightShoulderSelected, backLeftFootSelected, backLeftForearmSelected, backLeftShoulderSelected, backRightAnkleSelected, lowerBackSelected, upperBackSelected, rightButtoxSelected, backRightThighSelected, rightTricepSelected, midBackSelected, backLeftCalveSelected, backRightCalveSelected, backRightHandSelected, backRightKneeSelected, backLeftThighSelected;
-    private boolean frontRightHandSelected, leftShinSelected, frontLeftFootSelected, frontRightThighSelected, frontRightFootSelected, frontLeftThighSelected, abdomenSelected, frontRightForearmSelected, frontLeftForearmSelected, upperChestSelected, rightShinSelected, rightBicepSelected, groinSelected, leftBicepSelected, frontLeftKneeSelected, frontLeftHandSelected, faceSelected, frontRightKneeSelected, rightShoulderSelected, leftShoulderSelected, eyesSelected, mouthSelected, hairSelected, earsSelected, noseSelected;
-
+    private boolean frontRightHandSelected, leftShinSelected, frontLeftFootSelected, frontRightThighSelected, frontRightFootSelected, frontLeftThighSelected, abdomenSelected, frontRightForearmSelected, frontLeftForearmSelected, upperChestSelected, rightShinSelected, rightBicepSelected, groinSelected, leftBicepSelected, frontLeftKneeSelected, frontLeftHandSelected, faceSelected, frontRightKneeSelected, rightShoulderSelected, leftShoulderSelected;
+    private boolean foreheadSelected, eyesSelected, noseSelected, mouthSelected, chinSelected, rightCheekSelected, leftCheekSelected, rightEarSelected, leftEarSelected, neckSelected;
 
     ArrayList<String> bodyPartsSelected;
 
@@ -91,9 +91,8 @@ public class AddRecordActivity extends AppCompatActivity {
     String mCurrentPhotoPath; // the photo's file path
 
     Problem problem;
-    int year;
-    int month;
-    int day;
+    int year,month,
+            day;
     private DatePickerDialog.OnDateSetListener DateSetListener;
     boolean selectedDateDone;
 
@@ -117,6 +116,8 @@ public class AddRecordActivity extends AppCompatActivity {
 
         backRightForearmSelected = false; leftButtoxSelected = false; backHeadSelected = false; backRightFootSelected = false; backLeftHandSelected = false; backLeftAnkleSelected = false; backLeftKneeSelected = false; leftTricepSelected = false; backRightShoulderSelected = false; backLeftFootSelected = false; backLeftForearmSelected = false; backLeftShoulderSelected = false; backRightAnkleSelected = false; lowerBackSelected = false; upperBackSelected = false; rightButtoxSelected = false; backRightThighSelected = false; rightTricepSelected = false; midBackSelected = false; backLeftCalveSelected = false; backRightCalveSelected = false; backRightHandSelected = false; backRightKneeSelected = false; backLeftThighSelected = false;
         frontRightHandSelected = false; leftShinSelected = false; frontLeftFootSelected = false; frontRightThighSelected = false; frontRightFootSelected = false; frontLeftThighSelected = false; abdomenSelected = false; frontRightForearmSelected = false; frontLeftForearmSelected = false; upperChestSelected = false; rightShinSelected = false; rightBicepSelected = false; groinSelected = false; leftBicepSelected = false; frontLeftKneeSelected = false; frontLeftHandSelected = false; faceSelected = false; frontRightKneeSelected = false; rightShoulderSelected = false; leftShoulderSelected = false;
+        foreheadSelected = false; eyesSelected = false; noseSelected = false; mouthSelected = false; chinSelected = false; rightCheekSelected = false; leftCheekSelected = false; rightEarSelected = false; leftEarSelected = false; neckSelected = false;
+
 
         problem = (Problem) getIntent().getSerializableExtra("problem");
 
@@ -814,23 +815,17 @@ public class AddRecordActivity extends AppCompatActivity {
 //Gets a click for the Face button
         final ImageButton face = frontBodyPartDialog.findViewById(R.id.face);
         face.setEnabled(true);
-        final Dialog faceInfo = new Dialog(AddRecordActivity.this);
-        if(faceSelected){
+        if((foreheadSelected || eyesSelected || noseSelected || mouthSelected || chinSelected || rightCheekSelected || leftCheekSelected || rightEarSelected || leftEarSelected || neckSelected)){
             face.setImageResource(R.drawable.face_selected);
+        } else {
+            face.setImageResource(R.drawable.face);
+
         }
         face.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v){
-                if(faceSelected){
-                    //faceInfo.show();
-                    face.setImageResource(R.drawable.face);
-                    faceSelected = false;
-                    bodyPartsSelected.remove("Face");
-                } else {
-                    face.setImageResource(R.drawable.face_selected);
-                    faceSelected = true;
-                    bodyPartsSelected.add("Face");
-                }
+                faceDialog();
+                frontBodyPartDialog.dismiss();
             }
         });
 
@@ -1036,7 +1031,7 @@ public class AddRecordActivity extends AppCompatActivity {
         });
 
 
-//Gets a click for the Back Left Ankle button
+        //Gets a click for the Back Left Ankle button
         final ImageButton backLeftAnkle = backBodyPartDialog.findViewById(R.id.back_left_ankle);
         backLeftAnkle.setEnabled(true);
         if(backLeftAnkleSelected){
@@ -1058,7 +1053,7 @@ public class AddRecordActivity extends AppCompatActivity {
         });
 
 
-//Gets a click for the Back Left Knee button
+        //Gets a click for the Back Left Knee button
         final ImageButton backLeftKnee = backBodyPartDialog.findViewById(R.id.back_left_knee);
         backLeftKnee.setEnabled(true);
         if(backLeftKneeSelected){
@@ -1080,7 +1075,7 @@ public class AddRecordActivity extends AppCompatActivity {
         });
 
 
-//Gets a click for the Left Tricep button
+        //Gets a click for the Left Tricep button
         final ImageButton leftTricep = backBodyPartDialog.findViewById(R.id.left_tricep);
         leftTricep.setEnabled(true);
         if(leftTricepSelected){
@@ -1102,7 +1097,7 @@ public class AddRecordActivity extends AppCompatActivity {
         });
 
 
-//Gets a click for the Back Right Shoulder button
+        //Gets a click for the Back Right Shoulder button
         final ImageButton backRightShoulder = backBodyPartDialog.findViewById(R.id.back_right_shoulder);
         backRightShoulder.setEnabled(true);
         if(backRightShoulderSelected){
@@ -1124,7 +1119,7 @@ public class AddRecordActivity extends AppCompatActivity {
         });
 
 
-//Gets a click for the Back Left Foot button
+        //Gets a click for the Back Left Foot button
         final ImageButton backLeftFoot = backBodyPartDialog.findViewById(R.id.back_left_foot);
         backLeftFoot.setEnabled(true);
         if(backLeftFootSelected){
@@ -1146,7 +1141,7 @@ public class AddRecordActivity extends AppCompatActivity {
         });
 
 
-//Gets a click for the Back Left Forearm button
+        //Gets a click for the Back Left Forearm button
         final ImageButton backLeftForearm = backBodyPartDialog.findViewById(R.id.back_left_forearm);
         backLeftForearm.setEnabled(true);
         if(backLeftForearmSelected){
@@ -1168,7 +1163,7 @@ public class AddRecordActivity extends AppCompatActivity {
         });
 
 
-//Gets a click for the Back Left Shoulder button
+        //Gets a click for the Back Left Shoulder button
         final ImageButton backLeftShoulder = backBodyPartDialog.findViewById(R.id.back_left_shoulder);
         backLeftShoulder.setEnabled(true);
         if(backLeftShoulderSelected){
@@ -1190,7 +1185,7 @@ public class AddRecordActivity extends AppCompatActivity {
         });
 
 
-//Gets a click for the Back Right Ankle button
+        //Gets a click for the Back Right Ankle button
         final ImageButton backRightAnkle = backBodyPartDialog.findViewById(R.id.back_right_ankle);
         backRightAnkle.setEnabled(true);
         if(backRightAnkleSelected){
@@ -1212,7 +1207,7 @@ public class AddRecordActivity extends AppCompatActivity {
         });
 
 
-//Gets a click for the Lower Back button
+        //Gets a click for the Lower Back button
         final ImageButton lowerBack = backBodyPartDialog.findViewById(R.id.lower_back);
         lowerBack.setEnabled(true);
         if(lowerBackSelected){
@@ -1234,7 +1229,7 @@ public class AddRecordActivity extends AppCompatActivity {
         });
 
 
-//Gets a click for the Upper Back button
+        //Gets a click for the Upper Back button
         final ImageButton upperBack = backBodyPartDialog.findViewById(R.id.upper_back);
         upperBack.setEnabled(true);
         if(upperBackSelected){
@@ -1256,7 +1251,7 @@ public class AddRecordActivity extends AppCompatActivity {
         });
 
 
-//Gets a click for the Right Buttox button
+        //Gets a click for the Right Buttox button
         final ImageButton rightButtox = backBodyPartDialog.findViewById(R.id.right_buttox);
         rightButtox.setEnabled(true);
         if(rightButtoxSelected){
@@ -1278,7 +1273,7 @@ public class AddRecordActivity extends AppCompatActivity {
         });
 
 
-//Gets a click for the Back Right Thigh button
+        //Gets a click for the Back Right Thigh button
         final ImageButton backRightThigh = backBodyPartDialog.findViewById(R.id.back_right_thigh);
         backRightThigh.setEnabled(true);
         if(backRightThighSelected){
@@ -1300,7 +1295,7 @@ public class AddRecordActivity extends AppCompatActivity {
         });
 
 
-//Gets a click for the Right Tricep button
+        //Gets a click for the Right Tricep button
         final ImageButton rightTricep = backBodyPartDialog.findViewById(R.id.right_tricep);
         rightTricep.setEnabled(true);
         if(rightTricepSelected){
@@ -1322,7 +1317,7 @@ public class AddRecordActivity extends AppCompatActivity {
         });
 
 
-//Gets a click for the Mid Back button
+        //Gets a click for the Mid Back button
         final ImageButton midBack = backBodyPartDialog.findViewById(R.id.mid_back);
         midBack.setEnabled(true);
         if(midBackSelected){
@@ -1344,7 +1339,7 @@ public class AddRecordActivity extends AppCompatActivity {
         });
 
 
-//Gets a click for the Back Left Calve button
+        //Gets a click for the Back Left Calve button
         final ImageButton backLeftCalve = backBodyPartDialog.findViewById(R.id.back_left_calve);
         backLeftCalve.setEnabled(true);
         if(backLeftCalveSelected){
@@ -1366,7 +1361,7 @@ public class AddRecordActivity extends AppCompatActivity {
         });
 
 
-//Gets a click for the Back Right Calve button
+        //Gets a click for the Back Right Calve button
         final ImageButton backRightCalve = backBodyPartDialog.findViewById(R.id.back_right_calve);
         backRightCalve.setEnabled(true);
         if(backRightCalveSelected){
@@ -1388,7 +1383,7 @@ public class AddRecordActivity extends AppCompatActivity {
         });
 
 
-//Gets a click for the Back Right Hand button
+        //Gets a click for the Back Right Hand button
         final ImageButton backRightHand = backBodyPartDialog.findViewById(R.id.back_right_hand);
         backRightHand.setEnabled(true);
         if(backRightHandSelected){
@@ -1410,7 +1405,7 @@ public class AddRecordActivity extends AppCompatActivity {
         });
 
 
-//Gets a click for the Back Right Knee button
+        //Gets a click for the Back Right Knee button
         final ImageButton backRightKnee = backBodyPartDialog.findViewById(R.id.back_right_knee);
         backRightKnee.setEnabled(true);
         if(backRightKneeSelected){
@@ -1432,7 +1427,7 @@ public class AddRecordActivity extends AppCompatActivity {
         });
 
 
-//Gets a click for the Back Left Thigh button
+        //Gets a click for the Back Left Thigh button
         final ImageButton backLeftThigh = backBodyPartDialog.findViewById(R.id.back_left_thigh);
         backLeftThigh.setEnabled(true);
         if(backLeftThighSelected){
@@ -1454,6 +1449,245 @@ public class AddRecordActivity extends AppCompatActivity {
         });
 
         backBodyPartDialog.show();
+    }
+
+    private void faceDialog() {
+        final Dialog faceDialog = new Dialog(AddRecordActivity.this);
+        faceDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        faceDialog.setContentView(R.layout.face);
+        faceDialog.setTitle("Select Face Parts");
+
+        final Button close = faceDialog.findViewById(R.id.faceSave);
+        close.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                frontBodyPartDialog();
+                faceDialog.dismiss();
+            }
+        });
+
+        //Gets a click for the Right Ear button
+        final ImageButton rightEar = faceDialog.findViewById(R.id.right_ear);
+        rightEar.setEnabled(true);
+        if(rightEarSelected){
+            rightEar.setImageResource(R.drawable.right_ear_selected);
+        }
+        rightEar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v){
+                if(rightEarSelected){
+                    rightEar.setImageResource(R.drawable.right_ear);
+                    rightEarSelected = false;
+                    bodyPartsSelected.remove("Right Ear");
+                } else {
+                    rightEar.setImageResource(R.drawable.right_ear_selected);
+                    rightEarSelected = true;
+                    bodyPartsSelected.add("Right Ear");
+                }
+            }
+        });
+
+
+//Gets a click for the Mouth button
+        final ImageButton mouth = faceDialog.findViewById(R.id.mouth);
+        mouth.setEnabled(true);
+        if(mouthSelected){
+            mouth.setImageResource(R.drawable.mouth_selected);
+        }
+        mouth.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v){
+                if(mouthSelected){
+                    mouth.setImageResource(R.drawable.mouth);
+                    mouthSelected = false;
+                    bodyPartsSelected.remove("Mouth");
+                } else {
+                    mouth.setImageResource(R.drawable.mouth_selected);
+                    mouthSelected = true;
+                    bodyPartsSelected.add("Mouth");
+                }
+            }
+        });
+
+
+//Gets a click for the Nose button
+        final ImageButton nose = faceDialog.findViewById(R.id.nose);
+        nose.setEnabled(true);
+        if(noseSelected){
+            nose.setImageResource(R.drawable.nose_selected);
+        }
+        nose.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v){
+                if(noseSelected){
+                    nose.setImageResource(R.drawable.nose);
+                    noseSelected = false;
+                    bodyPartsSelected.remove("Nose");
+                } else {
+                    nose.setImageResource(R.drawable.nose_selected);
+                    noseSelected = true;
+                    bodyPartsSelected.add("Nose");
+                }
+            }
+        });
+
+
+//Gets a click for the Right Cheek button
+        final ImageButton rightCheek = faceDialog.findViewById(R.id.right_cheek);
+        rightCheek.setEnabled(true);
+        if(rightCheekSelected){
+            rightCheek.setImageResource(R.drawable.right_cheek_selected);
+        }
+        rightCheek.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v){
+                if(rightCheekSelected){
+                    rightCheek.setImageResource(R.drawable.right_cheek);
+                    rightCheekSelected = false;
+                    bodyPartsSelected.remove("Right Cheek");
+                } else {
+                    rightCheek.setImageResource(R.drawable.right_cheek_selected);
+                    rightCheekSelected = true;
+                    bodyPartsSelected.add("Right Cheek");
+                }
+            }
+        });
+
+
+//Gets a click for the Neck button
+        final ImageButton neck = faceDialog.findViewById(R.id.neck);
+        neck.setEnabled(true);
+        if(neckSelected){
+            neck.setImageResource(R.drawable.neck_selected);
+        }
+        neck.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v){
+                if(neckSelected){
+                    neck.setImageResource(R.drawable.neck);
+                    neckSelected = false;
+                    bodyPartsSelected.remove("Neck");
+                } else {
+                    neck.setImageResource(R.drawable.neck_selected);
+                    neckSelected = true;
+                    bodyPartsSelected.add("Neck");
+                }
+            }
+        });
+
+
+//Gets a click for the Chin button
+        final ImageButton chin = faceDialog.findViewById(R.id.chin);
+        chin.setEnabled(true);
+        if(chinSelected){
+            chin.setImageResource(R.drawable.chin_selected);
+        }
+        chin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v){
+                if(chinSelected){
+                    chin.setImageResource(R.drawable.chin);
+                    chinSelected = false;
+                    bodyPartsSelected.remove("Chin");
+                } else {
+                    chin.setImageResource(R.drawable.chin_selected);
+                    chinSelected = true;
+                    bodyPartsSelected.add("Chin");
+                }
+            }
+        });
+
+
+//Gets a click for the Eyes button
+        final ImageButton eyes = faceDialog.findViewById(R.id.eyes);
+        eyes.setEnabled(true);
+        if(eyesSelected){
+            eyes.setImageResource(R.drawable.eyes_selected);
+        }
+        eyes.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v){
+                if(eyesSelected){
+                    eyes.setImageResource(R.drawable.eyes);
+                    eyesSelected = false;
+                    bodyPartsSelected.remove("Eyes");
+                } else {
+                    eyes.setImageResource(R.drawable.eyes_selected);
+                    eyesSelected = true;
+                    bodyPartsSelected.add("Eyes");
+                }
+            }
+        });
+
+
+//Gets a click for the Forehead button
+        final ImageButton forehead = faceDialog.findViewById(R.id.forehead);
+        forehead.setEnabled(true);
+        if(foreheadSelected){
+            forehead.setImageResource(R.drawable.forehead_selected);
+        }
+        forehead.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v){
+                if(foreheadSelected){
+                    forehead.setImageResource(R.drawable.forehead);
+                    foreheadSelected = false;
+                    bodyPartsSelected.remove("Forehead");
+                } else {
+                    forehead.setImageResource(R.drawable.forehead_selected);
+                    foreheadSelected = true;
+                    bodyPartsSelected.add("Forehead");
+                }
+            }
+        });
+
+
+//Gets a click for the Left Cheek button
+        final ImageButton leftCheek = faceDialog.findViewById(R.id.left_cheek);
+        leftCheek.setEnabled(true);
+        if(leftCheekSelected){
+            leftCheek.setImageResource(R.drawable.left_cheek_selected);
+        }
+        leftCheek.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v){
+                if(leftCheekSelected){
+                    leftCheek.setImageResource(R.drawable.left_cheek);
+                    leftCheekSelected = false;
+                    bodyPartsSelected.remove("Left Cheek");
+                } else {
+                    leftCheek.setImageResource(R.drawable.left_cheek_selected);
+                    leftCheekSelected = true;
+                    bodyPartsSelected.add("Left Cheek");
+                }
+            }
+        });
+
+
+//Gets a click for the Left Ear button
+        final ImageButton leftEar = faceDialog.findViewById(R.id.left_ear);
+        leftEar.setEnabled(true);
+        if(leftEarSelected){
+            leftEar.setImageResource(R.drawable.left_ear_selected);
+        }
+        leftEar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v){
+                if(leftEarSelected){
+                    leftEar.setImageResource(R.drawable.left_ear);
+                    leftEarSelected = false;
+                    bodyPartsSelected.remove("Left Ear");
+                } else {
+                    leftEar.setImageResource(R.drawable.left_ear_selected);
+                    leftEarSelected = true;
+                    bodyPartsSelected.add("Left Ear");
+                }
+            }
+        });
+
+        faceDialog.show();
+
+
     }
 }
 
