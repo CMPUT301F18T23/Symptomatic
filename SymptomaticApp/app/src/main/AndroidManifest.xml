@@ -44,8 +44,8 @@
         <activity
             android:name="com.journeyapps.barcodescanner.CaptureActivity"
             android:screenOrientation="portrait"
-            tools:replace="android:screenOrientation"
-            android:stateNotNeeded="true"/>
+            android:stateNotNeeded="true"
+            tools:replace="android:screenOrientation" />
         <activity android:name=".CViewRecords" />
         <activity android:name=".Login" />
         <activity
@@ -91,7 +91,8 @@
         <activity
             android:name=".MapOfRecordsActivity"
             android:label="@string/title_activity_map_of_records" />
-        <activity android:name=".ViewQRCode"></activity>
+        <activity android:name=".ViewQRCode" />
+        <activity android:name=".ViewFullRecordActivity"></activity>
     </application>
 
 </manifest>

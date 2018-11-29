@@ -26,6 +26,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -33,7 +34,7 @@ import java.util.Date;
 /**
  * Represents a user record object. Each record is referenced by a problem name and a date.
  */
-public class Record {
+public class Record implements Serializable {
     protected String recordTitle,recordComment,user,problem;
 
     protected LatLng geolocation;

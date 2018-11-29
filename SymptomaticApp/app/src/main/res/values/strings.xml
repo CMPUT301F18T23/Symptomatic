@@ -92,6 +92,14 @@
     <string name="scanqr">Scan QR Code</string>
     <string name="useqrtologin">Use QR to Login</string>
     <string name="or">or</string>
+    <string name="regarding_problem">Regarding Problem:</string>
+    <string name="record_title">Record Title:</string>
+    <string name="time_stamp2">Time Stamp:</string>
+    <string name="comment">Comment:</string>
+    <string name="body_location">Body Location:</string>
+    <string name="geolocation">Geolocation:</string>
+    <string name="photos">Photos:</string>
+    <string name="view_all_records">View All Records</string>
 
 
 </resources>
