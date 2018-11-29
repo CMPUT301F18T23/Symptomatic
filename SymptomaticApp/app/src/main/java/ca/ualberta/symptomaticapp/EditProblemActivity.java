@@ -47,6 +47,7 @@ import com.google.firebase.firestore.QuerySnapshot;
 
 import org.w3c.dom.Document;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collection;
@@ -72,6 +73,7 @@ public class EditProblemActivity extends AppCompatActivity {
     Calendar cal;
 
     Button editProbButton, deleteProbButton;
+    SimpleDateFormat dateFormatter;
 
     @Override
     protected void onCreate(Bundle savedInstancesState){
@@ -105,7 +107,7 @@ public class EditProblemActivity extends AppCompatActivity {
             @Override
             public void onDateSet(DatePicker view, int chosenYear, int chosenMonth, int chosenDay) {
                 cal.set(chosenYear, chosenMonth, chosenDay);
-                dateTextView.setText(cal.getTime().toString());
+                dateTextView.setText("Chosen date: " + dateFormatter.format(cal.getTime().toString()));
             }
         };
 
@@ -116,7 +118,7 @@ public class EditProblemActivity extends AppCompatActivity {
         editDescriptionEditText.setText(problem.getComment());
 
         dateTextView = findViewById(R.id.currentDateTextView);
-        dateTextView.setText(problem.getDate().toString());
+        dateTextView.setText("Chosen date: " + dateFormatter.format(problem.getDate().toString()));
 
         editProbButton = findViewById(R.id.saveProblemButton);
         editProbButton.setOnClickListener(new View.OnClickListener() {
