@@ -92,7 +92,7 @@ public class RecordListViewAdapter extends BaseAdapter implements ListAdapter {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(context, EditRecordActivity.class);
-               // intent.putExtra("record", recordList.get(position));
+                intent.putExtra("record", recordList.get(position));
                 context.startActivity(intent);
 
             }

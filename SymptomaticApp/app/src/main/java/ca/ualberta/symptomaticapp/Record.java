@@ -39,9 +39,9 @@ public class Record implements Serializable {
 
     protected LatLng geolocation;
 
-    protected ArrayList<String> bodyLocation,photos;
+    protected ArrayList<String> bodyLocation;
 
-    protected ArrayList<Photo> photoList;
+    protected PhotoList photoList;
 
     protected Date recordDate;
 
@@ -61,8 +61,7 @@ public class Record implements Serializable {
       this.bodyLocation = null;
       this.recordComment = null;
       this.geolocation = null;
-      this.photos = null;
-      this.photoList = null;
+      this.photoList = new PhotoList();
     }
 
     public Record(){}
@@ -150,23 +149,27 @@ public class Record implements Serializable {
      * Adds photo to a record
      * @param photos
      */
-    public void addPhoto(ArrayList<String> photos) {
-        this.photos = photos;
+    public void setPhotoList(ArrayList<Photo> photos) {
+        this.photoList.setPhotos(photos);
     }
 
     /**
      * gets the photos of a record
      * @return record photos
      */
-    public ArrayList<String> getPhoto() {
-        return this.photos;
+    public ArrayList<Photo> getPhotoList() {
+        return this.photoList.getPhotos();
     }
 
     /**
      * removes the photo of a record
      */
-    public void removePhoto(String photo) {
-        this.photos.remove(photo);
+    public void removePhoto(Photo photo) {
+        this.photoList.deletePhoto(photo);
+    }
+
+    public void pushPhoto(Photo photo){
+        this.photoList.addPhoto(photo);
     }
 
     /**

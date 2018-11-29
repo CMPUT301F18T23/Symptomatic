@@ -251,6 +251,7 @@ public class AddRecordActivity extends AppCompatActivity {
                     // Create the new record
                     Record currRecord = new Record(currProbName, currDate,Login.thisUser.returnUsername(),title);
                     currRecord.addComment(comment);
+                    currRecord.setPhotoList(displayPhotos);
                     currRecord.addRecToDb();
 
                     // Switch back to the previous activity

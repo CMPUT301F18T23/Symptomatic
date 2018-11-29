@@ -15,7 +15,6 @@
 package ca.ualberta.symptomaticapp;
 
 import java.util.ArrayList;
-import java.util.Collection;
 
 
 /**
@@ -37,7 +36,7 @@ public class PhotoList {
      * Photo getter
      * @return a list of photo
      */
-    public Collection<Photo> getPhotos() {
+    public ArrayList<Photo> getPhotos() {
         return photoList;
     }
 
@@ -66,5 +65,9 @@ public class PhotoList {
     public int getPhotoListSize() {
         // Return the size of the photoList currently
         return photoList.size();
+    }
+
+    public void setPhotos(ArrayList<Photo> photos) {
+        this.photoList = photos;
     }
 }
