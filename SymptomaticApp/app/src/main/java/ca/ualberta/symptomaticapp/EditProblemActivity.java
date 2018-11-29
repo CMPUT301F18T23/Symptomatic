@@ -108,7 +108,7 @@ public class EditProblemActivity extends AppCompatActivity {
             @Override
             public void onDateSet(DatePicker view, int chosenYear, int chosenMonth, int chosenDay) {
                 cal.set(chosenYear, chosenMonth, chosenDay);
-                //chosenDateText = "Chosen date: " + dateFormatter.format(cal.getTime().toString());
+                //chosenDateText = "Chosen date: " + dateFormatter.format(cal.getTime());
                 dateTextView.setText(cal.getTime().toString());
             }
         };
@@ -120,7 +120,7 @@ public class EditProblemActivity extends AppCompatActivity {
         editDescriptionEditText.setText(problem.getComment());
 
         dateTextView = findViewById(R.id.currentDateTextView);
-        //chosenDateText = "Chosen date: " + dateFormatter.format(problem.getDate().toString());
+        //chosenDateText = "Chosen date: " + dateFormatter.format(problem.getDate());
         dateTextView.setText(problem.getDate().toString());
 
         editProbButton = findViewById(R.id.saveProblemButton);
