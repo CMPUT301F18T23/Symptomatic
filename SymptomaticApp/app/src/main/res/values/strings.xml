@@ -104,9 +104,9 @@
     <string name="modify_comment">Modify the comment:</string>
     <string name="delete_record">Delete Record</string>
     <string name="modify_geolocation">Modify the geolocation:</string>
-<<<<<<< HEAD
+
     <string name="title_activity_edit_map_of_record">Map</string>
-=======
+
     <string name="keyword_search">Search by Keywords:</string>
     <string name="geolocation_search">Search by Geo-Location:</string>
     <string name="bodylocation_search">Search by Body Location:</string>
@@ -114,7 +114,7 @@
     <string name="search">Search</string>
     <string name="keyword">Keyword;</string>
 
->>>>>>> b0d5a5f7bd914051c3729abd8686b8b6739f18e8
+
 
 
 </resources>

@@ -97,10 +97,9 @@
         <activity
             android:name=".MapOfSingleRecordActivity"
             android:label="@string/title_activity_map_of_single_record" />
-<<<<<<< HEAD
-=======
+
         <activity android:name=".SearchActivity"></activity>
->>>>>>> b0d5a5f7bd914051c3729abd8686b8b6739f18e8
+
     </application>
 
 </manifest>
