@@ -62,7 +62,6 @@
     <string name="logout">Logout</string>
 
     <string name="view_patients">View Patients</string>
-
     <string name="enter_username2">Enter Username:</string>
     <string name="edit_record">Edit Record</string>
     <string name="view_full_record">View Full Record</string>
@@ -78,9 +77,7 @@
     <string name="save_info">save Information</string>
     <string name="title_activity_maps">Map</string>
     <string name="show_map">Show Map</string>
-
     <string name="view_map">View Map</string>
-
     <string name="delete_photo">Delete</string>
     <string name="enter_title3">Enter Title for Record</string>
     <string name="enter_comment">Enter Comment for Record</string>
@@ -107,6 +104,13 @@
     <string name="modify_comment">Modify the comment:</string>
     <string name="delete_record">Delete Record</string>
     <string name="modify_geolocation">Modify the geolocation:</string>
+    <string name="keyword_search">Search by Keywords:</string>
+    <string name="geolocation_search">Search by Geo-Location:</string>
+    <string name="bodylocation_search">Search by Body Location:</string>
+    <string name="search_separator">Please separate keywords by a semicolon (;)</string>
+    <string name="search">Search</string>
+    <string name="keyword">Keyword;</string>
+
 
 
 </resources>

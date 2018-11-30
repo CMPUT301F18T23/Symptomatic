@@ -96,7 +96,8 @@
         <activity android:name=".ViewFullRecordActivity" />
         <activity
             android:name=".MapOfSingleRecordActivity"
-            android:label="@string/title_activity_map_of_single_record"></activity>
+            android:label="@string/title_activity_map_of_single_record" />
+        <activity android:name=".SearchActivity"></activity>
     </application>
 
 </manifest>
