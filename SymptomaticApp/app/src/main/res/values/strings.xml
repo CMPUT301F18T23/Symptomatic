@@ -107,6 +107,7 @@
     <string name="modify_comment">Modify the comment:</string>
     <string name="delete_record">Delete Record</string>
     <string name="modify_geolocation">Modify the geolocation:</string>
+    <string name="title_activity_edit_map_of_record">Map</string>
 
 
 </resources>

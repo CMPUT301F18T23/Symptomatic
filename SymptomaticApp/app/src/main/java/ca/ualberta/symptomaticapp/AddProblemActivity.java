@@ -114,6 +114,12 @@ public class AddProblemActivity extends AppCompatActivity {
         Intent intent = new Intent(AddProblemActivity.this, ViewQRCode.class);
         startActivity(intent);
     }
+    public void viewMap(MenuItem menu) {
+        //add the Map button to the menu
+        Intent intent = new Intent(AddProblemActivity.this, MapOfRecordsActivity.class);
+        startActivity(intent);
+    }
+
     public void viewLogout(MenuItem menu){
         Login.thisCaregiver = null;
         Login.thisUser = null;
