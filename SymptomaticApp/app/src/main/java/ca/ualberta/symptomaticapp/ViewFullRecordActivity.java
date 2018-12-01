@@ -61,6 +61,10 @@ public class ViewFullRecordActivity extends AppCompatActivity {
         TextView timeStampTextView = findViewById(R.id.InputDateTextView);
         timeStampTextView.setText(record.recordDate.toString());
 
+        // Insert the records comment
+        TextView commentTextView = findViewById(R.id.addCommentTextView);
+        commentTextView.setText(record.recordComment);
+
         Button mapButton = findViewById(R.id.mapButton);
         mapButton.setOnClickListener(new View.OnClickListener() {
             @Override
