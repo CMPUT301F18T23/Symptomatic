@@ -90,6 +90,7 @@ public class EditProblemActivity extends AppCompatActivity {
 
         cal = Calendar.getInstance();
         cal.setTime(problem.getDate());
+        dateFormatter = new SimpleDateFormat("dd/MM/yyyy");
 
         Button dateButton = findViewById(R.id.selectNewDateButton);
         dateButton.setOnClickListener(new View.OnClickListener() {
@@ -108,8 +109,9 @@ public class EditProblemActivity extends AppCompatActivity {
             @Override
             public void onDateSet(DatePicker view, int chosenYear, int chosenMonth, int chosenDay) {
                 cal.set(chosenYear, chosenMonth, chosenDay);
-                //chosenDateText = "Chosen date: " + dateFormatter.format(cal.getTime().toString());
-                dateTextView.setText(cal.getTime().toString());
+                chosenDateText = "Chosen date: " + dateFormatter.format(cal.getTime());
+                dateTextView.setText(chosenDateText);
+
             }
         };
 
@@ -119,9 +121,10 @@ public class EditProblemActivity extends AppCompatActivity {
         editDescriptionEditText = findViewById(R.id.editDescriptionEditText);
         editDescriptionEditText.setText(problem.getComment());
 
+
         dateTextView = findViewById(R.id.currentDateTextView);
-        //chosenDateText = "Chosen date: " + dateFormatter.format(problem.getDate().toString());
-        dateTextView.setText(problem.getDate().toString());
+        chosenDateText = "Chosen date: " + dateFormatter.format(problem.getDate());
+        dateTextView.setText(chosenDateText);
 
         editProbButton = findViewById(R.id.saveProblemButton);
         editProbButton.setOnClickListener(new View.OnClickListener() {
@@ -137,7 +140,6 @@ public class EditProblemActivity extends AppCompatActivity {
         });
 
     }
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -172,6 +174,10 @@ public class EditProblemActivity extends AppCompatActivity {
         Login.thisUser = null;
         Intent intent = new Intent(EditProblemActivity.this, MainActivity.class);
         startActivity(intent);
+    }
+
+    public void updateTime(){
+
     }
 
 
