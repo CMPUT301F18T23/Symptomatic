@@ -112,7 +112,6 @@ public class AddRecordActivity extends AppCompatActivity {
         frontRightHandSelected = false; leftShinSelected = false; frontLeftFootSelected = false; frontRightThighSelected = false; frontRightFootSelected = false; frontLeftThighSelected = false; abdomenSelected = false; frontRightForearmSelected = false; frontLeftForearmSelected = false; upperChestSelected = false; rightShinSelected = false; rightBicepSelected = false; groinSelected = false; leftBicepSelected = false; frontLeftKneeSelected = false; frontLeftHandSelected = false; faceSelected = false; frontRightKneeSelected = false; rightShoulderSelected = false; leftShoulderSelected = false;
         foreheadSelected = false; eyesSelected = false; noseSelected = false; mouthSelected = false; chinSelected = false; rightCheekSelected = false; leftCheekSelected = false; rightEarSelected = false; leftEarSelected = false; neckSelected = false;
 
-        testPhotos = new ArrayList<String>();
         problem = (Problem) getIntent().getSerializableExtra("problem");
 
         addBackBodyPart = findViewById(R.id.addBackBodyPart);
@@ -265,7 +264,7 @@ public class AddRecordActivity extends AppCompatActivity {
                     Record currRecord = new Record(currProbName, timeStamp,Login.thisUser.returnUsername(),title);
                     currRecord.addComment(comment);
 
-                    currRecord.setPhotoList(testPhotos);
+                    currRecord.setPhotoList(displayPhotos);
                     currRecord.addGeolocation(geolocationString);
 
               //so     currRecord.setPhotoList(displayPhotos);
@@ -368,7 +367,6 @@ public class AddRecordActivity extends AppCompatActivity {
 
                     if (displayPhotos.size() < 10) {
                         displayPhotos.add(photo);
-                        testPhotos.add(image);
                         photoListViewAdapter.notifyDataSetChanged();
                         setListViewHeightBasedOnChildren(photoListView);
                     } else {
@@ -398,7 +396,6 @@ public class AddRecordActivity extends AppCompatActivity {
 
                         if (displayPhotos.size() < 10) {
                             displayPhotos.add(photo);
-                            testPhotos.add(image);
                             photoListViewAdapter.notifyDataSetChanged();
                             setListViewHeightBasedOnChildren(photoListView);
                         } else {

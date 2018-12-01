@@ -69,6 +69,8 @@ public class Photo implements Serializable {
         this.stringPhoto = photo;
     }
 
+    public Photo(){}
+
     /**
      * Checks if the bitmap size of the photo is under required size
      * @param photoByteArray

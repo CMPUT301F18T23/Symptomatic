@@ -15,7 +15,7 @@ import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
 
 public class SlideShowModeActivity extends AppCompatActivity implements View.OnClickListener{
-    protected ArrayList<String> displayList;
+    protected ArrayList<Photo> displayList;
     protected Record record;
     protected Button previous;
     protected Button next;
@@ -51,8 +51,8 @@ public class SlideShowModeActivity extends AppCompatActivity implements View.OnC
 //
         noPhotos.setText("");
 
-        String stringPhoto = displayList.get(0);
-
+        Photo p = displayList.get(0);
+        String stringPhoto = p.getPhotoString();
         byte[] bytePhoto = Base64.decode(stringPhoto, Base64.DEFAULT);
         Bitmap photoBitmap = BitmapFactory.decodeByteArray(bytePhoto, 0, bytePhoto.length);
 
@@ -76,8 +76,8 @@ public class SlideShowModeActivity extends AppCompatActivity implements View.OnC
 
         if (viewId == R.id.nextBttn) {
             Log.d("clicked next", "clicked");
-            String stringPhoto = displayList.get(1);
-
+             Photo photo = displayList.get(1);
+            String stringPhoto = photo.getPhotoString();
             byte[] bytePhoto = Base64.decode(stringPhoto, Base64.DEFAULT);
             Bitmap photoBitmap = BitmapFactory.decodeByteArray(bytePhoto, 0, bytePhoto.length);
 
