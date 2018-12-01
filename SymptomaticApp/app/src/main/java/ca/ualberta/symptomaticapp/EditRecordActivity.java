@@ -103,6 +103,9 @@ public class EditRecordActivity extends AppCompatActivity {
         mapButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (record.geolocation == null) {
+
+                }
 
 
             }

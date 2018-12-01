@@ -149,7 +149,7 @@ public class AddRecordActivity extends AppCompatActivity {
         year = cal.get(Calendar.YEAR);
         month = cal.get(Calendar.MONTH);
         day = cal.get(Calendar.DAY_OF_MONTH);
-
+        
 
         addFrontBodyPart.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -204,13 +204,13 @@ public class AddRecordActivity extends AppCompatActivity {
             }
         };
 
-        // map button to edit geolocation
        Button mapButton = findViewById(R.id.mapButton);
         mapButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(AddRecordActivity.this, MapsActivity.class);
-
+                //startActivity(intent);
+                startActivityForResult(intent, GET_GEOLOCATION);
             }
         });
 
@@ -260,7 +260,6 @@ public class AddRecordActivity extends AppCompatActivity {
             public void onClick(View v) {
                 boolean goodRecord = true;
 
-                // When the required information to create a record is filled out
                 if (goodRecord) {
                     // Prepare the attributes required to instantiate the Record class
                     if (timeChanged){
