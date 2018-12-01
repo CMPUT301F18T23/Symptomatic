@@ -58,6 +58,8 @@ public class ListProblemsActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("View Problems");
 
+
+
         listView = findViewById(R.id.problemsListView);
         textView = (TextView) findViewById(R.id.NumberRecordsTextView);
 

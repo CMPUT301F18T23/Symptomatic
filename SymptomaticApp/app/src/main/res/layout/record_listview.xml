@@ -8,11 +8,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
-        android:layout_centerVertical="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="0dp"
+        android:layout_marginTop="18dp"
         android:paddingLeft="8dp"
         android:textColor="@android:color/black"
-        android:textSize="18sp"
-        android:textStyle="bold" />
+        android:textSize="18sp" />
 
     <Button
         android:id="@+id/viewFullRecordButton"
@@ -20,8 +21,8 @@
         android:layout_height="62dp"
         android:layout_alignParentRight="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginRight="75dp"
-        android:layout_marginBottom="120dp"
+        android:layout_marginRight="200dp"
+        android:layout_marginBottom="60dp"
         android:text="@string/view_full_record" />
 
     <Button
@@ -29,8 +30,8 @@
         android:layout_width="95dp"
         android:layout_height="62dp"
         android:layout_alignParentBottom="true"
-        android:layout_marginRight="51dp"
-        android:layout_marginBottom="120dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginBottom="60dp"
         android:layout_toLeftOf="@id/viewFullProblemButton"
         android:text="@string/edit_record" />
 

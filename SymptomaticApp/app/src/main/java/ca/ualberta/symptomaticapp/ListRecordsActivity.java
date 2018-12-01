@@ -65,6 +65,12 @@ public class ListRecordsActivity extends AppCompatActivity {
 
         problem = (Problem)getIntent().getSerializableExtra("problem");
 
+        // Header for view records
+        TextView header = findViewById(R.id.titleTextView);
+        String headerText = "Records for Problem: " + problem.getTitle();
+        header.setText(headerText);
+
+
         recordslistview = findViewById(R.id.recordsListView);
 
         thisRecordList = new RecordList();

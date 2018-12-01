@@ -8,11 +8,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
-        android:layout_centerVertical="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="0dp"
+        android:layout_marginTop="18dp"
         android:paddingLeft="8dp"
         android:textColor="@android:color/black"
         android:textSize="18sp"
-        android:textStyle="bold" />
+         />
 
     <Button
         android:id="@+id/viewFullProblemButton"
@@ -21,7 +23,7 @@
         android:layout_alignParentRight="true"
         android:layout_alignParentBottom="true"
         android:layout_marginRight="6dp"
-        android:layout_marginBottom="120dp"
+        android:layout_marginBottom="80dp"
         android:text="@string/view_full_problem" />
 
     <Button
@@ -30,7 +32,7 @@
         android:layout_height="62dp"
         android:layout_alignParentBottom="true"
         android:layout_marginRight="6dp"
-        android:layout_marginBottom="120dp"
+        android:layout_marginBottom="80dp"
         android:layout_toLeftOf="@id/viewFullProblemButton"
         android:text="@string/add_record" />
 
@@ -40,7 +42,7 @@
         android:layout_height="62dp"
         android:layout_alignParentBottom="true"
         android:layout_marginRight="7dp"
-        android:layout_marginBottom="120dp"
+        android:layout_marginBottom="80dp"
         android:layout_toLeftOf="@id/addRecordButton"
         android:text="@string/view_records" />
 
@@ -50,7 +52,7 @@
         android:layout_height="62dp"
         android:layout_alignParentBottom="true"
         android:layout_marginRight="102dp"
-        android:layout_marginBottom="120dp"
+        android:layout_marginBottom="80dp"
         android:layout_toLeftOf="@id/addRecordButton"
         android:text="@string/edit_problem" />
 
