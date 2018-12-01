@@ -26,7 +26,11 @@ public class SlideShowModeActivity extends AppCompatActivity implements View.OnC
         setContentView(R.layout.activity_slide_show_mode);
         record = (Record) getIntent().getSerializableExtra("record");
 
+<<<<<<< HEAD
        // displayList = record.getPhotoList();
+=======
+//        displayList = record.getPhotoList();
+>>>>>>> 84ab13b4b23c2618e63b65e6d600652899f4fddb
         empty = isEmpty();
         position = 0;
 
