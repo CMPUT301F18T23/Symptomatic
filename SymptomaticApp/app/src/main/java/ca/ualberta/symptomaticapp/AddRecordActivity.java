@@ -389,9 +389,14 @@ public class AddRecordActivity extends AppCompatActivity {
 
                         // Store the image as a Photo object
                         Photo photo = new Photo(bitmap);
+                        ByteArrayOutputStream stream = new ByteArrayOutputStream();
+                        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, stream);
+                        photoByteArray = stream.toByteArray();
+                        String imageB64 = Base64.encodeToString(photoByteArray, Base64.DEFAULT);
 
                         if (displayPhotos.size() < 10) {
                             displayPhotos.add(photo);
+                            testPhotos.add(imageB64);
                             photoListViewAdapter.notifyDataSetChanged();
                             setListViewHeightBasedOnChildren(photoListView);
                         } else {
