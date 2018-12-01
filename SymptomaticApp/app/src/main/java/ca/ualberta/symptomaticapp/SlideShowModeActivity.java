@@ -5,6 +5,7 @@ import android.graphics.BitmapFactory;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Base64;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -13,7 +14,7 @@ import android.widget.TextView;
 import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
 
-public class SlideShowModeActivity extends AppCompatActivity {
+public class SlideShowModeActivity extends AppCompatActivity implements View.OnClickListener{
     protected ArrayList<String> displayList;
     protected Record record;
     protected Button previous;
@@ -24,6 +25,7 @@ public class SlideShowModeActivity extends AppCompatActivity {
     protected int position;
 
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,16 +34,20 @@ public class SlideShowModeActivity extends AppCompatActivity {
 
 
         displayList = record.getPhotoList();
+        Log.d("PhotoList Length", String.valueOf(displayList.size()));
 
 //        displayList = record.getPhotoList();
 
 //        empty = isEmpty();
-//        position = 0;
+        position = 0;
 //
-//        previous = findViewById(R.id.previousBttn);
-//        next = findViewById(R.id.nextBttn);
+        previous = findViewById(R.id.previousBttn);
+        next = findViewById(R.id.nextBttn);
         photoImage = findViewById(R.id.slideShow);
         noPhotos = findViewById(R.id.noImages);
+
+        next.setOnClickListener(this);
+        previous.setOnClickListener(this);
 //
         noPhotos.setText("");
 
@@ -51,7 +57,7 @@ public class SlideShowModeActivity extends AppCompatActivity {
         Bitmap photoBitmap = BitmapFactory.decodeByteArray(bytePhoto, 0, bytePhoto.length);
 
         photoImage.setImageBitmap(photoBitmap);
-
+//        position = position + 1;
 
     }
 
@@ -64,9 +70,20 @@ public class SlideShowModeActivity extends AppCompatActivity {
 //    }
 //
 //
-//    @Override
-//    public void onClick(View v) {
-//        int viewId = v.getId();
+    @Override
+    public void onClick(View v) {
+        int viewId = v.getId();
+
+        if (viewId == R.id.nextBttn) {
+            Log.d("clicked next", "clicked");
+            String stringPhoto = displayList.get(1);
+
+            byte[] bytePhoto = Base64.decode(stringPhoto, Base64.DEFAULT);
+            Bitmap photoBitmap = BitmapFactory.decodeByteArray(bytePhoto, 0, bytePhoto.length);
+
+            photoImage.setImageBitmap(photoBitmap);
+
+        }
 //
 //        if ((viewId == R.id.previousBttn) && !empty)  {
 //            position--;
@@ -90,5 +107,5 @@ public class SlideShowModeActivity extends AppCompatActivity {
 //
 //        }
 //
-//    }
+    }
 }
