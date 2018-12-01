@@ -210,14 +210,14 @@ public class AddRecordActivity extends AppCompatActivity {
                 // Start the intent to take the photo
                 Intent takePictureintent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
 
-                // Create the name of the file for the photo
-                try {
-                    File photoDir = createImageFile();
-                    // for testing: Print the photo's path
-                    Log.d("Photo Directory:", mCurrentPhotoPath);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
+//                // Create the name of the file for the photo
+//                try {
+//                    File photoDir = createImageFile();
+//                    // for testing: Print the photo's path
+//                    Log.d("Photo Directory:", mCurrentPhotoPath);
+//                } catch (IOException e) {
+//                    e.printStackTrace();
+//                }
 
                 // Start the camera for the photo to be taken
                 startActivityForResult(takePictureintent, REQUEST_IMAGE_CAPTURE);
@@ -251,7 +251,7 @@ public class AddRecordActivity extends AppCompatActivity {
                     // Create the new record
                     Record currRecord = new Record(currProbName, currDate,Login.thisUser.returnUsername(),title);
                     currRecord.addComment(comment);
-                    currRecord.setPhotoList(displayPhotos);
+//                    currRecord.setPhotoList(displayPhotos);
                     currRecord.addRecToDb();
 
                     // Switch back to the previous activity
@@ -413,26 +413,26 @@ public class AddRecordActivity extends AppCompatActivity {
 
     }
 
-    // Reference: https://developer.android.com/training/camera/photobasics#java
-    private File createImageFile() throws IOException {
-        // Create the image file name with its timestamp
-        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
-        String photoFileName = "JPEG_" + timeStamp + "_";
-
-        // Get the app's directory for photos
-        File picturesDir = getExternalFilesDir(Environment.DIRECTORY_PICTURES);
-
-        // Create the file
-        File photo = File.createTempFile(
-                photoFileName,  /* prefix */
-                ".jpg",         /* suffix */
-                picturesDir      /* directory */
-        );
-
-        // Store the photo's path name and return the image File
-        mCurrentPhotoPath = photo.getAbsolutePath();
-        return photo;
-    }
+//    // Reference: https://developer.android.com/training/camera/photobasics#java
+//    private File createImageFile() throws IOException {
+//        // Create the image file name with its timestamp
+//        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
+//        String photoFileName = "JPEG_" + timeStamp + "_";
+//
+//        // Get the app's directory for photos
+//        File picturesDir = getExternalFilesDir(Environment.DIRECTORY_PICTURES);
+//
+//        // Create the file
+//        File photo = File.createTempFile(
+//                photoFileName,  /* prefix */
+//                ".jpg",         /* suffix */
+//                picturesDir      /* directory */
+//        );
+//
+//        // Store the photo's path name and return the image File
+//        mCurrentPhotoPath = photo.getAbsolutePath();
+//        return photo;
+//    }
 
 
 

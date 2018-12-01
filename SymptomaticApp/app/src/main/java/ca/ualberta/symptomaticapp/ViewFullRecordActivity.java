@@ -36,7 +36,7 @@ public class ViewFullRecordActivity extends AppCompatActivity {
 
         record = (Record) getIntent().getSerializableExtra("record");
         photoListView = findViewById(R.id.fullRPhotoListView);
-        displayPhotos = record.getPhotoList();
+//        displayPhotos = record.getPhotoList();
         initPhotoListView();
         setListViewHeightBasedOnChildren(photoListView);
         //record.geolocation = new LatLng(-34, 151);
