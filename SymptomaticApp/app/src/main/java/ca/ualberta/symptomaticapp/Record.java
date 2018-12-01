@@ -41,11 +41,10 @@ public class Record implements Serializable {
 
     protected ArrayList<String> bodyLocation;
 
-<<<<<<< HEAD
     //protected PhotoList photoList;
-=======
+
     protected ArrayList<Photo> photoList;
->>>>>>> 84ab13b4b23c2618e63b65e6d600652899f4fddb
+
 
     protected Date recordDate;
 
@@ -65,11 +64,10 @@ public class Record implements Serializable {
       this.bodyLocation = null;
       this.recordComment = null;
       this.geolocation = null;
-<<<<<<< HEAD
+
       //this.photoList = new PhotoList();
-=======
+
       this.photoList = new ArrayList<Photo>();
->>>>>>> 84ab13b4b23c2618e63b65e6d600652899f4fddb
     }
 
     public Record(){
@@ -159,7 +157,7 @@ public class Record implements Serializable {
      * Adds photo to a record
      * @param photos
      */
-<<<<<<< HEAD
+
   //  public void setPhotoList(ArrayList<Photo> photos) {
     //    this.photoList.setPhotos(photos);
    // }
@@ -182,7 +180,7 @@ public class Record implements Serializable {
   //  public void pushPhoto(Photo photo){
     //    this.photoList.addPhoto(photo);
     //}
-=======
+
 //    public void setPhotoList(ArrayList<Photo> photos) {
 //        this.photoList.setPhotos(photos);
 //    }
@@ -205,7 +203,7 @@ public class Record implements Serializable {
 //    public void pushPhoto(Photo photo){
 //        this.photoList.addPhoto(photo);
 //    }
->>>>>>> 84ab13b4b23c2618e63b65e6d600652899f4fddb
+
 
     /**
      * Adds geolocation to a record

@@ -131,7 +131,7 @@ public class MapOfSingleRecordActivity extends FragmentActivity implements OnMap
         MARKER.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(MapOfSingleRecordActivity.this, "Geolocation of Record:" + title, Toast.LENGTH_SHORT).show();
+                Toast.makeText(MapOfSingleRecordActivity.this, "Geolocation of Record: " + title, Toast.LENGTH_SHORT).show();
                 moveCamera(geolocation,DEFAULT_ZOOM, title);
 
             }

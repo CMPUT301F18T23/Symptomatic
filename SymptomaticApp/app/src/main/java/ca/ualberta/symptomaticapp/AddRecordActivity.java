@@ -254,12 +254,12 @@ public class AddRecordActivity extends AppCompatActivity {
                     // Create the new record
                     Record currRecord = new Record(currProbName, currDate,Login.thisUser.returnUsername(),title);
                     currRecord.addComment(comment);
-<<<<<<< HEAD
+
                     //currRecord.setPhotoList(displayPhotos);
                     currRecord.addGeolocation(geolocationString);
-=======
-//                    currRecord.setPhotoList(displayPhotos);
->>>>>>> 84ab13b4b23c2618e63b65e6d600652899f4fddb
+
+              //     currRecord.setPhotoList(displayPhotos);
+
                     currRecord.addRecToDb();
 
                     // Switch back to the previous activity
