@@ -37,11 +37,11 @@ import java.util.Date;
 public class Record implements Serializable {
     protected String recordTitle,recordComment,user,problem;
 
-    protected LatLng geolocation;
+    protected String geolocation;
 
     protected ArrayList<String> bodyLocation;
 
-    protected PhotoList photoList;
+    //protected PhotoList photoList;
 
     protected Date recordDate;
 
@@ -61,7 +61,7 @@ public class Record implements Serializable {
       this.bodyLocation = null;
       this.recordComment = null;
       this.geolocation = null;
-      this.photoList = new PhotoList();
+      //this.photoList = new PhotoList();
     }
 
     public Record(){}
@@ -149,34 +149,34 @@ public class Record implements Serializable {
      * Adds photo to a record
      * @param photos
      */
-    public void setPhotoList(ArrayList<Photo> photos) {
-        this.photoList.setPhotos(photos);
-    }
+  //  public void setPhotoList(ArrayList<Photo> photos) {
+    //    this.photoList.setPhotos(photos);
+   // }
 
     /**
      * gets the photos of a record
      * @return record photos
      */
-    public ArrayList<Photo> getPhotoList() {
-        return this.photoList.getPhotos();
-    }
+   // public ArrayList<Photo> getPhotoList() {
+     //   return this.photoList.getPhotos();
+   // }
 
     /**
      * removes the photo of a record
      */
-    public void removePhoto(Photo photo) {
-        this.photoList.deletePhoto(photo);
-    }
+  //  public void removePhoto(Photo photo) {
+    //    this.photoList.deletePhoto(photo);
+   // }
 
-    public void pushPhoto(Photo photo){
-        this.photoList.addPhoto(photo);
-    }
+  //  public void pushPhoto(Photo photo){
+    //    this.photoList.addPhoto(photo);
+    //}
 
     /**
      * Adds geolocation to a record
      * @param location
      */
-    public void addGeolocation(LatLng location) {
+    public void addGeolocation(String location) {
         this.geolocation = location;
     }
 
@@ -184,7 +184,7 @@ public class Record implements Serializable {
      * Gets geolocation to a record
      * @return geolocation
      */
-    public LatLng getGeolocation() {
+    public String getGeolocation() {
         return this.geolocation;
     }
 
@@ -221,7 +221,7 @@ public class Record implements Serializable {
      * Updates the geolocation of a record
      * @param location
      */
-    public void updateGeolocation(LatLng location) {
+    public void updateGeolocation(String location) {
         this.geolocation = location;
     }
 

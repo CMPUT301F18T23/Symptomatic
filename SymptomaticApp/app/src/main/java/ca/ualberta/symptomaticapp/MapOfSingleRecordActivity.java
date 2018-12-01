@@ -67,17 +67,19 @@ public class MapOfSingleRecordActivity extends FragmentActivity implements OnMap
     private AutoCompleteTextView searchText;
     private ImageView GPS;
     private ImageView BACK;
+    private ImageView MARKER;
     private LatLng geolocation;
     private String title;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_map_of_records);
+        setContentView(R.layout.activity_map_of_single_record);
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         searchText = (AutoCompleteTextView) findViewById(R.id.input_search);
         GPS = (ImageView) findViewById(R.id.gps);
         BACK = (ImageView) findViewById(R.id.back);
+        MARKER = (ImageView) findViewById(R.id.marker);
 
         geolocation = getIntent().getExtras().getParcelable("geolocation");
         title = getIntent().getExtras().getString("title");
@@ -120,10 +122,20 @@ public class MapOfSingleRecordActivity extends FragmentActivity implements OnMap
         GPS.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Toast.makeText(MapOfSingleRecordActivity.this, "Current location", Toast.LENGTH_SHORT).show();
+
                 getDeviceLocation();
             }
         });
 
+        MARKER.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(MapOfSingleRecordActivity.this, "Geolocation of Record:" + title, Toast.LENGTH_SHORT).show();
+                moveCamera(geolocation,DEFAULT_ZOOM, title);
+
+            }
+        });
 
         BACK.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -244,7 +256,7 @@ public class MapOfSingleRecordActivity extends FragmentActivity implements OnMap
      */
     @Override
     public void onMapReady(GoogleMap googleMap) {
-        Toast.makeText(this, "Map is ready", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "Geolocation of Record: " + title, Toast.LENGTH_SHORT).show();
         mMap = googleMap;
 
         if (mLocationPermissionGranted) {

@@ -98,6 +98,9 @@ public class AddRecordActivity extends AppCompatActivity {
 
     private LatLng geolocation;
 
+    private String geolocationString;
+    private double lat, lng;
+
     EditText commentEdit,titleEdit;
 
 
@@ -251,7 +254,8 @@ public class AddRecordActivity extends AppCompatActivity {
                     // Create the new record
                     Record currRecord = new Record(currProbName, currDate,Login.thisUser.returnUsername(),title);
                     currRecord.addComment(comment);
-                    currRecord.setPhotoList(displayPhotos);
+                    //currRecord.setPhotoList(displayPhotos);
+                    currRecord.addGeolocation(geolocationString);
                     currRecord.addRecToDb();
 
                     // Switch back to the previous activity
@@ -266,6 +270,44 @@ public class AddRecordActivity extends AppCompatActivity {
 
 
     }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.add_record_menu, menu);
+        return true;
+    }
+
+    public void viewHome(MenuItem menu) {
+        Intent intent = new Intent(AddRecordActivity.this, MainActivity.class);
+        startActivity(intent);
+    }
+    public void viewEditAccount(MenuItem menu){
+        Intent intent = new Intent(AddRecordActivity.this, EditAccountActivity.class);
+        startActivity(intent);
+    }
+
+    public void viewViewProblems(MenuItem menu) {
+        Intent intent = new Intent(AddRecordActivity.this, ListProblemsActivity.class);
+        startActivity(intent);
+    }
+
+    public void viewAddProblem(MenuItem menu) {
+        Intent intent = new Intent(AddRecordActivity.this, AddProblemActivity.class);
+        startActivity(intent);
+    }
+    public void viewViewQR(MenuItem menu) {
+        Intent intent = new Intent(AddRecordActivity.this, ViewQRCode.class);
+        startActivity(intent);
+    }
+
+    public void viewLogout(MenuItem menu) {
+        Login.thisCaregiver = null;
+        Login.thisUser = null;
+        Intent intent = new Intent(AddRecordActivity.this, MainActivity.class);
+        startActivity(intent);
+    }
+
 
     public void initListView(){
         if(photoListViewAdapter == null){
@@ -304,43 +346,6 @@ public class AddRecordActivity extends AppCompatActivity {
 
         listView.setLayoutParams(params);
         listView.requestLayout();
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.add_record_menu, menu);
-        return true;
-    }
-
-    public void viewHome(MenuItem menu) {
-        Intent intent = new Intent(AddRecordActivity.this, MainActivity.class);
-        startActivity(intent);
-    }
-    public void viewEditAccount(MenuItem menu){
-        Intent intent = new Intent(AddRecordActivity.this, EditAccountActivity.class);
-        startActivity(intent);
-    }
-
-    public void viewViewProblems(MenuItem menu) {
-        Intent intent = new Intent(AddRecordActivity.this, ListProblemsActivity.class);
-        startActivity(intent);
-    }
-
-    public void viewAddProblem(MenuItem menu) {
-        Intent intent = new Intent(AddRecordActivity.this, AddProblemActivity.class);
-        startActivity(intent);
-    }
-    public void viewViewQR(MenuItem menu) {
-        Intent intent = new Intent(AddRecordActivity.this, ViewQRCode.class);
-        startActivity(intent);
-    }
-
-    public void viewLogout(MenuItem menu) {
-        Login.thisCaregiver = null;
-        Login.thisUser = null;
-        Intent intent = new Intent(AddRecordActivity.this, MainActivity.class);
-        startActivity(intent);
     }
 
 
@@ -404,6 +409,9 @@ public class AddRecordActivity extends AppCompatActivity {
             case GET_GEOLOCATION:
                 if (resultCode == RESULT_OK){
                     geolocation = data.getExtras().getParcelable("geolocation");
+                    lat = geolocation.latitude;
+                    lng = geolocation.longitude;
+                    geolocationString = Double.toString(lat) + ',' + Double.toString(lng);
                     Toast.makeText(this, geolocation.toString(), Toast.LENGTH_SHORT).show();
                 }
                 break;

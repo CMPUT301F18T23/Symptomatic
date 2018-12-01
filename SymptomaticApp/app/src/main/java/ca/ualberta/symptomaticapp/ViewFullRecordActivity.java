@@ -35,10 +35,10 @@ public class ViewFullRecordActivity extends AppCompatActivity {
         getSupportActionBar().setTitle("View Record Details");
 
         record = (Record) getIntent().getSerializableExtra("record");
-        photoListView = findViewById(R.id.fullRPhotoListView);
-        displayPhotos = record.getPhotoList();
-        initPhotoListView();
-        setListViewHeightBasedOnChildren(photoListView);
+       // photoListView = findViewById(R.id.fullRPhotoListView);
+       // displayPhotos = record.getPhotoList();
+        //initPhotoListView();
+        //setListViewHeightBasedOnChildren(photoListView);
         //record.geolocation = new LatLng(-34, 151);
 
 
@@ -59,8 +59,14 @@ public class ViewFullRecordActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (record.geolocation != null) {
+
+                    String[] latlng = record.geolocation.split(",");
+                    double latitude = Double.parseDouble(latlng[0]);
+                    double longitude = Double.parseDouble(latlng[1]);
+
+                    LatLng location = new LatLng(latitude, longitude);
                     Intent intent = new Intent(ViewFullRecordActivity.this, MapOfSingleRecordActivity.class);
-                    intent.putExtra("geolocation", record.geolocation);
+                    intent.putExtra("geolocation", location);
                     intent.putExtra("title", record.recordTitle);
                     startActivity(intent);
                 }
@@ -88,20 +94,20 @@ public class ViewFullRecordActivity extends AppCompatActivity {
 
     }
 
-    public void initPhotoListView(){
+   /* public void initPhotoListView(){
         if(photoListViewAdapter2 == null){
             photoListViewAdapter2 = new PhotoListViewAdapter2(displayPhotos, this);
         }
 
         photoListView.setAdapter(photoListViewAdapter2);
 
-    }
+    } */
 
     // setListViewHeightBasedonChildren class reference:
 //    Skidan, Oleg. “ListView inside ScrollView. Solve the Problem. – Oleg Skidan – Medium.” Medium.com, Medium,
 //    5 Feb. 2016, medium.com/@skidanolegs/listview-inside-scrollview-solve-the-problem-a06fdff2a4e0.
 //    Accessed: 25th November, 2018
-    public static void setListViewHeightBasedOnChildren(ListView listView) {
+  /*  public static void setListViewHeightBasedOnChildren(ListView listView) {
         ListAdapter listAdapter = listView.getAdapter();
         if (listAdapter == null) return;
         int desiredWidth = View.MeasureSpec.makeMeasureSpec(listView.getWidth(),
@@ -125,7 +131,7 @@ public class ViewFullRecordActivity extends AppCompatActivity {
 
         listView.setLayoutParams(params);
         listView.requestLayout();
-    }
+    } */
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
