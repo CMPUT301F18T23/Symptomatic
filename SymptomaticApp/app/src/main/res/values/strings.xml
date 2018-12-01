@@ -113,8 +113,7 @@
     <string name="search_separator">Please separate keywords by a semicolon (;)</string>
     <string name="search">Search</string>
     <string name="keyword">Keyword;</string>
-
-
+    <string name="change_timestamp">Select to Change Time Stamp</string>
 
 
 </resources>

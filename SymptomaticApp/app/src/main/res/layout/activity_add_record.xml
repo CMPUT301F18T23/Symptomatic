@@ -26,7 +26,7 @@
                 app:titleTextColor="@android:color/background_light" />
 
             <TextView
-                android:id="@+id/editTitleTextView"
+                android:id="@+id/problemTextView"
                 android:layout_width="match_parent"
                 android:layout_height="29dp"
                 android:layout_marginBottom="8dp"
@@ -39,7 +39,7 @@
                 android:textColor="@android:color/black"
                 android:textSize="18sp"
                 android:textStyle="bold"
-                app:layout_constraintBottom_toTopOf="@+id/commentTextView"
+                app:layout_constraintBottom_toTopOf="@+id/timeTextView"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
@@ -57,14 +57,14 @@
                 android:layout_marginBottom="8dp"
                 android:textColor="@android:color/black"
                 android:textSize="18sp"
-                app:layout_constraintBottom_toTopOf="@+id/commentTextView"
+                app:layout_constraintBottom_toTopOf="@+id/timeTextView"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/commentTextView" />
+                app:layout_constraintTop_toBottomOf="@+id/timeTextView" />
 
             <TextView
-                android:id="@+id/timeTextView"
+                android:id="@+id/titleTextView"
                 android:layout_width="match_parent"
                 android:layout_height="23dp"
                 android:layout_marginStart="8dp"
@@ -99,12 +99,12 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/timeTextView" />
+                app:layout_constraintTop_toBottomOf="@+id/titleTextView" />
 
 
 
             <TextView
-                android:id="@+id/commentTextView"
+                android:id="@+id/timeTextView"
                 android:layout_width="match_parent"
                 android:layout_height="23dp"
                 android:layout_marginBottom="12dp"
@@ -127,17 +127,35 @@
                 android:id="@+id/changeDateButton"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
-                android:layout_marginBottom="8dp"
-                android:layout_marginEnd="8dp"
-                android:layout_marginLeft="8dp"
-                android:layout_marginRight="8dp"
                 android:layout_marginStart="8dp"
+                android:layout_marginLeft="8dp"
                 android:layout_marginTop="12dp"
-                android:text="@string/change_date"
-                app:layout_constraintBottom_toTopOf="@+id/commentTextView"
+                android:layout_marginEnd="8dp"
+                android:layout_marginRight="8dp"
+                android:layout_marginBottom="8dp"
+                android:text="@string/change_timestamp"
+                app:layout_constraintBottom_toTopOf="@+id/currentTimeTextView"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/commentTextView" />
+                app:layout_constraintTop_toBottomOf="@+id/timeTextView" />
+
+            <TextView
+                android:id="@+id/currentTimeTextView"
+                android:layout_width="match_parent"
+                android:layout_height="29dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginRight="8dp"
+                android:layout_marginBottom="8dp"
+                android:textColor="@android:color/black"
+                android:textSize="18sp"
+                app:layout_constraintBottom_toTopOf="@+id/commentTextView"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/changeDateButton" />
 
             <TextView
                 android:id="@+id/commentTextView"
@@ -155,7 +173,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/changeDateButton" />
+                app:layout_constraintTop_toBottomOf="@+id/currentTimeTextView" />
 
             <EditText
                 android:id="@+id/addCommentEditText"

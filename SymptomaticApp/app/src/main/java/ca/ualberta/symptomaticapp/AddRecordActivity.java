@@ -18,6 +18,7 @@ package ca.ualberta.symptomaticapp;
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
+import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -31,6 +32,7 @@ import android.support.v4.content.FileProvider;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.text.format.DateFormat;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -48,6 +50,7 @@ import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.TimePicker;
 import android.widget.Toast;
 
 import com.google.android.gms.maps.model.LatLng;
@@ -91,9 +94,9 @@ public class AddRecordActivity extends AppCompatActivity {
     String mCurrentPhotoPath; // the photo's file path
 
     Problem problem;
-    int year,month,
-            day;
+    int year, month, day, hour, min;
     private DatePickerDialog.OnDateSetListener DateSetListener;
+    private TimePickerDialog.OnTimeSetListener TimeSetListener;
     boolean selectedDateDone;
 
     private LatLng geolocation;
@@ -101,6 +104,10 @@ public class AddRecordActivity extends AppCompatActivity {
     private String geolocationString;
     private double lat, lng;
 
+    TextView currentTime;
+    String currentTimeString;
+    boolean timeChanged;
+    Date timeStamp;
     EditText commentEdit,titleEdit;
 
 
@@ -135,6 +142,10 @@ public class AddRecordActivity extends AppCompatActivity {
         commentEdit = findViewById(R.id.addCommentEditText);
         titleEdit = findViewById(R.id.addTitleEditText);
 
+        currentTime = findViewById(R.id.currentTimeTextView);
+        currentTimeString = "Current Time: " + cal.getTime().toString();
+        currentTime.setText(currentTimeString);
+
         year = cal.get(Calendar.YEAR);
         month = cal.get(Calendar.MONTH);
         day = cal.get(Calendar.DAY_OF_MONTH);
@@ -164,9 +175,14 @@ public class AddRecordActivity extends AppCompatActivity {
                 int currentMonth = cal.get(Calendar.MONTH);
                 int currentDay = cal.get(Calendar.DAY_OF_MONTH);
 
+                TimePickerDialog editTimeDialog = new TimePickerDialog(AddRecordActivity.this, android.R.style.Theme_DeviceDefault_Dialog, TimeSetListener, cal.get(Calendar.HOUR), cal.get(Calendar.MINUTE), DateFormat.is24HourFormat(AddRecordActivity.this));
+                editTimeDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.BLACK));
+                editTimeDialog.show();
+
                 DatePickerDialog dialog = new DatePickerDialog(AddRecordActivity.this, android.R.style.Theme_DeviceDefault_Dialog, DateSetListener, currentYear, currentMonth, currentDay);
                 dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.BLACK));
                 dialog.show();
+
             }
         });
 
@@ -176,6 +192,16 @@ public class AddRecordActivity extends AppCompatActivity {
                 year = chosenYear;
                 month = chosenMonth;
                 day = chosenDay;
+            }
+        };
+
+        TimeSetListener = new TimePickerDialog.OnTimeSetListener() {
+            @Override
+            public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+                hour = hourOfDay;
+                min = minute;
+                updateTime();
+
             }
         };
 
@@ -245,20 +271,29 @@ public class AddRecordActivity extends AppCompatActivity {
                 // When the required information to create a record is filled out
                 if (goodRecord) {
                     // Prepare the attributes required to instantiate the Record class
+                    if (timeChanged){
+                        final Calendar cal = Calendar.getInstance();
+                        cal.set(year, month, day, hour, min);
+                        timeStamp = cal.getTime();
+
+
+                    } else{
+                        timeStamp = Calendar.getInstance().getTime();
+                    }
                     String currProbName = problem.getTitle();
-                    Date currDate = Calendar.getInstance().getTime();
+                    //Date currDate = Calendar.getInstance().getTime();
 
                     String comment = commentEdit.getText().toString();
                     String title = titleEdit.getText().toString();
 
                     // Create the new record
-                    Record currRecord = new Record(currProbName, currDate,Login.thisUser.returnUsername(),title);
+                    Record currRecord = new Record(currProbName, timeStamp,Login.thisUser.returnUsername(),title);
                     currRecord.addComment(comment);
 
                     //currRecord.setPhotoList(displayPhotos);
                     currRecord.addGeolocation(geolocationString);
 
-              //     currRecord.setPhotoList(displayPhotos);
+              //so     currRecord.setPhotoList(displayPhotos);
 
                     currRecord.addRecToDb();
 
@@ -275,42 +310,17 @@ public class AddRecordActivity extends AppCompatActivity {
 
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.add_record_menu, menu);
-        return true;
+    public void updateTime(){
+        final Calendar cal = Calendar.getInstance();
+        cal.set(year, month, day, hour, min);
+        currentTime = findViewById(R.id.currentTimeTextView);
+        currentTimeString = "Current Time: " + cal.getTime().toString();
+        currentTime.setText(currentTimeString);
+        timeChanged = true;
+
+
     }
 
-    public void viewHome(MenuItem menu) {
-        Intent intent = new Intent(AddRecordActivity.this, MainActivity.class);
-        startActivity(intent);
-    }
-    public void viewEditAccount(MenuItem menu){
-        Intent intent = new Intent(AddRecordActivity.this, EditAccountActivity.class);
-        startActivity(intent);
-    }
-
-    public void viewViewProblems(MenuItem menu) {
-        Intent intent = new Intent(AddRecordActivity.this, ListProblemsActivity.class);
-        startActivity(intent);
-    }
-
-    public void viewAddProblem(MenuItem menu) {
-        Intent intent = new Intent(AddRecordActivity.this, AddProblemActivity.class);
-        startActivity(intent);
-    }
-    public void viewViewQR(MenuItem menu) {
-        Intent intent = new Intent(AddRecordActivity.this, ViewQRCode.class);
-        startActivity(intent);
-    }
-
-    public void viewLogout(MenuItem menu) {
-        Login.thisCaregiver = null;
-        Login.thisUser = null;
-        Intent intent = new Intent(AddRecordActivity.this, MainActivity.class);
-        startActivity(intent);
-    }
 
 
     public void initListView(){
@@ -1702,6 +1712,44 @@ public class AddRecordActivity extends AppCompatActivity {
 
 
     }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.add_record_menu, menu);
+        return true;
+    }
+
+    public void viewHome(MenuItem menu) {
+        Intent intent = new Intent(AddRecordActivity.this, MainActivity.class);
+        startActivity(intent);
+    }
+    public void viewEditAccount(MenuItem menu){
+        Intent intent = new Intent(AddRecordActivity.this, EditAccountActivity.class);
+        startActivity(intent);
+    }
+
+    public void viewViewProblems(MenuItem menu) {
+        Intent intent = new Intent(AddRecordActivity.this, ListProblemsActivity.class);
+        startActivity(intent);
+    }
+
+    public void viewAddProblem(MenuItem menu) {
+        Intent intent = new Intent(AddRecordActivity.this, AddProblemActivity.class);
+        startActivity(intent);
+    }
+    public void viewViewQR(MenuItem menu) {
+        Intent intent = new Intent(AddRecordActivity.this, ViewQRCode.class);
+        startActivity(intent);
+    }
+
+    public void viewLogout(MenuItem menu) {
+        Login.thisCaregiver = null;
+        Login.thisUser = null;
+        Intent intent = new Intent(AddRecordActivity.this, MainActivity.class);
+        startActivity(intent);
+    }
+
 }
 
 
