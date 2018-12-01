@@ -356,9 +356,10 @@ public class AddRecordActivity extends AppCompatActivity {
                     }
 
                     // Create an instance of the Photo class
-                    Photo photo = new Photo(bmp);
+//                    Photo photo = new Photo(bmp);
 
                     String image = formatPhoto(bmp);
+                    Photo photo = new Photo(image);
 
 //                    ByteArrayOutputStream stream = new ByteArrayOutputStream();
 //                    bmp.compress(Bitmap.CompressFormat.JPEG, 40, stream);
@@ -386,13 +387,14 @@ public class AddRecordActivity extends AppCompatActivity {
 
 
                         // Store the image as a Photo object
-                        Photo photo = new Photo(bitmap);
+
 //                        ByteArrayOutputStream stream = new ByteArrayOutputStream();
 //                        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, stream);
 //                        photoByteArray = stream.toByteArray();
 //                        String imageB64 = Base64.encodeToString(photoByteArray, Base64.DEFAULT);
 
                         String image = formatPhoto(bitmap);
+                        Photo photo = new Photo(image);
 
                         if (displayPhotos.size() < 10) {
                             displayPhotos.add(photo);

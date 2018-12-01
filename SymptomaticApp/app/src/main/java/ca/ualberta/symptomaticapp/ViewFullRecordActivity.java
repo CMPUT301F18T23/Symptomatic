@@ -24,7 +24,7 @@ public class ViewFullRecordActivity extends AppCompatActivity {
 
     Record record;
     ArrayList<Photo> displayPhotos;
-    PhotoListViewAdapter2 photoListViewAdapter2;
+//    PhotoListViewAdapter2 photoListViewAdapter2;
     ListView photoListView;
 
     @Override
