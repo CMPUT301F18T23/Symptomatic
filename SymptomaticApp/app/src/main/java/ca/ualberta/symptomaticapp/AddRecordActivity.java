@@ -280,6 +280,7 @@ public class AddRecordActivity extends AppCompatActivity {
                     // Create the new record
                     Record currRecord = new Record(currProbName, timeStamp,Login.thisUser.returnUsername(),title);
                     currRecord.addComment(comment);
+                    currRecord.addBodyLocation(bodyPartsSelected);
 
                     //currRecord.setPhotoList(displayPhotos);
                     currRecord.addGeolocation(geolocationString);

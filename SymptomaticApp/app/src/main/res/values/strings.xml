@@ -115,6 +115,9 @@
     <string name="keyword">Keyword;</string>
     <string name="change_timestamp">Select to Change Time Stamp</string>
     <string name="title_activity_edit_record_map">Map</string>
+    <string name="view_front_body_parts">View Front Body Parts</string>
+    <string name="view_back_body_parts">View Back Body Parts</string>
+    <string name="done">Done</string>
 
 
 </resources>
