@@ -11,6 +11,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -40,6 +41,7 @@ public class ViewFullRecordActivity extends AppCompatActivity {
        // displayPhotos = record.getPhotoList();
         //initPhotoListView();
         //setListViewHeightBasedOnChildren(photoListView);
+
 
         photoListView = findViewById(R.id.fullRPhotoListView);
 //        displayPhotos = record.getPhotoList();
@@ -87,6 +89,16 @@ public class ViewFullRecordActivity extends AppCompatActivity {
                     noGeolocationDialog.setMessage("No Geolocation exists. You may add a geolocation in Edit Record.");
                     noGeolocationDialog.show();
                 }
+            }
+        });
+
+        Button slideShow = findViewById(R.id.slideShowMode);
+        slideShow.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(ViewFullRecordActivity.this, SlideShowModeActivity.class);
+                intent.putExtra("record", record);
+                startActivity(intent);
             }
         });
 

@@ -15,24 +15,20 @@
  */
 package ca.ualberta.symptomaticapp;
 
-import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
-import android.os.Environment;
 import android.provider.MediaStore;
-import android.support.annotation.NonNull;
-import android.support.v4.content.FileProvider;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.text.format.DateFormat;
+import android.util.Base64;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -40,35 +36,22 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.ListAdapter;
 import android.widget.ListView;
-import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
 import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.firestore.CollectionReference;
-import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.Query;
-import com.google.firebase.firestore.QueryDocumentSnapshot;
-import com.google.firebase.firestore.QuerySnapshot;
 
 import java.io.ByteArrayOutputStream;
-import java.io.File;
 import java.io.IOException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Collection;
 import java.util.Date;
 
 public class AddRecordActivity extends AppCompatActivity {
@@ -78,7 +61,8 @@ public class AddRecordActivity extends AppCompatActivity {
     private ListView photoListView;
     PhotoListViewAdapter photoListViewAdapter;
     ArrayList<Photo> displayPhotos;
-
+    byte[] photoByteArray;
+    ArrayList<String> testPhotos;
     Button addBackBodyPart,addFrontBodyPart;
 
     private boolean backRightForearmSelected, leftButtoxSelected, backHeadSelected, backRightFootSelected, backLeftHandSelected, backLeftAnkleSelected, backLeftKneeSelected, leftTricepSelected, backRightShoulderSelected, backLeftFootSelected, backLeftForearmSelected, backLeftShoulderSelected, backRightAnkleSelected, lowerBackSelected, upperBackSelected, rightButtoxSelected, backRightThighSelected, rightTricepSelected, midBackSelected, backLeftCalveSelected, backRightCalveSelected, backRightHandSelected, backRightKneeSelected, backLeftThighSelected;
@@ -89,7 +73,7 @@ public class AddRecordActivity extends AppCompatActivity {
 
     Bitmap bmp;
 
-    PhotoList photoList = new PhotoList();
+//    PhotoList photoList = new PhotoList();
 
     String mCurrentPhotoPath; // the photo's file path
 
@@ -128,7 +112,7 @@ public class AddRecordActivity extends AppCompatActivity {
         frontRightHandSelected = false; leftShinSelected = false; frontLeftFootSelected = false; frontRightThighSelected = false; frontRightFootSelected = false; frontLeftThighSelected = false; abdomenSelected = false; frontRightForearmSelected = false; frontLeftForearmSelected = false; upperChestSelected = false; rightShinSelected = false; rightBicepSelected = false; groinSelected = false; leftBicepSelected = false; frontLeftKneeSelected = false; frontLeftHandSelected = false; faceSelected = false; frontRightKneeSelected = false; rightShoulderSelected = false; leftShoulderSelected = false;
         foreheadSelected = false; eyesSelected = false; noseSelected = false; mouthSelected = false; chinSelected = false; rightCheekSelected = false; leftCheekSelected = false; rightEarSelected = false; leftEarSelected = false; neckSelected = false;
 
-
+        testPhotos = new ArrayList<String>();
         problem = (Problem) getIntent().getSerializableExtra("problem");
 
         addBackBodyPart = findViewById(R.id.addBackBodyPart);
@@ -281,7 +265,7 @@ public class AddRecordActivity extends AppCompatActivity {
                     Record currRecord = new Record(currProbName, timeStamp,Login.thisUser.returnUsername(),title);
                     currRecord.addComment(comment);
 
-                    //currRecord.setPhotoList(displayPhotos);
+                    currRecord.setPhotoList(testPhotos);
                     currRecord.addGeolocation(geolocationString);
 
               //so     currRecord.setPhotoList(displayPhotos);
@@ -373,8 +357,19 @@ public class AddRecordActivity extends AppCompatActivity {
 
                     // Create an instance of the Photo class
                     Photo photo = new Photo(bmp);
+
+//                    int size = bmp.getRowBytes() * bmp.getHeight();
+//                    ByteBuffer byteBuffer = ByteBuffer.allocate(size);
+//                    bmp.copyPixelsToBuffer(byteBuffer);
+
+                    ByteArrayOutputStream stream = new ByteArrayOutputStream();
+                    bmp.compress(Bitmap.CompressFormat.JPEG, 40, stream);
+                    photoByteArray = stream.toByteArray();
+                    String imageB64 = Base64.encodeToString(photoByteArray, Base64.DEFAULT);
+
                     if (displayPhotos.size() < 10) {
                         displayPhotos.add(photo);
+                        testPhotos.add(imageB64);
                         photoListViewAdapter.notifyDataSetChanged();
                         setListViewHeightBasedOnChildren(photoListView);
                     } else {

@@ -21,6 +21,7 @@ import android.graphics.BitmapFactory;
 import android.util.Log;
 
 import java.io.ByteArrayOutputStream;
+import java.io.Serializable;
 import java.nio.ByteBuffer;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -31,11 +32,11 @@ import java.util.Date;
  * adding record
  */
 
-public class Photo {
+public class Photo implements Serializable {
     protected String photoPath;
     protected String timestamp;
     protected Integer photoSize;
-    protected byte[] photoByteArray;
+//    protected byte[] photoByteArray;
     protected Bitmap photoBitmap;
     protected Bitmap reducedSizeBitmap;
 
@@ -53,7 +54,7 @@ public class Photo {
         int size = photoBitmap.getRowBytes() * photoBitmap.getHeight();
         ByteBuffer byteBuffer = ByteBuffer.allocate(size);
         photoBitmap.copyPixelsToBuffer(byteBuffer);
-        this.photoByteArray = byteBuffer.array();
+        byte[] photoByteArray = byteBuffer.array();
 
         // Method 2: Another way to convert a bitmap into a byte array but very slow.
 //        ByteArrayOutputStream stream = new ByteArrayOutputStream();
@@ -61,13 +62,14 @@ public class Photo {
 //        this.photoByteArray = stream.toByteArray();
 
         // Check bitmap size and compress if necessary
-        checkBitmapSize();
+        checkBitmapSize(photoByteArray);
     }
 
     /**
      * Checks if the bitmap size of the photo is under required size
+     * @param photoByteArray
      */
-    private void checkBitmapSize() {
+    private void checkBitmapSize(byte[] photoByteArray) {
         // for testing: Log.d("Checked Bitmap Size", "hello" );
         if (photoByteArray.length > 65536){
             int size = photoByteArray.length/65536;
@@ -117,7 +119,7 @@ public class Photo {
         ByteArrayOutputStream stream = new ByteArrayOutputStream();
 
         if(photoBitmap.compress(Bitmap.CompressFormat.JPEG, quality, stream)) {
-            this.photoByteArray = stream.toByteArray();
+            byte[] photoByteArray = stream.toByteArray();
             // for testing: Log.d("COMPRESSION COUNTER:", "harry potter");
             this.reducedSizeBitmap = BitmapFactory.decodeByteArray(photoByteArray, 0, photoByteArray.length);
 
@@ -134,10 +136,10 @@ public class Photo {
      * gets the byte array of the photo
      * @return byte array of the photo
      */
-    public byte[] getPhotoByteArray (){
-        // Return the byte array representation of the photo
-        return this.photoByteArray;
-    }
+//    public byte[] getPhotoByteArray (){
+//        // Return the byte array representation of the photo
+//        return this.photoByteArray;
+//    }
 
     /**
      * gets the bitmap of the photo
