@@ -90,7 +90,7 @@ public class ViewFullRecordActivity extends AppCompatActivity {
             }
         });
 
-
+        // return to view all records
         Button viewRecordsButton = findViewById(R.id.viewAllRecordsBtn);
         viewRecordsButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -99,10 +99,16 @@ public class ViewFullRecordActivity extends AppCompatActivity {
             }
         });
 
-
-
-
-
+        // edit record
+        Button editRecordButton = findViewById(R.id.editRecordBtn);
+        editRecordButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(ViewFullRecordActivity.this, EditRecordActivity.class);
+                intent.putExtra("record", record);
+                startActivity(intent);
+            }
+        });
     }
 
    /* public void initPhotoListView(){

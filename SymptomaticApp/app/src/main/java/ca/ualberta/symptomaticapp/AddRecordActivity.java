@@ -97,7 +97,7 @@ public class AddRecordActivity extends AppCompatActivity {
     int year, month, day, hour, min;
     private DatePickerDialog.OnDateSetListener DateSetListener;
     private TimePickerDialog.OnTimeSetListener TimeSetListener;
-    boolean selectedDateDone;
+
 
     private LatLng geolocation;
 
@@ -150,7 +150,6 @@ public class AddRecordActivity extends AppCompatActivity {
         month = cal.get(Calendar.MONTH);
         day = cal.get(Calendar.DAY_OF_MONTH);
 
-        selectedDateDone = false;
 
         addFrontBodyPart.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -205,13 +204,13 @@ public class AddRecordActivity extends AppCompatActivity {
             }
         };
 
+        // map button to edit geolocation
        Button mapButton = findViewById(R.id.mapButton);
         mapButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(AddRecordActivity.this, MapsActivity.class);
-                //startActivity(intent);
-                startActivityForResult(intent, GET_GEOLOCATION);
+
             }
         });
 
@@ -260,14 +259,7 @@ public class AddRecordActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 boolean goodRecord = true;
-                // If the record's date is not given
-                // TODO: selectedDateDone is always true for some reason...
-                if (selectedDateDone) {
-                    AlertDialog.Builder noDescriptionDialog = new AlertDialog.Builder(AddRecordActivity.this);
-                    noDescriptionDialog.setMessage("A date must be inputted");
-                    noDescriptionDialog.show();
-                    goodRecord = false;
-                }
+
                 // When the required information to create a record is filled out
                 if (goodRecord) {
                     // Prepare the attributes required to instantiate the Record class
