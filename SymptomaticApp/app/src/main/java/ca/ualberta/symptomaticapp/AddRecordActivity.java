@@ -358,18 +358,16 @@ public class AddRecordActivity extends AppCompatActivity {
                     // Create an instance of the Photo class
                     Photo photo = new Photo(bmp);
 
-//                    int size = bmp.getRowBytes() * bmp.getHeight();
-//                    ByteBuffer byteBuffer = ByteBuffer.allocate(size);
-//                    bmp.copyPixelsToBuffer(byteBuffer);
+                    String image = formatPhoto(bmp);
 
-                    ByteArrayOutputStream stream = new ByteArrayOutputStream();
-                    bmp.compress(Bitmap.CompressFormat.JPEG, 40, stream);
-                    photoByteArray = stream.toByteArray();
-                    String imageB64 = Base64.encodeToString(photoByteArray, Base64.DEFAULT);
+//                    ByteArrayOutputStream stream = new ByteArrayOutputStream();
+//                    bmp.compress(Bitmap.CompressFormat.JPEG, 40, stream);
+//                    photoByteArray = stream.toByteArray();
+//                    String imageB64 = Base64.encodeToString(photoByteArray, Base64.DEFAULT);
 
                     if (displayPhotos.size() < 10) {
                         displayPhotos.add(photo);
-                        testPhotos.add(imageB64);
+                        testPhotos.add(image);
                         photoListViewAdapter.notifyDataSetChanged();
                         setListViewHeightBasedOnChildren(photoListView);
                     } else {
@@ -389,14 +387,16 @@ public class AddRecordActivity extends AppCompatActivity {
 
                         // Store the image as a Photo object
                         Photo photo = new Photo(bitmap);
-                        ByteArrayOutputStream stream = new ByteArrayOutputStream();
-                        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, stream);
-                        photoByteArray = stream.toByteArray();
-                        String imageB64 = Base64.encodeToString(photoByteArray, Base64.DEFAULT);
+//                        ByteArrayOutputStream stream = new ByteArrayOutputStream();
+//                        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, stream);
+//                        photoByteArray = stream.toByteArray();
+//                        String imageB64 = Base64.encodeToString(photoByteArray, Base64.DEFAULT);
+
+                        String image = formatPhoto(bitmap);
 
                         if (displayPhotos.size() < 10) {
                             displayPhotos.add(photo);
-                            testPhotos.add(imageB64);
+                            testPhotos.add(image);
                             photoListViewAdapter.notifyDataSetChanged();
                             setListViewHeightBasedOnChildren(photoListView);
                         } else {
@@ -447,6 +447,29 @@ public class AddRecordActivity extends AppCompatActivity {
 //        return photo;
 //    }
 
+    public String formatPhoto(Bitmap bmp) {
+        String image = null;
+        ByteArrayOutputStream stream = new ByteArrayOutputStream();
+        bmp.compress(Bitmap.CompressFormat.JPEG, 100, stream);
+        photoByteArray = stream.toByteArray();
+
+        if (photoByteArray.length > 65536) {
+            int size = photoByteArray.length/65536;
+
+            if (size > 0) {
+                int quality = 100 / size;
+                stream = new ByteArrayOutputStream();
+                bmp.compress(Bitmap.CompressFormat.JPEG, quality, stream);
+                photoByteArray = stream.toByteArray();
+                image = Base64.encodeToString(photoByteArray, Base64.DEFAULT);
+                return image;
+            }
+
+        }
+
+        image = Base64.encodeToString(photoByteArray, Base64.DEFAULT);
+        return image;
+    }
 
 
     //EVERYTHING BELOW HERE IS FOR THE BODY PART DIALOGS
