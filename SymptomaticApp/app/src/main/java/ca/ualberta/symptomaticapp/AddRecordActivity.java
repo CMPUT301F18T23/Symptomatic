@@ -149,7 +149,7 @@ public class AddRecordActivity extends AppCompatActivity {
         year = cal.get(Calendar.YEAR);
         month = cal.get(Calendar.MONTH);
         day = cal.get(Calendar.DAY_OF_MONTH);
-        
+
 
         addFrontBodyPart.setOnClickListener(new View.OnClickListener() {
             @Override

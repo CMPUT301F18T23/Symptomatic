@@ -4,12 +4,16 @@ import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.net.Uri;
+import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.text.format.DateFormat;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -19,14 +23,18 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.TimePicker;
+import android.widget.Toast;
 
 import com.google.android.gms.maps.model.LatLng;
 
+import java.io.IOException;
 import java.util.Calendar;
 
 public class EditRecordActivity extends AppCompatActivity {
 
     Record record;
+
+    // time stamp variables
     private DatePickerDialog.OnDateSetListener DateSetListener;
     private TimePickerDialog.OnTimeSetListener TimeSetListener;
     Calendar cal;
@@ -35,6 +43,14 @@ public class EditRecordActivity extends AppCompatActivity {
     int day;
     int hour;
     int min;
+
+    // geolocation variables
+    private LatLng newGeolocation;
+    private Double lat, lng;
+    private String newGeolocationString;
+    private boolean geoChanged;
+
+    static final int GET_GEOLOCATION = 2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -104,12 +120,47 @@ public class EditRecordActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (record.geolocation == null) {
+                    Intent intent = new Intent(EditRecordActivity.this, MapsActivity.class);
+                    //startActivity(intent);
+                    startActivityForResult(intent, GET_GEOLOCATION);
+
+                } else {
+                    String[] latlng = record.geolocation.split(",");
+                    double latitude = Double.parseDouble(latlng[0]);
+                    double longitude = Double.parseDouble(latlng[1]);
+
+                    LatLng location = new LatLng(latitude, longitude);
+                    Intent intent = new Intent(EditRecordActivity.this, EditRecordMap.class);
+                    intent.putExtra("geolocation", location);
+                    intent.putExtra("title", record.recordTitle);
+                    startActivityForResult(intent, GET_GEOLOCATION);
 
                 }
 
 
             }
         });
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        switch (requestCode) {
+
+            // if changing the geolocation
+            case GET_GEOLOCATION:
+                if (resultCode == RESULT_OK){
+                    newGeolocation = data.getExtras().getParcelable("geolocation");
+                    lat = newGeolocation.latitude;
+                    lng = newGeolocation.longitude;
+                    newGeolocationString = Double.toString(lat) + ',' + Double.toString(lng);
+                    geoChanged = true;
+                    Toast.makeText(this, newGeolocation.toString(), Toast.LENGTH_SHORT).show();
+                }
+                break;
+
+        }
+
+
     }
 
 

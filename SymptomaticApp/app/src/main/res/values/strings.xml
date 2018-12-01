@@ -114,6 +114,7 @@
     <string name="search">Search</string>
     <string name="keyword">Keyword;</string>
     <string name="change_timestamp">Select to Change Time Stamp</string>
+    <string name="title_activity_edit_record_map">Map</string>
 
 
 </resources>
