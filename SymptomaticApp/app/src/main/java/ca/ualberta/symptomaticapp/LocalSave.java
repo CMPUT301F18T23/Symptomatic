@@ -61,7 +61,6 @@ public final class LocalSave {
         return tempFile;
     }
 
-
     public void writeToCacheFile(FileOutputStream tempOfflineFile, Object object) throws IOException {
         ObjectOutputStream newFile = new ObjectOutputStream(tempOfflineFile);
         newFile.writeObject(object);

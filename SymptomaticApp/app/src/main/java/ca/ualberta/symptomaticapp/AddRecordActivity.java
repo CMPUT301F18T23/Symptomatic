@@ -23,6 +23,7 @@ import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
+import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -49,7 +50,9 @@ import android.widget.Toast;
 import com.google.android.gms.maps.model.LatLng;
 
 import java.io.ByteArrayOutputStream;
+import java.io.File;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -223,13 +226,13 @@ public class AddRecordActivity extends AppCompatActivity {
                 Intent takePictureintent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
 
 //                // Create the name of the file for the photo
-//                try {
-//                    File photoDir = createImageFile();
-//                    // for testing: Print the photo's path
-//                    Log.d("Photo Directory:", mCurrentPhotoPath);
-//                } catch (IOException e) {
-//                    e.printStackTrace();
-//                }
+                try {
+                    File photoDir = createImageFile();
+                    // for testing: Print the photo's path
+                    Log.d("Photo Directory:", mCurrentPhotoPath);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
 
                 // Start the camera for the photo to be taken
                 startActivityForResult(takePictureintent, REQUEST_IMAGE_CAPTURE);
@@ -386,6 +389,7 @@ public class AddRecordActivity extends AppCompatActivity {
                         // Convert the photo captured into a bitmap
                         Bitmap bitmap = (Bitmap) data.getExtras().get("data");
 
+                        Log.d("Photo Location", mCurrentPhotoPath);
 
                         // Store the image as a Photo object
                         Photo photo = new Photo(bitmap);
@@ -426,26 +430,26 @@ public class AddRecordActivity extends AppCompatActivity {
 
     }
 
-//    // Reference: https://developer.android.com/training/camera/photobasics#java
-//    private File createImageFile() throws IOException {
-//        // Create the image file name with its timestamp
-//        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
-//        String photoFileName = "JPEG_" + timeStamp + "_";
-//
-//        // Get the app's directory for photos
-//        File picturesDir = getExternalFilesDir(Environment.DIRECTORY_PICTURES);
-//
-//        // Create the file
-//        File photo = File.createTempFile(
-//                photoFileName,  /* prefix */
-//                ".jpg",         /* suffix */
-//                picturesDir      /* directory */
-//        );
-//
-//        // Store the photo's path name and return the image File
-//        mCurrentPhotoPath = photo.getAbsolutePath();
-//        return photo;
-//    }
+    // Reference: https://developer.android.com/training/camera/photobasics#java
+    private File createImageFile() throws IOException {
+        // Create the image file name with its timestamp
+        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
+        String photoFileName = "JPEG_" + timeStamp + "_";
+
+        // Get the app's directory for photos
+        File picturesDir = getExternalFilesDir(Environment.DIRECTORY_PICTURES);
+
+        // Create the file
+        File photo = File.createTempFile(
+                photoFileName,  /* prefix */
+                ".jpg",         /* suffix */
+                picturesDir      /* directory */
+        );
+
+        // Store the photo's path name and return the image File
+        mCurrentPhotoPath = photo.getAbsolutePath();
+        return photo;
+    }
 
 
 

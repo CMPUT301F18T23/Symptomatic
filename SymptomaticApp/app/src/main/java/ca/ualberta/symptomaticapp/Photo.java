@@ -93,6 +93,13 @@ public class Photo implements Serializable {
     }
 
     /**
+     * sets the photoPath for the Photo with a string
+     * @return void
+     */
+    public void setPhotoPath(String newPhotoPath) {
+        this.photoPath = newPhotoPath;
+    }
+    /**
      * gets the string TimeStamp
      * @return string TimeStamp
      */
@@ -158,6 +165,7 @@ public class Photo implements Serializable {
         // Return the size of the photo
         this.photoSize = photoSize;
     }
+
 
 
 }
