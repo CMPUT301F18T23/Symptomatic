@@ -269,6 +269,7 @@ public class AddRecordActivity extends AppCompatActivity {
 
               //so     currRecord.setPhotoList(displayPhotos);
 
+                    Log.d("photos length", String.valueOf(displayPhotos.size()));
                     currRecord.addRecToDb();
 
                     // Switch back to the previous activity

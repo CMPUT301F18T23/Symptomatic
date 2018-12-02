@@ -258,8 +258,8 @@
             <Button
                 android:id="@+id/slideShowMode"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Button" />
+                android:layout_height="40dp"
+                android:text="@string/sideShow" />
 
             <ListView
                 android:id="@+id/fullRPhotoListView"
