@@ -40,17 +40,20 @@ import java.util.Date;
 public class Photo implements Serializable {
     protected String photoPath;
     protected Uri photoUri;
+//    protected String photoPath;
     protected String timestamp;
-    protected Integer photoSize;
+//    protected Integer photoSize;
 //    protected byte[] photoByteArray;
-    protected Bitmap photoBitmap;
-    protected Bitmap reducedSizeBitmap;
+//    protected Bitmap photoBitmap;
+//    protected Bitmap reducedSizeBitmap;
+
+    protected String stringPhoto;
 
     /**
      * Constructor for photo
      * @param
      */
-    public Photo(){
+    public Photo(String photo){
         // Initialize the Photo object
 //        this.photoBitmap = photoBitmap;
         this.timestamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
@@ -69,34 +72,38 @@ public class Photo implements Serializable {
 
         // Check bitmap size and compress if necessary
 //        checkBitmapSize(photoByteArray);
+
+        this.stringPhoto = photo;
     }
+
+    public Photo(){}
 
     /**
      * Checks if the bitmap size of the photo is under required size
      * @param photoByteArray
      */
-    private void checkBitmapSize(byte[] photoByteArray) {
-        // for testing: Log.d("Checked Bitmap Size", "hello" );
-        if (photoByteArray.length > 65536){
-            int size = photoByteArray.length/65536;
-            if (size > 0) {
-                int quality = 100 / size;
-                compressPhoto(quality);
-            }
-        }
-        // If bitmap doesn't exceed the maximum size, then set the photoSize
-        this.setPhotoSize(photoByteArray.length);
-
-    }
+//    private void checkBitmapSize(byte[] photoByteArray) {
+//        // for testing: Log.d("Checked Bitmap Size", "hello" );
+//        if (photoByteArray.length > 65536){
+//            int size = photoByteArray.length/65536;
+//            if (size > 0) {
+//                int quality = 100 / size;
+//                compressPhoto(quality);
+//            }
+//        }
+//        // If bitmap doesn't exceed the maximum size, then set the photoSize
+//        this.setPhotoSize(photoByteArray.length);
+//
+//    }
 
     /**
      * gets the String photoPath
      * @return the String photoPath
      */
-    public String getPhotoPath() {
-        // Return the photo's file path as a String
-        return this.photoPath;
-    }
+//    public String getPhotoPath() {
+//        // Return the photo's file path as a String
+//        return this.photoPath;
+//    }
 
     /**
      * sets the photoPath for the Photo with a string
@@ -135,29 +142,32 @@ public class Photo implements Serializable {
      * gets integer photo size
      * @return integer photoSize
      */
-    public Integer getPhotoSize() {
-        // Return the photo's size as an Integer
-        return this.photoSize;
-    }
+//    public Integer getPhotoSize() {
+//        // Return the photo's size as an Integer
+//        return this.photoSize;
+//    }
 
     /**
      * If initial photo size is larger than specified, compress the photo
      * and do so continually until the photo is under the specified size
      */
-    public void compressPhoto(int quality) {
-        // If the photo's size exceeds 65536 bytes, compress the image.
-        ByteArrayOutputStream stream = new ByteArrayOutputStream();
-
-        if (photoBitmap.compress(Bitmap.CompressFormat.JPEG, quality, stream)) {
-            byte[] photoByteArray = stream.toByteArray();
-            // for testing: Log.d("COMPRESSION COUNTER:", "harry potter");
-            this.reducedSizeBitmap = BitmapFactory.decodeByteArray(photoByteArray, 0, photoByteArray.length);
-
-        } else {
-            // Print our error message saying the compression wasn't successful
-            Log.d("COMPRESSION ERROR", "Bitmap cannot be compressed.");
-        }
-    }
+//    public void compressPhoto(int quality) {
+//        // If the photo's size exceeds 65536 bytes, compress the image.
+//        ByteArrayOutputStream stream = new ByteArrayOutputStream();
+//
+//        if(photoBitmap.compress(Bitmap.CompressFormat.JPEG, quality, stream)) {
+//            byte[] photoByteArray = stream.toByteArray();
+//            // for testing: Log.d("COMPRESSION COUNTER:", "harry potter");
+//            this.reducedSizeBitmap = BitmapFactory.decodeByteArray(photoByteArray, 0, photoByteArray.length);
+//
+//        }
+//        else{
+//            // Print our error message saying the compression wasn't successful
+//            Log.d("COMPRESSION ERROR", "Bitmap cannot be compressed.");
+//        }
+//
+//
+//    }
 
 //    public File savePhotoToGallery(Context context) throws IOException {
 //        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
@@ -187,10 +197,10 @@ public class Photo implements Serializable {
      * gets the bitmap of the photo
      * @return bitmap of the photo
      */
-    public Bitmap getPhotoBitmap(){
-        // Return the bitmap representation of the photo
-        return this.photoBitmap;
-    }
+//    public Bitmap getPhotoBitmap(){
+//        // Return the bitmap representation of the photo
+//        return this.photoBitmap;
+//    }
 
     public void setPhotoBitmap(Bitmap newPhotoBitmap) {
         this.photoBitmap = newPhotoBitmap;
@@ -200,11 +210,15 @@ public class Photo implements Serializable {
 
     /**
      * sets the size of the photo
-     * @param photoSize
+     * @param
      */
-    public void setPhotoSize(int photoSize) {
-        // Return the size of the photo
-        this.photoSize = photoSize;
+//    public void setPhotoSize(int photoSize) {
+//        // Return the size of the photo
+//        this.photoSize = photoSize;
+//    }
+
+    public String getPhotoString() {
+        return this.stringPhoto;
     }
 
 

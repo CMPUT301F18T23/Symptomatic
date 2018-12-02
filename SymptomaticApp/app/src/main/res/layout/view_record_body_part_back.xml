@@ -1,0 +1,388 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:background="@color/background"
+    android:layout_height="match_parent">
+
+    <ImageButton
+        android:id="@+id/back_head"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="131dp"
+        android:layout_marginLeft="131dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="141dp"
+        android:layout_marginRight="141dp"
+        android:adjustViewBounds="false"
+        android:background="@null"
+        android:cropToPadding="false"
+        app:layout_constraintBottom_toTopOf="@+id/upper_back"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_chainStyle="spread_inside"
+        app:srcCompat="@drawable/back_head" />
+
+    <ImageButton
+        android:id="@+id/upper_back"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:adjustViewBounds="false"
+        android:background="@null"
+        android:cropToPadding="false"
+        app:layout_constraintBottom_toTopOf="@+id/mid_back"
+        app:layout_constraintEnd_toStartOf="@+id/back_right_shoulder"
+        app:layout_constraintStart_toEndOf="@+id/back_left_shoulder"
+        app:layout_constraintTop_toBottomOf="@+id/back_head"
+        app:srcCompat="@drawable/upper_back" />
+
+    <ImageButton
+        android:id="@+id/mid_back"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:adjustViewBounds="false"
+        android:background="@null"
+        android:cropToPadding="false"
+        app:layout_constraintBottom_toTopOf="@+id/lower_back"
+        app:layout_constraintEnd_toStartOf="@+id/right_tricep"
+        app:layout_constraintStart_toEndOf="@+id/left_tricep"
+        app:layout_constraintTop_toBottomOf="@+id/upper_back"
+        app:srcCompat="@drawable/mid_back" />
+
+    <ImageButton
+        android:id="@+id/lower_back"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:adjustViewBounds="false"
+        android:background="@null"
+        android:cropToPadding="false"
+        app:layout_constraintBottom_toTopOf="@+id/left_buttox"
+        app:layout_constraintEnd_toStartOf="@+id/right_tricep"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toEndOf="@+id/left_tricep"
+        app:layout_constraintTop_toBottomOf="@+id/mid_back"
+        app:srcCompat="@drawable/lower_back" />
+
+    <ImageButton
+        android:id="@+id/left_buttox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="2dp"
+        android:layout_marginLeft="2dp"
+        android:adjustViewBounds="false"
+        android:background="@null"
+        android:cropToPadding="false"
+        app:layout_constraintBottom_toTopOf="@+id/back_left_thigh"
+        app:layout_constraintEnd_toStartOf="@+id/right_buttox"
+        app:layout_constraintStart_toEndOf="@+id/back_left_forearm"
+        app:layout_constraintTop_toBottomOf="@+id/lower_back"
+        app:srcCompat="@drawable/back_left_buttox" />
+
+    <ImageButton
+        android:id="@+id/right_buttox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:adjustViewBounds="false"
+        android:background="@null"
+        android:cropToPadding="false"
+        app:layout_constraintBottom_toTopOf="@+id/back_right_thigh"
+        app:layout_constraintEnd_toStartOf="@+id/back_right_forearm"
+        app:layout_constraintStart_toEndOf="@+id/left_buttox"
+        app:layout_constraintTop_toBottomOf="@+id/lower_back"
+        app:srcCompat="@drawable/back_right_buttox" />
+
+    <ImageButton
+        android:id="@+id/back_left_thigh"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="22dp"
+        android:layout_marginLeft="22dp"
+        android:layout_marginEnd="5dp"
+        android:layout_marginRight="5dp"
+        android:adjustViewBounds="false"
+        android:background="@null"
+        android:cropToPadding="false"
+        app:layout_constraintBottom_toTopOf="@+id/back_left_knee"
+        app:layout_constraintEnd_toStartOf="@+id/back_right_thigh"
+        app:layout_constraintStart_toEndOf="@+id/back_left_hand"
+        app:layout_constraintTop_toBottomOf="@+id/left_buttox"
+        app:srcCompat="@drawable/back_left_thigh" />
+
+    <ImageButton
+        android:id="@+id/back_right_thigh"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="124dp"
+        android:layout_marginRight="124dp"
+        android:adjustViewBounds="false"
+        android:background="@null"
+        android:cropToPadding="false"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/back_left_thigh"
+        app:layout_constraintTop_toBottomOf="@+id/right_buttox"
+        app:srcCompat="@drawable/back_right_thigh" />
+
+    <ImageButton
+        android:id="@+id/back_right_calve"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="7dp"
+        android:layout_marginLeft="7dp"
+        android:layout_marginEnd="140dp"
+        android:layout_marginRight="140dp"
+        android:adjustViewBounds="false"
+        android:background="@null"
+        android:cropToPadding="false"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/back_left_calve"
+        app:layout_constraintTop_toBottomOf="@+id/back_right_knee"
+        app:srcCompat="@drawable/back_right_calve" />
+
+    <ImageButton
+        android:id="@+id/back_right_ankle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="17dp"
+        android:layout_marginLeft="17dp"
+        android:layout_marginBottom="9dp"
+        android:adjustViewBounds="false"
+        android:background="@null"
+        android:cropToPadding="false"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/back_left_ankle"
+        app:layout_constraintTop_toBottomOf="@+id/back_right_calve"
+        app:srcCompat="@drawable/back_right_ankle" />
+
+    <ImageButton
+        android:id="@+id/back_right_knee"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="25dp"
+        android:layout_marginLeft="25dp"
+        android:layout_marginEnd="150dp"
+        android:layout_marginRight="150dp"
+        android:adjustViewBounds="false"
+        android:background="@null"
+        android:cropToPadding="false"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/back_left_knee"
+        app:layout_constraintTop_toBottomOf="@+id/back_right_thigh"
+        app:srcCompat="@drawable/back_right_knee" />
+
+    <ImageButton
+        android:id="@+id/back_right_foot"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="136dp"
+        android:layout_marginRight="136dp"
+        android:layout_marginBottom="9dp"
+        android:adjustViewBounds="false"
+        android:background="@null"
+        android:cropToPadding="false"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/back_right_ankle"
+        app:layout_constraintTop_toBottomOf="@+id/back_right_calve"
+        app:srcCompat="@drawable/back_right_foot" />
+
+    <ImageButton
+        android:id="@+id/back_left_ankle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="9dp"
+        android:adjustViewBounds="false"
+        android:background="@null"
+        android:cropToPadding="false"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/back_left_foot"
+        app:layout_constraintTop_toBottomOf="@+id/back_left_calve"
+        app:srcCompat="@drawable/back_left_ankle" />
+
+    <ImageButton
+        android:id="@+id/back_left_foot"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="130dp"
+        android:layout_marginLeft="130dp"
+        android:layout_marginBottom="9dp"
+        android:adjustViewBounds="false"
+        android:background="@null"
+        android:cropToPadding="false"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/back_left_ankle"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/back_left_calve"
+        app:srcCompat="@drawable/back_left_foot" />
+
+    <ImageButton
+        android:id="@+id/back_left_calve"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="135dp"
+        android:layout_marginLeft="135dp"
+        android:layout_marginEnd="5dp"
+        android:layout_marginRight="5dp"
+        android:adjustViewBounds="false"
+        android:background="@null"
+        android:cropToPadding="false"
+        app:layout_constraintEnd_toStartOf="@+id/back_right_calve"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/back_left_knee"
+        app:srcCompat="@drawable/back_left_calve" />
+
+    <ImageButton
+        android:id="@+id/back_left_knee"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="138dp"
+        android:layout_marginLeft="138dp"
+        android:adjustViewBounds="false"
+        android:background="@null"
+        android:cropToPadding="false"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/back_left_thigh"
+        app:srcCompat="@drawable/back_left_knee" />
+
+    <ImageButton
+        android:id="@+id/back_right_shoulder"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="94dp"
+        android:layout_marginRight="94dp"
+        android:adjustViewBounds="false"
+        android:background="@null"
+        android:cropToPadding="false"
+        app:layout_constraintBottom_toTopOf="@+id/mid_back"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/upper_back"
+        app:layout_constraintTop_toBottomOf="@+id/back_head"
+        app:srcCompat="@drawable/back_right_shoulder" />
+
+    <ImageButton
+        android:id="@+id/right_tricep"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:adjustViewBounds="false"
+        android:background="@null"
+        android:cropToPadding="false"
+        app:layout_constraintBottom_toTopOf="@+id/back_right_forearm"
+        app:layout_constraintStart_toEndOf="@+id/mid_back"
+        app:layout_constraintTop_toBottomOf="@+id/back_right_shoulder"
+        app:srcCompat="@drawable/right_tricep" />
+
+    <ImageButton
+        android:id="@+id/back_right_forearm"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="1dp"
+        android:layout_marginBottom="1dp"
+        android:adjustViewBounds="false"
+        android:background="@null"
+        android:cropToPadding="false"
+        app:layout_constraintBottom_toTopOf="@+id/back_right_hand"
+        app:layout_constraintStart_toEndOf="@+id/right_buttox"
+        app:layout_constraintTop_toBottomOf="@+id/right_tricep"
+        app:srcCompat="@drawable/back_right_forearm" />
+
+    <ImageButton
+        android:id="@+id/back_right_hand"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="25dp"
+        android:layout_marginLeft="25dp"
+        android:adjustViewBounds="false"
+        android:background="@null"
+        android:cropToPadding="false"
+        app:layout_constraintStart_toEndOf="@+id/right_buttox"
+        app:layout_constraintTop_toBottomOf="@+id/back_right_forearm"
+        app:srcCompat="@drawable/back_right_hand" />
+
+    <ImageButton
+        android:id="@+id/back_left_shoulder"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="85dp"
+        android:layout_marginLeft="85dp"
+        android:layout_marginTop="1dp"
+        android:adjustViewBounds="false"
+        android:background="@null"
+        android:cropToPadding="false"
+        app:layout_constraintBottom_toTopOf="@+id/mid_back"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/back_head"
+        app:srcCompat="@drawable/back_left_shoulder" />
+
+    <ImageButton
+        android:id="@+id/left_tricep"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="74dp"
+        android:layout_marginLeft="74dp"
+        android:adjustViewBounds="false"
+        android:background="@null"
+        android:cropToPadding="false"
+        app:layout_constraintBottom_toTopOf="@+id/back_left_forearm"
+        app:layout_constraintEnd_toStartOf="@+id/mid_back"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/back_left_shoulder"
+        app:srcCompat="@drawable/left_tricep" />
+
+    <ImageButton
+        android:id="@+id/back_left_forearm"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="68dp"
+        android:layout_marginLeft="68dp"
+        android:layout_marginEnd="2dp"
+        android:layout_marginRight="2dp"
+        android:adjustViewBounds="false"
+        android:background="@null"
+        android:cropToPadding="false"
+        app:layout_constraintBottom_toTopOf="@+id/back_left_hand"
+        app:layout_constraintEnd_toStartOf="@+id/left_buttox"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/left_tricep"
+        app:srcCompat="@drawable/back_left_forearm" />
+
+    <ImageButton
+        android:id="@+id/back_left_hand"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="38dp"
+        android:layout_marginLeft="38dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginRight="24dp"
+        android:layout_marginBottom="240dp"
+        android:adjustViewBounds="false"
+        android:background="@null"
+        android:cropToPadding="false"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/left_buttox"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/back_left_forearm"
+        app:srcCompat="@drawable/back_left_hand" />
+
+    <Button
+        android:id="@+id/linkToFront"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@color/logoColor"
+        android:text="Front View"
+        android:textColor="@color/background"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/saveclose"
+        android:layout_width="wrap_content"
+        android:layout_height="44dp"
+        android:background="@color/logoColor"
+        android:text="@string/done"
+        android:textColor="@color/background"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+</android.support.constraint.ConstraintLayout>

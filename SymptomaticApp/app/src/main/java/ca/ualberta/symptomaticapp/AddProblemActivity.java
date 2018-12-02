@@ -114,11 +114,7 @@ public class AddProblemActivity extends AppCompatActivity {
         Intent intent = new Intent(AddProblemActivity.this, ViewQRCode.class);
         startActivity(intent);
     }
-    public void viewMap(MenuItem menu) {
-        //add the Map button to the menu
-        Intent intent = new Intent(AddProblemActivity.this, MapOfRecordsActivity.class);
-        startActivity(intent);
-    }
+
 
     public void viewLogout(MenuItem menu){
         Login.thisCaregiver = null;
@@ -168,8 +164,8 @@ public class AddProblemActivity extends AppCompatActivity {
                 // Create filename
                 String fileName = "SymptomaticProblem" + timestampStr;
 //
-                // Create and write the file to cache
-                FileOutputStream offlineFile = localSaveProblem.createTempCacheFile(fileName, "Problem");
+                // Create and write the file   to cache
+                FileOutputStream offlineFile = localSaveProblem.createTempCacheFile(fileName);
 //                Log.d("Save location", AddProblemActivity.this.getFilesDir().getAbsolutePath());
                 localSaveProblem.writeToCacheFile(offlineFile, newProblem);
 

@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/background">
+
+    <ImageButton
+        android:id="@+id/neck"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="26dp"
+        android:layout_marginLeft="26dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginRight="24dp"
+        android:background="@null"
+        app:layout_constraintBottom_toTopOf="@+id/faceSave"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/chin"
+        app:srcCompat="@drawable/neck" />
+
+    <ImageButton
+        android:id="@+id/chin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="117dp"
+        android:layout_marginLeft="117dp"
+        android:layout_marginEnd="117dp"
+        android:layout_marginRight="117dp"
+        android:background="@null"
+        app:layout_constraintBottom_toTopOf="@+id/neck"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/right_cheek"
+        app:srcCompat="@drawable/chin" />
+
+    <ImageButton
+        android:id="@+id/nose"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@null"
+        app:layout_constraintBottom_toTopOf="@+id/mouth"
+        app:layout_constraintEnd_toStartOf="@+id/left_cheek"
+        app:layout_constraintStart_toEndOf="@+id/right_cheek"
+        app:layout_constraintTop_toBottomOf="@+id/eyes"
+        app:srcCompat="@drawable/nose" />
+
+    <ImageButton
+        android:id="@+id/eyes"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@null"
+        app:layout_constraintBottom_toTopOf="@+id/nose"
+        app:layout_constraintEnd_toStartOf="@+id/left_ear"
+        app:layout_constraintStart_toEndOf="@+id/right_ear"
+        app:layout_constraintTop_toBottomOf="@+id/forehead"
+        app:srcCompat="@drawable/eyes" />
+
+    <ImageButton
+        android:id="@+id/forehead"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="109dp"
+        android:layout_marginLeft="109dp"
+        android:layout_marginTop="159dp"
+        android:layout_marginEnd="108dp"
+        android:layout_marginRight="108dp"
+        android:background="@null"
+        app:layout_constraintBottom_toTopOf="@+id/eyes"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/forehead" />
+
+    <ImageButton
+        android:id="@+id/right_ear"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="92dp"
+        android:layout_marginLeft="92dp"
+        android:layout_marginEnd="1dp"
+        android:layout_marginRight="1dp"
+        android:background="@null"
+        app:layout_constraintEnd_toStartOf="@+id/eyes"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/forehead"
+        app:srcCompat="@drawable/right_ear" />
+
+    <ImageButton
+        android:id="@+id/left_ear"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="92dp"
+        android:layout_marginRight="92dp"
+        android:background="@null"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/eyes"
+        app:layout_constraintTop_toBottomOf="@+id/forehead"
+        app:srcCompat="@drawable/left_ear" />
+
+    <ImageButton
+        android:id="@+id/left_cheek"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="1dp"
+        android:background="@null"
+        app:layout_constraintBottom_toTopOf="@+id/chin"
+        app:layout_constraintEnd_toStartOf="@+id/left_ear"
+        app:layout_constraintStart_toEndOf="@+id/nose"
+        app:layout_constraintTop_toBottomOf="@+id/eyes"
+        app:srcCompat="@drawable/left_cheek" />
+
+    <ImageButton
+        android:id="@+id/right_cheek"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@null"
+        app:layout_constraintBottom_toTopOf="@+id/chin"
+        app:layout_constraintEnd_toStartOf="@+id/mouth"
+        app:layout_constraintStart_toEndOf="@+id/right_ear"
+        app:layout_constraintTop_toBottomOf="@+id/eyes"
+        app:srcCompat="@drawable/right_cheek" />
+
+    <ImageButton
+        android:id="@+id/mouth"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@null"
+        app:layout_constraintBottom_toTopOf="@+id/chin"
+        app:layout_constraintEnd_toStartOf="@+id/left_cheek"
+        app:layout_constraintStart_toEndOf="@+id/right_cheek"
+        app:layout_constraintTop_toBottomOf="@+id/nose"
+        app:srcCompat="@drawable/mouth" />
+
+    <Button
+        android:id="@+id/faceSave"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="131dp"
+        android:layout_marginLeft="131dp"
+        android:layout_marginEnd="131dp"
+        android:layout_marginRight="131dp"
+        android:layout_marginBottom="87dp"
+        android:background="@color/logoColor"
+        android:text="@string/done"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.6"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/neck" />
+</android.support.constraint.ConstraintLayout>

@@ -127,7 +127,6 @@ public class AddRecordActivity extends AppCompatActivity {
         frontRightHandSelected = false; leftShinSelected = false; frontLeftFootSelected = false; frontRightThighSelected = false; frontRightFootSelected = false; frontLeftThighSelected = false; abdomenSelected = false; frontRightForearmSelected = false; frontLeftForearmSelected = false; upperChestSelected = false; rightShinSelected = false; rightBicepSelected = false; groinSelected = false; leftBicepSelected = false; frontLeftKneeSelected = false; frontLeftHandSelected = false; faceSelected = false; frontRightKneeSelected = false; rightShoulderSelected = false; leftShoulderSelected = false;
         foreheadSelected = false; eyesSelected = false; noseSelected = false; mouthSelected = false; chinSelected = false; rightCheekSelected = false; leftCheekSelected = false; rightEarSelected = false; leftEarSelected = false; neckSelected = false;
 
-        testPhotos = new ArrayList<String>();
         problem = (Problem) getIntent().getSerializableExtra("problem");
 
         addBackBodyPart = findViewById(R.id.addBackBodyPart);
@@ -303,12 +302,14 @@ public class AddRecordActivity extends AppCompatActivity {
                     // Create the new record
                     Record currRecord = new Record(currProbName, timeStamp,Login.thisUser.returnUsername(),title);
                     currRecord.addComment(comment);
+                    currRecord.addBodyLocation(bodyPartsSelected);
 
-                    currRecord.setPhotoList(testPhotos);
+                    currRecord.setPhotoList(displayPhotos);
                     currRecord.addGeolocation(geolocationString);
 
               //so     currRecord.setPhotoList(displayPhotos);
 
+                    Log.d("photos length", String.valueOf(displayPhotos.size()));
                     currRecord.addRecToDb();
 
                     // Switch back to the previous activity
@@ -396,25 +397,17 @@ public class AddRecordActivity extends AppCompatActivity {
                     }
 
                     // Create an instance of the Photo class
-                    Photo photo = new Photo();
+                    String image = formatPhoto(bmp);
+                    Photo photo = new Photo(image);
                     photo.setPhotoBitmap(bmp);
 
-//                    int size = bmp.getRowBytes() * bmp.getHeight();
-//                    ByteBuffer byteBuffer = ByteBuffer.allocate(size);
-//                    bmp.copyPixelsToBuffer(byteBuffer);
-
-                    ByteArrayOutputStream stream = new ByteArrayOutputStream();
-                    bmp.compress(Bitmap.CompressFormat.JPEG, 40, stream);
-                    photoByteArray = stream.toByteArray();
-//                    if (newFile) {
-//
-//                    }
-
-                    String imageB64 = Base64.encodeToString(photoByteArray, Base64.DEFAULT);
+//                    ByteArrayOutputStream stream = new ByteArrayOutputStream();
+//                    bmp.compress(Bitmap.CompressFormat.JPEG, 40, stream);
+//                    photoByteArray = stream.toByteArray();
+//                    String imageB64 = Base64.encodeToString(photoByteArray, Base64.DEFAULT);
 
                     if (displayPhotos.size() < 10) {
                         displayPhotos.add(photo);
-                        testPhotos.add(imageB64);
                         photoListViewAdapter.notifyDataSetChanged();
                         setListViewHeightBasedOnChildren(photoListView);
                     } else {
@@ -432,17 +425,18 @@ public class AddRecordActivity extends AppCompatActivity {
                         bmp = BitmapFactory.decodeFile(mCurrentPhotoPath);
 
                         // Store the image as a Photo object
-                        Photo photo = new Photo();
-                        photo.setPhotoBitmap(bmp);
 
-                        ByteArrayOutputStream stream = new ByteArrayOutputStream();
-                        bmp.compress(Bitmap.CompressFormat.JPEG, 100, stream);
-                        photoByteArray = stream.toByteArray();
-                        String imageB64 = Base64.encodeToString(photoByteArray, Base64.DEFAULT);
+//                        ByteArrayOutputStream stream = new ByteArrayOutputStream();
+//                        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, stream);
+//                        photoByteArray = stream.toByteArray();
+//                        String imageB64 = Base64.encodeToString(photoByteArray, Base64.DEFAULT);
+
+                        String image = formatPhoto(bitmap);
+                        Photo photo = new Photo(image);
+                        photo.setPhotoBitmap(bmp);
 
                         if (displayPhotos.size() < 10) {
                             displayPhotos.add(photo);
-                            testPhotos.add(imageB64);
                             photoListViewAdapter.notifyDataSetChanged();
                             setListViewHeightBasedOnChildren(photoListView);
                         } else {
@@ -474,6 +468,29 @@ public class AddRecordActivity extends AppCompatActivity {
     }
 
 
+    public String formatPhoto(Bitmap bmp) {
+        String image = null;
+        ByteArrayOutputStream stream = new ByteArrayOutputStream();
+        bmp.compress(Bitmap.CompressFormat.JPEG, 100, stream);
+        photoByteArray = stream.toByteArray();
+
+        if (photoByteArray.length > 65536) {
+            int size = photoByteArray.length/65536;
+
+            if (size > 0) {
+                int quality = 100 / size;
+                stream = new ByteArrayOutputStream();
+                bmp.compress(Bitmap.CompressFormat.JPEG, quality, stream);
+                photoByteArray = stream.toByteArray();
+                image = Base64.encodeToString(photoByteArray, Base64.DEFAULT);
+                return image;
+            }
+
+        }
+
+        image = Base64.encodeToString(photoByteArray, Base64.DEFAULT);
+        return image;
+    }
 
     private File createImageFile() throws IOException {
         String timeStamp =

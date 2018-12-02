@@ -176,12 +176,6 @@ public class EditProblemActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    public void updateTime(){
-
-    }
-
-
-
 
 
 

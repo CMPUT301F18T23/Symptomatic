@@ -35,6 +35,12 @@
             android:textSize="18sp"
             android:textStyle="bold" />
 
+        <Button
+            android:id="@+id/mapRecordsButton"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="@string/map_of_records" />
+
 
         <ListView
             android:id="@+id/recordsListView"

@@ -102,11 +102,6 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    public void viewMap(MenuItem menu) {
-        //add the Map button to the menu
-        Intent intent = new Intent(MainActivity.this, MapOfRecordsActivity.class);
-        startActivity(intent);
-    }
 
     public void viewViewProblems(MenuItem menu) {
         //adds the view problems button to the menu

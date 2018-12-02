@@ -24,8 +24,11 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -47,6 +50,7 @@ public class ListRecordsActivity extends AppCompatActivity {
     RecordListViewAdapter recordListViewAdapter;
 
     RecordList thisRecordList;
+
 
     FirebaseFirestore db;
 
@@ -78,6 +82,15 @@ public class ListRecordsActivity extends AppCompatActivity {
         initRecordView();
 
         getRecords();
+
+
+        Button mapRecordsButton = findViewById(R.id.mapRecordsButton);
+        mapRecordsButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openMap();
+            }
+        });
     }
 
     @Override
@@ -113,6 +126,13 @@ public class ListRecordsActivity extends AppCompatActivity {
         Login.thisUser = null;
         Intent intent = new Intent(ListRecordsActivity.this, MainActivity.class);
         startActivity(intent);
+    }
+
+    private void openMap(){
+        Intent intent = new Intent(ListRecordsActivity.this, MapOfRecordsActivity.class);
+        intent.putExtra("problem", problem);
+        startActivity(intent);
+
     }
 
 
