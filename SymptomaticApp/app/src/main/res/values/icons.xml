@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="fa_icon_add_circle">&#xf0fe;</string>
+    <string name="fa_icon_view_list">&#xf022;</string>
+    <string name="fa_icon_login">&#xf35a;</string>
+    <string name="fa_icon_contact">&#xf2b9;</string>
+    <string name="fa_icon_user">&#xf007;</string>
+    <string name="fa_icon_email">&#xf0e0;</string>
+    <string name="fa_icon_phone">&#xf098;</string>
+</resources>
