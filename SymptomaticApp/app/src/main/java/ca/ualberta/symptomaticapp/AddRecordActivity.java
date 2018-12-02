@@ -25,7 +25,9 @@ import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
+import android.os.Environment;
 import android.provider.MediaStore;
+import android.support.v4.content.FileProvider;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -51,10 +53,13 @@ import android.widget.Toast;
 import com.google.android.gms.maps.model.LatLng;
 
 import java.io.ByteArrayOutputStream;
+import java.io.File;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Locale;
 
 public class AddRecordActivity extends AppCompatActivity {
     private static final int PICK_IMAGE_REQUEST = 100; // to access the gallery to choose an image
@@ -69,6 +74,7 @@ public class AddRecordActivity extends AppCompatActivity {
     ArrayList<String> bodyPartsSelected;
 
     Bitmap bmp;
+    Context context = this;
 
 //    PhotoList photoList = new PhotoList();
 
@@ -216,19 +222,27 @@ public class AddRecordActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 // Start the intent to take the photo
-                Intent takePictureintent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
+                Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
 
-//                // Create the name of the file for the photo
-//                try {
-//                    File photoDir = createImageFile();
-//                    // for testing: Print the photo's path
-//                    Log.d("Photo Directory:", mCurrentPhotoPath);
-//                } catch (IOException e) {
-//                    e.printStackTrace();
-//                }
+                if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
+                    // Create a file to store the image
+                    File photoFile = null;
+                    try {
+                        photoFile = createImageFile();
+                    } catch (IOException e) {
+                        Log.d("Take Photo Error", "Camera could not capture image.");
+                        e.printStackTrace();
+                    }
 
-                // Start the camera for the photo to be taken
-                startActivityForResult(takePictureintent, REQUEST_IMAGE_CAPTURE);
+                    if (photoFile != null) {
+                        Uri photoURI = FileProvider.getUriForFile(context, "ca.ualberta.symptomaticapp", photoFile);
+                        takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI);
+                    }
+
+                    // Start the camera for the photo to be taken
+                    startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
+                }
+
 
             }
         });
@@ -424,26 +438,23 @@ public class AddRecordActivity extends AppCompatActivity {
 
     }
 
-//    // Reference: https://developer.android.com/training/camera/photobasics#java
-//    private File createImageFile() throws IOException {
-//        // Create the image file name with its timestamp
-//        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
-//        String photoFileName = "JPEG_" + timeStamp + "_";
-//
-//        // Get the app's directory for photos
-//        File picturesDir = getExternalFilesDir(Environment.DIRECTORY_PICTURES);
-//
-//        // Create the file
-//        File photo = File.createTempFile(
-//                photoFileName,  /* prefix */
-//                ".jpg",         /* suffix */
-//                picturesDir      /* directory */
-//        );
-//
-//        // Store the photo's path name and return the image File
-//        mCurrentPhotoPath = photo.getAbsolutePath();
-//        return photo;
-//    }
+    private File createImageFile() throws IOException {
+        String timeStamp =
+                new SimpleDateFormat("yyyyMMdd_HHmmss",
+                        Locale.getDefault()).format(new Date());
+        String imageFileName = "IMG_" + timeStamp + "_";
+        File storageDir =
+                context.getExternalFilesDir(Environment.DIRECTORY_PICTURES);
+        File image = File.createTempFile(
+                imageFileName,  /* prefix */
+                ".jpg",         /* suffix */
+                storageDir      /* directory */
+        );
+
+        mCurrentPhotoPath = image.getAbsolutePath();
+        Log.d("Photo Path", mCurrentPhotoPath);
+        return image;
+    }
 
     public String formatPhoto(Bitmap bmp) {
         String image = null;
