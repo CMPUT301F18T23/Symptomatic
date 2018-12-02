@@ -159,7 +159,7 @@ public class ListProblemsActivity extends AppCompatActivity {
                     listAdapter.notifyDataSetChanged();
                 } else {
                     AlertDialog.Builder badUsernameDialog = new AlertDialog.Builder(ListProblemsActivity.this);
-                    badUsernameDialog.setMessage("Data Load Error");
+                    badUsernameDialog.setMessage("Unable to load problem's list due to corruption.");
                     badUsernameDialog.show();
                 }
             }
