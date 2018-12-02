@@ -118,6 +118,7 @@
     <string name="view_front_body_parts">View Front Body Parts</string>
     <string name="view_back_body_parts">View Back Body Parts</string>
     <string name="done">Done</string>
+    <string name="map_of_records">Map of Records</string>
 
 
 </resources>

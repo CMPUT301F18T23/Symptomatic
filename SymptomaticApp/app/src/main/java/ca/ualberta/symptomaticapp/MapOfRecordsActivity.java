@@ -1,6 +1,7 @@
 package ca.ualberta.symptomaticapp;
 
 import android.Manifest;
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Address;
@@ -42,6 +43,11 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.Query;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -55,7 +61,7 @@ public class MapOfRecordsActivity extends FragmentActivity implements OnMapReady
     private static final String FINE_LOCATION = Manifest.permission.ACCESS_FINE_LOCATION;
     private static final String COURSE_LOCATION = Manifest.permission.ACCESS_COARSE_LOCATION;
     private static final int LOCATION_PERMISSION_REQUEST_CODE = 1234;
-    private static final float DEFAULT_ZOOM = 15;
+    private static final float DEFAULT_ZOOM = 0;
     private PlaceAutocompleteAdapter placeAutocompleteAdapter;
     private GoogleApiClient mGoogleApiClient;
     private static final LatLngBounds LAT_LNG_BOUNDS = new LatLngBounds(new LatLng(-40, -168), new LatLng(71, 136));
@@ -68,6 +74,13 @@ public class MapOfRecordsActivity extends FragmentActivity implements OnMapReady
     private ImageView GPS;
     private ImageView BACK;
 
+
+    private RecordList recordList;
+    private Record currRecord;
+    private Problem problem;
+    FirebaseFirestore db;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -76,6 +89,34 @@ public class MapOfRecordsActivity extends FragmentActivity implements OnMapReady
         searchText = (AutoCompleteTextView) findViewById(R.id.input_search);
         GPS = (ImageView) findViewById(R.id.gps);
         BACK = (ImageView) findViewById(R.id.back);
+
+
+        problem = (Problem)getIntent().getSerializableExtra("problem");
+
+        recordList = new RecordList();
+
+
+        //thisRecList = new RecordList();
+
+
+        getRecords();
+
+
+       /* for (int i = 0; i < thisRecList.getSize(); i++){
+            currentRec = thisRecList.getRecords().get(i);
+            if (currentRec.geolocation != null){
+                String[] latlng = currentRec.geolocation.split(",");
+                double latitude = Double.parseDouble(latlng[0]);
+                double longitude = Double.parseDouble(latlng[1]);
+
+                LatLng location = new LatLng(latitude, longitude);
+                MarkerOptions options = new MarkerOptions().position(location).title(currentRec.recordTitle);
+                mMap.addMarker(options);
+            }
+
+
+        } */
+
 
         getLocationPermission();
 
@@ -239,7 +280,7 @@ public class MapOfRecordsActivity extends FragmentActivity implements OnMapReady
      */
     @Override
     public void onMapReady(GoogleMap googleMap) {
-        Toast.makeText(this, "Map is ready", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, problem.getTitle(), Toast.LENGTH_SHORT).show();
         mMap = googleMap;
 
         if (mLocationPermissionGranted) {
@@ -295,4 +336,65 @@ public class MapOfRecordsActivity extends FragmentActivity implements OnMapReady
             places.release();
         }
     };
+
+  /*  private void getProblems(String username){
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+
+        CollectionReference problems = db.collection("problems");
+
+        Query problemsQuery = problems.whereEqualTo("user",username);
+
+        problemsQuery.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                if (task.isSuccessful()) {
+                    thisProbList.empty();
+                    for (QueryDocumentSnapshot document : task.getResult()) {
+                        Problem problem = document.toObject(Problem.class);
+                        thisProbList.addProblem(problem);
+                    }
+                }
+            }
+
+        });
+    } */
+
+    private void getRecords(){
+        final ArrayList<Record> foundRecords = new ArrayList<Record>();
+        db = FirebaseFirestore.getInstance();
+
+        final CollectionReference records = db.collection("records");
+
+        Query recordsQuery = records.whereEqualTo("problem",problem.getTitle()).whereEqualTo("user",Login.thisUser.returnUsername());
+
+        recordsQuery.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                if (task.isSuccessful()) {
+                    int x = 0;
+                    for (QueryDocumentSnapshot document : task.getResult()) {
+                        recordList.addRecord(document.toObject(Record.class));
+                        foundRecords.add(document.toObject(Record.class));
+                    }
+                }
+                for (int i = 0; i < foundRecords.size(); i++) {
+                    currRecord = foundRecords.get(i);
+                    if (currRecord.geolocation != null) {
+                        String[] latlng = currRecord.geolocation.split(",");
+                        double latitude = Double.parseDouble(latlng[0]);
+                        double longitude = Double.parseDouble(latlng[1]);
+
+                        LatLng location = new LatLng(latitude, longitude);
+                        MarkerOptions options = new MarkerOptions().position(location).title(currRecord.recordTitle);
+                        mMap.addMarker(options);
+                    }
+                }
+            }
+        });
+
+
+
+    }
+
+
 }

@@ -25,8 +25,11 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -73,6 +76,10 @@ public class ListProblemsActivity extends AppCompatActivity {
         if(Login.thisUser != null) {
             getProblems(Login.thisUser.returnUsername());
         }
+
+
+
+
     }
 
     @Override
@@ -80,11 +87,14 @@ public class ListProblemsActivity extends AppCompatActivity {
         super.onResume();
         if(Login.thisUser != null) {
             getProblems(Login.thisUser.returnUsername());
+
         }
         for (Problem thisProblem: thisProbList.getProblems()){
             thisProblem.updateRecords();
             listAdapter.notifyDataSetChanged();
+
         }
+
     }
 
     @Override
@@ -123,7 +133,9 @@ public class ListProblemsActivity extends AppCompatActivity {
             listAdapter = new ListViewAdapter(thisProbList.getProblems(), this);
         }
         listView.setAdapter(listAdapter);
+
     }
+
 
     private void getProblems(String username){
         FirebaseFirestore db = FirebaseFirestore.getInstance();

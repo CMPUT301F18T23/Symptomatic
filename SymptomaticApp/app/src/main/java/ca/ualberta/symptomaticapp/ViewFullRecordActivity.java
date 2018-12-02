@@ -377,7 +377,7 @@ public class ViewFullRecordActivity extends AppCompatActivity {
                        faceDialog();
                        frontBodyPartDialog.dismiss();
                    }
-               }); 
+               });
 
 
            }
