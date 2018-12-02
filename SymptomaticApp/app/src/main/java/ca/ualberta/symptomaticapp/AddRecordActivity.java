@@ -15,9 +15,15 @@
  */
 package ca.ualberta.symptomaticapp;
 
+<<<<<<< HEAD
+=======
+import android.app.Activity;
+import android.app.AlertDialog;
+>>>>>>> pineo
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.app.TimePickerDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Color;
@@ -65,10 +71,6 @@ public class AddRecordActivity extends AppCompatActivity {
     ArrayList<String> testPhotos;
     Button addBackBodyPart,addFrontBodyPart;
 
-    private boolean backRightForearmSelected, leftButtoxSelected, backHeadSelected, backRightFootSelected, backLeftHandSelected, backLeftAnkleSelected, backLeftKneeSelected, leftTricepSelected, backRightShoulderSelected, backLeftFootSelected, backLeftForearmSelected, backLeftShoulderSelected, backRightAnkleSelected, lowerBackSelected, upperBackSelected, rightButtoxSelected, backRightThighSelected, rightTricepSelected, midBackSelected, backLeftCalveSelected, backRightCalveSelected, backRightHandSelected, backRightKneeSelected, backLeftThighSelected;
-    private boolean frontRightHandSelected, leftShinSelected, frontLeftFootSelected, frontRightThighSelected, frontRightFootSelected, frontLeftThighSelected, abdomenSelected, frontRightForearmSelected, frontLeftForearmSelected, upperChestSelected, rightShinSelected, rightBicepSelected, groinSelected, leftBicepSelected, frontLeftKneeSelected, frontLeftHandSelected, faceSelected, frontRightKneeSelected, rightShoulderSelected, leftShoulderSelected;
-    private boolean foreheadSelected, eyesSelected, noseSelected, mouthSelected, chinSelected, rightCheekSelected, leftCheekSelected, rightEarSelected, leftEarSelected, neckSelected;
-
     ArrayList<String> bodyPartsSelected;
 
     Bitmap bmp;
@@ -94,6 +96,8 @@ public class AddRecordActivity extends AppCompatActivity {
     Date timeStamp;
     EditText commentEdit,titleEdit;
 
+    bodyPartDialog bodyPartSelector;
+
 
 
     @Override
@@ -108,10 +112,13 @@ public class AddRecordActivity extends AppCompatActivity {
 
         bodyPartsSelected = new ArrayList<>();
 
+<<<<<<< HEAD
         backRightForearmSelected = false; leftButtoxSelected = false; backHeadSelected = false; backRightFootSelected = false; backLeftHandSelected = false; backLeftAnkleSelected = false; backLeftKneeSelected = false; leftTricepSelected = false; backRightShoulderSelected = false; backLeftFootSelected = false; backLeftForearmSelected = false; backLeftShoulderSelected = false; backRightAnkleSelected = false; lowerBackSelected = false; upperBackSelected = false; rightButtoxSelected = false; backRightThighSelected = false; rightTricepSelected = false; midBackSelected = false; backLeftCalveSelected = false; backRightCalveSelected = false; backRightHandSelected = false; backRightKneeSelected = false; backLeftThighSelected = false;
         frontRightHandSelected = false; leftShinSelected = false; frontLeftFootSelected = false; frontRightThighSelected = false; frontRightFootSelected = false; frontLeftThighSelected = false; abdomenSelected = false; frontRightForearmSelected = false; frontLeftForearmSelected = false; upperChestSelected = false; rightShinSelected = false; rightBicepSelected = false; groinSelected = false; leftBicepSelected = false; frontLeftKneeSelected = false; frontLeftHandSelected = false; faceSelected = false; frontRightKneeSelected = false; rightShoulderSelected = false; leftShoulderSelected = false;
         foreheadSelected = false; eyesSelected = false; noseSelected = false; mouthSelected = false; chinSelected = false; rightCheekSelected = false; leftCheekSelected = false; rightEarSelected = false; leftEarSelected = false; neckSelected = false;
 
+=======
+>>>>>>> pineo
         problem = (Problem) getIntent().getSerializableExtra("problem");
 
         addBackBodyPart = findViewById(R.id.addBackBodyPart);
@@ -133,18 +140,20 @@ public class AddRecordActivity extends AppCompatActivity {
         month = cal.get(Calendar.MONTH);
         day = cal.get(Calendar.DAY_OF_MONTH);
 
+        bodyPartSelector = new bodyPartDialog(AddRecordActivity.this);
+
 
         addFrontBodyPart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                frontBodyPartDialog();
+                bodyPartSelector.frontBodyPartDialog();
             }
         });
 
         addBackBodyPart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                backBodyPartDialog();
+                bodyPartSelector.backBodyPartDialog();
             }
         });
 
@@ -448,6 +457,7 @@ public class AddRecordActivity extends AppCompatActivity {
 //        return photo;
 //    }
 
+<<<<<<< HEAD
     public String formatPhoto(Bitmap bmp) {
         String image = null;
         ByteArrayOutputStream stream = new ByteArrayOutputStream();
@@ -1728,6 +1738,8 @@ public class AddRecordActivity extends AppCompatActivity {
 
     }
 
+=======
+>>>>>>> pineo
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();

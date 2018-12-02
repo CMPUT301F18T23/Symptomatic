@@ -82,4 +82,6 @@ public class bodyPart {
         //Returns the body part's back photo
         return this.backPhoto;
     }
+
+
 }
