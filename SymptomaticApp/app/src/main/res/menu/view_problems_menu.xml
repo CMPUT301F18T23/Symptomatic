@@ -24,9 +24,6 @@
                 android:onClick="viewAddProblem"
                 />
 
-            <item android:id="@+id/action_viewMap"
-                android:title="@string/view_map"
-                />
             <item
                 android:id="@+id/action_viewQR"
                 android:onClick="viewViewQR"
