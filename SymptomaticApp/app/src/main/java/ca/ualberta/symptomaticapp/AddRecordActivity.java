@@ -62,7 +62,6 @@ public class AddRecordActivity extends AppCompatActivity {
     PhotoListViewAdapter photoListViewAdapter;
     ArrayList<Photo> displayPhotos;
     byte[] photoByteArray;
-    ArrayList<String> testPhotos;
     Button addBackBodyPart,addFrontBodyPart;
 
     private boolean backRightForearmSelected, leftButtoxSelected, backHeadSelected, backRightFootSelected, backLeftHandSelected, backLeftAnkleSelected, backLeftKneeSelected, leftTricepSelected, backRightShoulderSelected, backLeftFootSelected, backLeftForearmSelected, backLeftShoulderSelected, backRightAnkleSelected, lowerBackSelected, upperBackSelected, rightButtoxSelected, backRightThighSelected, rightTricepSelected, midBackSelected, backLeftCalveSelected, backRightCalveSelected, backRightHandSelected, backRightKneeSelected, backLeftThighSelected;
