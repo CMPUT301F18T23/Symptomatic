@@ -46,7 +46,7 @@ public class ProblemList implements Serializable {
 
     /**
      * Gets the problem list
-     * @return thisProblemList
+     * @return A list of the users problems
      */
     public ArrayList<Problem> getProblems() {
         return  this.thisProblemList;
@@ -87,7 +87,7 @@ public class ProblemList implements Serializable {
 
     /**
      * Get the size of the problem list
-     * @return Problem list size
+     * @return The size of the users problem list.
      */
     public int getSize() {
         return this.thisProblemList.size();

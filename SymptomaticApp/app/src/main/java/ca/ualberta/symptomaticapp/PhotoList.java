@@ -35,7 +35,7 @@ public class PhotoList implements Serializable {
 
     /**
      * Photo getter
-     * @return a list of photo
+     * @return a list of photo's
      */
     public ArrayList<Photo> getPhotos() {
         return photoList;

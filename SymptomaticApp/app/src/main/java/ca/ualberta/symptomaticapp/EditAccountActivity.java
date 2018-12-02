@@ -47,7 +47,7 @@ public class EditAccountActivity extends AppCompatActivity {
         setContentView(R.layout.activity_edit_account);
         Toolbar toolbar = findViewById(R.id.editAccount_toolbar);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle("Edit Account");
+        getSupportActionBar().setTitle("Profile");
 
         Typeface otherFont = FontManager.getTypeface(getApplicationContext(), FontManager.BOLDFONTAWESOME);
         FontManager.markAsIconContainer(findViewById(R.id.contactIcons), otherFont);

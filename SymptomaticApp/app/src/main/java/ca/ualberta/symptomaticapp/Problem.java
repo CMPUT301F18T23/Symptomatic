@@ -105,7 +105,7 @@ public class Problem implements Serializable {
 
     /**
      * Gets the problem title
-     * @return problem title
+     * @return The title of the problem
      */
     public String getTitle() {
         return title;
@@ -113,7 +113,7 @@ public class Problem implements Serializable {
 
     /**
      * Gets the problem date
-     * @return problem date
+     * @return The date of the problem
      */
     public Date getDate() {
         return date;
@@ -122,7 +122,7 @@ public class Problem implements Serializable {
 
     /**
      * Gets the problem comment
-     * @return problem comment
+     * @return The comment of a problem
      */
     public String getComment() {
         return comment;
@@ -130,7 +130,7 @@ public class Problem implements Serializable {
 
     /**
      * Gets the problem's record list size
-     * @return The number of records
+     * @return The number of records associated with a problem
      */
     public int getRecordListSize() {
         return numberRecords;
@@ -138,7 +138,7 @@ public class Problem implements Serializable {
 
     /**
      * Gets the user
-     * @return this.user
+     * @return The current user's username
      */
     public String getUser(){return this.user;}
 

@@ -15,7 +15,7 @@
                 android:onClick="viewHome"/>
 
             <item android:id="@+id/action_editAccount"
-                android:title="@string/edit_account"
+                android:title="@string/profile"
                 android:onClick="viewEditAccount"
                 />
             <item android:id="@+id/action_viewProblems"
