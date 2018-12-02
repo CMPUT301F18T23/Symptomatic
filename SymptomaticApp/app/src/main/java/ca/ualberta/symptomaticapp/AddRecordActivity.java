@@ -18,6 +18,8 @@ package ca.ualberta.symptomaticapp;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.app.TimePickerDialog;
+import android.content.ContentProvider;
+import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -228,14 +230,6 @@ public class AddRecordActivity extends AppCompatActivity {
                 // Start the intent to take the photo
                 Intent takePictureintent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
 
-//                // Create the name of the file for the photo
-//                try {
-//                    File photoDir = createImageFile();
-//                    // for testing: Print the photo's path
-//                } catch (IOException e) {
-//                    e.printStackTrace();
-//                }
-
                 // Start the camera for the photo to be taken
                 startActivityForResult(takePictureintent, REQUEST_IMAGE_CAPTURE);
 
@@ -410,14 +404,15 @@ public class AddRecordActivity extends AppCompatActivity {
 
                         // Store the image as a Photo object
                         Photo photo = new Photo();
-                        photo.setPhotoBitmap(bitmap);
 
                         // Save the photo to cache/Gallery
                         File photoFile = photo.savePhotoToGallery(context);
 
                         // Get uri from the photoFile
                         Uri photoUri = Uri.fromFile(photoFile);
-
+                        Uri selectedImage = data.getData();
+//                        Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), selectedImage);
+                        photo.setPhotoBitmap(bitmap);
 
                         // Set photoUri
 //                        photo.setPhotoUri(imageUri);
@@ -457,29 +452,6 @@ public class AddRecordActivity extends AppCompatActivity {
 
 
     }
-
-    // Reference: https://developer.android.com/training/camera/photobasics#java
-    private File createImageFile() throws IOException {
-        // Create the image file name with its timestamp
-        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
-        String photoFileName = "JPEG_" + timeStamp + "_";
-
-        // Get the app's directory for photos
-        File picturesDir = getExternalFilesDir(Environment.DIRECTORY_PICTURES);
-
-        // Create the file
-        File photo = File.createTempFile(
-                photoFileName,  /* prefix */
-                ".jpg",         /* suffix */
-                picturesDir      /* directory */
-        );
-
-        // Store the photo's path name and return the image File
-        mCurrentPhotoPath = photo.getAbsolutePath();
-        return photo;
-    }
-
-
 
     //EVERYTHING BELOW HERE IS FOR THE BODY PART DIALOGS
 
