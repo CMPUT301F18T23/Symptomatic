@@ -378,6 +378,7 @@ public class AddRecordActivity extends AppCompatActivity {
 
                     // Create an instance of the Photo class
                     Photo photo = new Photo();
+                    photo.setPhotoBitmap(bmp);
 
 //                    int size = bmp.getRowBytes() * bmp.getHeight();
 //                    ByteBuffer byteBuffer = ByteBuffer.allocate(size);
@@ -409,7 +410,13 @@ public class AddRecordActivity extends AppCompatActivity {
 
                         // Store the image as a Photo object
                         Photo photo = new Photo();
+                        photo.setPhotoBitmap(bitmap);
+
+                        // Save the photo to cache/Gallery
                         File photoFile = photo.savePhotoToGallery(context);
+
+                        // Get uri from the photoFile
+                        Uri photoUri = Uri.fromFile(photoFile);
 
 
                         // Set photoUri

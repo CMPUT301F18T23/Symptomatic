@@ -192,6 +192,10 @@ public class Photo implements Serializable {
         return this.photoBitmap;
     }
 
+    public void setPhotoBitmap(Bitmap newPhotoBitmap) {
+        this.photoBitmap = newPhotoBitmap;
+    }
+
 
 
     /**
