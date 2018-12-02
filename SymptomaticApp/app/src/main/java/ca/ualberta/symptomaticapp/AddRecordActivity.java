@@ -128,7 +128,7 @@ public class AddRecordActivity extends AppCompatActivity {
         month = cal.get(Calendar.MONTH);
         day = cal.get(Calendar.DAY_OF_MONTH);
 
-        bodyPartSelector = new bodyPartDialog(AddRecordActivity.this);
+        bodyPartSelector = new bodyPartDialog(AddRecordActivity.this,true);
 
 
         addFrontBodyPart.setOnClickListener(new View.OnClickListener() {

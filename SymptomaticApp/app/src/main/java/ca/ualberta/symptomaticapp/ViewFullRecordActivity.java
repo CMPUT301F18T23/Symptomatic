@@ -125,7 +125,7 @@ public class ViewFullRecordActivity extends AppCompatActivity {
         viewBackBodyPart = findViewById(R.id.viewBackBodyPart);
         viewFrontBodyPart = findViewById(R.id.viewFrontBodyPart);
 
-        thisDialog = new bodyPartDialog(ViewFullRecordActivity.this);
+        thisDialog = new bodyPartDialog(ViewFullRecordActivity.this,false);
         thisDialog.readList(bodyLocation);
 
         viewBackBodyPart.setOnClickListener(new View.OnClickListener() {

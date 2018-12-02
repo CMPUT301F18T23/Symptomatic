@@ -25,10 +25,14 @@ public class bodyPartDialog{
 
     Activity thisActivity;
 
-    public bodyPartDialog(Activity activity){
+    Boolean clickOk;
+
+    public bodyPartDialog(Activity activity,Boolean click){
         thisActivity = activity;
 
         bodyPartsSelected = new ArrayList<>();
+
+        clickOk = click;
 
         backRightForearmSelected = false; leftButtoxSelected = false; backHeadSelected = false; backRightFootSelected = false; backLeftHandSelected = false; backLeftAnkleSelected = false; backLeftKneeSelected = false; leftTricepSelected = false; backRightShoulderSelected = false; backLeftFootSelected = false; backLeftForearmSelected = false; backLeftShoulderSelected = false; backRightAnkleSelected = false; lowerBackSelected = false; upperBackSelected = false; rightButtoxSelected = false; backRightThighSelected = false; rightTricepSelected = false; midBackSelected = false; backLeftCalveSelected = false; backRightCalveSelected = false; backRightHandSelected = false; backRightKneeSelected = false; backLeftThighSelected = false;
         frontRightHandSelected = false; leftShinSelected = false; frontLeftFootSelected = false; frontRightThighSelected = false; frontRightFootSelected = false; frontLeftThighSelected = false; abdomenSelected = false; frontRightForearmSelected = false; frontLeftForearmSelected = false; upperChestSelected = false; rightShinSelected = false; rightBicepSelected = false; groinSelected = false; leftBicepSelected = false; frontLeftKneeSelected = false; frontLeftHandSelected = false; faceSelected = false; frontRightKneeSelected = false; rightShoulderSelected = false; leftShoulderSelected = false;
@@ -37,6 +41,14 @@ public class bodyPartDialog{
 
     public static ArrayList<String> returnPartsSelected(){
         return bodyPartsSelected;
+    }
+
+    public void toggleClickable(){
+        if(this.clickOk){
+            this.clickOk = false;
+        } else {
+            this.clickOk = true;
+        }
     }
 
     public void frontBodyPartDialog(){
@@ -71,14 +83,16 @@ public class bodyPartDialog{
         frontRightHand.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v){
-                if(frontRightHandSelected){
-                    frontRightHand.setImageResource(R.drawable.front_right_hand);
-                    frontRightHandSelected = false;
-                    bodyPartsSelected.remove("Front Right Hand");
-                } else {
-                    frontRightHand.setImageResource(R.drawable.front_right_hand_selected);
-                    frontRightHandSelected = true;
-                    bodyPartsSelected.add("Front Right Hand");
+                if(clickOk) {
+                    if (frontRightHandSelected) {
+                        frontRightHand.setImageResource(R.drawable.front_right_hand);
+                        frontRightHandSelected = false;
+                        bodyPartsSelected.remove("Front Right Hand");
+                    } else {
+                        frontRightHand.setImageResource(R.drawable.front_right_hand_selected);
+                        frontRightHandSelected = true;
+                        bodyPartsSelected.add("Front Right Hand");
+                    }
                 }
             }
         });
@@ -93,14 +107,16 @@ public class bodyPartDialog{
         leftShin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v){
-                if(leftShinSelected){
-                    leftShin.setImageResource(R.drawable.left_shin);
-                    leftShinSelected = false;
-                    bodyPartsSelected.remove("Left Shin");
-                } else {
-                    leftShin.setImageResource(R.drawable.left_shin_selected);
-                    leftShinSelected = true;
-                    bodyPartsSelected.add("Left Shin");
+                if(clickOk) {
+                    if (leftShinSelected) {
+                        leftShin.setImageResource(R.drawable.left_shin);
+                        leftShinSelected = false;
+                        bodyPartsSelected.remove("Left Shin");
+                    } else {
+                        leftShin.setImageResource(R.drawable.left_shin_selected);
+                        leftShinSelected = true;
+                        bodyPartsSelected.add("Left Shin");
+                    }
                 }
             }
         });
@@ -115,14 +131,16 @@ public class bodyPartDialog{
         frontLeftFoot.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v){
-                if(frontLeftFootSelected){
-                    frontLeftFoot.setImageResource(R.drawable.front_left_foot);
-                    frontLeftFootSelected = false;
-                    bodyPartsSelected.remove("Front Left Foot");
-                } else {
-                    frontLeftFoot.setImageResource(R.drawable.front_left_foot_selected);
-                    frontLeftFootSelected = true;
-                    bodyPartsSelected.add("Front Left Foot");
+                if(clickOk) {
+                    if (frontLeftFootSelected) {
+                        frontLeftFoot.setImageResource(R.drawable.front_left_foot);
+                        frontLeftFootSelected = false;
+                        bodyPartsSelected.remove("Front Left Foot");
+                    } else {
+                        frontLeftFoot.setImageResource(R.drawable.front_left_foot_selected);
+                        frontLeftFootSelected = true;
+                        bodyPartsSelected.add("Front Left Foot");
+                    }
                 }
             }
         });
@@ -137,14 +155,16 @@ public class bodyPartDialog{
         frontRightThigh.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v){
-                if(frontRightThighSelected){
-                    frontRightThigh.setImageResource(R.drawable.front_right_thigh);
-                    frontRightThighSelected = false;
-                    bodyPartsSelected.remove("Front Right Thigh");
-                } else {
-                    frontRightThigh.setImageResource(R.drawable.front_right_thigh_selected);
-                    frontRightThighSelected = true;
-                    bodyPartsSelected.add("Front Right Thigh");
+                if(clickOk) {
+                    if (frontRightThighSelected) {
+                        frontRightThigh.setImageResource(R.drawable.front_right_thigh);
+                        frontRightThighSelected = false;
+                        bodyPartsSelected.remove("Front Right Thigh");
+                    } else {
+                        frontRightThigh.setImageResource(R.drawable.front_right_thigh_selected);
+                        frontRightThighSelected = true;
+                        bodyPartsSelected.add("Front Right Thigh");
+                    }
                 }
             }
         });
@@ -159,14 +179,16 @@ public class bodyPartDialog{
         frontRightFoot.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v){
-                if(frontRightFootSelected){
-                    frontRightFoot.setImageResource(R.drawable.front_right_foot);
-                    frontRightFootSelected = false;
-                    bodyPartsSelected.remove("Front Right Foot");
-                } else {
-                    frontRightFoot.setImageResource(R.drawable.front_right_foot_selected);
-                    frontRightFootSelected = true;
-                    bodyPartsSelected.add("Front Right Foot");
+                if(clickOk) {
+                    if (frontRightFootSelected) {
+                        frontRightFoot.setImageResource(R.drawable.front_right_foot);
+                        frontRightFootSelected = false;
+                        bodyPartsSelected.remove("Front Right Foot");
+                    } else {
+                        frontRightFoot.setImageResource(R.drawable.front_right_foot_selected);
+                        frontRightFootSelected = true;
+                        bodyPartsSelected.add("Front Right Foot");
+                    }
                 }
             }
         });
@@ -181,14 +203,16 @@ public class bodyPartDialog{
         frontLeftThigh.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v){
-                if(frontLeftThighSelected){
-                    frontLeftThigh.setImageResource(R.drawable.front_left_thigh);
-                    frontLeftThighSelected = false;
-                    bodyPartsSelected.remove("Front Left Thigh");
-                } else {
-                    frontLeftThigh.setImageResource(R.drawable.front_left_thigh_selected);
-                    frontLeftThighSelected = true;
-                    bodyPartsSelected.add("Front Left Thigh");
+                if(clickOk) {
+                    if (frontLeftThighSelected) {
+                        frontLeftThigh.setImageResource(R.drawable.front_left_thigh);
+                        frontLeftThighSelected = false;
+                        bodyPartsSelected.remove("Front Left Thigh");
+                    } else {
+                        frontLeftThigh.setImageResource(R.drawable.front_left_thigh_selected);
+                        frontLeftThighSelected = true;
+                        bodyPartsSelected.add("Front Left Thigh");
+                    }
                 }
             }
         });
@@ -203,14 +227,16 @@ public class bodyPartDialog{
         abdomen.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v){
-                if(abdomenSelected){
-                    abdomen.setImageResource(R.drawable.abdomen);
-                    abdomenSelected = false;
-                    bodyPartsSelected.remove("Abdomen");
-                } else {
-                    abdomen.setImageResource(R.drawable.abdomen_selected);
-                    abdomenSelected = true;
-                    bodyPartsSelected.add("Abdomen");
+                if(clickOk) {
+                    if (abdomenSelected) {
+                        abdomen.setImageResource(R.drawable.abdomen);
+                        abdomenSelected = false;
+                        bodyPartsSelected.remove("Abdomen");
+                    } else {
+                        abdomen.setImageResource(R.drawable.abdomen_selected);
+                        abdomenSelected = true;
+                        bodyPartsSelected.add("Abdomen");
+                    }
                 }
             }
         });
@@ -225,14 +251,16 @@ public class bodyPartDialog{
         frontRightForearm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v){
-                if(frontRightForearmSelected){
-                    frontRightForearm.setImageResource(R.drawable.front_right_forearm);
-                    frontRightForearmSelected = false;
-                    bodyPartsSelected.remove("Front Right Forearm");
-                } else {
-                    frontRightForearm.setImageResource(R.drawable.front_right_forearm_selected);
-                    frontRightForearmSelected = true;
-                    bodyPartsSelected.add("Front Right Forearm");
+                if(clickOk) {
+                    if (frontRightForearmSelected) {
+                        frontRightForearm.setImageResource(R.drawable.front_right_forearm);
+                        frontRightForearmSelected = false;
+                        bodyPartsSelected.remove("Front Right Forearm");
+                    } else {
+                        frontRightForearm.setImageResource(R.drawable.front_right_forearm_selected);
+                        frontRightForearmSelected = true;
+                        bodyPartsSelected.add("Front Right Forearm");
+                    }
                 }
             }
         });
@@ -247,14 +275,16 @@ public class bodyPartDialog{
         frontLeftForearm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v){
-                if(frontLeftForearmSelected){
-                    frontLeftForearm.setImageResource(R.drawable.front_left_forearm);
-                    frontLeftForearmSelected = false;
-                    bodyPartsSelected.remove("Front Left Forearm");
-                } else {
-                    frontLeftForearm.setImageResource(R.drawable.front_left_forearm_selected);
-                    frontLeftForearmSelected = true;
-                    bodyPartsSelected.add("Front Left Forearm");
+                if(clickOk) {
+                    if (frontLeftForearmSelected) {
+                        frontLeftForearm.setImageResource(R.drawable.front_left_forearm);
+                        frontLeftForearmSelected = false;
+                        bodyPartsSelected.remove("Front Left Forearm");
+                    } else {
+                        frontLeftForearm.setImageResource(R.drawable.front_left_forearm_selected);
+                        frontLeftForearmSelected = true;
+                        bodyPartsSelected.add("Front Left Forearm");
+                    }
                 }
             }
         });
@@ -269,14 +299,16 @@ public class bodyPartDialog{
         upperChest.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v){
-                if(upperChestSelected){
-                    upperChest.setImageResource(R.drawable.upper_chest);
-                    upperChestSelected = false;
-                    bodyPartsSelected.remove("Upper Chest");
-                } else {
-                    upperChest.setImageResource(R.drawable.upper_chest_selected);
-                    upperChestSelected = true;
-                    bodyPartsSelected.add("Upper Chest");
+                if(clickOk) {
+                    if (upperChestSelected) {
+                        upperChest.setImageResource(R.drawable.upper_chest);
+                        upperChestSelected = false;
+                        bodyPartsSelected.remove("Upper Chest");
+                    } else {
+                        upperChest.setImageResource(R.drawable.upper_chest_selected);
+                        upperChestSelected = true;
+                        bodyPartsSelected.add("Upper Chest");
+                    }
                 }
             }
         });
@@ -291,14 +323,16 @@ public class bodyPartDialog{
         rightShin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v){
-                if(rightShinSelected){
-                    rightShin.setImageResource(R.drawable.right_shin);
-                    rightShinSelected = false;
-                    bodyPartsSelected.remove("Right Shin");
-                } else {
-                    rightShin.setImageResource(R.drawable.right_shin_selected);
-                    rightShinSelected = true;
-                    bodyPartsSelected.add("Right Shin");
+                if(clickOk) {
+                    if (rightShinSelected) {
+                        rightShin.setImageResource(R.drawable.right_shin);
+                        rightShinSelected = false;
+                        bodyPartsSelected.remove("Right Shin");
+                    } else {
+                        rightShin.setImageResource(R.drawable.right_shin_selected);
+                        rightShinSelected = true;
+                        bodyPartsSelected.add("Right Shin");
+                    }
                 }
             }
         });
@@ -313,14 +347,16 @@ public class bodyPartDialog{
         rightBicep.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v){
-                if(rightBicepSelected){
-                    rightBicep.setImageResource(R.drawable.right_bicep);
-                    rightBicepSelected = false;
-                    bodyPartsSelected.remove("Right Bicep");
-                } else {
-                    rightBicep.setImageResource(R.drawable.right_bicep_selected);
-                    rightBicepSelected = true;
-                    bodyPartsSelected.add("Right Bicep");
+                if(clickOk) {
+                    if (rightBicepSelected) {
+                        rightBicep.setImageResource(R.drawable.right_bicep);
+                        rightBicepSelected = false;
+                        bodyPartsSelected.remove("Right Bicep");
+                    } else {
+                        rightBicep.setImageResource(R.drawable.right_bicep_selected);
+                        rightBicepSelected = true;
+                        bodyPartsSelected.add("Right Bicep");
+                    }
                 }
             }
         });
@@ -335,14 +371,16 @@ public class bodyPartDialog{
         groin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v){
-                if(groinSelected){
-                    groin.setImageResource(R.drawable.groin);
-                    groinSelected = false;
-                    bodyPartsSelected.remove("Groin");
-                } else {
-                    groin.setImageResource(R.drawable.groin_selected);
-                    groinSelected = true;
-                    bodyPartsSelected.add("Groin");
+                if(clickOk) {
+                    if (groinSelected) {
+                        groin.setImageResource(R.drawable.groin);
+                        groinSelected = false;
+                        bodyPartsSelected.remove("Groin");
+                    } else {
+                        groin.setImageResource(R.drawable.groin_selected);
+                        groinSelected = true;
+                        bodyPartsSelected.add("Groin");
+                    }
                 }
             }
         });
@@ -357,14 +395,16 @@ public class bodyPartDialog{
         leftBicep.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v){
-                if(leftBicepSelected){
-                    leftBicep.setImageResource(R.drawable.left_bicep);
-                    leftBicepSelected = false;
-                    bodyPartsSelected.remove("Left Bicep");
-                } else {
-                    leftBicep.setImageResource(R.drawable.left_bicep_selected);
-                    leftBicepSelected = true;
-                    bodyPartsSelected.add("Left Bicep");
+                if(clickOk) {
+                    if (leftBicepSelected) {
+                        leftBicep.setImageResource(R.drawable.left_bicep);
+                        leftBicepSelected = false;
+                        bodyPartsSelected.remove("Left Bicep");
+                    } else {
+                        leftBicep.setImageResource(R.drawable.left_bicep_selected);
+                        leftBicepSelected = true;
+                        bodyPartsSelected.add("Left Bicep");
+                    }
                 }
             }
         });
@@ -378,15 +418,17 @@ public class bodyPartDialog{
         }
         frontLeftKnee.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v){
-                if(frontLeftKneeSelected){
-                    frontLeftKnee.setImageResource(R.drawable.front_left_knee);
-                    frontLeftKneeSelected = false;
-                    bodyPartsSelected.remove("Front Left Knee");
-                } else {
-                    frontLeftKnee.setImageResource(R.drawable.front_left_knee_selected);
-                    frontLeftKneeSelected = true;
-                    bodyPartsSelected.add("Front Left Knee");
+            public void onClick(View v) {
+                if (clickOk) {
+                    if (frontLeftKneeSelected) {
+                        frontLeftKnee.setImageResource(R.drawable.front_left_knee);
+                        frontLeftKneeSelected = false;
+                        bodyPartsSelected.remove("Front Left Knee");
+                    } else {
+                        frontLeftKnee.setImageResource(R.drawable.front_left_knee_selected);
+                        frontLeftKneeSelected = true;
+                        bodyPartsSelected.add("Front Left Knee");
+                    }
                 }
             }
         });
@@ -401,14 +443,16 @@ public class bodyPartDialog{
         frontLeftHand.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v){
-                if(frontLeftHandSelected){
-                    frontLeftHand.setImageResource(R.drawable.front_left_hand);
-                    frontLeftHandSelected = false;
-                    bodyPartsSelected.remove("Front Left Hand");
-                } else {
-                    frontLeftHand.setImageResource(R.drawable.front_left_hand_selected);
-                    frontLeftHandSelected = true;
-                    bodyPartsSelected.add("Front Left Hand");
+                if(clickOk) {
+                    if (frontLeftHandSelected) {
+                        frontLeftHand.setImageResource(R.drawable.front_left_hand);
+                        frontLeftHandSelected = false;
+                        bodyPartsSelected.remove("Front Left Hand");
+                    } else {
+                        frontLeftHand.setImageResource(R.drawable.front_left_hand_selected);
+                        frontLeftHandSelected = true;
+                        bodyPartsSelected.add("Front Left Hand");
+                    }
                 }
             }
         });
@@ -441,14 +485,16 @@ public class bodyPartDialog{
         frontRightKnee.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v){
-                if(frontRightKneeSelected){
-                    frontRightKnee.setImageResource(R.drawable.front_right_knee);
-                    frontRightKneeSelected = false;
-                    bodyPartsSelected.remove("Front Right Knee");
-                } else {
-                    frontRightKnee.setImageResource(R.drawable.front_right_knee_selected);
-                    frontRightKneeSelected = true;
-                    bodyPartsSelected.add("Front Right Knee");
+                if(clickOk) {
+                    if (frontRightKneeSelected) {
+                        frontRightKnee.setImageResource(R.drawable.front_right_knee);
+                        frontRightKneeSelected = false;
+                        bodyPartsSelected.remove("Front Right Knee");
+                    } else {
+                        frontRightKnee.setImageResource(R.drawable.front_right_knee_selected);
+                        frontRightKneeSelected = true;
+                        bodyPartsSelected.add("Front Right Knee");
+                    }
                 }
             }
         });
@@ -463,14 +509,16 @@ public class bodyPartDialog{
         rightShoulder.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v){
-                if(rightShoulderSelected){
-                    rightShoulder.setImageResource(R.drawable.front_right_shoulder);
-                    rightShoulderSelected = false;
-                    bodyPartsSelected.remove("Right Shoulder");
-                } else {
-                    rightShoulder.setImageResource(R.drawable.front_right_shoulder_selected);
-                    rightShoulderSelected = true;
-                    bodyPartsSelected.add("Right Shoulder");
+                if(clickOk) {
+                    if (rightShoulderSelected) {
+                        rightShoulder.setImageResource(R.drawable.front_right_shoulder);
+                        rightShoulderSelected = false;
+                        bodyPartsSelected.remove("Right Shoulder");
+                    } else {
+                        rightShoulder.setImageResource(R.drawable.front_right_shoulder_selected);
+                        rightShoulderSelected = true;
+                        bodyPartsSelected.add("Right Shoulder");
+                    }
                 }
             }
         });
@@ -485,14 +533,16 @@ public class bodyPartDialog{
         leftShoulder.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v){
-                if(leftShoulderSelected){
-                    leftShoulder.setImageResource(R.drawable.front_left_shoulder);
-                    leftShoulderSelected = false;
-                    bodyPartsSelected.remove("Left Shoulder");
-                } else {
-                    leftShoulder.setImageResource(R.drawable.front_left_shoulder_selected);
-                    leftShoulderSelected = true;
-                    bodyPartsSelected.add("Left Shoulder");
+                if(clickOk) {
+                    if (leftShoulderSelected) {
+                        leftShoulder.setImageResource(R.drawable.front_left_shoulder);
+                        leftShoulderSelected = false;
+                        bodyPartsSelected.remove("Left Shoulder");
+                    } else {
+                        leftShoulder.setImageResource(R.drawable.front_left_shoulder_selected);
+                        leftShoulderSelected = true;
+                        bodyPartsSelected.add("Left Shoulder");
+                    }
                 }
             }
         });
@@ -532,14 +582,16 @@ public class bodyPartDialog{
         backRightForearm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v){
-                if(backRightForearmSelected){
-                    backRightForearm.setImageResource(R.drawable.back_right_forearm);
-                    backRightForearmSelected = false;
-                    bodyPartsSelected.remove("Back Right Forearm");
-                } else {
-                    backRightForearm.setImageResource(R.drawable.back_right_forearm_selected);
-                    backRightForearmSelected = true;
-                    bodyPartsSelected.add("Back Right Forearm");
+                if(clickOk) {
+                    if (backRightForearmSelected) {
+                        backRightForearm.setImageResource(R.drawable.back_right_forearm);
+                        backRightForearmSelected = false;
+                        bodyPartsSelected.remove("Back Right Forearm");
+                    } else {
+                        backRightForearm.setImageResource(R.drawable.back_right_forearm_selected);
+                        backRightForearmSelected = true;
+                        bodyPartsSelected.add("Back Right Forearm");
+                    }
                 }
             }
         });
@@ -554,14 +606,16 @@ public class bodyPartDialog{
         leftButtox.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v){
-                if(leftButtoxSelected){
-                    leftButtox.setImageResource(R.drawable.back_left_buttox);
-                    leftButtoxSelected = false;
-                    bodyPartsSelected.remove("Left Buttox");
-                } else {
-                    leftButtox.setImageResource(R.drawable.left_buttox_selected);
-                    leftButtoxSelected = true;
-                    bodyPartsSelected.add("Left Buttox");
+                if(clickOk) {
+                    if (leftButtoxSelected) {
+                        leftButtox.setImageResource(R.drawable.back_left_buttox);
+                        leftButtoxSelected = false;
+                        bodyPartsSelected.remove("Left Buttox");
+                    } else {
+                        leftButtox.setImageResource(R.drawable.left_buttox_selected);
+                        leftButtoxSelected = true;
+                        bodyPartsSelected.add("Left Buttox");
+                    }
                 }
             }
         });
@@ -576,14 +630,16 @@ public class bodyPartDialog{
         backHead.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v){
-                if(backHeadSelected){
-                    backHead.setImageResource(R.drawable.back_head);
-                    backHeadSelected = false;
-                    bodyPartsSelected.remove("Back Head");
-                } else {
-                    backHead.setImageResource(R.drawable.back_head_selected);
-                    backHeadSelected = true;
-                    bodyPartsSelected.add("Back Head");
+                if(clickOk) {
+                    if (backHeadSelected) {
+                        backHead.setImageResource(R.drawable.back_head);
+                        backHeadSelected = false;
+                        bodyPartsSelected.remove("Back Head");
+                    } else {
+                        backHead.setImageResource(R.drawable.back_head_selected);
+                        backHeadSelected = true;
+                        bodyPartsSelected.add("Back Head");
+                    }
                 }
             }
         });
@@ -598,14 +654,16 @@ public class bodyPartDialog{
         backRightFoot.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v){
-                if(backRightFootSelected){
-                    backRightFoot.setImageResource(R.drawable.back_right_foot);
-                    backRightFootSelected = false;
-                    bodyPartsSelected.remove("Back Right Foot");
-                } else {
-                    backRightFoot.setImageResource(R.drawable.back_right_foot_selected);
-                    backRightFootSelected = true;
-                    bodyPartsSelected.add("Back Right Foot");
+                if(clickOk) {
+                    if (backRightFootSelected) {
+                        backRightFoot.setImageResource(R.drawable.back_right_foot);
+                        backRightFootSelected = false;
+                        bodyPartsSelected.remove("Back Right Foot");
+                    } else {
+                        backRightFoot.setImageResource(R.drawable.back_right_foot_selected);
+                        backRightFootSelected = true;
+                        bodyPartsSelected.add("Back Right Foot");
+                    }
                 }
             }
         });
@@ -620,14 +678,16 @@ public class bodyPartDialog{
         backLeftHand.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v){
-                if(backLeftHandSelected){
-                    backLeftHand.setImageResource(R.drawable.back_left_hand);
-                    backLeftHandSelected = false;
-                    bodyPartsSelected.remove("Back Left Hand");
-                } else {
-                    backLeftHand.setImageResource(R.drawable.back_left_hand_selected);
-                    backLeftHandSelected = true;
-                    bodyPartsSelected.add("Back Left Hand");
+                if(clickOk) {
+                    if (backLeftHandSelected) {
+                        backLeftHand.setImageResource(R.drawable.back_left_hand);
+                        backLeftHandSelected = false;
+                        bodyPartsSelected.remove("Back Left Hand");
+                    } else {
+                        backLeftHand.setImageResource(R.drawable.back_left_hand_selected);
+                        backLeftHandSelected = true;
+                        bodyPartsSelected.add("Back Left Hand");
+                    }
                 }
             }
         });
@@ -642,14 +702,16 @@ public class bodyPartDialog{
         backLeftAnkle.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v){
-                if(backLeftAnkleSelected){
-                    backLeftAnkle.setImageResource(R.drawable.back_left_ankle);
-                    backLeftAnkleSelected = false;
-                    bodyPartsSelected.remove("Back Left Ankle");
-                } else {
-                    backLeftAnkle.setImageResource(R.drawable.back_left_ankle_selected);
-                    backLeftAnkleSelected = true;
-                    bodyPartsSelected.add("Back Left Ankle");
+                if(clickOk) {
+                    if (backLeftAnkleSelected) {
+                        backLeftAnkle.setImageResource(R.drawable.back_left_ankle);
+                        backLeftAnkleSelected = false;
+                        bodyPartsSelected.remove("Back Left Ankle");
+                    } else {
+                        backLeftAnkle.setImageResource(R.drawable.back_left_ankle_selected);
+                        backLeftAnkleSelected = true;
+                        bodyPartsSelected.add("Back Left Ankle");
+                    }
                 }
             }
         });
@@ -664,14 +726,16 @@ public class bodyPartDialog{
         backLeftKnee.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v){
-                if(backLeftKneeSelected){
-                    backLeftKnee.setImageResource(R.drawable.back_left_knee);
-                    backLeftKneeSelected = false;
-                    bodyPartsSelected.remove("Back Left Knee");
-                } else {
-                    backLeftKnee.setImageResource(R.drawable.back_left_knee_selected);
-                    backLeftKneeSelected = true;
-                    bodyPartsSelected.add("Back Left Knee");
+                if(clickOk) {
+                    if (backLeftKneeSelected) {
+                        backLeftKnee.setImageResource(R.drawable.back_left_knee);
+                        backLeftKneeSelected = false;
+                        bodyPartsSelected.remove("Back Left Knee");
+                    } else {
+                        backLeftKnee.setImageResource(R.drawable.back_left_knee_selected);
+                        backLeftKneeSelected = true;
+                        bodyPartsSelected.add("Back Left Knee");
+                    }
                 }
             }
         });
@@ -686,14 +750,16 @@ public class bodyPartDialog{
         leftTricep.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v){
-                if(leftTricepSelected){
-                    leftTricep.setImageResource(R.drawable.left_tricep);
-                    leftTricepSelected = false;
-                    bodyPartsSelected.remove("Left Tricep");
-                } else {
-                    leftTricep.setImageResource(R.drawable.left_tricep_selected);
-                    leftTricepSelected = true;
-                    bodyPartsSelected.add("Left Tricep");
+                if(clickOk) {
+                    if (leftTricepSelected) {
+                        leftTricep.setImageResource(R.drawable.left_tricep);
+                        leftTricepSelected = false;
+                        bodyPartsSelected.remove("Left Tricep");
+                    } else {
+                        leftTricep.setImageResource(R.drawable.left_tricep_selected);
+                        leftTricepSelected = true;
+                        bodyPartsSelected.add("Left Tricep");
+                    }
                 }
             }
         });
@@ -708,14 +774,16 @@ public class bodyPartDialog{
         backRightShoulder.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v){
-                if(backRightShoulderSelected){
-                    backRightShoulder.setImageResource(R.drawable.back_right_shoulder);
-                    backRightShoulderSelected = false;
-                    bodyPartsSelected.remove("Back Right Shoulder");
-                } else {
-                    backRightShoulder.setImageResource(R.drawable.back_right_shoulder_selected);
-                    backRightShoulderSelected = true;
-                    bodyPartsSelected.add("Back Right Shoulder");
+                if(clickOk) {
+                    if (backRightShoulderSelected) {
+                        backRightShoulder.setImageResource(R.drawable.back_right_shoulder);
+                        backRightShoulderSelected = false;
+                        bodyPartsSelected.remove("Back Right Shoulder");
+                    } else {
+                        backRightShoulder.setImageResource(R.drawable.back_right_shoulder_selected);
+                        backRightShoulderSelected = true;
+                        bodyPartsSelected.add("Back Right Shoulder");
+                    }
                 }
             }
         });
@@ -730,14 +798,16 @@ public class bodyPartDialog{
         backLeftFoot.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v){
-                if(backLeftFootSelected){
-                    backLeftFoot.setImageResource(R.drawable.back_left_foot);
-                    backLeftFootSelected = false;
-                    bodyPartsSelected.remove("Back Left Foot");
-                } else {
-                    backLeftFoot.setImageResource(R.drawable.back_left_foot_selected);
-                    backLeftFootSelected = true;
-                    bodyPartsSelected.add("Back Left Foot");
+                if(clickOk) {
+                    if (backLeftFootSelected) {
+                        backLeftFoot.setImageResource(R.drawable.back_left_foot);
+                        backLeftFootSelected = false;
+                        bodyPartsSelected.remove("Back Left Foot");
+                    } else {
+                        backLeftFoot.setImageResource(R.drawable.back_left_foot_selected);
+                        backLeftFootSelected = true;
+                        bodyPartsSelected.add("Back Left Foot");
+                    }
                 }
             }
         });
@@ -752,14 +822,16 @@ public class bodyPartDialog{
         backLeftForearm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v){
-                if(backLeftForearmSelected){
-                    backLeftForearm.setImageResource(R.drawable.back_left_forearm);
-                    backLeftForearmSelected = false;
-                    bodyPartsSelected.remove("Back Left Forearm");
-                } else {
-                    backLeftForearm.setImageResource(R.drawable.back_left_forearm_selected);
-                    backLeftForearmSelected = true;
-                    bodyPartsSelected.add("Back Left Forearm");
+                if(clickOk) {
+                    if (backLeftForearmSelected) {
+                        backLeftForearm.setImageResource(R.drawable.back_left_forearm);
+                        backLeftForearmSelected = false;
+                        bodyPartsSelected.remove("Back Left Forearm");
+                    } else {
+                        backLeftForearm.setImageResource(R.drawable.back_left_forearm_selected);
+                        backLeftForearmSelected = true;
+                        bodyPartsSelected.add("Back Left Forearm");
+                    }
                 }
             }
         });
@@ -774,14 +846,16 @@ public class bodyPartDialog{
         backLeftShoulder.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v){
-                if(backLeftShoulderSelected){
-                    backLeftShoulder.setImageResource(R.drawable.back_left_shoulder);
-                    backLeftShoulderSelected = false;
-                    bodyPartsSelected.remove("Back Left Shoulder");
-                } else {
-                    backLeftShoulder.setImageResource(R.drawable.back_left_shoulder_selected);
-                    backLeftShoulderSelected = true;
-                    bodyPartsSelected.add("Back Left Shoulder");
+                if(clickOk) {
+                    if (backLeftShoulderSelected) {
+                        backLeftShoulder.setImageResource(R.drawable.back_left_shoulder);
+                        backLeftShoulderSelected = false;
+                        bodyPartsSelected.remove("Back Left Shoulder");
+                    } else {
+                        backLeftShoulder.setImageResource(R.drawable.back_left_shoulder_selected);
+                        backLeftShoulderSelected = true;
+                        bodyPartsSelected.add("Back Left Shoulder");
+                    }
                 }
             }
         });
@@ -796,14 +870,16 @@ public class bodyPartDialog{
         backRightAnkle.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v){
-                if(backRightAnkleSelected){
-                    backRightAnkle.setImageResource(R.drawable.back_right_ankle);
-                    backRightAnkleSelected = false;
-                    bodyPartsSelected.remove("Back Right Ankle");
-                } else {
-                    backRightAnkle.setImageResource(R.drawable.back_right_ankle_selected);
-                    backRightAnkleSelected = true;
-                    bodyPartsSelected.add("Back Right Ankle");
+                if(clickOk) {
+                    if (backRightAnkleSelected) {
+                        backRightAnkle.setImageResource(R.drawable.back_right_ankle);
+                        backRightAnkleSelected = false;
+                        bodyPartsSelected.remove("Back Right Ankle");
+                    } else {
+                        backRightAnkle.setImageResource(R.drawable.back_right_ankle_selected);
+                        backRightAnkleSelected = true;
+                        bodyPartsSelected.add("Back Right Ankle");
+                    }
                 }
             }
         });
@@ -818,14 +894,16 @@ public class bodyPartDialog{
         lowerBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v){
-                if(lowerBackSelected){
-                    lowerBack.setImageResource(R.drawable.lower_back);
-                    lowerBackSelected = false;
-                    bodyPartsSelected.remove("Lower Back");
-                } else {
-                    lowerBack.setImageResource(R.drawable.lower_back_selected);
-                    lowerBackSelected = true;
-                    bodyPartsSelected.add("Lower Back");
+                if(clickOk) {
+                    if (lowerBackSelected) {
+                        lowerBack.setImageResource(R.drawable.lower_back);
+                        lowerBackSelected = false;
+                        bodyPartsSelected.remove("Lower Back");
+                    } else {
+                        lowerBack.setImageResource(R.drawable.lower_back_selected);
+                        lowerBackSelected = true;
+                        bodyPartsSelected.add("Lower Back");
+                    }
                 }
             }
         });
@@ -840,14 +918,16 @@ public class bodyPartDialog{
         upperBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v){
-                if(upperBackSelected){
-                    upperBack.setImageResource(R.drawable.upper_back);
-                    upperBackSelected = false;
-                    bodyPartsSelected.remove("Upper Back");
-                } else {
-                    upperBack.setImageResource(R.drawable.upper_back_selected);
-                    upperBackSelected = true;
-                    bodyPartsSelected.add("Upper Back");
+                if(clickOk) {
+                    if (upperBackSelected) {
+                        upperBack.setImageResource(R.drawable.upper_back);
+                        upperBackSelected = false;
+                        bodyPartsSelected.remove("Upper Back");
+                    } else {
+                        upperBack.setImageResource(R.drawable.upper_back_selected);
+                        upperBackSelected = true;
+                        bodyPartsSelected.add("Upper Back");
+                    }
                 }
             }
         });
@@ -862,14 +942,16 @@ public class bodyPartDialog{
         rightButtox.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v){
-                if(rightButtoxSelected){
-                    rightButtox.setImageResource(R.drawable.back_right_buttox);
-                    rightButtoxSelected = false;
-                    bodyPartsSelected.remove("Right Buttox");
-                } else {
-                    rightButtox.setImageResource(R.drawable.right_buttox_selected);
-                    rightButtoxSelected = true;
-                    bodyPartsSelected.add("Right Buttox");
+                if(clickOk) {
+                    if (rightButtoxSelected) {
+                        rightButtox.setImageResource(R.drawable.back_right_buttox);
+                        rightButtoxSelected = false;
+                        bodyPartsSelected.remove("Right Buttox");
+                    } else {
+                        rightButtox.setImageResource(R.drawable.right_buttox_selected);
+                        rightButtoxSelected = true;
+                        bodyPartsSelected.add("Right Buttox");
+                    }
                 }
             }
         });
@@ -884,14 +966,16 @@ public class bodyPartDialog{
         backRightThigh.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v){
-                if(backRightThighSelected){
-                    backRightThigh.setImageResource(R.drawable.back_right_thigh);
-                    backRightThighSelected = false;
-                    bodyPartsSelected.remove("Back Right Thigh");
-                } else {
-                    backRightThigh.setImageResource(R.drawable.back_right_thigh_selected);
-                    backRightThighSelected = true;
-                    bodyPartsSelected.add("Back Right Thigh");
+                if(clickOk) {
+                    if (backRightThighSelected) {
+                        backRightThigh.setImageResource(R.drawable.back_right_thigh);
+                        backRightThighSelected = false;
+                        bodyPartsSelected.remove("Back Right Thigh");
+                    } else {
+                        backRightThigh.setImageResource(R.drawable.back_right_thigh_selected);
+                        backRightThighSelected = true;
+                        bodyPartsSelected.add("Back Right Thigh");
+                    }
                 }
             }
         });
@@ -905,15 +989,17 @@ public class bodyPartDialog{
         }
         rightTricep.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v){
-                if(rightTricepSelected){
-                    rightTricep.setImageResource(R.drawable.right_tricep);
-                    rightTricepSelected = false;
-                    bodyPartsSelected.remove("Right Tricep");
-                } else {
-                    rightTricep.setImageResource(R.drawable.right_tricep_selected);
-                    rightTricepSelected = true;
-                    bodyPartsSelected.add("Right Tricep");
+            public void onClick(View v) {
+                if (clickOk) {
+                    if (rightTricepSelected) {
+                        rightTricep.setImageResource(R.drawable.right_tricep);
+                        rightTricepSelected = false;
+                        bodyPartsSelected.remove("Right Tricep");
+                    } else {
+                        rightTricep.setImageResource(R.drawable.right_tricep_selected);
+                        rightTricepSelected = true;
+                        bodyPartsSelected.add("Right Tricep");
+                    }
                 }
             }
         });
@@ -928,14 +1014,16 @@ public class bodyPartDialog{
         midBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v){
-                if(midBackSelected){
-                    midBack.setImageResource(R.drawable.mid_back);
-                    midBackSelected = false;
-                    bodyPartsSelected.remove("Mid Back");
-                } else {
-                    midBack.setImageResource(R.drawable.mid_back_selected);
-                    midBackSelected = true;
-                    bodyPartsSelected.add("Mid Back");
+                if(clickOk) {
+                    if (midBackSelected) {
+                        midBack.setImageResource(R.drawable.mid_back);
+                        midBackSelected = false;
+                        bodyPartsSelected.remove("Mid Back");
+                    } else {
+                        midBack.setImageResource(R.drawable.mid_back_selected);
+                        midBackSelected = true;
+                        bodyPartsSelected.add("Mid Back");
+                    }
                 }
             }
         });
@@ -950,14 +1038,16 @@ public class bodyPartDialog{
         backLeftCalve.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v){
-                if(backLeftCalveSelected){
-                    backLeftCalve.setImageResource(R.drawable.back_left_calve);
-                    backLeftCalveSelected = false;
-                    bodyPartsSelected.remove("Back Left Calve");
-                } else {
-                    backLeftCalve.setImageResource(R.drawable.back_left_calve_selected);
-                    backLeftCalveSelected = true;
-                    bodyPartsSelected.add("Back Left Calve");
+                if(clickOk) {
+                    if (backLeftCalveSelected) {
+                        backLeftCalve.setImageResource(R.drawable.back_left_calve);
+                        backLeftCalveSelected = false;
+                        bodyPartsSelected.remove("Back Left Calve");
+                    } else {
+                        backLeftCalve.setImageResource(R.drawable.back_left_calve_selected);
+                        backLeftCalveSelected = true;
+                        bodyPartsSelected.add("Back Left Calve");
+                    }
                 }
             }
         });
@@ -972,14 +1062,16 @@ public class bodyPartDialog{
         backRightCalve.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v){
-                if(backRightCalveSelected){
-                    backRightCalve.setImageResource(R.drawable.back_right_calve);
-                    backRightCalveSelected = false;
-                    bodyPartsSelected.remove("Back Right Calve");
-                } else {
-                    backRightCalve.setImageResource(R.drawable.back_right_calve_selected);
-                    backRightCalveSelected = true;
-                    bodyPartsSelected.add("Back Right Calve");
+                if(clickOk) {
+                    if (backRightCalveSelected) {
+                        backRightCalve.setImageResource(R.drawable.back_right_calve);
+                        backRightCalveSelected = false;
+                        bodyPartsSelected.remove("Back Right Calve");
+                    } else {
+                        backRightCalve.setImageResource(R.drawable.back_right_calve_selected);
+                        backRightCalveSelected = true;
+                        bodyPartsSelected.add("Back Right Calve");
+                    }
                 }
             }
         });
@@ -994,14 +1086,16 @@ public class bodyPartDialog{
         backRightHand.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v){
-                if(backRightHandSelected){
-                    backRightHand.setImageResource(R.drawable.back_right_hand);
-                    backRightHandSelected = false;
-                    bodyPartsSelected.remove("Back Right Hand");
-                } else {
-                    backRightHand.setImageResource(R.drawable.back_right_hand_selected);
-                    backRightHandSelected = true;
-                    bodyPartsSelected.add("Back Right Hand");
+                if(clickOk) {
+                    if (backRightHandSelected) {
+                        backRightHand.setImageResource(R.drawable.back_right_hand);
+                        backRightHandSelected = false;
+                        bodyPartsSelected.remove("Back Right Hand");
+                    } else {
+                        backRightHand.setImageResource(R.drawable.back_right_hand_selected);
+                        backRightHandSelected = true;
+                        bodyPartsSelected.add("Back Right Hand");
+                    }
                 }
             }
         });
@@ -1016,14 +1110,16 @@ public class bodyPartDialog{
         backRightKnee.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v){
-                if(backRightKneeSelected){
-                    backRightKnee.setImageResource(R.drawable.back_right_knee);
-                    backRightKneeSelected = false;
-                    bodyPartsSelected.remove("Back Right Knee");
-                } else {
-                    backRightKnee.setImageResource(R.drawable.back_right_knee_selected);
-                    backRightKneeSelected = true;
-                    bodyPartsSelected.add("Back Right Knee");
+                if(clickOk) {
+                    if (backRightKneeSelected) {
+                        backRightKnee.setImageResource(R.drawable.back_right_knee);
+                        backRightKneeSelected = false;
+                        bodyPartsSelected.remove("Back Right Knee");
+                    } else {
+                        backRightKnee.setImageResource(R.drawable.back_right_knee_selected);
+                        backRightKneeSelected = true;
+                        bodyPartsSelected.add("Back Right Knee");
+                    }
                 }
             }
         });
@@ -1038,14 +1134,16 @@ public class bodyPartDialog{
         backLeftThigh.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v){
-                if(backLeftThighSelected){
-                    backLeftThigh.setImageResource(R.drawable.back_left_thigh);
-                    backLeftThighSelected = false;
-                    bodyPartsSelected.remove("Back Left Thigh");
-                } else {
-                    backLeftThigh.setImageResource(R.drawable.back_left_thigh_selected);
-                    backLeftThighSelected = true;
-                    bodyPartsSelected.add("Back Left Thigh");
+                if(clickOk) {
+                    if (backLeftThighSelected) {
+                        backLeftThigh.setImageResource(R.drawable.back_left_thigh);
+                        backLeftThighSelected = false;
+                        bodyPartsSelected.remove("Back Left Thigh");
+                    } else {
+                        backLeftThigh.setImageResource(R.drawable.back_left_thigh_selected);
+                        backLeftThighSelected = true;
+                        bodyPartsSelected.add("Back Left Thigh");
+                    }
                 }
             }
         });
@@ -1077,14 +1175,16 @@ public class bodyPartDialog{
         rightEar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v){
-                if(rightEarSelected){
-                    rightEar.setImageResource(R.drawable.right_ear);
-                    rightEarSelected = false;
-                    bodyPartsSelected.remove("Right Ear");
-                } else {
-                    rightEar.setImageResource(R.drawable.right_ear_selected);
-                    rightEarSelected = true;
-                    bodyPartsSelected.add("Right Ear");
+                if(clickOk) {
+                    if (rightEarSelected) {
+                        rightEar.setImageResource(R.drawable.right_ear);
+                        rightEarSelected = false;
+                        bodyPartsSelected.remove("Right Ear");
+                    } else {
+                        rightEar.setImageResource(R.drawable.right_ear_selected);
+                        rightEarSelected = true;
+                        bodyPartsSelected.add("Right Ear");
+                    }
                 }
             }
         });
@@ -1099,14 +1199,16 @@ public class bodyPartDialog{
         mouth.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v){
-                if(mouthSelected){
-                    mouth.setImageResource(R.drawable.mouth);
-                    mouthSelected = false;
-                    bodyPartsSelected.remove("Mouth");
-                } else {
-                    mouth.setImageResource(R.drawable.mouth_selected);
-                    mouthSelected = true;
-                    bodyPartsSelected.add("Mouth");
+                if(clickOk) {
+                    if (mouthSelected) {
+                        mouth.setImageResource(R.drawable.mouth);
+                        mouthSelected = false;
+                        bodyPartsSelected.remove("Mouth");
+                    } else {
+                        mouth.setImageResource(R.drawable.mouth_selected);
+                        mouthSelected = true;
+                        bodyPartsSelected.add("Mouth");
+                    }
                 }
             }
         });
@@ -1121,14 +1223,16 @@ public class bodyPartDialog{
         nose.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v){
-                if(noseSelected){
-                    nose.setImageResource(R.drawable.nose);
-                    noseSelected = false;
-                    bodyPartsSelected.remove("Nose");
-                } else {
-                    nose.setImageResource(R.drawable.nose_selected);
-                    noseSelected = true;
-                    bodyPartsSelected.add("Nose");
+                if(clickOk) {
+                    if (noseSelected) {
+                        nose.setImageResource(R.drawable.nose);
+                        noseSelected = false;
+                        bodyPartsSelected.remove("Nose");
+                    } else {
+                        nose.setImageResource(R.drawable.nose_selected);
+                        noseSelected = true;
+                        bodyPartsSelected.add("Nose");
+                    }
                 }
             }
         });
@@ -1143,14 +1247,16 @@ public class bodyPartDialog{
         rightCheek.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v){
-                if(rightCheekSelected){
-                    rightCheek.setImageResource(R.drawable.right_cheek);
-                    rightCheekSelected = false;
-                    bodyPartsSelected.remove("Right Cheek");
-                } else {
-                    rightCheek.setImageResource(R.drawable.right_cheek_selected);
-                    rightCheekSelected = true;
-                    bodyPartsSelected.add("Right Cheek");
+                if(clickOk) {
+                    if (rightCheekSelected) {
+                        rightCheek.setImageResource(R.drawable.right_cheek);
+                        rightCheekSelected = false;
+                        bodyPartsSelected.remove("Right Cheek");
+                    } else {
+                        rightCheek.setImageResource(R.drawable.right_cheek_selected);
+                        rightCheekSelected = true;
+                        bodyPartsSelected.add("Right Cheek");
+                    }
                 }
             }
         });
@@ -1165,14 +1271,16 @@ public class bodyPartDialog{
         neck.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v){
-                if(neckSelected){
-                    neck.setImageResource(R.drawable.neck);
-                    neckSelected = false;
-                    bodyPartsSelected.remove("Neck");
-                } else {
-                    neck.setImageResource(R.drawable.neck_selected);
-                    neckSelected = true;
-                    bodyPartsSelected.add("Neck");
+                if(clickOk) {
+                    if (neckSelected) {
+                        neck.setImageResource(R.drawable.neck);
+                        neckSelected = false;
+                        bodyPartsSelected.remove("Neck");
+                    } else {
+                        neck.setImageResource(R.drawable.neck_selected);
+                        neckSelected = true;
+                        bodyPartsSelected.add("Neck");
+                    }
                 }
             }
         });
@@ -1187,14 +1295,16 @@ public class bodyPartDialog{
         chin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v){
-                if(chinSelected){
-                    chin.setImageResource(R.drawable.chin);
-                    chinSelected = false;
-                    bodyPartsSelected.remove("Chin");
-                } else {
-                    chin.setImageResource(R.drawable.chin_selected);
-                    chinSelected = true;
-                    bodyPartsSelected.add("Chin");
+                if(clickOk) {
+                    if (chinSelected) {
+                        chin.setImageResource(R.drawable.chin);
+                        chinSelected = false;
+                        bodyPartsSelected.remove("Chin");
+                    } else {
+                        chin.setImageResource(R.drawable.chin_selected);
+                        chinSelected = true;
+                        bodyPartsSelected.add("Chin");
+                    }
                 }
             }
         });
@@ -1208,15 +1318,17 @@ public class bodyPartDialog{
         }
         eyes.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v){
-                if(eyesSelected){
-                    eyes.setImageResource(R.drawable.eyes);
-                    eyesSelected = false;
-                    bodyPartsSelected.remove("Eyes");
-                } else {
-                    eyes.setImageResource(R.drawable.eyes_selected);
-                    eyesSelected = true;
-                    bodyPartsSelected.add("Eyes");
+            public void onClick(View v) {
+                if (clickOk) {
+                    if (eyesSelected) {
+                        eyes.setImageResource(R.drawable.eyes);
+                        eyesSelected = false;
+                        bodyPartsSelected.remove("Eyes");
+                    } else {
+                        eyes.setImageResource(R.drawable.eyes_selected);
+                        eyesSelected = true;
+                        bodyPartsSelected.add("Eyes");
+                    }
                 }
             }
         });
@@ -1231,14 +1343,16 @@ public class bodyPartDialog{
         forehead.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v){
-                if(foreheadSelected){
-                    forehead.setImageResource(R.drawable.forehead);
-                    foreheadSelected = false;
-                    bodyPartsSelected.remove("Forehead");
-                } else {
-                    forehead.setImageResource(R.drawable.forehead_selected);
-                    foreheadSelected = true;
-                    bodyPartsSelected.add("Forehead");
+                if(clickOk) {
+                    if (foreheadSelected) {
+                        forehead.setImageResource(R.drawable.forehead);
+                        foreheadSelected = false;
+                        bodyPartsSelected.remove("Forehead");
+                    } else {
+                        forehead.setImageResource(R.drawable.forehead_selected);
+                        foreheadSelected = true;
+                        bodyPartsSelected.add("Forehead");
+                    }
                 }
             }
         });
@@ -1253,14 +1367,16 @@ public class bodyPartDialog{
         leftCheek.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v){
-                if(leftCheekSelected){
-                    leftCheek.setImageResource(R.drawable.left_cheek);
-                    leftCheekSelected = false;
-                    bodyPartsSelected.remove("Left Cheek");
-                } else {
-                    leftCheek.setImageResource(R.drawable.left_cheek_selected);
-                    leftCheekSelected = true;
-                    bodyPartsSelected.add("Left Cheek");
+                if(clickOk) {
+                    if (leftCheekSelected) {
+                        leftCheek.setImageResource(R.drawable.left_cheek);
+                        leftCheekSelected = false;
+                        bodyPartsSelected.remove("Left Cheek");
+                    } else {
+                        leftCheek.setImageResource(R.drawable.left_cheek_selected);
+                        leftCheekSelected = true;
+                        bodyPartsSelected.add("Left Cheek");
+                    }
                 }
             }
         });
@@ -1275,14 +1391,16 @@ public class bodyPartDialog{
         leftEar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v){
-                if(leftEarSelected){
-                    leftEar.setImageResource(R.drawable.left_ear);
-                    leftEarSelected = false;
-                    bodyPartsSelected.remove("Left Ear");
-                } else {
-                    leftEar.setImageResource(R.drawable.left_ear_selected);
-                    leftEarSelected = true;
-                    bodyPartsSelected.add("Left Ear");
+                if(clickOk) {
+                    if (leftEarSelected) {
+                        leftEar.setImageResource(R.drawable.left_ear);
+                        leftEarSelected = false;
+                        bodyPartsSelected.remove("Left Ear");
+                    } else {
+                        leftEar.setImageResource(R.drawable.left_ear_selected);
+                        leftEarSelected = true;
+                        bodyPartsSelected.add("Left Ear");
+                    }
                 }
             }
         });
@@ -1293,6 +1411,8 @@ public class bodyPartDialog{
     }
 
     public void readList(ArrayList<String> bodyparts){
+
+        bodyPartDialog.bodyPartsSelected = bodyparts;
 
         for (String location: bodyparts){
             if("Front Right Hand".equals(location)){
