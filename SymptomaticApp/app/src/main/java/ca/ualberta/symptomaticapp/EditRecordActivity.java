@@ -13,21 +13,27 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.text.format.DateFormat;
+import android.util.Base64;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ListAdapter;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
 import com.google.android.gms.maps.model.LatLng;
 
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Calendar;
 
 public class EditRecordActivity extends AppCompatActivity {
@@ -43,6 +49,14 @@ public class EditRecordActivity extends AppCompatActivity {
     int day;
     int hour;
     int min;
+
+    private static final int PICK_IMAGE_REQUEST = 100; // to access the gallery to choose an image
+    static final int REQUEST_IMAGE_CAPTURE = 1; // to access the camera to take an image
+    ListView photoListView;
+    PhotoListViewAdapter photoListViewAdapter;
+    ArrayList<Photo> displayPhotos;
+    Bitmap bmp;
+
 
     // geolocation variables
     private LatLng newGeolocation;
@@ -140,6 +154,40 @@ public class EditRecordActivity extends AppCompatActivity {
 
             }
         });
+
+        photoListView = findViewById(R.id.EditRPhotoListView);
+        displayPhotos = record.getPhotoList();
+        initPhotoListView();
+        setListViewHeightBasedOnChildren(photoListView);
+
+        Button savedPhoto = findViewById(R.id.editSavedPhoto);
+        Button takePhoto = findViewById(R.id.editTakePhoto);
+
+        savedPhoto.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
+                intent.setType("image/*");
+                startActivityForResult(intent, PICK_IMAGE_REQUEST);
+            }
+        });
+
+        takePhoto.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent takePictureintent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
+                startActivityForResult(takePictureintent, REQUEST_IMAGE_CAPTURE);
+            }
+        });
+
+    }
+
+    private void initPhotoListView() {
+        if(photoListViewAdapter == null){
+            photoListViewAdapter = new PhotoListViewAdapter(displayPhotos, this);
+        }
+
+        photoListView.setAdapter(photoListViewAdapter);
     }
 
     @Override
@@ -158,12 +206,117 @@ public class EditRecordActivity extends AppCompatActivity {
                 }
                 break;
 
+            // If selecting a photo from gallery
+            case PICK_IMAGE_REQUEST:
+                if (resultCode == RESULT_OK) {
+                    Uri selectedImage = data.getData();
+                    try {
+                        // Convert the photo selected from gallery into a bitmap and display it
+                        bmp = MediaStore.Images.Media.getBitmap(getContentResolver(), selectedImage);
+//
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+
+
+                    String image = formatPhoto(bmp);
+                    Photo photo = new Photo(image);
+
+
+                    if (displayPhotos.size() < 10) {
+                        displayPhotos.add(photo);
+                        photoListViewAdapter.notifyDataSetChanged();
+                        setListViewHeightBasedOnChildren(photoListView);
+                    } else {
+                        Toast.makeText(getApplicationContext(), "Max. 10 Photos Allowed", Toast.LENGTH_LONG).show();
+                    }
+                }
+                break;
+
+            case REQUEST_IMAGE_CAPTURE:
+                // If capturing a photo using the camera
+                if (resultCode == RESULT_OK) {
+                    // Do try and catch
+                    try {
+                        // Convert the photo captured into a bitmap
+                        Bitmap bitmap = (Bitmap) data.getExtras().get("data");
+
+
+                        String image = formatPhoto(bitmap);
+                        Photo photo = new Photo(image);
+
+                        if (displayPhotos.size() < 10) {
+                            displayPhotos.add(photo);
+                            photoListViewAdapter.notifyDataSetChanged();
+                            setListViewHeightBasedOnChildren(photoListView);
+                        } else {
+                            Toast.makeText(getApplicationContext(), "Max. 10 Photos Allowed", Toast.LENGTH_LONG).show();
+                        }
+
+                    } catch (Exception e) {
+                        Log.d("ERROR", "Captured photo could not be created.");
+                    }
+                }
+                break;
+
         }
 
 
     }
 
+    public String formatPhoto(Bitmap bmp) {
+        String image = null;
+        ByteArrayOutputStream stream = new ByteArrayOutputStream();
+        bmp.compress(Bitmap.CompressFormat.JPEG, 100, stream);
+        byte[] photoByteArray = stream.toByteArray();
 
+        if (photoByteArray.length > 65536) {
+            int size = photoByteArray.length/65536;
+
+            if (size > 0) {
+                int quality = 100 / size;
+                stream = new ByteArrayOutputStream();
+                bmp.compress(Bitmap.CompressFormat.JPEG, quality, stream);
+                photoByteArray = stream.toByteArray();
+                image = Base64.encodeToString(photoByteArray, Base64.DEFAULT);
+                return image;
+            }
+
+        }
+
+        image = Base64.encodeToString(photoByteArray, Base64.DEFAULT);
+        return image;
+    }
+
+    // setListViewHeightBasedonChildren class reference:
+//    Skidan, Oleg. “ListView inside ScrollView. Solve the Problem. – Oleg Skidan – Medium.” Medium.com, Medium,
+//    5 Feb. 2016, medium.com/@skidanolegs/listview-inside-scrollview-solve-the-problem-a06fdff2a4e0.
+//    Accessed: 25th November, 2018
+    public static void setListViewHeightBasedOnChildren(ListView listView) {
+        ListAdapter listAdapter = listView.getAdapter();
+        if (listAdapter == null) return;
+        int desiredWidth = View.MeasureSpec.makeMeasureSpec(listView.getWidth(),
+                View.MeasureSpec.UNSPECIFIED);
+        int totalHeight = 0;
+        View view = null;
+        for (int i = 0; i < listAdapter.getCount(); i++) {
+            view = listAdapter.getView(i, view, listView);
+            if (i == 0) view.setLayoutParams(new
+                    ViewGroup.LayoutParams(desiredWidth,
+                    ViewGroup.LayoutParams.WRAP_CONTENT));
+
+            view.measure(desiredWidth, View.MeasureSpec.UNSPECIFIED);
+            totalHeight += view.getMeasuredHeight();
+        }
+
+        ViewGroup.LayoutParams params = listView.getLayoutParams();
+
+        params.height = totalHeight + (listView.getDividerHeight() *
+                (listAdapter.getCount() - 1));
+
+        listView.setLayoutParams(params);
+        listView.requestLayout();
+    }
 
 
     @Override

@@ -64,7 +64,6 @@ public class AddRecordActivity extends AppCompatActivity {
     PhotoListViewAdapter photoListViewAdapter;
     ArrayList<Photo> displayPhotos;
     byte[] photoByteArray;
-    ArrayList<String> testPhotos;
     Button addBackBodyPart,addFrontBodyPart;
 
     ArrayList<String> bodyPartsSelected;
