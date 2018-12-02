@@ -22,6 +22,7 @@ import android.app.TimePickerDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
@@ -393,9 +394,8 @@ public class AddRecordActivity extends AppCompatActivity {
                 if (resultCode == RESULT_OK) {
                     // Do try and catch
                     try {
-                        // Convert the photo captured into a bitmap
-                        Bitmap bitmap = (Bitmap) data.getExtras().get("data");
-
+                        // Reference: https://stackoverflow.com/questions/42516126/fileprovider-illegalargumentexception-failed-to-find-configured-root
+                        bmp = BitmapFactory.decodeFile(mCurrentPhotoPath);
 
                         // Store the image as a Photo object
 
@@ -404,8 +404,9 @@ public class AddRecordActivity extends AppCompatActivity {
 //                        photoByteArray = stream.toByteArray();
 //                        String imageB64 = Base64.encodeToString(photoByteArray, Base64.DEFAULT);
 
-                        String image = formatPhoto(bitmap);
+                        String image = formatPhoto(bmp);
                         Photo photo = new Photo(image);
+//                        photo.setPhotoBitmap(bmp);
 
                         if (displayPhotos.size() < 10) {
                             displayPhotos.add(photo);
@@ -417,6 +418,7 @@ public class AddRecordActivity extends AppCompatActivity {
 
                     } catch (Exception e) {
                         Log.d("ERROR", "Captured photo could not be created.");
+                        e.printStackTrace();
                     }
 
 
