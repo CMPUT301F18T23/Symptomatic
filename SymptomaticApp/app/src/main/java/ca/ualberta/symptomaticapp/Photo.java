@@ -159,20 +159,20 @@ public class Photo implements Serializable {
         }
     }
 
-    public File savePhotoToGallery(Context context) throws IOException {
-        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
-        String photoFileName = "SymptomaticPhoto" + timeStamp + "_";
-
-        // Make a folder in cache called 'Gallery' if it doesn't exist
-        File galleryDir = new File(context.getCacheDir().getAbsolutePath() + File.separator + "Gallery");
-        if (!(galleryDir.exists())) {
-            galleryDir.mkdirs();
-        }
-
-        File photoFile = File.createTempFile(photoFileName, ".jpg", galleryDir);
-        return photoFile;
-
-        }
+//    public File savePhotoToGallery(Context context) throws IOException {
+//        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
+//        String photoFileName = "SymptomaticPhoto" + timeStamp + "_";
+//
+//        // Make a folder in cache called 'Gallery' if it doesn't exist
+//        File galleryDir = new File(context.getCacheDir().getAbsolutePath() + File.separator + "Gallery");
+//        if (!(galleryDir.exists())) {
+//            galleryDir.mkdirs();
+//        }
+//
+//        File photoFile = File.createTempFile(photoFileName, ".jpg", galleryDir);
+//        return photoFile;
+//
+//        }
 
     /**
      * gets the byte array of the photo

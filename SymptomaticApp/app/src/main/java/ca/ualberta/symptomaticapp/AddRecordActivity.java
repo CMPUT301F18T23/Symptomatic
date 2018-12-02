@@ -101,6 +101,7 @@ public class AddRecordActivity extends AppCompatActivity {
     Date timeStamp;
     EditText commentEdit,titleEdit;
     Context context = this; // for saving offline
+    LocalSave localSaveRecord = new LocalSave(context); // for getting full-size bitmap for takePhoto
 
 
 
@@ -228,10 +229,17 @@ public class AddRecordActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 // Start the intent to take the photo
-                Intent takePictureintent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
+                Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
 
+                try {
+                    File photoFile = localSaveRecord.savePhotoToGallery(context);
+                    Uri photoUri = Uri.parse(photoFile.getPath());
+                    takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoUri);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
                 // Start the camera for the photo to be taken
-                startActivityForResult(takePictureintent, REQUEST_IMAGE_CAPTURE);
+                startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
 
             }
         });
@@ -242,7 +250,7 @@ public class AddRecordActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 // Context was defined outside the View.OnClickListener context
-                LocalSave localSaveRecord = new LocalSave(context);
+                // localSaveRecord defined outside too
                 boolean goodRecord = true;
 
                 if (goodRecord) {
@@ -406,11 +414,11 @@ public class AddRecordActivity extends AppCompatActivity {
                         Photo photo = new Photo();
 
                         // Save the photo to cache/Gallery
-                        File photoFile = photo.savePhotoToGallery(context);
+//                        File photoFile = photo.savePhotoToGallery(context);
 
                         // Get uri from the photoFile
-                        Uri photoUri = Uri.fromFile(photoFile);
-                        Uri selectedImage = data.getData();
+//                        Uri photoUri = Uri.fromFile(photoFile);
+//                        Uri selectedImage = data.getData();
 //                        Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), selectedImage);
                         photo.setPhotoBitmap(bitmap);
 
