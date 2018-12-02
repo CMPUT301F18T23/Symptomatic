@@ -137,9 +137,9 @@ public class AddProblemActivity extends AppCompatActivity {
         }
 
         if (cal.getTime().after(new Date())){
-            AlertDialog.Builder noTitleDialog = new AlertDialog.Builder(AddProblemActivity.this);
-            noTitleDialog.setMessage("The Date cannot be in the future.");
-            noTitleDialog.show();
+            AlertDialog.Builder futureDate = new AlertDialog.Builder(AddProblemActivity.this);
+            futureDate.setMessage("The date cannot be in the future.");
+            futureDate.show();
             goodProblem = false;
         }
 
