@@ -104,6 +104,17 @@ public class ViewFullProblemActivity extends AppCompatActivity {
             }
         });
 
+        Button viewRecordsButton = findViewById(R.id.viewRecordsButton);
+        viewRecordsButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(ViewFullProblemActivity.this, ListRecordsActivity.class);
+                intent.putExtra("problem", problem);
+                startActivity(intent);
+
+            }
+        });
+
 
     }
 

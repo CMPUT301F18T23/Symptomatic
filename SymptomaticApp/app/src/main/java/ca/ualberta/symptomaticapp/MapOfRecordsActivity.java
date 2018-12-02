@@ -61,7 +61,7 @@ public class MapOfRecordsActivity extends FragmentActivity implements OnMapReady
     private static final String FINE_LOCATION = Manifest.permission.ACCESS_FINE_LOCATION;
     private static final String COURSE_LOCATION = Manifest.permission.ACCESS_COARSE_LOCATION;
     private static final int LOCATION_PERMISSION_REQUEST_CODE = 1234;
-    private static final float DEFAULT_ZOOM = 0;
+    private static final float DEFAULT_ZOOM = 5;
     private PlaceAutocompleteAdapter placeAutocompleteAdapter;
     private GoogleApiClient mGoogleApiClient;
     private static final LatLngBounds LAT_LNG_BOUNDS = new LatLngBounds(new LatLng(-40, -168), new LatLng(71, 136));
