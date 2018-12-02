@@ -10,6 +10,7 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.provider.MediaStore;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -31,6 +32,14 @@ import android.widget.TimePicker;
 import android.widget.Toast;
 
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.Query;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -67,9 +76,11 @@ public class EditRecordActivity extends AppCompatActivity {
 
     static final int GET_GEOLOCATION = 2;
 
-    Button viewFrontBodyPart,viewBackBodyPart;
+    Button viewFrontBodyPart,viewBackBodyPart,saveButton,deleteButton;
 
     bodyPartDialog thisDialog;
+
+    EditText titleEditText,commentEditText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -85,7 +96,7 @@ public class EditRecordActivity extends AppCompatActivity {
         cal.setTime(record.recordDate);
 
         // Input the title
-        EditText titleEditText = findViewById(R.id.editTitleEditText);
+        titleEditText = findViewById(R.id.editTitleEditText);
         titleEditText.setText(record.recordTitle);
 
         // Input the time stamp
@@ -93,7 +104,7 @@ public class EditRecordActivity extends AppCompatActivity {
         timeTextView.setText(record.recordDate.toString());
 
         // Input the comment
-        EditText commentEditText = findViewById(R.id.commentEditText);
+        commentEditText = findViewById(R.id.commentEditText);
         commentEditText.setText(record.recordComment);
 
         // Change time stamp button
@@ -203,6 +214,22 @@ public class EditRecordActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent takePictureintent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
                 startActivityForResult(takePictureintent, REQUEST_IMAGE_CAPTURE);
+            }
+        });
+
+        saveButton = findViewById(R.id.saveRecordBtn);
+        saveButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                saveRecord();
+            }
+        });
+
+        deleteButton = findViewById(R.id.deleteRecordBtn);
+        deleteButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                deleteRecord();
             }
         });
 
@@ -378,6 +405,51 @@ public class EditRecordActivity extends AppCompatActivity {
         Login.thisUser = null;
         Intent intent = new Intent(EditRecordActivity.this, MainActivity.class);
         startActivity(intent);
+    }
+
+    public void saveRecord(){
+        final FirebaseFirestore db = FirebaseFirestore.getInstance();
+
+        CollectionReference records = db.collection("records");
+
+        Query recordsQuery = records.whereEqualTo("problem", record.getProblem()).whereEqualTo("user", Login.thisUser.username);
+
+        recordsQuery.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                if (task.isSuccessful()) {
+                    for (QueryDocumentSnapshot document : task.getResult()) {
+                        //update problem to new information
+                        String recordDocId = document.getId();
+                        DocumentReference thisDocument = db.collection("records").document(recordDocId);
+                        thisDocument.update("title",titleEditText.getText().toString(),"comment",commentEditText.getText().toString());
+                    }
+                }
+                finish();
+            }
+        });
+    }
+
+    public void deleteRecord(){
+        final FirebaseFirestore db = FirebaseFirestore.getInstance();
+
+        CollectionReference records = db.collection("records");
+
+        Query recordsQuery = records.whereEqualTo("problem",record.getProblem()).whereEqualTo("user",Login.thisUser.username);
+
+        recordsQuery.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                if (task.isSuccessful()) {
+                    for (QueryDocumentSnapshot document : task.getResult()) {
+                        String problemDocID = document.getId();
+                        DocumentReference thisDocument = db.collection("records").document(problemDocID);
+                        thisDocument.delete();
+                    }
+                }
+                finish();
+            }
+        });
     }
 
 
