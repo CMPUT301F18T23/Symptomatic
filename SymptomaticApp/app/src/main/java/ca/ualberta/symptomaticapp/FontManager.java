@@ -10,7 +10,7 @@ public class FontManager {
     //https://code.tutsplus.com/tutorials/how-to-use-fontawesome-in-an-android-app--cms-24167
 
     public static final String ROOT = "fonts/",
-            FONTAWESOME = ROOT + "fa-regular-400.ttf";
+            FONTAWESOME = ROOT + "fa-regular-400.ttf",BOLDFONTAWESOME = ROOT + "fa-solid-900.ttf";
 
     public static Typeface getTypeface(Context context, String font) {
         return Typeface.createFromAsset(context.getAssets(), font);

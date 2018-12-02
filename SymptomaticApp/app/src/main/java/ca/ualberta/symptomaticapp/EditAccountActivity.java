@@ -2,6 +2,7 @@ package ca.ualberta.symptomaticapp;
 
 import android.app.AlertDialog;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -10,6 +11,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -37,6 +39,8 @@ public class EditAccountActivity extends AppCompatActivity {
 
     EditText emailTextView,phoneNumberEditText;
 
+    Button editSave,close;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,12 +49,18 @@ public class EditAccountActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("Edit Account");
 
+        Typeface otherFont = FontManager.getTypeface(getApplicationContext(), FontManager.BOLDFONTAWESOME);
+        FontManager.markAsIconContainer(findViewById(R.id.contactIcons), otherFont);
+
+
         usernameTextView = findViewById(R.id.usernameEditText);
 
         emailTextView = findViewById(R.id.emailAddressEditText);
 
-
         phoneNumberEditText = findViewById(R.id.phoneNumberEditText);
+
+        editSave = findViewById(R.id.editSaveButton);
+        close = findViewById(R.id.closeButton);
 
         if(Login.thisUser != null) {
             usernameTextView.setText(Login.thisUser.username);
@@ -61,6 +71,23 @@ public class EditAccountActivity extends AppCompatActivity {
             emailTextView.setText(Login.thisCaregiver.email);
             phoneNumberEditText.setText(Login.thisCaregiver.phone);
         }
+
+        editSave.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                if (editSave.getText().toString().equals("Edit Info")){
+                    enableEdit();
+                    editSave.setText("Save");
+                } else {
+                    editInfo();
+                }
+            }
+        });
+
+        close.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                finish();
+            }
+        });
 
     }
 
@@ -93,7 +120,17 @@ public class EditAccountActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    public void editInfo(View V) {
+    public void enableEdit(){
+        emailTextView.setEnabled(true);
+        phoneNumberEditText.setEnabled(true);
+    }
+
+    public void disableEdit(){
+        emailTextView.setEnabled(false);
+        phoneNumberEditText.setEnabled(false);
+    }
+
+    public void editInfo() {
 
         email = emailTextView.getText().toString();
         phoneNumber = phoneNumberEditText.getText().toString();
@@ -160,8 +197,9 @@ public class EditAccountActivity extends AppCompatActivity {
                                 DocumentReference thisDocument = db.collection("caregivers").document(userDocID);
                                 thisDocument.update("phone", phoneNumber, "email", email);
                             }
+                            disableEdit();
+                            editSave.setText("Edit Info");
                         }
-                        finish();
                     }
                 }
             });
