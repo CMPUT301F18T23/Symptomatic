@@ -213,7 +213,14 @@ public class Record implements Serializable {
 
 
     public String toString() {
-        return this.recordTitle+ "\n" + this.recordDate.toString();
+        String returnString = "";
+        if(this.recordTitle!= null) {
+            returnString += this.recordTitle + "\n";
+        }
+        if (this.recordDate!=null){
+            returnString += this.recordDate.toString();
+        }
+        return returnString;
     }
 
     /**
