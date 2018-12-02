@@ -255,6 +255,29 @@ public class AddRecordActivity extends AppCompatActivity {
             public void onClick(View v) {
                 boolean goodRecord = true;
 
+                // Obtaining the user's input fields
+                String currProbName = problem.getTitle();
+                //Date currDate = Calendar.getInstance().getTime();
+
+                String comment = commentEdit.getText().toString();
+                String title = titleEdit.getText().toString();
+
+                if (title.length() == 0) {
+                    // Check whether a title for the record was inputted
+                    AlertDialog.Builder noTitleDialog = new AlertDialog.Builder(AddRecordActivity.this);
+                    noTitleDialog.setMessage("Title for the record cannot be empty.");
+                    noTitleDialog.show();
+                    goodRecord = false;
+                }
+
+                if (displayPhotos.size() < 2) {
+                    // Check whether the minimum of two photos were added to the record
+                    AlertDialog.Builder twoPhotosMinDialog = new AlertDialog.Builder(AddRecordActivity.this);
+                    twoPhotosMinDialog.setMessage("A minimum of 2 photos for the record needed.");
+                    twoPhotosMinDialog.show();
+                    goodRecord = false;
+                }
+
                 if (goodRecord) {
                     // Prepare the attributes required to instantiate the Record class
                     if (timeChanged){
@@ -264,13 +287,9 @@ public class AddRecordActivity extends AppCompatActivity {
 
 
                     } else{
+                        // If no specific date was inputted, just current time instance
                         timeStamp = Calendar.getInstance().getTime();
                     }
-                    String currProbName = problem.getTitle();
-                    //Date currDate = Calendar.getInstance().getTime();
-
-                    String comment = commentEdit.getText().toString();
-                    String title = titleEdit.getText().toString();
 
                     // Create the new record
                     Record currRecord = new Record(currProbName, timeStamp,Login.thisUser.returnUsername(),title);
@@ -282,7 +301,7 @@ public class AddRecordActivity extends AppCompatActivity {
 
               //so     currRecord.setPhotoList(displayPhotos);
 
-                    Log.d("photos length", String.valueOf(displayPhotos.size()));
+//                    Log.d("photos length", String.valueOf(displayPhotos.size()));
                     currRecord.addRecToDb();
 
                     // Switch back to the previous activity
