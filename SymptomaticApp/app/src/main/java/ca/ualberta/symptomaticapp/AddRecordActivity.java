@@ -30,6 +30,7 @@ import android.media.ThumbnailUtils;
 import android.net.Uri;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.support.v4.content.FileProvider;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -62,6 +63,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Locale;
 
 public class AddRecordActivity extends AppCompatActivity {
     private static final int PICK_IMAGE_REQUEST = 100; // to access the gallery to choose an image
@@ -235,17 +237,34 @@ public class AddRecordActivity extends AppCompatActivity {
                 // Start the intent to take the photo
                 Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
 
-                try {
-                    File photoFile = localSaveRecord.savePhotoToGallery(context);
-                    Uri photoUri = Uri.parse(photoFile.getPath());
-                    mCurrentPhotoUri = photoUri;
-                    takePictureIntent.setData(mCurrentPhotoUri);
-                    takePictureIntent.putExtra(android.provider.MediaStore.EXTRA_OUTPUT, photoUri);
-                } catch (IOException e) {
-                    e.printStackTrace();
+//                try {
+//                    File photoFile = localSaveRecord.savePhotoToGallery(context);
+//                    Uri photoUri = Uri.parse(photoFile.getPath());
+//                    mCurrentPhotoUri = photoUri;
+//                    takePictureIntent.setData(mCurrentPhotoUri);
+//                    takePictureIntent.putExtra(android.provider.MediaStore.EXTRA_OUTPUT, photoUri);
+//                } catch (IOException e) {
+//                    e.printStackTrace();
+//                }
+                if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
+                    // Create a file to store the image
+                    File photoFile = null;
+                    try {
+                        photoFile = createImageFile();
+                    } catch (IOException e) {
+                        Log.d("Take Photo Error", "Camera could not capture image.");
+                        e.printStackTrace();
+                    }
+
+                    if (photoFile != null) {
+                        Uri photoURI = FileProvider.getUriForFile(context, "ca.ualberta.symptomaticapp", photoFile);
+                        takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI);
+                    }
+
+                    // Start the camera for the photo to be taken
+                    startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
                 }
-                // Start the camera for the photo to be taken
-                startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
+
 
             }
         });
@@ -369,6 +388,7 @@ public class AddRecordActivity extends AppCompatActivity {
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
         switch (requestCode) {
 
             // If selecting a photo from gallery
@@ -417,16 +437,20 @@ public class AddRecordActivity extends AppCompatActivity {
                 if (resultCode == RESULT_OK) {
                     // Do try and catch
                     try {
+                        // Reference: https://stackoverflow.com/questions/42516126/fileprovider-illegalargumentexception-failed-to-find-configured-root
+                        bmp = BitmapFactory.decodeFile(mCurrentPhotoPath);
 
+//                        Log.d("Photo Path", mCurrentPhotoPath);
                         // Convert the photo captured into a bitmap
-//                        Bitmap bitmap = (Bitmap) data.getExtras().get("data");
-                        Uri selectedImage = data.getData();
+//                        Bitmap bmp = (Bitmap) data.getExtras().get("data");
+//                        Uri selectedImage = data.getData();
 //                        Uri selectedImage = Uri.fromFile(new File(data.getData()));
-                        Bitmap bitmap = MediaStore.Images.Media.getBitmap(context.getContentResolver(), mCurrentPhotoUri);
+//                        Bitmap bitmap = MediaStore.Images.Media.getBitmap(context.getContentResolver(), mCurrentPhotoUri);
 
 
                         // Store the image as a Photo object
                         Photo photo = new Photo();
+                        photo.setPhotoBitmap(bmp);
 
 
 ////                        Bundle extra = data.getExtras();
@@ -453,10 +477,10 @@ public class AddRecordActivity extends AppCompatActivity {
                         // Set photoUri
 //                        photo.setPhotoUri(imageUri);
                         ByteArrayOutputStream stream = new ByteArrayOutputStream();
-//                        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, stream);
+                        bmp.compress(Bitmap.CompressFormat.JPEG, 100, stream);
                         photoByteArray = stream.toByteArray();
                         String imageB64 = Base64.encodeToString(photoByteArray, Base64.DEFAULT);
-//
+
                         if (displayPhotos.size() < 10) {
                             displayPhotos.add(photo);
                             testPhotos.add(imageB64);
@@ -489,6 +513,27 @@ public class AddRecordActivity extends AppCompatActivity {
 
 
     }
+
+
+
+    private File createImageFile() throws IOException {
+        String timeStamp =
+                new SimpleDateFormat("yyyyMMdd_HHmmss",
+                        Locale.getDefault()).format(new Date());
+        String imageFileName = "IMG_" + timeStamp + "_";
+        File storageDir =
+                context.getExternalFilesDir(Environment.DIRECTORY_PICTURES);
+        File image = File.createTempFile(
+                imageFileName,  /* prefix */
+                ".jpg",         /* suffix */
+                storageDir      /* directory */
+        );
+
+        mCurrentPhotoPath = image.getAbsolutePath();
+        Log.d("Photo Path", mCurrentPhotoPath);
+        return image;
+    }
+
 
     //EVERYTHING BELOW HERE IS FOR THE BODY PART DIALOGS
 
