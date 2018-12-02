@@ -23,8 +23,10 @@ import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.media.ThumbnailUtils;
 import android.net.Uri;
 import android.os.Environment;
 import android.provider.MediaStore;
@@ -83,6 +85,8 @@ public class AddRecordActivity extends AppCompatActivity {
 //    PhotoList photoList = new PhotoList();
 
     String mCurrentPhotoPath; // the photo's file path
+    Uri mCurrentPhotoUri; // the photo's URI
+    File mCurrentPhotoFile;
 
     Problem problem;
     int year, month, day, hour, min;
@@ -234,7 +238,8 @@ public class AddRecordActivity extends AppCompatActivity {
                 try {
                     File photoFile = localSaveRecord.savePhotoToGallery(context);
                     Uri photoUri = Uri.parse(photoFile.getPath());
-                    takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoUri);
+                    mCurrentPhotoUri = photoUri;
+                    takePictureIntent.putExtra(android.provider.MediaStore.EXTRA_OUTPUT, photoUri);
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
@@ -389,6 +394,10 @@ public class AddRecordActivity extends AppCompatActivity {
                     ByteArrayOutputStream stream = new ByteArrayOutputStream();
                     bmp.compress(Bitmap.CompressFormat.JPEG, 40, stream);
                     photoByteArray = stream.toByteArray();
+//                    if (newFile) {
+//
+//                    }
+
                     String imageB64 = Base64.encodeToString(photoByteArray, Base64.DEFAULT);
 
                     if (displayPhotos.size() < 10) {
@@ -407,11 +416,19 @@ public class AddRecordActivity extends AppCompatActivity {
                 if (resultCode == RESULT_OK) {
                     // Do try and catch
                     try {
+
                         // Convert the photo captured into a bitmap
-                        Bitmap bitmap = (Bitmap) data.getExtras().get("data");
+//                        Bitmap bitmap = (Bitmap) data.getExtras().get("data");
+//                        Uri selectedImage = data.getData();
+//                        Uri selectedImage = Uri.fromFile(new File(data.getData()));
+//                        Bitmap bitmap = MediaStore.Images.Media.getBitmap(context.getContentResolver(), mCurrentPhotoUri);
+
 
                         // Store the image as a Photo object
                         Photo photo = new Photo();
+
+////                        Bundle extra = data.getExtras();
+//                        Bitmap bitmap =(Bitmap)extra.get("data");
 
                         // Save the photo to cache/Gallery
 //                        File photoFile = photo.savePhotoToGallery(context);
@@ -419,16 +436,25 @@ public class AddRecordActivity extends AppCompatActivity {
                         // Get uri from the photoFile
 //                        Uri photoUri = Uri.fromFile(photoFile);
 //                        Uri selectedImage = data.getData();
-//                        Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), selectedImage);
-                        photo.setPhotoBitmap(bitmap);
+//                    Bitmap bitmap = null;
+//                    try {
+//                        Bitmap bitmap = MediaStore.Images.Media.getBitmap(context.getContentResolver(), mCurrentPhotoUri);
+//                    } catch (IOException e) {
+//                        e.printStackTrace();
+//                    }
+
+
+//                    photo.setPhotoBitmap(bitmap);
+
+//                        imageView.setImageBitmap(thumbImage);
 
                         // Set photoUri
 //                        photo.setPhotoUri(imageUri);
                         ByteArrayOutputStream stream = new ByteArrayOutputStream();
-                        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, stream);
+//                        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, stream);
                         photoByteArray = stream.toByteArray();
                         String imageB64 = Base64.encodeToString(photoByteArray, Base64.DEFAULT);
-
+//
                         if (displayPhotos.size() < 10) {
                             displayPhotos.add(photo);
                             testPhotos.add(imageB64);
@@ -440,6 +466,7 @@ public class AddRecordActivity extends AppCompatActivity {
 
                     } catch (Exception e) {
                         Log.d("ERROR", "Captured photo could not be created.");
+                        e.printStackTrace();
                     }
 
 
