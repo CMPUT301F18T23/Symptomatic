@@ -21,29 +21,22 @@ public class bodyPartDialog{
 
     Button addBackBodyPart,addFrontBodyPart;
 
-    static ArrayList<String> frontPartsSelected,backPartsSelected;
+    private static ArrayList<String> bodyPartsSelected;
 
     Activity thisActivity;
 
     public bodyPartDialog(Activity activity){
         thisActivity = activity;
 
-        frontPartsSelected = new ArrayList<>();
-        backPartsSelected = new ArrayList<>();
+        bodyPartsSelected = new ArrayList<>();
 
         backRightForearmSelected = false; leftButtoxSelected = false; backHeadSelected = false; backRightFootSelected = false; backLeftHandSelected = false; backLeftAnkleSelected = false; backLeftKneeSelected = false; leftTricepSelected = false; backRightShoulderSelected = false; backLeftFootSelected = false; backLeftForearmSelected = false; backLeftShoulderSelected = false; backRightAnkleSelected = false; lowerBackSelected = false; upperBackSelected = false; rightButtoxSelected = false; backRightThighSelected = false; rightTricepSelected = false; midBackSelected = false; backLeftCalveSelected = false; backRightCalveSelected = false; backRightHandSelected = false; backRightKneeSelected = false; backLeftThighSelected = false;
         frontRightHandSelected = false; leftShinSelected = false; frontLeftFootSelected = false; frontRightThighSelected = false; frontRightFootSelected = false; frontLeftThighSelected = false; abdomenSelected = false; frontRightForearmSelected = false; frontLeftForearmSelected = false; upperChestSelected = false; rightShinSelected = false; rightBicepSelected = false; groinSelected = false; leftBicepSelected = false; frontLeftKneeSelected = false; frontLeftHandSelected = false; faceSelected = false; frontRightKneeSelected = false; rightShoulderSelected = false; leftShoulderSelected = false;
         foreheadSelected = false; eyesSelected = false; noseSelected = false; mouthSelected = false; chinSelected = false; rightCheekSelected = false; leftCheekSelected = false; rightEarSelected = false; leftEarSelected = false; neckSelected = false;
     }
 
-    public static ArrayList<String> returnPartsSelected(String region){
-        if (region.equals("Front")) {
-            return frontPartsSelected;
-        } else if (region.equals("Back")) {
-            return backPartsSelected;
-        } else {
-            return null;
-        }
+    public static ArrayList<String> returnPartsSelected(){
+        return bodyPartsSelected;
     }
 
     public void frontBodyPartDialog(){
@@ -81,11 +74,11 @@ public class bodyPartDialog{
                 if(frontRightHandSelected){
                     frontRightHand.setImageResource(R.drawable.front_right_hand);
                     frontRightHandSelected = false;
-                    frontPartsSelected.remove("Front Right Hand");
+                    bodyPartsSelected.remove("Front Right Hand");
                 } else {
                     frontRightHand.setImageResource(R.drawable.front_right_hand_selected);
                     frontRightHandSelected = true;
-                    frontPartsSelected.add("Front Right Hand");
+                    bodyPartsSelected.add("Front Right Hand");
                 }
             }
         });
@@ -103,11 +96,11 @@ public class bodyPartDialog{
                 if(leftShinSelected){
                     leftShin.setImageResource(R.drawable.left_shin);
                     leftShinSelected = false;
-                    frontPartsSelected.remove("Left Shin");
+                    bodyPartsSelected.remove("Left Shin");
                 } else {
                     leftShin.setImageResource(R.drawable.left_shin_selected);
                     leftShinSelected = true;
-                    frontPartsSelected.add("Left Shin");
+                    bodyPartsSelected.add("Left Shin");
                 }
             }
         });
@@ -125,11 +118,11 @@ public class bodyPartDialog{
                 if(frontLeftFootSelected){
                     frontLeftFoot.setImageResource(R.drawable.front_left_foot);
                     frontLeftFootSelected = false;
-                    frontPartsSelected.remove("Front Left Foot");
+                    bodyPartsSelected.remove("Front Left Foot");
                 } else {
                     frontLeftFoot.setImageResource(R.drawable.front_left_foot_selected);
                     frontLeftFootSelected = true;
-                    frontPartsSelected.add("Front Left Foot");
+                    bodyPartsSelected.add("Front Left Foot");
                 }
             }
         });
@@ -147,11 +140,11 @@ public class bodyPartDialog{
                 if(frontRightThighSelected){
                     frontRightThigh.setImageResource(R.drawable.front_right_thigh);
                     frontRightThighSelected = false;
-                    frontPartsSelected.remove("Front Right Thigh");
+                    bodyPartsSelected.remove("Front Right Thigh");
                 } else {
                     frontRightThigh.setImageResource(R.drawable.front_right_thigh_selected);
                     frontRightThighSelected = true;
-                    frontPartsSelected.add("Front Right Thigh");
+                    bodyPartsSelected.add("Front Right Thigh");
                 }
             }
         });
@@ -169,11 +162,11 @@ public class bodyPartDialog{
                 if(frontRightFootSelected){
                     frontRightFoot.setImageResource(R.drawable.front_right_foot);
                     frontRightFootSelected = false;
-                    frontPartsSelected.remove("Front Right Foot");
+                    bodyPartsSelected.remove("Front Right Foot");
                 } else {
                     frontRightFoot.setImageResource(R.drawable.front_right_foot_selected);
                     frontRightFootSelected = true;
-                    frontPartsSelected.add("Front Right Foot");
+                    bodyPartsSelected.add("Front Right Foot");
                 }
             }
         });
@@ -191,11 +184,11 @@ public class bodyPartDialog{
                 if(frontLeftThighSelected){
                     frontLeftThigh.setImageResource(R.drawable.front_left_thigh);
                     frontLeftThighSelected = false;
-                    frontPartsSelected.remove("Front Left Thigh");
+                    bodyPartsSelected.remove("Front Left Thigh");
                 } else {
                     frontLeftThigh.setImageResource(R.drawable.front_left_thigh_selected);
                     frontLeftThighSelected = true;
-                    frontPartsSelected.add("Front Left Thigh");
+                    bodyPartsSelected.add("Front Left Thigh");
                 }
             }
         });
@@ -213,11 +206,11 @@ public class bodyPartDialog{
                 if(abdomenSelected){
                     abdomen.setImageResource(R.drawable.abdomen);
                     abdomenSelected = false;
-                    frontPartsSelected.remove("Abdomen");
+                    bodyPartsSelected.remove("Abdomen");
                 } else {
                     abdomen.setImageResource(R.drawable.abdomen_selected);
                     abdomenSelected = true;
-                    frontPartsSelected.add("Abdomen");
+                    bodyPartsSelected.add("Abdomen");
                 }
             }
         });
@@ -235,11 +228,11 @@ public class bodyPartDialog{
                 if(frontRightForearmSelected){
                     frontRightForearm.setImageResource(R.drawable.front_right_forearm);
                     frontRightForearmSelected = false;
-                    frontPartsSelected.remove("Front Right Forearm");
+                    bodyPartsSelected.remove("Front Right Forearm");
                 } else {
                     frontRightForearm.setImageResource(R.drawable.front_right_forearm_selected);
                     frontRightForearmSelected = true;
-                    frontPartsSelected.add("Front Right Forearm");
+                    bodyPartsSelected.add("Front Right Forearm");
                 }
             }
         });
@@ -257,11 +250,11 @@ public class bodyPartDialog{
                 if(frontLeftForearmSelected){
                     frontLeftForearm.setImageResource(R.drawable.front_left_forearm);
                     frontLeftForearmSelected = false;
-                    frontPartsSelected.remove("Front Left Forearm");
+                    bodyPartsSelected.remove("Front Left Forearm");
                 } else {
                     frontLeftForearm.setImageResource(R.drawable.front_left_forearm_selected);
                     frontLeftForearmSelected = true;
-                    frontPartsSelected.add("Front Left Forearm");
+                    bodyPartsSelected.add("Front Left Forearm");
                 }
             }
         });
@@ -279,11 +272,11 @@ public class bodyPartDialog{
                 if(upperChestSelected){
                     upperChest.setImageResource(R.drawable.upper_chest);
                     upperChestSelected = false;
-                    frontPartsSelected.remove("Upper Chest");
+                    bodyPartsSelected.remove("Upper Chest");
                 } else {
                     upperChest.setImageResource(R.drawable.upper_chest_selected);
                     upperChestSelected = true;
-                    frontPartsSelected.add("Upper Chest");
+                    bodyPartsSelected.add("Upper Chest");
                 }
             }
         });
@@ -301,11 +294,11 @@ public class bodyPartDialog{
                 if(rightShinSelected){
                     rightShin.setImageResource(R.drawable.right_shin);
                     rightShinSelected = false;
-                    frontPartsSelected.remove("Right Shin");
+                    bodyPartsSelected.remove("Right Shin");
                 } else {
                     rightShin.setImageResource(R.drawable.right_shin_selected);
                     rightShinSelected = true;
-                    frontPartsSelected.add("Right Shin");
+                    bodyPartsSelected.add("Right Shin");
                 }
             }
         });
@@ -323,11 +316,11 @@ public class bodyPartDialog{
                 if(rightBicepSelected){
                     rightBicep.setImageResource(R.drawable.right_bicep);
                     rightBicepSelected = false;
-                    frontPartsSelected.remove("Right Bicep");
+                    bodyPartsSelected.remove("Right Bicep");
                 } else {
                     rightBicep.setImageResource(R.drawable.right_bicep_selected);
                     rightBicepSelected = true;
-                    frontPartsSelected.add("Right Bicep");
+                    bodyPartsSelected.add("Right Bicep");
                 }
             }
         });
@@ -345,11 +338,11 @@ public class bodyPartDialog{
                 if(groinSelected){
                     groin.setImageResource(R.drawable.groin);
                     groinSelected = false;
-                    frontPartsSelected.remove("Groin");
+                    bodyPartsSelected.remove("Groin");
                 } else {
                     groin.setImageResource(R.drawable.groin_selected);
                     groinSelected = true;
-                    frontPartsSelected.add("Groin");
+                    bodyPartsSelected.add("Groin");
                 }
             }
         });
@@ -367,11 +360,11 @@ public class bodyPartDialog{
                 if(leftBicepSelected){
                     leftBicep.setImageResource(R.drawable.left_bicep);
                     leftBicepSelected = false;
-                    frontPartsSelected.remove("Left Bicep");
+                    bodyPartsSelected.remove("Left Bicep");
                 } else {
                     leftBicep.setImageResource(R.drawable.left_bicep_selected);
                     leftBicepSelected = true;
-                    frontPartsSelected.add("Left Bicep");
+                    bodyPartsSelected.add("Left Bicep");
                 }
             }
         });
@@ -389,11 +382,11 @@ public class bodyPartDialog{
                 if(frontLeftKneeSelected){
                     frontLeftKnee.setImageResource(R.drawable.front_left_knee);
                     frontLeftKneeSelected = false;
-                    frontPartsSelected.remove("Front Left Knee");
+                    bodyPartsSelected.remove("Front Left Knee");
                 } else {
                     frontLeftKnee.setImageResource(R.drawable.front_left_knee_selected);
                     frontLeftKneeSelected = true;
-                    frontPartsSelected.add("Front Left Knee");
+                    bodyPartsSelected.add("Front Left Knee");
                 }
             }
         });
@@ -411,11 +404,11 @@ public class bodyPartDialog{
                 if(frontLeftHandSelected){
                     frontLeftHand.setImageResource(R.drawable.front_left_hand);
                     frontLeftHandSelected = false;
-                    frontPartsSelected.remove("Front Left Hand");
+                    bodyPartsSelected.remove("Front Left Hand");
                 } else {
                     frontLeftHand.setImageResource(R.drawable.front_left_hand_selected);
                     frontLeftHandSelected = true;
-                    frontPartsSelected.add("Front Left Hand");
+                    bodyPartsSelected.add("Front Left Hand");
                 }
             }
         });
@@ -451,11 +444,11 @@ public class bodyPartDialog{
                 if(frontRightKneeSelected){
                     frontRightKnee.setImageResource(R.drawable.front_right_knee);
                     frontRightKneeSelected = false;
-                    frontPartsSelected.remove("Front Right Knee");
+                    bodyPartsSelected.remove("Front Right Knee");
                 } else {
                     frontRightKnee.setImageResource(R.drawable.front_right_knee_selected);
                     frontRightKneeSelected = true;
-                    frontPartsSelected.add("Front Right Knee");
+                    bodyPartsSelected.add("Front Right Knee");
                 }
             }
         });
@@ -473,11 +466,11 @@ public class bodyPartDialog{
                 if(rightShoulderSelected){
                     rightShoulder.setImageResource(R.drawable.front_right_shoulder);
                     rightShoulderSelected = false;
-                    frontPartsSelected.remove("Right Shoulder");
+                    bodyPartsSelected.remove("Right Shoulder");
                 } else {
                     rightShoulder.setImageResource(R.drawable.front_right_shoulder_selected);
                     rightShoulderSelected = true;
-                    frontPartsSelected.add("Right Shoulder");
+                    bodyPartsSelected.add("Right Shoulder");
                 }
             }
         });
@@ -495,11 +488,11 @@ public class bodyPartDialog{
                 if(leftShoulderSelected){
                     leftShoulder.setImageResource(R.drawable.front_left_shoulder);
                     leftShoulderSelected = false;
-                    frontPartsSelected.remove("Left Shoulder");
+                    bodyPartsSelected.remove("Left Shoulder");
                 } else {
                     leftShoulder.setImageResource(R.drawable.front_left_shoulder_selected);
                     leftShoulderSelected = true;
-                    frontPartsSelected.add("Left Shoulder");
+                    bodyPartsSelected.add("Left Shoulder");
                 }
             }
         });
@@ -542,11 +535,11 @@ public class bodyPartDialog{
                 if(backRightForearmSelected){
                     backRightForearm.setImageResource(R.drawable.back_right_forearm);
                     backRightForearmSelected = false;
-                    backPartsSelected.remove("Back Right Forearm");
+                    bodyPartsSelected.remove("Back Right Forearm");
                 } else {
                     backRightForearm.setImageResource(R.drawable.back_right_forearm_selected);
                     backRightForearmSelected = true;
-                    backPartsSelected.add("Back Right Forearm");
+                    bodyPartsSelected.add("Back Right Forearm");
                 }
             }
         });
@@ -564,11 +557,11 @@ public class bodyPartDialog{
                 if(leftButtoxSelected){
                     leftButtox.setImageResource(R.drawable.back_left_buttox);
                     leftButtoxSelected = false;
-                    backPartsSelected.remove("Left Buttox");
+                    bodyPartsSelected.remove("Left Buttox");
                 } else {
                     leftButtox.setImageResource(R.drawable.left_buttox_selected);
                     leftButtoxSelected = true;
-                    backPartsSelected.add("Left Buttox");
+                    bodyPartsSelected.add("Left Buttox");
                 }
             }
         });
@@ -586,11 +579,11 @@ public class bodyPartDialog{
                 if(backHeadSelected){
                     backHead.setImageResource(R.drawable.back_head);
                     backHeadSelected = false;
-                    backPartsSelected.remove("Back Head");
+                    bodyPartsSelected.remove("Back Head");
                 } else {
                     backHead.setImageResource(R.drawable.back_head_selected);
                     backHeadSelected = true;
-                    backPartsSelected.add("Back Head");
+                    bodyPartsSelected.add("Back Head");
                 }
             }
         });
@@ -608,11 +601,11 @@ public class bodyPartDialog{
                 if(backRightFootSelected){
                     backRightFoot.setImageResource(R.drawable.back_right_foot);
                     backRightFootSelected = false;
-                    backPartsSelected.remove("Back Right Foot");
+                    bodyPartsSelected.remove("Back Right Foot");
                 } else {
                     backRightFoot.setImageResource(R.drawable.back_right_foot_selected);
                     backRightFootSelected = true;
-                    backPartsSelected.add("Back Right Foot");
+                    bodyPartsSelected.add("Back Right Foot");
                 }
             }
         });
@@ -630,11 +623,11 @@ public class bodyPartDialog{
                 if(backLeftHandSelected){
                     backLeftHand.setImageResource(R.drawable.back_left_hand);
                     backLeftHandSelected = false;
-                    backPartsSelected.remove("Back Left Hand");
+                    bodyPartsSelected.remove("Back Left Hand");
                 } else {
                     backLeftHand.setImageResource(R.drawable.back_left_hand_selected);
                     backLeftHandSelected = true;
-                    backPartsSelected.add("Back Left Hand");
+                    bodyPartsSelected.add("Back Left Hand");
                 }
             }
         });
@@ -652,11 +645,11 @@ public class bodyPartDialog{
                 if(backLeftAnkleSelected){
                     backLeftAnkle.setImageResource(R.drawable.back_left_ankle);
                     backLeftAnkleSelected = false;
-                    backPartsSelected.remove("Back Left Ankle");
+                    bodyPartsSelected.remove("Back Left Ankle");
                 } else {
                     backLeftAnkle.setImageResource(R.drawable.back_left_ankle_selected);
                     backLeftAnkleSelected = true;
-                    backPartsSelected.add("Back Left Ankle");
+                    bodyPartsSelected.add("Back Left Ankle");
                 }
             }
         });
@@ -674,11 +667,11 @@ public class bodyPartDialog{
                 if(backLeftKneeSelected){
                     backLeftKnee.setImageResource(R.drawable.back_left_knee);
                     backLeftKneeSelected = false;
-                    backPartsSelected.remove("Back Left Knee");
+                    bodyPartsSelected.remove("Back Left Knee");
                 } else {
                     backLeftKnee.setImageResource(R.drawable.back_left_knee_selected);
                     backLeftKneeSelected = true;
-                    backPartsSelected.add("Back Left Knee");
+                    bodyPartsSelected.add("Back Left Knee");
                 }
             }
         });
@@ -696,11 +689,11 @@ public class bodyPartDialog{
                 if(leftTricepSelected){
                     leftTricep.setImageResource(R.drawable.left_tricep);
                     leftTricepSelected = false;
-                    backPartsSelected.remove("Left Tricep");
+                    bodyPartsSelected.remove("Left Tricep");
                 } else {
                     leftTricep.setImageResource(R.drawable.left_tricep_selected);
                     leftTricepSelected = true;
-                    backPartsSelected.add("Left Tricep");
+                    bodyPartsSelected.add("Left Tricep");
                 }
             }
         });
@@ -718,11 +711,11 @@ public class bodyPartDialog{
                 if(backRightShoulderSelected){
                     backRightShoulder.setImageResource(R.drawable.back_right_shoulder);
                     backRightShoulderSelected = false;
-                    backPartsSelected.remove("Back Right Shoulder");
+                    bodyPartsSelected.remove("Back Right Shoulder");
                 } else {
                     backRightShoulder.setImageResource(R.drawable.back_right_shoulder_selected);
                     backRightShoulderSelected = true;
-                    backPartsSelected.add("Back Right Shoulder");
+                    bodyPartsSelected.add("Back Right Shoulder");
                 }
             }
         });
@@ -740,11 +733,11 @@ public class bodyPartDialog{
                 if(backLeftFootSelected){
                     backLeftFoot.setImageResource(R.drawable.back_left_foot);
                     backLeftFootSelected = false;
-                    backPartsSelected.remove("Back Left Foot");
+                    bodyPartsSelected.remove("Back Left Foot");
                 } else {
                     backLeftFoot.setImageResource(R.drawable.back_left_foot_selected);
                     backLeftFootSelected = true;
-                    backPartsSelected.add("Back Left Foot");
+                    bodyPartsSelected.add("Back Left Foot");
                 }
             }
         });
@@ -762,11 +755,11 @@ public class bodyPartDialog{
                 if(backLeftForearmSelected){
                     backLeftForearm.setImageResource(R.drawable.back_left_forearm);
                     backLeftForearmSelected = false;
-                    backPartsSelected.remove("Back Left Forearm");
+                    bodyPartsSelected.remove("Back Left Forearm");
                 } else {
                     backLeftForearm.setImageResource(R.drawable.back_left_forearm_selected);
                     backLeftForearmSelected = true;
-                    backPartsSelected.add("Back Left Forearm");
+                    bodyPartsSelected.add("Back Left Forearm");
                 }
             }
         });
@@ -784,11 +777,11 @@ public class bodyPartDialog{
                 if(backLeftShoulderSelected){
                     backLeftShoulder.setImageResource(R.drawable.back_left_shoulder);
                     backLeftShoulderSelected = false;
-                    backPartsSelected.remove("Back Left Shoulder");
+                    bodyPartsSelected.remove("Back Left Shoulder");
                 } else {
                     backLeftShoulder.setImageResource(R.drawable.back_left_shoulder_selected);
                     backLeftShoulderSelected = true;
-                    backPartsSelected.add("Back Left Shoulder");
+                    bodyPartsSelected.add("Back Left Shoulder");
                 }
             }
         });
@@ -806,11 +799,11 @@ public class bodyPartDialog{
                 if(backRightAnkleSelected){
                     backRightAnkle.setImageResource(R.drawable.back_right_ankle);
                     backRightAnkleSelected = false;
-                    backPartsSelected.remove("Back Right Ankle");
+                    bodyPartsSelected.remove("Back Right Ankle");
                 } else {
                     backRightAnkle.setImageResource(R.drawable.back_right_ankle_selected);
                     backRightAnkleSelected = true;
-                    backPartsSelected.add("Back Right Ankle");
+                    bodyPartsSelected.add("Back Right Ankle");
                 }
             }
         });
@@ -828,11 +821,11 @@ public class bodyPartDialog{
                 if(lowerBackSelected){
                     lowerBack.setImageResource(R.drawable.lower_back);
                     lowerBackSelected = false;
-                    backPartsSelected.remove("Lower Back");
+                    bodyPartsSelected.remove("Lower Back");
                 } else {
                     lowerBack.setImageResource(R.drawable.lower_back_selected);
                     lowerBackSelected = true;
-                    backPartsSelected.add("Lower Back");
+                    bodyPartsSelected.add("Lower Back");
                 }
             }
         });
@@ -850,11 +843,11 @@ public class bodyPartDialog{
                 if(upperBackSelected){
                     upperBack.setImageResource(R.drawable.upper_back);
                     upperBackSelected = false;
-                    backPartsSelected.remove("Upper Back");
+                    bodyPartsSelected.remove("Upper Back");
                 } else {
                     upperBack.setImageResource(R.drawable.upper_back_selected);
                     upperBackSelected = true;
-                    backPartsSelected.add("Upper Back");
+                    bodyPartsSelected.add("Upper Back");
                 }
             }
         });
@@ -872,11 +865,11 @@ public class bodyPartDialog{
                 if(rightButtoxSelected){
                     rightButtox.setImageResource(R.drawable.back_right_buttox);
                     rightButtoxSelected = false;
-                    backPartsSelected.remove("Right Buttox");
+                    bodyPartsSelected.remove("Right Buttox");
                 } else {
                     rightButtox.setImageResource(R.drawable.right_buttox_selected);
                     rightButtoxSelected = true;
-                    backPartsSelected.add("Right Buttox");
+                    bodyPartsSelected.add("Right Buttox");
                 }
             }
         });
@@ -894,11 +887,11 @@ public class bodyPartDialog{
                 if(backRightThighSelected){
                     backRightThigh.setImageResource(R.drawable.back_right_thigh);
                     backRightThighSelected = false;
-                    backPartsSelected.remove("Back Right Thigh");
+                    bodyPartsSelected.remove("Back Right Thigh");
                 } else {
                     backRightThigh.setImageResource(R.drawable.back_right_thigh_selected);
                     backRightThighSelected = true;
-                    backPartsSelected.add("Back Right Thigh");
+                    bodyPartsSelected.add("Back Right Thigh");
                 }
             }
         });
@@ -916,11 +909,11 @@ public class bodyPartDialog{
                 if(rightTricepSelected){
                     rightTricep.setImageResource(R.drawable.right_tricep);
                     rightTricepSelected = false;
-                    backPartsSelected.remove("Right Tricep");
+                    bodyPartsSelected.remove("Right Tricep");
                 } else {
                     rightTricep.setImageResource(R.drawable.right_tricep_selected);
                     rightTricepSelected = true;
-                    backPartsSelected.add("Right Tricep");
+                    bodyPartsSelected.add("Right Tricep");
                 }
             }
         });
@@ -938,11 +931,11 @@ public class bodyPartDialog{
                 if(midBackSelected){
                     midBack.setImageResource(R.drawable.mid_back);
                     midBackSelected = false;
-                    backPartsSelected.remove("Mid Back");
+                    bodyPartsSelected.remove("Mid Back");
                 } else {
                     midBack.setImageResource(R.drawable.mid_back_selected);
                     midBackSelected = true;
-                    backPartsSelected.add("Mid Back");
+                    bodyPartsSelected.add("Mid Back");
                 }
             }
         });
@@ -960,11 +953,11 @@ public class bodyPartDialog{
                 if(backLeftCalveSelected){
                     backLeftCalve.setImageResource(R.drawable.back_left_calve);
                     backLeftCalveSelected = false;
-                    backPartsSelected.remove("Back Left Calve");
+                    bodyPartsSelected.remove("Back Left Calve");
                 } else {
                     backLeftCalve.setImageResource(R.drawable.back_left_calve_selected);
                     backLeftCalveSelected = true;
-                    backPartsSelected.add("Back Left Calve");
+                    bodyPartsSelected.add("Back Left Calve");
                 }
             }
         });
@@ -982,11 +975,11 @@ public class bodyPartDialog{
                 if(backRightCalveSelected){
                     backRightCalve.setImageResource(R.drawable.back_right_calve);
                     backRightCalveSelected = false;
-                    backPartsSelected.remove("Back Right Calve");
+                    bodyPartsSelected.remove("Back Right Calve");
                 } else {
                     backRightCalve.setImageResource(R.drawable.back_right_calve_selected);
                     backRightCalveSelected = true;
-                    backPartsSelected.add("Back Right Calve");
+                    bodyPartsSelected.add("Back Right Calve");
                 }
             }
         });
@@ -1004,11 +997,11 @@ public class bodyPartDialog{
                 if(backRightHandSelected){
                     backRightHand.setImageResource(R.drawable.back_right_hand);
                     backRightHandSelected = false;
-                    backPartsSelected.remove("Back Right Hand");
+                    bodyPartsSelected.remove("Back Right Hand");
                 } else {
                     backRightHand.setImageResource(R.drawable.back_right_hand_selected);
                     backRightHandSelected = true;
-                    backPartsSelected.add("Back Right Hand");
+                    bodyPartsSelected.add("Back Right Hand");
                 }
             }
         });
@@ -1026,11 +1019,11 @@ public class bodyPartDialog{
                 if(backRightKneeSelected){
                     backRightKnee.setImageResource(R.drawable.back_right_knee);
                     backRightKneeSelected = false;
-                    backPartsSelected.remove("Back Right Knee");
+                    bodyPartsSelected.remove("Back Right Knee");
                 } else {
                     backRightKnee.setImageResource(R.drawable.back_right_knee_selected);
                     backRightKneeSelected = true;
-                    backPartsSelected.add("Back Right Knee");
+                    bodyPartsSelected.add("Back Right Knee");
                 }
             }
         });
@@ -1048,11 +1041,11 @@ public class bodyPartDialog{
                 if(backLeftThighSelected){
                     backLeftThigh.setImageResource(R.drawable.back_left_thigh);
                     backLeftThighSelected = false;
-                    backPartsSelected.remove("Back Left Thigh");
+                    bodyPartsSelected.remove("Back Left Thigh");
                 } else {
                     backLeftThigh.setImageResource(R.drawable.back_left_thigh_selected);
                     backLeftThighSelected = true;
-                    backPartsSelected.add("Back Left Thigh");
+                    bodyPartsSelected.add("Back Left Thigh");
                 }
             }
         });
@@ -1087,11 +1080,11 @@ public class bodyPartDialog{
                 if(rightEarSelected){
                     rightEar.setImageResource(R.drawable.right_ear);
                     rightEarSelected = false;
-                    frontPartsSelected.remove("Right Ear");
+                    bodyPartsSelected.remove("Right Ear");
                 } else {
                     rightEar.setImageResource(R.drawable.right_ear_selected);
                     rightEarSelected = true;
-                    frontPartsSelected.add("Right Ear");
+                    bodyPartsSelected.add("Right Ear");
                 }
             }
         });
@@ -1109,11 +1102,11 @@ public class bodyPartDialog{
                 if(mouthSelected){
                     mouth.setImageResource(R.drawable.mouth);
                     mouthSelected = false;
-                    frontPartsSelected.remove("Mouth");
+                    bodyPartsSelected.remove("Mouth");
                 } else {
                     mouth.setImageResource(R.drawable.mouth_selected);
                     mouthSelected = true;
-                    frontPartsSelected.add("Mouth");
+                    bodyPartsSelected.add("Mouth");
                 }
             }
         });
@@ -1131,11 +1124,11 @@ public class bodyPartDialog{
                 if(noseSelected){
                     nose.setImageResource(R.drawable.nose);
                     noseSelected = false;
-                    frontPartsSelected.remove("Nose");
+                    bodyPartsSelected.remove("Nose");
                 } else {
                     nose.setImageResource(R.drawable.nose_selected);
                     noseSelected = true;
-                    frontPartsSelected.add("Nose");
+                    bodyPartsSelected.add("Nose");
                 }
             }
         });
@@ -1153,11 +1146,11 @@ public class bodyPartDialog{
                 if(rightCheekSelected){
                     rightCheek.setImageResource(R.drawable.right_cheek);
                     rightCheekSelected = false;
-                    frontPartsSelected.remove("Right Cheek");
+                    bodyPartsSelected.remove("Right Cheek");
                 } else {
                     rightCheek.setImageResource(R.drawable.right_cheek_selected);
                     rightCheekSelected = true;
-                    frontPartsSelected.add("Right Cheek");
+                    bodyPartsSelected.add("Right Cheek");
                 }
             }
         });
@@ -1175,11 +1168,11 @@ public class bodyPartDialog{
                 if(neckSelected){
                     neck.setImageResource(R.drawable.neck);
                     neckSelected = false;
-                    frontPartsSelected.remove("Neck");
+                    bodyPartsSelected.remove("Neck");
                 } else {
                     neck.setImageResource(R.drawable.neck_selected);
                     neckSelected = true;
-                    frontPartsSelected.add("Neck");
+                    bodyPartsSelected.add("Neck");
                 }
             }
         });
@@ -1197,11 +1190,11 @@ public class bodyPartDialog{
                 if(chinSelected){
                     chin.setImageResource(R.drawable.chin);
                     chinSelected = false;
-                    frontPartsSelected.remove("Chin");
+                    bodyPartsSelected.remove("Chin");
                 } else {
                     chin.setImageResource(R.drawable.chin_selected);
                     chinSelected = true;
-                    frontPartsSelected.add("Chin");
+                    bodyPartsSelected.add("Chin");
                 }
             }
         });
@@ -1219,11 +1212,11 @@ public class bodyPartDialog{
                 if(eyesSelected){
                     eyes.setImageResource(R.drawable.eyes);
                     eyesSelected = false;
-                    frontPartsSelected.remove("Eyes");
+                    bodyPartsSelected.remove("Eyes");
                 } else {
                     eyes.setImageResource(R.drawable.eyes_selected);
                     eyesSelected = true;
-                    frontPartsSelected.add("Eyes");
+                    bodyPartsSelected.add("Eyes");
                 }
             }
         });
@@ -1241,11 +1234,11 @@ public class bodyPartDialog{
                 if(foreheadSelected){
                     forehead.setImageResource(R.drawable.forehead);
                     foreheadSelected = false;
-                    frontPartsSelected.remove("Forehead");
+                    bodyPartsSelected.remove("Forehead");
                 } else {
                     forehead.setImageResource(R.drawable.forehead_selected);
                     foreheadSelected = true;
-                    frontPartsSelected.add("Forehead");
+                    bodyPartsSelected.add("Forehead");
                 }
             }
         });
@@ -1263,11 +1256,11 @@ public class bodyPartDialog{
                 if(leftCheekSelected){
                     leftCheek.setImageResource(R.drawable.left_cheek);
                     leftCheekSelected = false;
-                    frontPartsSelected.remove("Left Cheek");
+                    bodyPartsSelected.remove("Left Cheek");
                 } else {
                     leftCheek.setImageResource(R.drawable.left_cheek_selected);
                     leftCheekSelected = true;
-                    frontPartsSelected.add("Left Cheek");
+                    bodyPartsSelected.add("Left Cheek");
                 }
             }
         });
@@ -1285,11 +1278,11 @@ public class bodyPartDialog{
                 if(leftEarSelected){
                     leftEar.setImageResource(R.drawable.left_ear);
                     leftEarSelected = false;
-                    frontPartsSelected.remove("Left Ear");
+                    bodyPartsSelected.remove("Left Ear");
                 } else {
                     leftEar.setImageResource(R.drawable.left_ear_selected);
                     leftEarSelected = true;
-                    frontPartsSelected.add("Left Ear");
+                    bodyPartsSelected.add("Left Ear");
                 }
             }
         });
@@ -1301,6 +1294,116 @@ public class bodyPartDialog{
 
     public void readList(ArrayList<String> bodyparts){
 
+        for (String location: bodyparts){
+            if("Front Right Hand".equals(location)){
+                frontRightHandSelected = true;
+            } else if("Left Shin".equals(location)){
+                frontRightHandSelected = true;
+            } else if("Front Left Foot".equals(location)){
+                frontLeftFootSelected = true;
+            } else if("Front Right Thigh".equals(location)){
+                frontRightThighSelected = true;
+            } else if("Front Right Foot".equals(location)){
+                frontRightFootSelected = true;
+            } else if("Front Left Thigh".equals(location)){
+                frontLeftThighSelected = true;
+            } else if("Abdomen".equals(location)){
+                abdomenSelected = true;
+            } else if("Front Right Forearm".equals(location)){
+                frontRightForearmSelected = true;
+            } else if("Front Left Forearm".equals(location)){
+                frontLeftForearmSelected = true;
+            } else if("Upper Chest".equals(location)){
+                upperChestSelected = true;
+            } else if("Right Shin".equals(location)){
+                rightShinSelected = true;
+            } else if("Right Bicep".equals(location)){
+                rightBicepSelected = true;
+            } else if("Groin".equals(location)){
+                groinSelected = true;
+            } else if("Left Bicep".equals(location)){
+                leftBicepSelected = true;
+            } else if("Front Left Knee".equals(location)){
+                frontLeftKneeSelected = true;
+            } else if("Front Left Hand".equals(location)){
+                frontLeftHandSelected = true;
+            } else if("Front Right Knee".equals(location)){
+                frontRightKneeSelected = true;
+            } else if("Right Shoulder".equals(location)){
+                rightShoulderSelected = true;
+            } else if("Left Shoulder".equals(location)){
+                leftShoulderSelected = true;
+            } else if ("Right Ear".equals(location)) {
+                rightEarSelected = true;
+            } else if ("Mouth".equals(location)) {
+                mouthSelected = true;
+            } else if ("Nose".equals(location)) {
+                noseSelected = true;
+            } else if ("Right Cheek".equals(location)) {
+                rightCheekSelected = true;
+            } else if ("Neck".equals(location)) {
+                neckSelected = true;
+            } else if ("Chin".equals(location)) {
+                chinSelected = true;
+            } else if ("Eyes".equals(location)) {
+                eyesSelected = true;
+            } else if ("Forehead".equals(location)) {
+                foreheadSelected = true;
+            } else if ("Left Cheek".equals(location)) {
+                leftCheekSelected = true;
+            } else if ("Left Ear".equals(location)) {
+                leftEarSelected = true;
+            } else if("Back Right Forearm".equals(location)){
+                backRightForearmSelected = true;
+            } else if("Left Buttox".equals(location)){
+                leftButtoxSelected = true;
+            } else if("Back Head".equals(location)){
+                backHeadSelected = true;
+            } else if("Back Right Foot".equals(location)){
+                backRightFootSelected = true;
+            } else if("Back Left Hand".equals(location)){
+                backLeftHandSelected = true;
+            } else if("Back Left Ankle".equals(location)){
+                backLeftAnkleSelected = true;
+            } else if("Back Left Knee".equals(location)){
+                backLeftKneeSelected = true;
+            } else if("Left Tricep".equals(location)){
+                leftTricepSelected = true;
+            } else if("Back Right Shoulder".equals(location)){
+                backRightShoulderSelected = true;
+            } else if("Back Left Foot".equals(location)){
+                backLeftFootSelected = true;
+            } else if("Back Left Forearm".equals(location)){
+                backLeftForearmSelected = true;
+            } else if("Back Left Shoulder".equals(location)){
+                backLeftShoulderSelected = true;
+            } else if("Back Right Ankle".equals(location)){
+                backRightAnkleSelected = true;
+            } else if("Lower Back".equals(location)){
+                lowerBackSelected = true;
+            } else if("Upper Back".equals(location)){
+                upperBackSelected = true;
+            } else if("Right Buttox".equals(location)){
+                rightButtoxSelected = true;
+            } else if("Back Right Thigh".equals(location)){
+                backRightThighSelected = true;
+            } else if("Right Tricep".equals(location)){
+                rightTricepSelected = true;
+            } else if("Mid Back".equals(location)){
+                midBackSelected = true;
+            } else if("Back Left Calve".equals(location)){
+                backLeftCalveSelected = true;
+            } else if("Back Right Calve".equals(location)){
+                backRightCalveSelected = true;
+            } else if("Back Right Hand".equals(location)){
+                backRightHandSelected = true;
+            } else if("Back Right Knee".equals(location)){
+                backRightKneeSelected = true;
+            } else if("Back Left Thigh".equals(location)){
+                backLeftThighSelected = true;
+            }
+
+        }
     }
 
 }

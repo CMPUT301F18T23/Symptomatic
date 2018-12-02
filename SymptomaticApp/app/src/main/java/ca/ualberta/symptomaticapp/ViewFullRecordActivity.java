@@ -35,6 +35,7 @@ public class ViewFullRecordActivity extends AppCompatActivity {
 
     ArrayList<String> bodyLocation;
 
+    bodyPartDialog thisDialog;
 
     Button viewFrontBodyPart, viewBackBodyPart;
 
@@ -121,17 +122,20 @@ public class ViewFullRecordActivity extends AppCompatActivity {
         viewBackBodyPart = findViewById(R.id.viewBackBodyPart);
         viewFrontBodyPart = findViewById(R.id.viewFrontBodyPart);
 
+        thisDialog = new bodyPartDialog(ViewFullRecordActivity.this);
+        thisDialog.readList(bodyLocation);
+
         viewBackBodyPart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                backBodyPartDialog();
+                thisDialog.backBodyPartDialog();
             }
         });
 
         viewFrontBodyPart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                frontBodyPartDialog();
+                thisDialog.frontBodyPartDialog();
             }
         });
 
@@ -232,7 +236,7 @@ public class ViewFullRecordActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-
+/*
     private void frontBodyPartDialog() {
         final Dialog frontBodyPartDialog = new Dialog(ViewFullRecordActivity.this);
         frontBodyPartDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -689,6 +693,6 @@ public class ViewFullRecordActivity extends AppCompatActivity {
         }
 
         backBodyPartDialog.show();
-    }
+    }*/
 
 }
