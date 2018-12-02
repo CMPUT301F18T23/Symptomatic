@@ -110,9 +110,16 @@ public class ViewFullRecordActivity extends AppCompatActivity {
         slideShow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(ViewFullRecordActivity.this, SlideShowModeActivity.class);
-                intent.putExtra("record", record);
-                startActivity(intent);
+                if (record.getPhotoList().size() > 0) {
+                    Intent intent = new Intent(ViewFullRecordActivity.this, SlideShowModeActivity.class);
+                    intent.putExtra("record", record);
+                    startActivity(intent);
+                }
+                else{
+                    AlertDialog.Builder noPhotosDialog = new AlertDialog.Builder(ViewFullRecordActivity.this);
+                    noPhotosDialog.setMessage("No photos exists. You may add photos in Edit Record.");
+                    noPhotosDialog.show();
+                }
             }
         });
 
