@@ -113,6 +113,9 @@ public class ViewFullRecordActivity extends AppCompatActivity {
                 Intent intent = new Intent(ViewFullRecordActivity.this, SlideShowModeActivity.class);
                 intent.putExtra("record", record);
                 startActivity(intent);
+            }
+        });
+
               
         // view body location related
         viewBackBodyPart = findViewById(R.id.viewBackBodyPart);
@@ -128,7 +131,7 @@ public class ViewFullRecordActivity extends AppCompatActivity {
         viewFrontBodyPart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                frontBodyPartDialog(
+                frontBodyPartDialog();
             }
         });
 
