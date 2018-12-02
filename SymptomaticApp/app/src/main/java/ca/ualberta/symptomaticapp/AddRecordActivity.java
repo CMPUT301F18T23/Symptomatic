@@ -270,13 +270,13 @@ public class AddRecordActivity extends AppCompatActivity {
                     goodRecord = false;
                 }
 
-                if (displayPhotos.size() < 2) {
-                    // Check whether the minimum of two photos were added to the record
-                    AlertDialog.Builder twoPhotosMinDialog = new AlertDialog.Builder(AddRecordActivity.this);
-                    twoPhotosMinDialog.setMessage("A minimum of 2 photos for the record needed.");
-                    twoPhotosMinDialog.show();
-                    goodRecord = false;
-                }
+//                if (displayPhotos.size() < 2) {
+//                    // Check whether the minimum of two photos were added to the record
+//                    AlertDialog.Builder twoPhotosMinDialog = new AlertDialog.Builder(AddRecordActivity.this);
+//                    twoPhotosMinDialog.setMessage("A minimum of 2 photos for the record needed.");
+//                    twoPhotosMinDialog.show();
+//                    goodRecord = false;
+//                }
 
                 if (goodRecord) {
                     // Prepare the attributes required to instantiate the Record class
