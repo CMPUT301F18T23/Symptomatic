@@ -125,19 +125,20 @@ public class Photo implements Serializable {
         // If the photo's size exceeds 65536 bytes, compress the image.
         ByteArrayOutputStream stream = new ByteArrayOutputStream();
 
-        if(photoBitmap.compress(Bitmap.CompressFormat.JPEG, quality, stream)) {
+        if (photoBitmap.compress(Bitmap.CompressFormat.JPEG, quality, stream)) {
             byte[] photoByteArray = stream.toByteArray();
             // for testing: Log.d("COMPRESSION COUNTER:", "harry potter");
             this.reducedSizeBitmap = BitmapFactory.decodeByteArray(photoByteArray, 0, photoByteArray.length);
 
-        }
-        else{
+        } else {
             // Print our error message saying the compression wasn't successful
             Log.d("COMPRESSION ERROR", "Bitmap cannot be compressed.");
         }
-
-
     }
+
+    public void savePhoto(String fileName) {
+
+        }
 
     /**
      * gets the byte array of the photo
@@ -156,6 +157,8 @@ public class Photo implements Serializable {
         // Return the bitmap representation of the photo
         return this.photoBitmap;
     }
+
+
 
     /**
      * sets the size of the photo

@@ -226,13 +226,12 @@ public class AddRecordActivity extends AppCompatActivity {
                 Intent takePictureintent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
 
 //                // Create the name of the file for the photo
-                try {
-                    File photoDir = createImageFile();
-                    // for testing: Print the photo's path
-                    Log.d("Photo Directory:", mCurrentPhotoPath);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
+//                try {
+//                    File photoDir = createImageFile();
+//                    // for testing: Print the photo's path
+//                } catch (IOException e) {
+//                    e.printStackTrace();
+//                }
 
                 // Start the camera for the photo to be taken
                 startActivityForResult(takePictureintent, REQUEST_IMAGE_CAPTURE);
@@ -388,9 +387,8 @@ public class AddRecordActivity extends AppCompatActivity {
                     try {
                         // Convert the photo captured into a bitmap
                         Bitmap bitmap = (Bitmap) data.getExtras().get("data");
-
-                        Log.d("Photo Location", mCurrentPhotoPath);
-
+                        Uri imageUri = data.getData();
+//                        Log.d("Photo Location", imageUri.toString());
                         // Store the image as a Photo object
                         Photo photo = new Photo(bitmap);
                         ByteArrayOutputStream stream = new ByteArrayOutputStream();
