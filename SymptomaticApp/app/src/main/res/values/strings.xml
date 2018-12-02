@@ -107,9 +107,9 @@
 
     <string name="title_activity_edit_map_of_record">Map</string>
 
-    <string name="keyword_search">Search by Keywords:</string>
-    <string name="geolocation_search">Search by Geo-Location:</string>
-    <string name="bodylocation_search">Search by Body Location:</string>
+    <string name="keyword_search">Search by Keywords</string>
+    <string name="geolocation_search">Search by Geo Location</string>
+    <string name="bodylocation_search">Search by Body Location</string>
     <string name="search_separator">Please separate keywords by a semicolon (;)</string>
     <string name="search">Search</string>
     <string name="keyword">Keyword;</string>
@@ -119,6 +119,13 @@
     <string name="view_back_body_parts">View Back Body Parts</string>
     <string name="done">Done</string>
     <string name="map_of_records">Map of Records</string>
+    <string name="select_geolocation">Select Geolocation</string>
+    <string name="select_body_location">Select body location</string>
+    <string name="search_problems">Search Problems</string>
+    <string name="search_records">Search Records</string>
+    <string name="enter_distance">Enter distance in KM</string>
+    />
+    />
 
 
 </resources>

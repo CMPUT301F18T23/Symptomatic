@@ -114,6 +114,11 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    public void viewSearch(MenuItem menu){
+        Intent intent = new Intent(MainActivity.this, SearchActivity.class);
+        startActivity(intent);
+    }
+
     public void viewLogout(MenuItem menu){
         //adds the logout button to the menu
         //sets both thisCaregiver and thisUser to null, and refreshes the page, effectively sending them to the login page.
