@@ -422,7 +422,7 @@ public class EditRecordActivity extends AppCompatActivity {
                         //update problem to new information
                         String recordDocId = document.getId();
                         DocumentReference thisDocument = db.collection("records").document(recordDocId);
-                        thisDocument.update("title",titleEditText.getText().toString(),"comment",commentEditText.getText().toString());
+                        thisDocument.update("recordTitle",titleEditText.getText().toString(),"recordComment",commentEditText.getText().toString(),"bodyLocation",thisDialog.returnPartsSelected());
                     }
                 }
                 finish();
