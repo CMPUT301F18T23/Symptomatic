@@ -2,6 +2,7 @@ package ca.ualberta.symptomaticapp;
 
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
+import android.app.Dialog;
 import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -66,6 +67,10 @@ public class EditRecordActivity extends AppCompatActivity {
 
     static final int GET_GEOLOCATION = 2;
 
+    Button viewFrontBodyPart,viewBackBodyPart;
+
+    bodyPartDialog thisDialog;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -107,6 +112,27 @@ public class EditRecordActivity extends AppCompatActivity {
                 dialog.show();
 
 
+            }
+        });
+
+        // view body location related
+        viewBackBodyPart = findViewById(R.id.viewBackBodyPart);
+        viewFrontBodyPart = findViewById(R.id.viewFrontBodyPart);
+
+        thisDialog = new bodyPartDialog(EditRecordActivity.this,true);
+        thisDialog.readList(record.getBodyLocation());
+
+        viewBackBodyPart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                thisDialog.backBodyPartDialog();
+            }
+        });
+
+        viewFrontBodyPart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                thisDialog.frontBodyPartDialog();
             }
         });
 

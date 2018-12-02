@@ -38,7 +38,7 @@
             <TextView
                 android:id="@+id/usernameTextView"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:text="@string/fa_icon_user"
                 android:textColor="@color/colorAccent"
                 android:textSize="25sp"
@@ -47,7 +47,7 @@
             <TextView
                 android:id="@+id/usernameEditText"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:textSize="25sp"
                 android:layout_marginLeft="15dp"
                 android:layout_marginStart="15dp"
@@ -64,7 +64,7 @@
             <TextView
                 android:id="@+id/phoneNumberTextView"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:text="@string/fa_icon_phone"
                 android:textColor="@color/colorAccent"
                 android:textSize="25sp"
@@ -73,7 +73,7 @@
             <EditText
                 android:id="@+id/phoneNumberEditText"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:ems="10"
                 android:layout_marginLeft="10dp"
                 android:layout_marginStart="10dp"
@@ -91,7 +91,7 @@
             <TextView
                 android:id="@+id/emailAddressTextView"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:text="@string/fa_icon_email"
                 android:textColor="@color/colorAccent"
                 android:textSize="25sp"
@@ -100,7 +100,7 @@
             <EditText
                 android:id="@+id/emailAddressEditText"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_marginLeft="10dp"
                 android:layout_marginStart="10dp"
                 android:textSize="25sp"
