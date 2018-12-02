@@ -16,11 +16,16 @@
 
 package ca.ualberta.symptomaticapp;
 
+import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.net.Uri;
+import android.os.Environment;
 import android.util.Log;
 
 import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.IOException;
 import java.io.Serializable;
 import java.nio.ByteBuffer;
 import java.text.SimpleDateFormat;
@@ -34,6 +39,7 @@ import java.util.Date;
 
 public class Photo implements Serializable {
     protected String photoPath;
+    protected Uri photoUri;
     protected String timestamp;
     protected Integer photoSize;
 //    protected byte[] photoByteArray;
@@ -42,19 +48,19 @@ public class Photo implements Serializable {
 
     /**
      * Constructor for photo
-     * @param photoBitmap
+     * @param
      */
-    public Photo(Bitmap photoBitmap){
+    public Photo(){
         // Initialize the Photo object
-        this.photoBitmap = photoBitmap;
+//        this.photoBitmap = photoBitmap;
         this.timestamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
 //        this.quality = 60;
 
         // Method 1: Convert the bitmap into a byte array
-        int size = photoBitmap.getRowBytes() * photoBitmap.getHeight();
-        ByteBuffer byteBuffer = ByteBuffer.allocate(size);
-        photoBitmap.copyPixelsToBuffer(byteBuffer);
-        byte[] photoByteArray = byteBuffer.array();
+//        int size = photoBitmap.getRowBytes() * photoBitmap.getHeight();
+//        ByteBuffer byteBuffer = ByteBuffer.allocate(size);
+//        photoBitmap.copyPixelsToBuffer(byteBuffer);
+//        byte[] photoByteArray = byteBuffer.array();
 
         // Method 2: Another way to convert a bitmap into a byte array but very slow.
 //        ByteArrayOutputStream stream = new ByteArrayOutputStream();
@@ -62,7 +68,7 @@ public class Photo implements Serializable {
 //        this.photoByteArray = stream.toByteArray();
 
         // Check bitmap size and compress if necessary
-        checkBitmapSize(photoByteArray);
+//        checkBitmapSize(photoByteArray);
     }
 
     /**
@@ -99,6 +105,23 @@ public class Photo implements Serializable {
     public void setPhotoPath(String newPhotoPath) {
         this.photoPath = newPhotoPath;
     }
+
+    /**
+     * sets the photoUri for the Photo
+     * @return void
+     */
+    public void setPhotoUri(Uri newPhotoUri) {
+        this.photoUri = newPhotoUri;
+    }
+
+    /**
+     * gets the photoUri for the Photo
+     * @return Uri
+     */
+    public Uri getPhotoUri() {
+        return this.photoUri;
+    }
+
     /**
      * gets the string TimeStamp
      * @return string TimeStamp
@@ -136,7 +159,18 @@ public class Photo implements Serializable {
         }
     }
 
-    public void savePhoto(String fileName) {
+    public File savePhotoToGallery(Context context) throws IOException {
+        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
+        String photoFileName = "SymptomaticPhoto" + timeStamp + "_";
+
+        // Make a folder in cache called 'Gallery' if it doesn't exist
+        File galleryDir = new File(context.getCacheDir().getAbsolutePath() + File.separator + "Gallery");
+        if (!(galleryDir.exists())) {
+            galleryDir.mkdirs();
+        }
+
+        File photoFile = File.createTempFile(photoFileName, ".jpg", galleryDir);
+        return photoFile;
 
         }
 

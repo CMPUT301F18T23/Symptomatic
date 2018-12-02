@@ -18,6 +18,7 @@ package ca.ualberta.symptomaticapp;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.app.TimePickerDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Color;
@@ -51,6 +52,7 @@ import com.google.android.gms.maps.model.LatLng;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -96,6 +98,7 @@ public class AddRecordActivity extends AppCompatActivity {
     boolean timeChanged;
     Date timeStamp;
     EditText commentEdit,titleEdit;
+    Context context = this; // for saving offline
 
 
 
@@ -244,9 +247,25 @@ public class AddRecordActivity extends AppCompatActivity {
         saveRecordBttn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                // Context was defined outside the View.OnClickListener context
+                LocalSave localSaveRecord = new LocalSave(context);
                 boolean goodRecord = true;
 
                 if (goodRecord) {
+                    // Check whether the system is offline
+//                    if (!(localSaveRecord.checkConnectivity())) {
+//
+//                        // Get current timestamp
+//                        String timestampStr = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
+//
+//                        // Create filename
+//                        String fileName = "SymptomaticRecord" + timestampStr;
+//
+//                        // Create and write the file to cache
+//                        FileOutputStream offlineFile = localSaveRecord.createTempCacheFile(fileName);
+////                        localSaveRecord.writeToCacheFile(offlineFile, newProblem);
+//
+//                    }
                     // Prepare the attributes required to instantiate the Record class
                     if (timeChanged){
                         final Calendar cal = Calendar.getInstance();
@@ -358,7 +377,7 @@ public class AddRecordActivity extends AppCompatActivity {
                     }
 
                     // Create an instance of the Photo class
-                    Photo photo = new Photo(bmp);
+                    Photo photo = new Photo();
 
 //                    int size = bmp.getRowBytes() * bmp.getHeight();
 //                    ByteBuffer byteBuffer = ByteBuffer.allocate(size);
@@ -387,10 +406,14 @@ public class AddRecordActivity extends AppCompatActivity {
                     try {
                         // Convert the photo captured into a bitmap
                         Bitmap bitmap = (Bitmap) data.getExtras().get("data");
-                        Uri imageUri = data.getData();
-//                        Log.d("Photo Location", imageUri.toString());
+
                         // Store the image as a Photo object
-                        Photo photo = new Photo(bitmap);
+                        Photo photo = new Photo();
+                        File photoFile = photo.savePhotoToGallery(context);
+
+
+                        // Set photoUri
+//                        photo.setPhotoUri(imageUri);
                         ByteArrayOutputStream stream = new ByteArrayOutputStream();
                         bitmap.compress(Bitmap.CompressFormat.JPEG, 100, stream);
                         photoByteArray = stream.toByteArray();

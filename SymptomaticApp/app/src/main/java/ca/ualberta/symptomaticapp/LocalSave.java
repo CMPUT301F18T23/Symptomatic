@@ -31,12 +31,12 @@ public final class LocalSave {
      * creates a temporary cache file
      * @return void
      */
-    public FileOutputStream createTempCacheFile(String fileName) throws IOException{
+    public FileOutputStream createTempCacheFile(String fileName, String objectToSave) throws IOException{
         // Create a temporary file in the cache
         // The app should be offline
 
         // Make a folder in cache called 'Offline' if it doesn't exist
-        File offlineFolder = new File(LocalSave.this.context.getCacheDir().getAbsolutePath() + File.separator + "Offline");
+        File offlineFolder = new File(LocalSave.this.context.getCacheDir().getAbsolutePath() + File.separator + "Offline" + File.separator + objectToSave);
         if (!(offlineFolder.exists())) {
             offlineFolder.mkdirs();
         }

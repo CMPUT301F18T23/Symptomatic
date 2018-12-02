@@ -168,8 +168,8 @@ public class AddProblemActivity extends AppCompatActivity {
                 // Create filename
                 String fileName = "SymptomaticProblem" + timestampStr;
 //
-                // Create and write the file   to cache
-                FileOutputStream offlineFile = localSaveProblem.createTempCacheFile(fileName);
+                // Create and write the file to cache
+                FileOutputStream offlineFile = localSaveProblem.createTempCacheFile(fileName, "Problem");
 //                Log.d("Save location", AddProblemActivity.this.getFilesDir().getAbsolutePath());
                 localSaveProblem.writeToCacheFile(offlineFile, newProblem);
 
