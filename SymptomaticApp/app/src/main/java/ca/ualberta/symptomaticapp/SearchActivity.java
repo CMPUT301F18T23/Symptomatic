@@ -41,6 +41,7 @@ public class SearchActivity extends AppCompatActivity {
     private RadioButton keywordButton, geoButton, bodyButton;
 
     private ProblemList problemList;
+    private Problem currProb;
     private ArrayList<Problem> problemArrayList;
 
 
@@ -48,6 +49,8 @@ public class SearchActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
+
+
 
         //initialize a toolbar
         Toolbar toolbar = findViewById(R.id.search_toolbar);
@@ -60,6 +63,10 @@ public class SearchActivity extends AppCompatActivity {
         bodyButton = findViewById(R.id.bodyRadio);
 
         problemList = new ProblemList();
+
+        if(Login.thisUser != null) {
+            getProblems(Login.thisUser.returnUsername());
+        }
 
         // Get km
         final EditText distanceEditText = findViewById(R.id.distanceEditText);
@@ -80,6 +87,7 @@ public class SearchActivity extends AppCompatActivity {
         searchProblems.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Toast.makeText(SearchActivity.this, problemArrayList.size(), Toast.LENGTH_SHORT).show();
                 if( keywordButton.isChecked()){
                     Toast.makeText(SearchActivity.this, "keybutton", Toast.LENGTH_SHORT).show();
 
@@ -99,7 +107,7 @@ public class SearchActivity extends AppCompatActivity {
                         noDistanceDialog.show();
 
                     } else{
-                    geoSearch();
+                    //geoSearch();
                     }
 
 
@@ -132,21 +140,13 @@ public class SearchActivity extends AppCompatActivity {
 
     }
 
-    public void geoSearch(){
-
-        // get keywords
-        EditText keywordEditText = findViewById(R.id.keywordEditText);
-        keywords = keywordEditText.getText().toString();
-
-        // get distance
-        final EditText distanceEditText = findViewById(R.id.distanceEditText);
-        distance = distanceEditText.getText().toString();
-
-
+    public void geoSearch(String username){
 
     }
 
+
     private void getProblems(String username){
+        final ArrayList<Problem> foundRecords = new ArrayList<Problem>();
         FirebaseFirestore db = FirebaseFirestore.getInstance();
 
         CollectionReference problems = db.collection("problems");
@@ -162,10 +162,46 @@ public class SearchActivity extends AppCompatActivity {
                         Problem problem = document.toObject(Problem.class);
                         problem.updateRecords();
                         problemList.addProblem(problem);
+                        foundRecords.add(problem);
+
                     }
+
                 }
+                for (int i = 0; i < foundRecords.size(); i++) {
+                    currProb = foundRecords.get(i);
+                    problemArrayList.add(currProb);
+
+                }
+
             }
         });
     }
+
+
+
+
+
+    private double distance(double lat1, double lon1, double lat2, double lon2) {
+        double theta = lon1 - lon2;
+        double dist = Math.sin(deg2rad(lat1))
+                * Math.sin(deg2rad(lat2))
+                + Math.cos(deg2rad(lat1))
+                * Math.cos(deg2rad(lat2))
+                * Math.cos(deg2rad(theta));
+        dist = Math.acos(dist);
+        dist = rad2deg(dist);
+        dist = dist * 60 * 1.1515;
+        return (dist);
+    }
+
+    private double deg2rad(double deg) {
+        return (deg * Math.PI / 180.0);
+    }
+
+    private double rad2deg(double rad) {
+        return (rad * 180.0 / Math.PI);
+    }
+
+
 
 }
