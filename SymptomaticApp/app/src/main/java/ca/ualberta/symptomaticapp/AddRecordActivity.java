@@ -239,6 +239,7 @@ public class AddRecordActivity extends AppCompatActivity {
                     File photoFile = localSaveRecord.savePhotoToGallery(context);
                     Uri photoUri = Uri.parse(photoFile.getPath());
                     mCurrentPhotoUri = photoUri;
+                    takePictureIntent.setData(mCurrentPhotoUri);
                     takePictureIntent.putExtra(android.provider.MediaStore.EXTRA_OUTPUT, photoUri);
                 } catch (IOException e) {
                     e.printStackTrace();
@@ -419,13 +420,14 @@ public class AddRecordActivity extends AppCompatActivity {
 
                         // Convert the photo captured into a bitmap
 //                        Bitmap bitmap = (Bitmap) data.getExtras().get("data");
-//                        Uri selectedImage = data.getData();
+                        Uri selectedImage = data.getData();
 //                        Uri selectedImage = Uri.fromFile(new File(data.getData()));
-//                        Bitmap bitmap = MediaStore.Images.Media.getBitmap(context.getContentResolver(), mCurrentPhotoUri);
+                        Bitmap bitmap = MediaStore.Images.Media.getBitmap(context.getContentResolver(), mCurrentPhotoUri);
 
 
                         // Store the image as a Photo object
                         Photo photo = new Photo();
+
 
 ////                        Bundle extra = data.getExtras();
 //                        Bitmap bitmap =(Bitmap)extra.get("data");
