@@ -14,6 +14,7 @@
  */
 package ca.ualberta.symptomaticapp;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 
@@ -21,7 +22,7 @@ import java.util.ArrayList;
  *  A list of photo that gets created when adding records.
  */
 
-public class PhotoList {
+public class PhotoList implements Serializable {
     protected ArrayList<Photo> photoList;
 
     /**

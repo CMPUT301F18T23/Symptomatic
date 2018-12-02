@@ -18,11 +18,7 @@ package ca.ualberta.symptomaticapp;
 
 
 
-import android.support.annotation.NonNull;
-
 import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
@@ -41,10 +37,7 @@ public class Record implements Serializable {
 
     protected ArrayList<String> bodyLocation;
 
-    //protected PhotoList photoList;
-
-    protected ArrayList<Photo> photoList;
-
+    protected PhotoList photoList;
 
     protected Date recordDate;
 
@@ -64,14 +57,12 @@ public class Record implements Serializable {
       this.bodyLocation = null;
       this.recordComment = null;
       this.geolocation = null;
+      this.photoList = new PhotoList();
 
-      //this.photoList = new PhotoList();
-
-      this.photoList = new ArrayList<Photo>();
     }
 
     public Record(){
-//        this.photoList = new PhotoList();
+        this.photoList = new PhotoList();
     }
 
     /**
@@ -158,40 +149,17 @@ public class Record implements Serializable {
      * @param photos
      */
 
-  //  public void setPhotoList(ArrayList<Photo> photos) {
-    //    this.photoList.setPhotos(photos);
-   // }
-
-    /**
-     * gets the photos of a record
-     * @return record photos
-     */
-   // public ArrayList<Photo> getPhotoList() {
-     //   return this.photoList.getPhotos();
-   // }
-
-    /**
-     * removes the photo of a record
-     */
-  //  public void removePhoto(Photo photo) {
-    //    this.photoList.deletePhoto(photo);
-   // }
-
-  //  public void pushPhoto(Photo photo){
-    //    this.photoList.addPhoto(photo);
-    //}
-
-//    public void setPhotoList(ArrayList<Photo> photos) {
-//        this.photoList.setPhotos(photos);
-//    }
+    public void setPhotoList(ArrayList<Photo> photos) {
+        this.photoList.setPhotos(photos);
+    }
 //
 //    /**
 //     * gets the photos of a record
 //     * @return record photos
 //     */
-//    public ArrayList<Photo> getPhotoList() {
-//        return this.photoList.getPhotos();
-//    }
+    public ArrayList<Photo> getPhotoList() {
+        return this.photoList.getPhotos();
+    }
 //
 //    /**
 //     * removes the photo of a record
