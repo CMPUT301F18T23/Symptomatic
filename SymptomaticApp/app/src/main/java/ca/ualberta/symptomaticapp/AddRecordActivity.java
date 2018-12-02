@@ -237,15 +237,6 @@ public class AddRecordActivity extends AppCompatActivity {
                 // Start the intent to take the photo
                 Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
 
-//                try {
-//                    File photoFile = localSaveRecord.savePhotoToGallery(context);
-//                    Uri photoUri = Uri.parse(photoFile.getPath());
-//                    mCurrentPhotoUri = photoUri;
-//                    takePictureIntent.setData(mCurrentPhotoUri);
-//                    takePictureIntent.putExtra(android.provider.MediaStore.EXTRA_OUTPUT, photoUri);
-//                } catch (IOException e) {
-//                    e.printStackTrace();
-//                }
                 if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
                     // Create a file to store the image
                     File photoFile = null;
@@ -440,42 +431,10 @@ public class AddRecordActivity extends AppCompatActivity {
                         // Reference: https://stackoverflow.com/questions/42516126/fileprovider-illegalargumentexception-failed-to-find-configured-root
                         bmp = BitmapFactory.decodeFile(mCurrentPhotoPath);
 
-//                        Log.d("Photo Path", mCurrentPhotoPath);
-                        // Convert the photo captured into a bitmap
-//                        Bitmap bmp = (Bitmap) data.getExtras().get("data");
-//                        Uri selectedImage = data.getData();
-//                        Uri selectedImage = Uri.fromFile(new File(data.getData()));
-//                        Bitmap bitmap = MediaStore.Images.Media.getBitmap(context.getContentResolver(), mCurrentPhotoUri);
-
-
                         // Store the image as a Photo object
                         Photo photo = new Photo();
                         photo.setPhotoBitmap(bmp);
 
-
-////                        Bundle extra = data.getExtras();
-//                        Bitmap bitmap =(Bitmap)extra.get("data");
-
-                        // Save the photo to cache/Gallery
-//                        File photoFile = photo.savePhotoToGallery(context);
-
-                        // Get uri from the photoFile
-//                        Uri photoUri = Uri.fromFile(photoFile);
-//                        Uri selectedImage = data.getData();
-//                    Bitmap bitmap = null;
-//                    try {
-//                        Bitmap bitmap = MediaStore.Images.Media.getBitmap(context.getContentResolver(), mCurrentPhotoUri);
-//                    } catch (IOException e) {
-//                        e.printStackTrace();
-//                    }
-
-
-//                    photo.setPhotoBitmap(bitmap);
-
-//                        imageView.setImageBitmap(thumbImage);
-
-                        // Set photoUri
-//                        photo.setPhotoUri(imageUri);
                         ByteArrayOutputStream stream = new ByteArrayOutputStream();
                         bmp.compress(Bitmap.CompressFormat.JPEG, 100, stream);
                         photoByteArray = stream.toByteArray();
