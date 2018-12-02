@@ -13,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ImageButton;
 import android.widget.ListAdapter;
 import android.widget.ListView;
@@ -28,7 +29,7 @@ public class ViewFullRecordActivity extends AppCompatActivity {
 
     Record record;
     ArrayList<Photo> displayPhotos;
-    PhotoListViewAdapter2 photoListViewAdapter2;
+//    PhotoListViewAdapter2 photoListViewAdapter2;
     ListView photoListView;
 
 
@@ -51,6 +52,7 @@ public class ViewFullRecordActivity extends AppCompatActivity {
        // displayPhotos = record.getPhotoList();
         //initPhotoListView();
         //setListViewHeightBasedOnChildren(photoListView);
+
 
         photoListView = findViewById(R.id.fullRPhotoListView);
 //        displayPhotos = record.getPhotoList();
@@ -104,6 +106,14 @@ public class ViewFullRecordActivity extends AppCompatActivity {
             }
         });
 
+        Button slideShow = findViewById(R.id.slideShowMode);
+        slideShow.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(ViewFullRecordActivity.this, SlideShowModeActivity.class);
+                intent.putExtra("record", record);
+                startActivity(intent);
+              
         // view body location related
         viewBackBodyPart = findViewById(R.id.viewBackBodyPart);
         viewFrontBodyPart = findViewById(R.id.viewFrontBodyPart);
@@ -118,7 +128,7 @@ public class ViewFullRecordActivity extends AppCompatActivity {
         viewFrontBodyPart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                frontBodyPartDialog();
+                frontBodyPartDialog(
             }
         });
 
