@@ -127,7 +127,7 @@ public class CViewProblems extends AppCompatActivity {
         //get db instance
         FirebaseFirestore db = FirebaseFirestore.getInstance();
 
-        CollectionReference problems = db.collection("problems"); //looking at problems
+        final CollectionReference problems = db.collection("problems"); //looking at problems
 
         Query problemsQuery = problems.whereEqualTo("user",username); //look at problems associated with given username
 

@@ -17,6 +17,7 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -36,22 +37,27 @@ public class CViewRecords extends AppCompatActivity {
     private Integer passedprob;
     private TextView numrecords; //textview for displaying the number of records
     private ArrayList<Problem> problemlist; //list for holding the problems of current patient
-    private ArrayList<Record> recordList; //list for holding records of current problem
+    private RecordList recordList; //list for holding records of current problem
     private ArrayList<String> problemtitles;
+    private ArrayAdapter<String> problemadapter;
+    private RecordListViewAdapter recordadapter;
+    FirebaseFirestore db;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cview_records);
+        db= FirebaseFirestore.getInstance();
         //get data given to us through intent
         Intent intent = getIntent();
-        passeduser = intent.getExtras().getString("username");
         passedprob = intent.getExtras().getInt("problem");
+        passeduser = intent.getExtras().getString("username");
+
 
         //declare empty lists
         problemtitles = new ArrayList<String>();
         problemlist = new ArrayList<Problem>();
-        recordList = new ArrayList<Record>();
-        //fill problem list with the passeduser's problems
+        recordList = new RecordList();
+        //fill problem list with the passeduser's problem
         getProblems(passeduser);
 
         for(Problem problem: problemlist){
@@ -74,50 +80,44 @@ public class CViewRecords extends AppCompatActivity {
 
         //setup adapters and assign them
         ArrayAdapter<String> patientadapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, patients);
-        final ArrayAdapter<String> problemadapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, problemtitles);
+        problemadapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, problemtitles);
         patientadapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         selectpatient.setAdapter(patientadapter);
         problemadapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         selectproblem.setAdapter(problemadapter);
-
+        selectpatient.setSelection(patients.indexOf(passeduser));
+        selectproblem.setSelection(passedprob);
+        problemadapter.notifyDataSetChanged();
 
         //POPULATE LISTVIEW USING THE SELECTED PROBLEM
-        ArrayList<String> recordtitles = new ArrayList<String>();
-        for(Record record: recordList){
-            recordtitles.add(record.getTitle());
-        }
-        ArrayAdapter<String> recordadapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, recordtitles);
+        recordadapter = new RecordListViewAdapter(recordList.getRecords(),this);
+        //getRecords(problemlist.get(1), passeduser);
         recordview.setAdapter(recordadapter);
 
         viewpatient.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 // take current selected patient and populate list view using their problems
-                viewproblem.setEnabled(true); //allow view contact info to be able to be pressed
-                passeduser = selectpatient.getSelectedItem().toString(); //get current selection
-
                 // GET PROBLEMS OF SELECTED USER HERE USING THE SELECTED INDEX
-                getProblems(passeduser);
-                // POPULATE THE SPINNER FOR PROBLEMS USING ABOVE
+                problemlist.clear();
                 problemtitles.clear();
-                for(Problem problem: problemlist){
-                    problemtitles.add(problem.getTitle());
-                }
+                getProblems(selectpatient.getItemAtPosition(selectpatient.getSelectedItemPosition()).toString());
+                // POPULATE THE SPINNER FOR PROBLEMS USING ABOVE
                 problemadapter.notifyDataSetChanged();
-
             }
         });
 
         viewproblem.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 // take current selected problem and show records related to it
-                String selection = selectproblem.getSelectedItem().toString(); //get current selection
+
+                //getRecords(selectproblem.getItemAtPosition(selectproblem.getSelectedItemPosition()).toString(),selectpatient.getItemAtPosition(selectpatient.getSelectedItemPosition()).toString()); //get current selection
             }
         });
 
         viewcontactinfo.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Intent intent = new Intent(CViewRecords.this, ViewContactInfo.class);
-                intent.putExtra("username", passeduser);
+                intent.putExtra("username", selectpatient.getItemAtPosition(selectpatient.getSelectedItemPosition()).toString());
                 intent.putExtra("usertype", "user");
                 startActivity(intent); //open view contact info using the correct information
             }
@@ -125,7 +125,6 @@ public class CViewRecords extends AppCompatActivity {
     }
 
     private void getProblems(String username){
-        FirebaseFirestore db = FirebaseFirestore.getInstance(); //get db instance
         //looking at problems
         CollectionReference problems = db.collection("problems");
         //query for appropriate problems related to username
@@ -136,20 +135,28 @@ public class CViewRecords extends AppCompatActivity {
                 if(task.isSuccessful()){ //query has a result
                     for(QueryDocumentSnapshot document: task.getResult()){
                         Problem problem = document.toObject(Problem.class); //convert all found problems to problem objects
-                        problemlist.add(problem); //get all problems into our problemList
+                        problemtitles.add(problem.getTitle()); //get all problems into our problemList
                     }
-                    if (problemlist != null) { //placeholder
-                        numrecords.setText("Number of active records: 0");
-                    }
-                } else {
-                    AlertDialog.Builder badUsernameDialog = new AlertDialog.Builder(CViewRecords.this);
-                    badUsernameDialog.setMessage("Data Load Error");
-                    badUsernameDialog.show();
                 }
             }
         });
-        for(Problem problem: problemlist){
-            problem.updateRecords();
-        }
+    }
+    //doesnt wor due to multiple access
+    private void getRecords(String problem, String username){
+        final CollectionReference records = db.collection("records");
+        Query recordsQuery = records.whereEqualTo("problem",problem).whereEqualTo("user",username);
+        recordsQuery.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                if(task.isSuccessful()){
+                    for(QueryDocumentSnapshot document: task.getResult()){
+                        recordList.addRecord(document.toObject(Record.class));
+                    }
+                }
+                recordadapter.notifyDataSetChanged();
+            }
+        });
     }
 }
+
+
