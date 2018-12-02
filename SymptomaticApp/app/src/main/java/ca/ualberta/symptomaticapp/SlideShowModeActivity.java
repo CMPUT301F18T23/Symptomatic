@@ -57,7 +57,8 @@ public class SlideShowModeActivity extends AppCompatActivity implements View.OnC
 
     private boolean isEmpty() {
         if (displayList.size() == 0) {
-            description.setText("No Photos");
+            String text = "NO PHOTOS";
+            description.setText(text);
             return true;
         }
         return false;
