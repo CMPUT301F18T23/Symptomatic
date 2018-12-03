@@ -37,16 +37,11 @@ import java.util.List;
 
 public class CViewRecords extends AppCompatActivity {
     private String passeduser; //for holding the passed data
-    private String passedprob;
+    private Problem passedprob;
     private TextView numrecords; //textview for displaying the number of records
-    private ArrayList<Problem> problemlist; //list for holding the problems of current patient
-    private ArrayList<String> problemtitles;
-    private ArrayAdapter<Problem> problemadapter;
     private CRecordAdapter recordadapter;
     private ArrayList<String> recordtitles = new ArrayList<String>();
-
     final ArrayList<Record> records = new ArrayList<>();
-
     FirebaseFirestore db;
 
     @Override
@@ -56,93 +51,47 @@ public class CViewRecords extends AppCompatActivity {
 
         //get data given to us through intent
         Intent intent = getIntent();
-        passedprob = intent.getExtras().getString("problem");
+        passedprob = (Problem)getIntent().getSerializableExtra("problem");
         passeduser = intent.getExtras().getString("username");
-
-
         //declare empty lists
-        problemtitles = new ArrayList<String>();
-        problemlist = new ArrayList<Problem>();
         //fill problem list with the passeduser's problem
-        getProblems(passeduser,passedprob);
+        getProblems(passeduser,passedprob.getTitle());
 
-        for (Problem problem : problemlist) {
-            problemtitles.add(problem.getTitle()); //get the problems titles into a separate list for the spinner
-        }
 
         // get all ui elements
         numrecords = (TextView) findViewById(R.id.tv_numprob);
-        final Spinner selectpatient = (Spinner) findViewById(R.id.sp_Patient);
-        final Spinner selectproblem = (Spinner) findViewById(R.id.sp_Problems);
-        final Button viewproblem = (Button) findViewById(R.id.btn_ViewProblems);
-        Button viewpatient = (Button) findViewById(R.id.btn_ViewPatient);
-        Button viewgeolocations = (Button) findViewById(R.id.btn_ViewPhotos);
+        numrecords.setText("Number of records: " + records.size());
+        Button viewgeolocations = (Button) findViewById(R.id.btn_ViewGeos);
         Button viewcontactinfo = (Button) findViewById(R.id.btn_ViewContactInfo);
         ListView recordview = (ListView) findViewById(R.id.lv_records);
+
+        TextView tvusername = (TextView) findViewById(R.id.tv_username);
+        TextView tvproblem = (TextView) findViewById(R.id.tv_problem);
         //
+
+        tvusername.setText(passeduser);
+        tvproblem.setText(passedprob.getTitle());
 
         Caregiver caregiver = Login.thisCaregiver; //get current logged in caregiver
         final ArrayList<String> patients = caregiver.getPatients(); //get their patients.
-
-        //setup adapters and assign them
-        ArrayAdapter<String> patientadapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, patients);
-        problemadapter = new ArrayAdapter<Problem>(this, android.R.layout.simple_spinner_item, problemlist);
-        patientadapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        selectpatient.setAdapter(patientadapter);
-        problemadapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        selectproblem.setAdapter(problemadapter);
-        selectpatient.setSelection(patients.indexOf(passeduser));
-        selectproblem.setSelection(problemlist.indexOf(passedprob));
-        problemadapter.notifyDataSetChanged();
 
         //POPULATE LISTVIEW USING THE SELECTED PROBLEM
         recordadapter = new CRecordAdapter(records, this);
 
         recordview.setAdapter(recordadapter);
 
-        viewpatient.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                // take current selected patient and populate list view using their problems
-                // GET PROBLEMS OF SELECTED USER HERE USING THE SELECTED INDEX
-                problemlist.clear();
-                problemtitles.clear();
-                records.clear();
-                String selectedproblem = selectproblem.getItemAtPosition(selectproblem.getSelectedItemPosition()).toString();
-                selectedproblem = selectedproblem.substring(0, selectedproblem.indexOf('\n'));
-                String selectedpatient = selectpatient.getItemAtPosition(selectpatient.getSelectedItemPosition()).toString();
-                getProblems(selectpatient.getItemAtPosition(selectpatient.getSelectedItemPosition()).toString(), selectproblem.getItemAtPosition(selectproblem.getSelectedItemPosition()).toString());
-                // POPULATE THE SPINNER FOR PROBLEMS USING ABOVE
-                problemadapter.notifyDataSetChanged();
-                recordadapter.notifyDataSetChanged();
-            }
-        });
-
-        viewproblem.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                // take current selected problem and show records related to it
-                problemlist.clear();
-                problemtitles.clear();
-                records.clear();
-                String selectedproblem = selectproblem.getItemAtPosition(selectproblem.getSelectedItemPosition()).toString();
-                selectedproblem = selectedproblem.substring(0, selectedproblem.indexOf('\n'));
-                String selectedpatient =selectpatient.getItemAtPosition(selectpatient.getSelectedItemPosition()).toString();
-                getProblems(selectedpatient, selectedproblem); //get current selection
-                recordadapter.notifyDataSetChanged();
-            }
-        });
-
         viewcontactinfo.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Intent intent = new Intent(CViewRecords.this, ViewContactInfo.class);
-                intent.putExtra("username", selectpatient.getItemAtPosition(selectpatient.getSelectedItemPosition()).toString());
+                intent.putExtra("username", passeduser);
                 intent.putExtra("usertype", "user");
                 startActivity(intent); //open view contact info using the correct information
             }
         });
         viewgeolocations.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Intent intent = new Intent(CViewRecords.this, MapOfRecordsActivity.class);
-                intent.putExtra("problem", problemlist.get(0));
+                Intent intent = new Intent(CViewRecords.this, CMapOfRecords.class);
+                intent.putExtra("problem", passedprob);
                 startActivity(intent); //open view contact info using the correct information
             }
         });
@@ -150,30 +99,18 @@ public class CViewRecords extends AppCompatActivity {
     private void getProblems(final String username, final String prob) {
         //looking at problems
         db = FirebaseFirestore.getInstance();
-        CollectionReference problems = db.collection("problems");
+        CollectionReference problems = db.collection("records");
         //query for appropriate problems related to username
-        Query problemsQuery = problems.whereEqualTo("user", username);
+        Query problemsQuery = problems.whereEqualTo("user", username).whereEqualTo("problem",prob);
         problemsQuery.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
                 if (task.isSuccessful()) { //query has a result
                     for (QueryDocumentSnapshot document : task.getResult()) {
-                        Problem problem = document.toObject(Problem.class); //convert all found problems to problem objects
-                        problemlist.add(problem);
-                        problemadapter.notifyDataSetChanged();
-                        CollectionReference recordscol = db.collection("records");
-                        Query recordsQuery = recordscol.whereEqualTo("problem",prob).whereEqualTo("user",username);
-                        recordsQuery.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                            @Override
-                            public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                                for (QueryDocumentSnapshot document: task.getResult()) {
-                                    Record record = document.toObject(Record.class);
-                                    records.add(record);
-                                    recordtitles.add(record.getTitle());
-                                    recordadapter.notifyDataSetChanged();
-                                }
-                            }
-                        });
+                        Record record = document.toObject(Record.class);
+                        records.add(record);
+                        recordtitles.add(record.getTitle());
+                        recordadapter.notifyDataSetChanged();
                     }
                 }
             }

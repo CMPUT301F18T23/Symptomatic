@@ -10,6 +10,7 @@
 
         <menu>
 
+
             <item android:id="@+id/action_viewPatients"
                 android:title="@string/view_patients"
                 android:onClick="viewViewPatients"
