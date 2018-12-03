@@ -178,7 +178,8 @@ public class ListRecordsActivity extends AppCompatActivity {
                 if(task.isSuccessful()){
                     int x = 0;
                     for(QueryDocumentSnapshot document: task.getResult()){
-                        thisRecordList.addRecord(document.toObject(Record.class));
+                        Record newRecord = document.toObject(Record.class);
+                        thisRecordList.addRecord(newRecord);
                     }
                 }
                 recordListViewAdapter.notifyDataSetChanged();
