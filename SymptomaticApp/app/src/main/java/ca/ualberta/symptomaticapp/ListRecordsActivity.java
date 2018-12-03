@@ -100,7 +100,9 @@ public class ListRecordsActivity extends AppCompatActivity {
     @Override
     protected void onPause(){
         super.onPause();
-        getRecords();
+        if(Login.thisUser != null) {
+            getRecords();
+        }
     }
     @Override
     protected void onStart(){
