@@ -155,13 +155,6 @@ public class ListProblemsActivity extends AppCompatActivity {
                     active_problem_count = "Number of active problems:"+" " + ListProblemsActivity.thisProbList.getSize();
                     textView.setText(active_problem_count);
                     listAdapter.notifyDataSetChanged();
-<<<<<<< HEAD
-                } else {
-                    AlertDialog.Builder badUsernameDialog = new AlertDialog.Builder(ListProblemsActivity.this);
-                    badUsernameDialog.setMessage("Unable to load problem's list due to corruption.");
-                    badUsernameDialog.show();
-=======
->>>>>>> pineo
                 }
             }
         });
