@@ -71,7 +71,11 @@ public class ViewFullRecordActivity extends AppCompatActivity {
 
         // Insert the records time stamp
         TextView timeStampTextView = findViewById(R.id.InputDateTextView);
-        timeStampTextView.setText(record.recordDate.toString());
+        if(record.getTimeStamp()!=null) {
+            timeStampTextView.setText(record.getTimeStamp().toString());
+        } else {
+            timeStampTextView.setText("No Date Entered");
+        }
 
         // Insert the records comment
         TextView commentTextView = findViewById(R.id.addCommentTextView);

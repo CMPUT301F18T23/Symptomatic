@@ -111,11 +111,8 @@ public class ViewFullProblemActivity extends AppCompatActivity {
                 Intent intent = new Intent(ViewFullProblemActivity.this, ListRecordsActivity.class);
                 intent.putExtra("problem", problem);
                 startActivity(intent);
-
             }
         });
-
-
     }
 
     @Override
