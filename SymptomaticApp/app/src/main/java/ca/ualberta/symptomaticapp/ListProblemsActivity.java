@@ -77,7 +77,7 @@ public class ListProblemsActivity extends AppCompatActivity {
 
     }
 
-    @Override
+   /* @Override
     public void onResume(){
         super.onResume();
         if(Login.thisUser != null) {
@@ -89,7 +89,7 @@ public class ListProblemsActivity extends AppCompatActivity {
             listAdapter.notifyDataSetChanged();
 
         }
-    }
+    }*/
     @Override
     protected void onPause(){
         super.onPause();
