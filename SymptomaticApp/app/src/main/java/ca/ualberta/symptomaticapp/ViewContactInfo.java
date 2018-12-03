@@ -27,8 +27,8 @@ public class ViewContactInfo extends AppCompatActivity {
     private TextView phone;
     private String user;
     private String type;
-    User thisUser;
-    Caregiver thisCaregiver;
+    private User currentuser;
+    private Caregiver currentcaregiver;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,79 +37,71 @@ public class ViewContactInfo extends AppCompatActivity {
         user = intent.getExtras().getString("username");
         type = intent.getExtras().getString("usertype");
 
-
         // get all text views and buttons
         username = (TextView) findViewById(R.id.tv_User);
         email = (TextView) findViewById(R.id.tv_Email);
         phone = (TextView) findViewById(R.id.tv_Phone);
         Button goback = (Button) findViewById(R.id.btn_return);
         //
+
         getuserinfo(); //updates textviews by fetching user information
-
-
         goback.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 finish();
             }
         });
-
     }
     protected void getuserinfo(){
-//        FirebaseFirestore db = FirebaseFirestore.getInstance();
-//        CollectionReference active_users;
-//
-//        if(type == "user"){
-//            active_users = db.collection("users");
-//        }else{
-//            active_users = db.collection("caregivers");
-//        }
-//        Query query = active_users.whereEqualTo("username",user);
-//
-//        query.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-//            //If Query Worked on not
-//            @Override
-//            public void onComplete(@NonNull Task<QuerySnapshot> task) {
-//                if(task.isSuccessful()){
-//                    //Query Worked
-//                    if (task.getResult().size() == 1){
-//                        //A user with that username exists
-//                        for(QueryDocumentSnapshot document: task.getResult()){
-//                            if (type =="user") {
-//                                thisUser = document.toObject(User.class);
-//                                thisCaregiver = null;
-//                            } else {
-//                                thisCaregiver = document.toObject(Caregiver.class);
-//                                thisUser = null;
-//                            }
-//                        }
-//                    }else if (user.isEmpty()) {
-//                        //No users with that username exists
-//                        Toast.makeText(ViewContactInfo.this, "Username is null.", Toast.LENGTH_SHORT).show();
-//
-//                    }
-//                    else {
-//                        //No users with that username exists
-//                        Toast.makeText(ViewContactInfo.this, "User Does Not Exist.", Toast.LENGTH_SHORT).show();
-//                    }
-//                } else {
-//                    //Query Did not Work
-//                    Toast.makeText(ViewContactInfo.this, "Load Error", Toast.LENGTH_SHORT).show();
-//                }
-//            }
-//        });
-//
-//
-//        //set textview values using the retrieved user.
-//        if(thisCaregiver == null){ //contact is a patient
-//            username.setText("Username: " + thisUser.returnUsername());
-//            email.setText("E-mail: " + thisUser.returnEmail());
-//            phone.setText("Phone Number: " + thisUser.returnPhone());
-//        }else { //contact is a caregiver
-//            username.setText("Username: " + thisCaregiver.returnUsername());
-//            email.setText("E-mail: " + thisCaregiver.returnEmail());
-//            phone.setText("Phone Number: " + thisCaregiver.returnPhone());
-//        }
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        CollectionReference active_users;
+        if(type.equals("user")){
+            active_users = db.collection("users");
+        }else{
+            active_users = db.collection("caregivers");
+        }
+        Query query = active_users.whereEqualTo("username",user);
 
+        query.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            //If Query Worked on not
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                if(task.isSuccessful()){
+                    //Query Worked
+                    if (task.getResult().size() == 1){
+                        //A user with that username exists
+                        for(QueryDocumentSnapshot document: task.getResult()){
+                            if (type.equals("user")) {
+                                currentuser = document.toObject(User.class);
+                                currentcaregiver = null;
+                            } else {
+                                currentcaregiver = document.toObject(Caregiver.class);
+                                currentuser = null;
+                            }
+                            //set textview values using the retrieved user.
+                            if(currentcaregiver == null){ //contact is a patient
+                                username.setText("Username: " + currentuser.returnUsername());
+                                email.setText("E-mail: " + currentuser.returnEmail());
+                                phone.setText("Phone Number: " + currentuser.returnPhone());
+                            }else { //contact is a caregiver
+                                username.setText("Username: " + currentcaregiver.returnUsername());
+                                email.setText("E-mail: " + currentcaregiver.returnEmail());
+                                phone.setText("Phone Number: " + currentcaregiver.returnPhone());
+                            }
+                        }
+                    }else if (user.isEmpty()) {
+                        //No users with that username exists
+                        Toast.makeText(ViewContactInfo.this, "Username is null.", Toast.LENGTH_SHORT).show();
+                    }
+                    else {
+                        //No users with that username exists
+                        Toast.makeText(ViewContactInfo.this, "User Does Not Exist.", Toast.LENGTH_SHORT).show();
+                    }
+                } else {
+                    //Query Did not Work
+                    Toast.makeText(ViewContactInfo.this, "Load Error", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
     }
 }
