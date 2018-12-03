@@ -74,7 +74,7 @@ public class ListProblemsActivity extends AppCompatActivity {
         if(Login.thisUser != null) {
             getProblems(Login.thisUser.returnUsername());
         }
-        
+
     }
 
     @Override

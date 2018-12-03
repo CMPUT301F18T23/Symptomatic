@@ -172,9 +172,8 @@ public class AddProblemActivity extends AppCompatActivity {
             Problem newProblem = new Problem(title, cal.getTime(), description);
             Context context = this;
             newProblem.addProbToDb();
-            finish();
-            //Intent intent = new Intent(AddProblemActivity.this, ListProblemsActivity.class);
-            //startActivity(intent);
+            Intent intent = new Intent(AddProblemActivity.this, ListProblemsActivity.class);
+            startActivity(intent);
         }
     }
 
