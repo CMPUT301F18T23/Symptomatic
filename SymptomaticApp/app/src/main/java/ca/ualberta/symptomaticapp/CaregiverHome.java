@@ -64,6 +64,7 @@ public class CaregiverHome extends AppCompatActivity {
         inflater.inflate(R.menu.caregiver_home_menu, menu);
         return true;
     }
+
     public void viewViewPatients(MenuItem menu) { //open viewpatients activity
         Intent intent = new Intent(CaregiverHome.this, ViewPatients.class);
         startActivity(intent);

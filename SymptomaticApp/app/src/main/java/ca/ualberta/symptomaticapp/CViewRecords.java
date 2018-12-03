@@ -11,7 +11,11 @@ import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -48,6 +52,9 @@ public class CViewRecords extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cview_records);
+        Toolbar toolbar = findViewById(R.id.CViewRecords_toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle("View Records");
 
         //get data given to us through intent
         Intent intent = getIntent();
@@ -116,5 +123,39 @@ public class CViewRecords extends AppCompatActivity {
                 }
             }
         });
+    }
+
+    //toolbar functions
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.caregiver_general_menu, menu);
+        return true;
+    }
+    public void viewHome(MenuItem menu) {
+        Intent intent = new Intent(CViewRecords.this, CaregiverHome.class);
+        startActivity(intent);
+    }
+    public void viewViewPatients(MenuItem menu) { //open viewpatients activity
+        Intent intent = new Intent(CViewRecords.this, ViewPatients.class);
+        startActivity(intent);
+    }
+
+    public void viewAddPatients(MenuItem menu) { //open add patients activity
+        Intent intent = new Intent(CViewRecords.this, AddPatientActivity.class);
+        startActivity(intent);
+    }
+
+    public void viewViewQR(MenuItem menu) {
+        //adds the view problems button to the menu
+        Intent intent = new Intent(CViewRecords.this, CaregiverViewQRCode.class);
+        startActivity(intent);
+    }
+
+    public void viewLogout(MenuItem menu){ //log current caregiver out and open login page
+        Login.thisCaregiver = null;
+        Login.thisUser = null;
+        Intent intent = new Intent(CViewRecords.this, MainActivity.class);
+        startActivity(intent);
     }
 }
