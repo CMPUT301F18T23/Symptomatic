@@ -176,7 +176,7 @@ public class ViewFullRecordActivity extends AppCompatActivity {
 
     }
 
-
+    //Resource: https://medium.com/@skidanolegs/listview-inside-scrollview-solve-the-problem-a06fdff2a4e0
     public static void setListViewHeightBasedOnChildren(ListView listView) {
         ListAdapter listAdapter = listView.getAdapter();
         if (listAdapter == null) return;
