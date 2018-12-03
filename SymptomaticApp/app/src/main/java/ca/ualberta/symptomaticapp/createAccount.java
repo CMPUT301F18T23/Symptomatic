@@ -88,14 +88,7 @@ public class createAccount extends AppCompatActivity implements View.OnClickList
                     if (caregiverButton.isChecked()){
                         active_users = db.collection("caregivers");
                     } else {
-<<<<<<< HEAD
                         active_users = db.collection("users");
-=======
-                        Caregiver newCaregiver = Caregiver.createNewCaregiver(username.getText().toString(), phone.getText().toString(), email.getText().toString());
-                        Login.thisUser = null;
-                        Login.thisCaregiver = newCaregiver;
-                        next_activity = new Intent(createAccount.this, CaregiverHome.class);
->>>>>>> c511ae3a5ebefb64bb3d63603d53cf077411b89c
                     }
 
                     //Build the query
