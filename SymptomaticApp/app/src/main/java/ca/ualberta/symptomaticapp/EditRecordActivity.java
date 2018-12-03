@@ -93,6 +93,9 @@ public class EditRecordActivity extends AppCompatActivity {
 
         record = (Record) getIntent().getSerializableExtra("record");
 
+        // get geolocation
+        newGeolocationString = record.geolocation;
+
         cal = Calendar.getInstance();
         cal.setTime(record.recordDate);
 
@@ -438,7 +441,7 @@ public class EditRecordActivity extends AppCompatActivity {
                         //update problem to new information
                         String recordDocId = document.getId();
                         DocumentReference thisDocument = db.collection("records").document(recordDocId);
-                        thisDocument.update("recordTitle",titleEditText.getText().toString(),"recordComment",commentEditText.getText().toString());
+                        thisDocument.update("recordTitle",titleEditText.getText().toString(),"recordComment",commentEditText.getText().toString(),"bodyLocation",thisDialog.returnPartsSelected(),"geolocation",newGeolocationString/*,"photoList",<insert photo list object here>*/);
                     }
                 }
                 finish();
