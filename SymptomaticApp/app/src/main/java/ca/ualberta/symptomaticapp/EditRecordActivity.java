@@ -47,6 +47,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 public class EditRecordActivity extends AppCompatActivity {
 
@@ -452,13 +454,23 @@ public class EditRecordActivity extends AppCompatActivity {
         recordsQuery.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
-//                photoList.setPhotos(displayPhotos);
+                Map<String, Object> dataMap = new HashMap();
+                ArrayList<Map<String,Object>> transferPhotos =new ArrayList<>();
+                for (Photo photo: displayPhotos) {
+                    Map<String,Object> photos =new HashMap<>();
+                    photos.put("stringPhoto",photo.getPhotoString());
+                    photos.put("timestamp",photo.getTimestamp());
+                    transferPhotos.add(photos);
+                }
+                dataMap.put("photoList",transferPhotos);
+
                 if (task.isSuccessful()) {
                     for (QueryDocumentSnapshot document : task.getResult()) {
                         //update problem to new information
                         String recordDocId = document.getId();
                         DocumentReference thisDocument = db.collection("records").document(recordDocId);
-                        thisDocument.update("recordTitle",titleEditText.getText().toString(),"recordComment",commentEditText.getText().toString(),"bodyLocation",thisDialog.returnPartsSelected(),"geolocation",newGeolocationString,"recordDate",currentTime/*,"photoList",photoList*/);
+                        thisDocument.update("recordTitle",titleEditText.getText().toString(),"recordComment",commentEditText.getText().toString(),"bodyLocation",thisDialog.returnPartsSelected(),"geolocation",newGeolocationString,"recordDate",currentTime);
+                        thisDocument.update(dataMap);
                     }
                 }
                 finish();
