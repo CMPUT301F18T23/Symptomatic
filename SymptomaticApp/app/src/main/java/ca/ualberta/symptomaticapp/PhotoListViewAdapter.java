@@ -1,3 +1,20 @@
+/*
+ * PhotoListViewAdapter.java
+ *
+ * Version 1
+ *
+ * November, 26, 2018.
+ *
+ * This file is subject to the terms and conditions defined in
+ * file 'LICENSE', which is part of this source code package.
+ *
+ * Custom adapter that displays the photos within a record along with
+ * its timestamp and a delete button that removes the photo if clicked
+ *
+ * Issues:
+ *
+ */
+
 package ca.ualberta.symptomaticapp;
 
 import android.content.Context;
@@ -22,31 +39,42 @@ public class PhotoListViewAdapter extends ArrayAdapter<Photo> {
     private ArrayList<Photo> photoList;
     private Context context;
 
+    /**
+     * Constructor that initiates the listview
+     * @param photoList
+     * @param context
+     */
     public PhotoListViewAdapter(ArrayList<Photo> photoList, Context context) {
         super(context, R.layout.photos_listview, photoList);
         this.photoList = photoList;
         this.context = context;
     }
 
-
+    /**
+     * creates the custom photo adapter
+     * @param position
+     * @param convertView
+     * @param parent
+     * @return the custom view
+     */
     public View getView(final int position, View convertView, ViewGroup parent){
         View view = convertView;
 
         if (convertView == null) {
-            // This a new view we inflate the new layout
+            // Creates and inflates the new view
             LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             view = inflater.inflate(R.layout.photos_listview, null);
 
         }
 
 
-        // Now we can fill the layout with the right values
+        // Fill the view with the correct values
         TextView date = (TextView) view.findViewById(R.id.photoDate);
         ImageView img = (ImageView) view.findViewById(R.id.photoImage);
-//        System.out.println("Position ["+position+"]");
         Photo p = photoList.get(position);
         date.setText("" + p.getTimestamp());
 
+        // converts from the string representation of a photo to its bitmap
         String stringPhoto = p.getPhotoString();
         byte[] bytePhoto = Base64.decode(stringPhoto, Base64.DEFAULT);
         Bitmap photoBitmap = BitmapFactory.decodeByteArray(bytePhoto, 0, bytePhoto.length);
@@ -54,6 +82,7 @@ public class PhotoListViewAdapter extends ArrayAdapter<Photo> {
         img.setImageBitmap(photoBitmap);
 
 
+        // delete button that deletes the photo upon click
         Button deletePhoto = view.findViewById(R.id.photoDelete);
 
         deletePhoto.setOnClickListener(new View.OnClickListener() {

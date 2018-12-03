@@ -68,6 +68,10 @@ public class PhotoList implements Serializable {
         return photoList.size();
     }
 
+    /**
+     * sets the entire photolist
+     * @param photos
+     */
     public void setPhotos(ArrayList<Photo> photos) {
         this.photoList = photos;
     }
