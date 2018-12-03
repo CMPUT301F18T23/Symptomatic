@@ -32,7 +32,7 @@ public class RecordList implements Serializable {
      * Creates the instance of a record list object
      */
     public RecordList() {
-        recordList = new ArrayList<>();
+        this.recordList = new ArrayList<>();
     }
 
     /**

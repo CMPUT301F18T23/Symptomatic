@@ -169,7 +169,8 @@ public class ListRecordsActivity extends AppCompatActivity {
         db = FirebaseFirestore.getInstance();
 
         final CollectionReference records = db.collection("records");
-        thisRecordList.empty();
+        //thisRecordList.empty();
+
         Query recordsQuery = records.whereEqualTo("problem",problem.getTitle()).whereEqualTo("user",Login.thisUser.returnUsername());
         recordsQuery.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
