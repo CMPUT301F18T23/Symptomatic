@@ -132,6 +132,8 @@ public class Login extends AppCompatActivity implements View.OnClickListener{
                                 ListProblemsActivity.thisProbList.empty();
                                 ListProblemsActivity.getProblems(thisUser.returnUsername());
                                 ListProblemsActivity.listAdapter.notifyDataSetChanged();
+                            } else {
+                                ListProblemsActivity.thisProbList = new ProblemList();
                             }
                             startActivity(next_activity);
 

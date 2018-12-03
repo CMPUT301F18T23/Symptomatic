@@ -46,7 +46,7 @@ public class ListProblemsActivity extends AppCompatActivity {
 
     public static ListViewAdapter listAdapter;
 
-    private ListView listView;
+    private static ListView listView;
 
     private static String active_problem_count;
 
@@ -77,7 +77,7 @@ public class ListProblemsActivity extends AppCompatActivity {
 
     }
 
-   /* @Override
+    @Override
     public void onResume(){
         super.onResume();
         if(Login.thisUser != null) {
@@ -89,7 +89,7 @@ public class ListProblemsActivity extends AppCompatActivity {
             listAdapter.notifyDataSetChanged();
 
         }
-    }*/
+    }
     @Override
     protected void onPause(){
         super.onPause();
@@ -146,7 +146,7 @@ public class ListProblemsActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    private void initListView(){
+    public void initListView(){
         if(listAdapter == null){
             listAdapter = new ListViewAdapter(thisProbList.getProblems(), this);
         }
@@ -156,6 +156,7 @@ public class ListProblemsActivity extends AppCompatActivity {
 
 
     public static void getProblems(String username){
+
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         CollectionReference problems = db.collection("problems");
 
