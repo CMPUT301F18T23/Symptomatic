@@ -290,11 +290,11 @@ public class AddRecordActivity extends AppCompatActivity {
 
                 if (goodRecord) {
                     FirebaseFirestore db = FirebaseFirestore.getInstance();
-                    CollectionReference problems = db.collection("problems");
+                    CollectionReference records = db.collection("records");
 
-                    Query problemsQuery = problems.whereEqualTo("user",Login.thisUser.returnUsername()).whereEqualTo("problem",problem.getTitle()).whereEqualTo("recordTitle",currProbName);
+                    Query recordsQuery = records.whereEqualTo("user",Login.thisUser.returnUsername()).whereEqualTo("problem",problem.getTitle()).whereEqualTo("recordTitle",currProbName);
 
-                    problemsQuery.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    recordsQuery.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                         @Override
                         public void onComplete(@NonNull Task<QuerySnapshot> task) {
                             if(task.isSuccessful()){
@@ -321,9 +321,6 @@ public class AddRecordActivity extends AppCompatActivity {
                                     currRecord.setPhotoList(displayPhotos);
                                     currRecord.addGeolocation(geolocationString);
 
-                                    //so     currRecord.setPhotoList(displayPhotos);
-
-//                    Log.d("photos length", String.valueOf(displayPhotos.size()));
                                     currRecord.addRecToDb();
 
                                     // Switch back to the previous activity

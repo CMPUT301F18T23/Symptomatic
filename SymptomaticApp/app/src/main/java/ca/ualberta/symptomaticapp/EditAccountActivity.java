@@ -52,7 +52,7 @@ public class EditAccountActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("Profile");
 
-        Typeface otherFont = FontManager.getTypeface(getApplicationContext(), FontManager.BOLDFONTAWESOME);
+        Typeface otherFont = FontManager.getTypeface(getApplicationContext(), FontManager.SOLIDFONTAWESOME);
         FontManager.markAsIconContainer(findViewById(R.id.contactIcons), otherFont);
 
 

@@ -47,7 +47,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Typeface iconFont = FontManager.getTypeface(getApplicationContext(), FontManager.FONTAWESOME);
+
+        Typeface iconFont = FontManager.getTypeface(getApplicationContext(), FontManager.REGULARFONTAWESOME);
         FontManager.markAsIconContainer(findViewById(R.id.button_container), iconFont);
 
         //initialize a toolbar
