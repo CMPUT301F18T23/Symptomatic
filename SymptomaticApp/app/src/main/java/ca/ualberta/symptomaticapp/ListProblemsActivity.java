@@ -84,10 +84,6 @@ public class ListProblemsActivity extends AppCompatActivity {
             getProblems(Login.thisUser.returnUsername());
 
         }
-        for (Problem thisProblem: thisProbList.getProblems()){
-            thisProblem.updateRecords();
-            listAdapter.notifyDataSetChanged();
-        }
     }
 
     @Override
@@ -95,11 +91,6 @@ public class ListProblemsActivity extends AppCompatActivity {
         super.onResume();
         if(Login.thisUser != null) {
             getProblems(Login.thisUser.returnUsername());
-
-        }
-        for (Problem thisProblem: thisProbList.getProblems()){
-            thisProblem.updateRecords();
-            listAdapter.notifyDataSetChanged();
 
         }
     }
@@ -110,21 +101,12 @@ public class ListProblemsActivity extends AppCompatActivity {
             getProblems(Login.thisUser.returnUsername());
 
         }
-        for (Problem thisProblem: thisProbList.getProblems()){
-            thisProblem.updateRecords();
-            listAdapter.notifyDataSetChanged();
-
-        }
     }
     @Override
     protected void onStart(){
         super.onStart();
         if(Login.thisUser != null) {
             getProblems(Login.thisUser.returnUsername());
-        }
-        for (Problem thisProblem: thisProbList.getProblems()){
-            thisProblem.updateRecords();
-            listAdapter.notifyDataSetChanged();
         }
     }
 

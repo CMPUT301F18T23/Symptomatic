@@ -27,7 +27,7 @@ public class createAccount extends AppCompatActivity implements View.OnClickList
 
     String usernameError,emailError, phoneError;
 
-    static boolean isUserUnique, goodUser,usernameOk, emailOk, phoneOk;;
+    static boolean goodUser,usernameOk, emailOk, phoneOk;;
 
     Intent next_activity;
 
@@ -81,18 +81,51 @@ public class createAccount extends AppCompatActivity implements View.OnClickList
                 //Check all validations
                 if (goodUser == true) {
                     //No errors, proceed with the creation of a user
-                    if (patientButton.isChecked()) {
-                        User newUser = User.createNewUser(username.getText().toString(), phone.getText().toString(), email.getText().toString());
-                        Login.thisUser = newUser;
-                        Login.thisCaregiver = null;
-                        next_activity = new Intent(createAccount.this, MainActivity.class);
+                    //Access Firestore database
+                    FirebaseFirestore db = FirebaseFirestore.getInstance();
+                    CollectionReference active_users;
+
+                    if (caregiverButton.isChecked()){
+                        active_users = db.collection("caregivers");
                     } else {
-                        Caregiver newCaregiver = Caregiver.createNewCaregiver(username.getText().toString(), phone.getText().toString(), email.getText().toString());
-                        Login.thisUser = null;
-                        Login.thisCaregiver = newCaregiver;
-                        next_activity = new Intent(createAccount.this, ViewPatients.class);
+                        active_users = db.collection("users");
                     }
-                    startActivity(next_activity);
+
+                    //Build the query
+                    Query query = active_users
+                            .whereEqualTo("username",username.getText().toString());
+
+                    query.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                        //If Query Worked on not
+                        @Override
+                        public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                            if(task.isSuccessful()){
+                                //Query Worked
+                                if (task.getResult().size() > 0) {
+                                    //A user with that username already exists
+                                    AlertDialog.Builder badUsernameDialog = new AlertDialog.Builder(createAccount.this);
+                                    badUsernameDialog.setMessage("Username in use, please choose another...");
+                                    badUsernameDialog.show();
+                                } else {
+                                    if (patientButton.isChecked()) {
+                                        User newUser = User.createNewUser(username.getText().toString(), phone.getText().toString(), email.getText().toString());
+                                        Login.thisUser = newUser;
+                                        Login.thisCaregiver = null;
+                                        next_activity = new Intent(createAccount.this, MainActivity.class);
+                                    } else {
+                                        Caregiver newCaregiver = Caregiver.createNewCaregiver(username.getText().toString(), phone.getText().toString(), email.getText().toString());
+                                        Login.thisUser = null;
+                                        Login.thisCaregiver = newCaregiver;
+                                        next_activity = new Intent(createAccount.this, ViewPatients.class);
+                                    }
+                                    startActivity(next_activity);
+                                }
+                            } else {
+                                //Query Did not Work
+                                Toast.makeText(createAccount.this, "Load Error", Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                    });
                 } else {
                     if (phoneOk == false) {
                         //Errors found, post messages to correct
