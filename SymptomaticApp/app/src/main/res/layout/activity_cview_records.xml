@@ -6,6 +6,20 @@
     android:layout_height="match_parent"
     tools:context=".CViewRecords">
 
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/CViewRecord_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?android:attr/actionBarSize"
+        android:background="@color/logoColor"
+        android:elevation="4dp"
+        android:theme="@style/AppTheme"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+        app:titleTextColor="@android:color/background_light" />
+
     <TextView
         android:id="@+id/tv_numprob"
         android:layout_width="wrap_content"
@@ -63,41 +77,41 @@
         android:id="@+id/tv_PatLab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="32dp"
         android:layout_marginStart="32dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginLeft="32dp"
 
+        android:layout_marginTop="8dp"
+        android:text="@string/username2"
         android:textSize="18sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:text="@string/username2" />
+        app:layout_constraintTop_toBottomOf="@+id/CViewRecord_toolbar" />
 
     <TextView
         android:id="@+id/tv_ProbLab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="32dp"
         android:layout_marginStart="32dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginLeft="32dp"
 
+        android:layout_marginTop="24dp"
+        android:text="@string/problem"
         android:textSize="18sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_PatLab"
-        android:text="@string/problem" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_PatLab" />
 
     <TextView
         android:id="@+id/tv_username"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="14dp"
-        android:layout_marginStart="14dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginStart="12dp"
+        android:layout_marginLeft="12dp"
+        android:layout_marginTop="8dp"
         android:text="TextView"
         android:textSize="18sp"
         app:layout_constraintStart_toEndOf="@+id/tv_PatLab"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/CViewRecord_toolbar" />
 
     <TextView
         android:id="@+id/tv_problem"
