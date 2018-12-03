@@ -76,6 +76,7 @@ public class EditProblemActivity extends AppCompatActivity {
     SimpleDateFormat dateFormatter;
     String chosenDateText;
 
+
     @Override
     protected void onCreate(Bundle savedInstancesState){
         super.onCreate(savedInstancesState);
