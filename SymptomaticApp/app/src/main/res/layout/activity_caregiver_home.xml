@@ -35,48 +35,102 @@
         android:textSize="30sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.501"
+        app:layout_constraintLeft_toRightOf="parent"
+        app:layout_constraintRight_toLeftOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/caregiver_home_toolbar" />
 
-    <Button
-        android:id="@+id/ViewPatientButton"
-        android:layout_width="135dp"
-        android:layout_height="45dp"
-        android:layout_marginStart="50dp"
-        android:layout_marginLeft="50dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginBottom="100dp"
-        android:text="@string/add_patient"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/AddPatientButton"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <Button
-        android:id="@+id/AddPatientButton"
-        android:layout_width="135dp"
-        android:layout_height="45dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginEnd="50dp"
-        android:layout_marginRight="50dp"
-        android:layout_marginBottom="100dp"
-        android:text="@string/view_patients"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/ViewPatientButton" />
-
     <ImageView
         android:id="@+id/imageView2"
-        android:layout_width="265dp"
-        android:layout_height="281dp"
-        android:layout_marginBottom="8dp"
-        app:layout_constraintBottom_toTopOf="@+id/AddPatientButton"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintBottom_toTopOf="@id/buttoncontainer"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.504"
+        app:layout_constraintLeft_toRightOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/HelloCareProviderTextView"
         app:srcCompat="@mipmap/ic_launcher_foreground"
         tools:ignore="VectorDrawableCompat" />
+
+    <LinearLayout
+        android:id="@+id/buttoncontainer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="50dp"
+        android:gravity="bottom"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toRightOf="parent"
+        app:layout_constraintRight_toLeftOf="parent">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginEnd="20dp"
+                android:layout_marginRight="20dp">
+
+                <Button
+                    android:id="@+id/AddPatientButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+
+                    android:layout_weight="1"
+                    android:textColor="@color/colorAccent"
+                    android:background="@null"
+                    android:textSize="50sp"
+                    android:text="@string/fa_icon_contact" />
+
+                <TextView
+                    android:id="@+id/tv_addpatients"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="15sp"
+                    android:gravity="center_horizontal"
+                    android:layout_marginTop="5dp"
+                    android:textAlignment="center"
+                    android:textColor="#FFFFFF"
+                    android:text="@string/add_patient" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <Button
+                    android:id="@+id/ViewPatientButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@null"
+                    android:text="@string/fa_icon_view_list"
+                    android:textColor="@color/colorAccent"
+                    android:gravity="center_horizontal"
+                    android:textSize="50sp"
+                     />
+
+                <TextView
+                    android:id="@+id/tv_viewpatients"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_horizontal"
+                    android:layout_marginTop="5dp"
+                    android:textAlignment="center"
+                    android:textSize="15sp"
+                    android:textColor="#FFFFFF"
+                    android:text="@string/view_patients" />
+            </LinearLayout>
+
+        </LinearLayout>
+    </LinearLayout>
+
 </android.support.constraint.ConstraintLayout>
