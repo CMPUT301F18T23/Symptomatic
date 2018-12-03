@@ -21,10 +21,12 @@ public class RecordListTest extends TestCase {
     }
 
     public void testAddRecord() {
+        String title = "A records title";
+        String username = "newUser";
         RecordList recordList = new RecordList();
         Date date = new Date();
         Problem problem = new Problem();
-        Record testRecord = new Record(problem.getTitle(), date);
+        Record testRecord = new Record(problem.getTitle(), date, username, title);
         recordList.addRecord(testRecord);
         Collection<Record> records = recordList.getRecords();
         assertTrue("Record list size == 1", records.size() == 1);
@@ -32,12 +34,14 @@ public class RecordListTest extends TestCase {
     }
 
     public void testDeleteRecord() {
+        String title = "A records title";
+        String username = "newUser";
         RecordList recordList = new RecordList();
         Date date = new Date();
         Problem problem = new Problem();
-        Record testRecord1 = new Record(problem.getTitle(), date);
-        Record testRecord2 = new Record(problem.getTitle(), date);
-        Record testRecord3 = new Record(problem.getTitle(), date);
+        Record testRecord1 = new Record(problem.getTitle(), date, username, title);
+        Record testRecord2 = new Record(problem.getTitle(), date, username, title);
+        Record testRecord3 = new Record(problem.getTitle(), date, username, title);
         recordList.addRecord(testRecord1);
         recordList.addRecord(testRecord2);
         recordList.addRecord(testRecord3);

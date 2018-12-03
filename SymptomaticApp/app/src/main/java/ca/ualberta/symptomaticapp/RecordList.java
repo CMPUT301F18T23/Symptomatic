@@ -37,7 +37,7 @@ public class RecordList implements Serializable {
 
     /**
      * Gets the record list
-     * @return this.recordList
+     * @return A list of the patients records.
      */
     public ArrayList<Record> getRecords() {
         return recordList;
@@ -68,6 +68,10 @@ public class RecordList implements Serializable {
         recordList.add(putPlace,thisRecord);
     }
 
+    public void empty(){
+        this.recordList = new ArrayList<Record>();
+    }
+
     /**
      * Deletes record from record list
      * @param testRecord
@@ -78,7 +82,7 @@ public class RecordList implements Serializable {
 
     /**
      * Gets the size of record list
-     * @return record list size
+     * @return The size of the patients record list.
      */
     public int size() {
         return recordList.size();

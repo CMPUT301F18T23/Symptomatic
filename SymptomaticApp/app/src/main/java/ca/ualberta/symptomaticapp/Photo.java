@@ -100,7 +100,7 @@ public class Photo implements Serializable {
 
     /**
      * gets the string TimeStamp
-     * @return string TimeStamp
+     * @return the timestamp the phot was added as a date
      */
     public String getTimestamp() {
         // Return the timestamp the photo was added as a Date

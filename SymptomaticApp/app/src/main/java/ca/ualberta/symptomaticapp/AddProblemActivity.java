@@ -20,6 +20,7 @@ package ca.ualberta.symptomaticapp;
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
@@ -91,6 +92,23 @@ public class AddProblemActivity extends AppCompatActivity {
 
     }
 
+
+
+    // Confirm with user that they want to exit without saving changes
+    @Override
+    public void onBackPressed() {
+        new AlertDialog.Builder(this)
+                .setMessage("Are you sure you want to exit without saving?")
+                .setCancelable(false)
+                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        AddProblemActivity.super.onBackPressed();
+                    }
+                })
+                .setNegativeButton("No", null)
+                .show();
+    }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
@@ -137,9 +155,9 @@ public class AddProblemActivity extends AppCompatActivity {
         }
 
         if (cal.getTime().after(new Date())){
-            AlertDialog.Builder noTitleDialog = new AlertDialog.Builder(AddProblemActivity.this);
-            noTitleDialog.setMessage("The Date cannot be in the future.");
-            noTitleDialog.show();
+            AlertDialog.Builder futureDate = new AlertDialog.Builder(AddProblemActivity.this);
+            futureDate.setMessage("The date cannot be in the future.");
+            futureDate.show();
             goodProblem = false;
         }
 
@@ -154,9 +172,8 @@ public class AddProblemActivity extends AppCompatActivity {
             Problem newProblem = new Problem(title, cal.getTime(), description);
             Context context = this;
             newProblem.addProbToDb();
-            finish();
-            //Intent intent = new Intent(AddProblemActivity.this, ListProblemsActivity.class);
-            //startActivity(intent);
+            Intent intent = new Intent(AddProblemActivity.this, ListProblemsActivity.class);
+            startActivity(intent);
         }
     }
 
@@ -181,10 +198,5 @@ public class AddProblemActivity extends AppCompatActivity {
 
         updateTime();
     }
-
-
-
-
-
 
 }

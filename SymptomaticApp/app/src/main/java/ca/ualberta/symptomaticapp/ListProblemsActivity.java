@@ -48,11 +48,11 @@ public class ListProblemsActivity extends AppCompatActivity {
 
     private ListView listView;
 
-    private String active_problem_count;
+    private static String active_problem_count;
 
-    private ProblemList thisProbList;
+    public static ProblemList thisProbList;
 
-    private TextView textView;
+    private static TextView textView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -60,8 +60,6 @@ public class ListProblemsActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.listProblem_toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("View Problems");
-
-
 
         listView = findViewById(R.id.problemsListView);
         textView = (TextView) findViewById(R.id.NumberRecordsTextView);
@@ -77,12 +75,9 @@ public class ListProblemsActivity extends AppCompatActivity {
             getProblems(Login.thisUser.returnUsername());
         }
 
-
-
-
     }
 
-    @Override
+   /* @Override
     public void onResume(){
         super.onResume();
         if(Login.thisUser != null) {
@@ -94,7 +89,30 @@ public class ListProblemsActivity extends AppCompatActivity {
             listAdapter.notifyDataSetChanged();
 
         }
+    }*/
+    @Override
+    protected void onPause(){
+        super.onPause();
+        if(Login.thisUser != null) {
+            getProblems(Login.thisUser.returnUsername());
 
+        }
+        for (Problem thisProblem: thisProbList.getProblems()){
+            thisProblem.updateRecords();
+            listAdapter.notifyDataSetChanged();
+
+        }
+    }
+    @Override
+    protected void onStart(){
+        super.onStart();
+        if(Login.thisUser != null) {
+            getProblems(Login.thisUser.returnUsername());
+        }
+        for (Problem thisProblem: thisProbList.getProblems()){
+            thisProblem.updateRecords();
+            listAdapter.notifyDataSetChanged();
+        }
     }
 
     @Override
@@ -137,9 +155,8 @@ public class ListProblemsActivity extends AppCompatActivity {
     }
 
 
-    private void getProblems(String username){
+    public static void getProblems(String username){
         FirebaseFirestore db = FirebaseFirestore.getInstance();
-
         CollectionReference problems = db.collection("problems");
 
         Query problemsQuery = problems.whereEqualTo("user",username);
@@ -148,19 +165,15 @@ public class ListProblemsActivity extends AppCompatActivity {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
                 if(task.isSuccessful()){
-                    thisProbList.empty();
+                    ListProblemsActivity.thisProbList.empty();
                     for(QueryDocumentSnapshot document: task.getResult()) {
                         Problem problem = document.toObject(Problem.class);
                         problem.updateRecords();
-                        thisProbList.addProblem(problem);
+                        ListProblemsActivity.thisProbList.addProblem(problem);
                     }
-                    active_problem_count = "Number of active problems:"+" " + thisProbList.getSize();
+                    active_problem_count = "Number of active problems:"+" " + ListProblemsActivity.thisProbList.getSize();
                     textView.setText(active_problem_count);
                     listAdapter.notifyDataSetChanged();
-                } else {
-                    AlertDialog.Builder badUsernameDialog = new AlertDialog.Builder(ListProblemsActivity.this);
-                    badUsernameDialog.setMessage("Data Load Error");
-                    badUsernameDialog.show();
                 }
             }
         });

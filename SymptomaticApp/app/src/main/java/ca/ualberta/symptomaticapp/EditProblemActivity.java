@@ -76,6 +76,7 @@ public class EditProblemActivity extends AppCompatActivity {
     SimpleDateFormat dateFormatter;
     String chosenDateText;
 
+
     @Override
     protected void onCreate(Bundle savedInstancesState){
         super.onCreate(savedInstancesState);
@@ -139,6 +140,21 @@ public class EditProblemActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    // Confirm with user that they want to exit without saving changes
+    @Override
+    public void onBackPressed() {
+        new AlertDialog.Builder(this)
+                .setMessage("Are you sure you want to exit?")
+                .setCancelable(false)
+                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        EditProblemActivity.super.onBackPressed();
+                    }
+                })
+                .setNegativeButton("No", null)
+                .show();
     }
 
     @Override

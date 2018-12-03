@@ -4,12 +4,14 @@ import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.app.TimePickerDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.provider.MediaStore;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -31,6 +33,14 @@ import android.widget.TimePicker;
 import android.widget.Toast;
 
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.Query;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -56,6 +66,7 @@ public class EditRecordActivity extends AppCompatActivity {
     ListView photoListView;
     PhotoListViewAdapter photoListViewAdapter;
     ArrayList<Photo> displayPhotos;
+    PhotoList photoList;
     Bitmap bmp;
 
 
@@ -67,9 +78,11 @@ public class EditRecordActivity extends AppCompatActivity {
 
     static final int GET_GEOLOCATION = 2;
 
-    Button viewFrontBodyPart,viewBackBodyPart;
+    Button viewFrontBodyPart,viewBackBodyPart,saveButton,deleteButton;
 
     bodyPartDialog thisDialog;
+
+    EditText titleEditText,commentEditText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,12 +93,16 @@ public class EditRecordActivity extends AppCompatActivity {
         getSupportActionBar().setTitle("Edit Record");
 
         record = (Record) getIntent().getSerializableExtra("record");
+        photoList = new PhotoList();
+
+        // get geolocation
+        newGeolocationString = record.geolocation;
 
         cal = Calendar.getInstance();
         cal.setTime(record.recordDate);
 
         // Input the title
-        EditText titleEditText = findViewById(R.id.editTitleEditText);
+        titleEditText = findViewById(R.id.editTitleEditText);
         titleEditText.setText(record.recordTitle);
 
         // Input the time stamp
@@ -93,7 +110,7 @@ public class EditRecordActivity extends AppCompatActivity {
         timeTextView.setText(record.recordDate.toString());
 
         // Input the comment
-        EditText commentEditText = findViewById(R.id.commentEditText);
+        commentEditText = findViewById(R.id.commentEditText);
         commentEditText.setText(record.recordComment);
 
         // Change time stamp button
@@ -206,6 +223,22 @@ public class EditRecordActivity extends AppCompatActivity {
             }
         });
 
+        saveButton = findViewById(R.id.saveRecordBtn);
+        saveButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                saveRecord();
+            }
+        });
+
+        deleteButton = findViewById(R.id.deleteRecordBtn);
+        deleteButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                deleteRecord();
+            }
+        });
+
     }
 
     private void initPhotoListView() {
@@ -214,6 +247,21 @@ public class EditRecordActivity extends AppCompatActivity {
         }
 
         photoListView.setAdapter(photoListViewAdapter);
+    }
+
+    // Confirm with user that they want to exit without saving changes
+    @Override
+    public void onBackPressed() {
+        new AlertDialog.Builder(this)
+                .setMessage("Are you sure you want to exit?")
+                .setCancelable(false)
+                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        EditRecordActivity.super.onBackPressed();
+                    }
+                })
+                .setNegativeButton("No", null)
+                .show();
     }
 
     @Override
@@ -378,6 +426,52 @@ public class EditRecordActivity extends AppCompatActivity {
         Login.thisUser = null;
         Intent intent = new Intent(EditRecordActivity.this, MainActivity.class);
         startActivity(intent);
+    }
+
+    public void saveRecord(){
+        final FirebaseFirestore db = FirebaseFirestore.getInstance();
+
+        CollectionReference records = db.collection("records");
+
+        Query recordsQuery = records.whereEqualTo("problem", record.getProblem()).whereEqualTo("user", Login.thisUser.username);
+
+        recordsQuery.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+//                photoList.setPhotos(displayPhotos);
+                if (task.isSuccessful()) {
+                    for (QueryDocumentSnapshot document : task.getResult()) {
+                        //update problem to new information
+                        String recordDocId = document.getId();
+                        DocumentReference thisDocument = db.collection("records").document(recordDocId);
+                        thisDocument.update("recordTitle",titleEditText.getText().toString(),"recordComment",commentEditText.getText().toString(),"bodyLocation",thisDialog.returnPartsSelected(),"geolocation",newGeolocationString/*,"photoList",photoList*/);
+                    }
+                }
+                finish();
+            }
+        });
+    }
+
+    public void deleteRecord(){
+        final FirebaseFirestore db = FirebaseFirestore.getInstance();
+
+        CollectionReference records = db.collection("records");
+
+        Query recordsQuery = records.whereEqualTo("problem",record.getProblem()).whereEqualTo("user",Login.thisUser.username);
+
+        recordsQuery.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                if (task.isSuccessful()) {
+                    for (QueryDocumentSnapshot document : task.getResult()) {
+                        String problemDocID = document.getId();
+                        DocumentReference thisDocument = db.collection("records").document(problemDocID);
+                        thisDocument.delete();
+                    }
+                }
+                finish();
+            }
+        });
     }
 
 

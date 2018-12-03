@@ -94,6 +94,23 @@ public class ListRecordsActivity extends AppCompatActivity {
     }
 
     @Override
+    protected void onResume(){
+        super.onResume();
+        getRecords();
+    }
+    @Override
+    protected void onPause(){
+        super.onPause();
+        getRecords();
+    }
+    @Override
+    protected void onStart(){
+        super.onStart();
+        getRecords();
+    }
+
+
+    @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.general_menu, menu);
@@ -147,9 +164,8 @@ public class ListRecordsActivity extends AppCompatActivity {
         db = FirebaseFirestore.getInstance();
 
         final CollectionReference records = db.collection("records");
-
+        thisRecordList.empty();
         Query recordsQuery = records.whereEqualTo("problem",problem.getTitle()).whereEqualTo("user",Login.thisUser.returnUsername());
-
         recordsQuery.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {

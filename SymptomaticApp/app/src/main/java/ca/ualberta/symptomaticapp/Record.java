@@ -67,7 +67,7 @@ public class Record implements Serializable {
 
     /**
      * Gets the date of the record.
-     * @return date of record
+     * @return The date of the record.
      */
     public Date getTimeStamp() {
         return this.recordDate;
@@ -83,7 +83,6 @@ public class Record implements Serializable {
 
     /**
      * removes the title of the record
-     * @return title = ""
      */
     public void removeTitle() {
         this.recordTitle = "";
@@ -107,7 +106,6 @@ public class Record implements Serializable {
 
     /**
      * removes the comment of a record
-     * @return comment  = ""
      */
     public void removeComment() {
         this.recordComment = "";
@@ -115,7 +113,7 @@ public class Record implements Serializable {
 
     /**
      * gets the comment of a record
-     * @return record comment
+     * @return The records comment
      */
     public String getComment() {
         return this.recordComment;
@@ -131,7 +129,7 @@ public class Record implements Serializable {
 
     /**
      * gets body location of a record
-     * @return bodyLocation
+     * @return A list of the records body parts.
      */
     public ArrayList<String> getBodyLocation() {
         return this.bodyLocation;
@@ -155,7 +153,7 @@ public class Record implements Serializable {
 //
 //    /**
 //     * gets the photos of a record
-//     * @return record photos
+//     * @return A list of the records photos.
 //     */
     public ArrayList<Photo> getPhotoList() {
         return this.photoList.getPhotos();
@@ -183,7 +181,7 @@ public class Record implements Serializable {
 
     /**
      * Gets geolocation to a record
-     * @return geolocation
+     * @return The geolocation of the record
      */
     public String getGeolocation() {
         return this.geolocation;
@@ -215,7 +213,14 @@ public class Record implements Serializable {
 
 
     public String toString() {
-        return this.recordTitle+ "\n" + this.recordDate.toString();
+        String returnString = "";
+        if(this.recordTitle!= null) {
+            returnString += this.recordTitle + "\n";
+        }
+        if (this.recordDate!=null){
+            returnString += this.recordDate.toString();
+        }
+        return returnString;
     }
 
     /**
@@ -228,7 +233,7 @@ public class Record implements Serializable {
 
     /**
      * Gets the problem associated with a record
-     * @return this.problem
+     * @return The problem associated with the record
      */
     public String getProblem() {
         return this.problem;

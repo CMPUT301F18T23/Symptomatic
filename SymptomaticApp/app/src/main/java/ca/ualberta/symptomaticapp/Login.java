@@ -36,6 +36,7 @@ import com.google.firebase.firestore.QuerySnapshot;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.concurrent.TimeUnit;
 
@@ -126,6 +127,11 @@ public class Login extends AppCompatActivity implements View.OnClickListener{
                             } else {
                                 //sends the user to the Caregiver homepage if the caregiver button is checked
                                 next_activity = new Intent(Login.this,CaregiverHome.class);
+                            }
+                            if(ListProblemsActivity.thisProbList != null) {
+                                ListProblemsActivity.thisProbList.empty();
+                                ListProblemsActivity.getProblems(thisUser.returnUsername());
+                                ListProblemsActivity.listAdapter.notifyDataSetChanged();
                             }
                             startActivity(next_activity);
 
