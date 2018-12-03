@@ -36,7 +36,7 @@ public class ViewFullRecordActivity extends AppCompatActivity {
 
     bodyPartDialog thisDialog;
 
-    Button viewFrontBodyPart, viewBackBodyPart;
+    Button viewFrontBodyPart, viewBackBodyPart, viewComments;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,18 +53,10 @@ public class ViewFullRecordActivity extends AppCompatActivity {
         initPhotoListView();
         setListViewHeightBasedOnChildren(photoListView);
 
-
-
-        //record.geolocation = new LatLng(-34, 151);
-
-
-        //Toast.makeText(this, record.bodyLocation.get(0), Toast.LENGTH_LONG).show();
-        // Insert the records problem
-
         bodyLocation = record.bodyLocation;
         TextView problemTextView = findViewById(R.id.InputProblemTextView);
         problemTextView.setText(record.problem);
-
+        viewComments = (Button) findViewById(R.id.btn_viewcomments);
         // Insert the records title
         TextView titleTextView = findViewById(R.id.addTitleTextView);
         titleTextView.setText(record.recordTitle);
@@ -103,6 +95,15 @@ public class ViewFullRecordActivity extends AppCompatActivity {
                     noGeolocationDialog.setMessage("No Geolocation exists. You may add a geolocation in Edit Record.");
                     noGeolocationDialog.show();
                 }
+            }
+        });
+
+        viewComments.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(ViewFullRecordActivity.this, ViewComments.class);
+                intent.putExtra("record", record);
+                startActivity(intent);
             }
         });
 
