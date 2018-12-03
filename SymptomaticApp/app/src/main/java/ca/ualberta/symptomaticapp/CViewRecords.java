@@ -41,7 +41,7 @@ public class CViewRecords extends AppCompatActivity {
     private TextView numrecords; //textview for displaying the number of records
     private ArrayList<Problem> problemlist; //list for holding the problems of current patient
     private ArrayList<String> problemtitles;
-    private ArrayAdapter<String> problemadapter;
+    private ArrayAdapter<Problem> problemadapter;
     private CRecordAdapter recordadapter;
     private ArrayList<String> recordtitles = new ArrayList<String>();
 
@@ -76,7 +76,7 @@ public class CViewRecords extends AppCompatActivity {
         final Spinner selectproblem = (Spinner) findViewById(R.id.sp_Problems);
         final Button viewproblem = (Button) findViewById(R.id.btn_ViewProblems);
         Button viewpatient = (Button) findViewById(R.id.btn_ViewPatient);
-        Button viewphotoalbum = (Button) findViewById(R.id.btn_ViewPhotos);
+        Button viewgeolocations = (Button) findViewById(R.id.btn_ViewPhotos);
         Button viewcontactinfo = (Button) findViewById(R.id.btn_ViewContactInfo);
         ListView recordview = (ListView) findViewById(R.id.lv_records);
         //
@@ -86,7 +86,7 @@ public class CViewRecords extends AppCompatActivity {
 
         //setup adapters and assign them
         ArrayAdapter<String> patientadapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, patients);
-        problemadapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, problemtitles);
+        problemadapter = new ArrayAdapter<Problem>(this, android.R.layout.simple_spinner_item, problemlist);
         patientadapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         selectpatient.setAdapter(patientadapter);
         problemadapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -96,8 +96,6 @@ public class CViewRecords extends AppCompatActivity {
         problemadapter.notifyDataSetChanged();
 
         //POPULATE LISTVIEW USING THE SELECTED PROBLEM
-
-
         recordadapter = new CRecordAdapter(records, this);
 
         recordview.setAdapter(recordadapter);
@@ -109,6 +107,9 @@ public class CViewRecords extends AppCompatActivity {
                 problemlist.clear();
                 problemtitles.clear();
                 records.clear();
+                String selectedproblem = selectproblem.getItemAtPosition(selectproblem.getSelectedItemPosition()).toString();
+                selectedproblem = selectedproblem.substring(0, selectedproblem.indexOf('\n'));
+                String selectedpatient = selectpatient.getItemAtPosition(selectpatient.getSelectedItemPosition()).toString();
                 getProblems(selectpatient.getItemAtPosition(selectpatient.getSelectedItemPosition()).toString(), selectproblem.getItemAtPosition(selectproblem.getSelectedItemPosition()).toString());
                 // POPULATE THE SPINNER FOR PROBLEMS USING ABOVE
                 problemadapter.notifyDataSetChanged();
@@ -119,7 +120,13 @@ public class CViewRecords extends AppCompatActivity {
         viewproblem.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 // take current selected problem and show records related to it
-                getProblems(selectproblem.getItemAtPosition(selectproblem.getSelectedItemPosition()).toString(),selectpatient.getItemAtPosition(selectpatient.getSelectedItemPosition()).toString()); //get current selection
+                problemlist.clear();
+                problemtitles.clear();
+                records.clear();
+                String selectedproblem = selectproblem.getItemAtPosition(selectproblem.getSelectedItemPosition()).toString();
+                selectedproblem = selectedproblem.substring(0, selectedproblem.indexOf('\n'));
+                String selectedpatient =selectpatient.getItemAtPosition(selectpatient.getSelectedItemPosition()).toString();
+                getProblems(selectedpatient, selectedproblem); //get current selection
                 recordadapter.notifyDataSetChanged();
             }
         });
@@ -129,6 +136,13 @@ public class CViewRecords extends AppCompatActivity {
                 Intent intent = new Intent(CViewRecords.this, ViewContactInfo.class);
                 intent.putExtra("username", selectpatient.getItemAtPosition(selectpatient.getSelectedItemPosition()).toString());
                 intent.putExtra("usertype", "user");
+                startActivity(intent); //open view contact info using the correct information
+            }
+        });
+        viewgeolocations.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Intent intent = new Intent(CViewRecords.this, MapOfRecordsActivity.class);
+                intent.putExtra("problem", problemlist.get(0));
                 startActivity(intent); //open view contact info using the correct information
             }
         });
@@ -145,7 +159,8 @@ public class CViewRecords extends AppCompatActivity {
                 if (task.isSuccessful()) { //query has a result
                     for (QueryDocumentSnapshot document : task.getResult()) {
                         Problem problem = document.toObject(Problem.class); //convert all found problems to problem objects
-                        problemtitles.add(problem.getTitle()); //get all problems into our problemList
+                        problemlist.add(problem);
+                        problemadapter.notifyDataSetChanged();
                         CollectionReference recordscol = db.collection("records");
                         Query recordsQuery = recordscol.whereEqualTo("problem",prob).whereEqualTo("user",username);
                         recordsQuery.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
