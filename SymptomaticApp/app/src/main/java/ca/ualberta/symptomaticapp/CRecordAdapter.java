@@ -85,8 +85,8 @@ public class CRecordAdapter extends BaseAdapter implements ListAdapter {
         listItemText.setText(recordList.get(position).toString());
 
         //Handle buttons
-        Button AddCommentButton = view.findViewById(R.id.viewPhotoButton);
-        Button viewPhotoButton = view.findViewById(R.id.AddCommentButton);
+        Button AddCommentButton = view.findViewById( R.id.AddCommentButton);
+        Button viewPhotoButton = view.findViewById(R.id.viewPhotoButton);
 
 
         AddCommentButton.setOnClickListener(new View.OnClickListener() {
@@ -100,8 +100,9 @@ public class CRecordAdapter extends BaseAdapter implements ListAdapter {
         viewPhotoButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-
-
+                Intent intent = new Intent(context, SlideShowModeActivity.class);
+                intent.putExtra("record", recordList.get(position));
+                context.startActivity(intent);
             }
         });
         return view;
