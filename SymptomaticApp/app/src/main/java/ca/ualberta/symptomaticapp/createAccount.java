@@ -90,7 +90,7 @@ public class createAccount extends AppCompatActivity implements View.OnClickList
                         Caregiver newCaregiver = Caregiver.createNewCaregiver(username.getText().toString(), phone.getText().toString(), email.getText().toString());
                         Login.thisUser = null;
                         Login.thisCaregiver = newCaregiver;
-                        next_activity = new Intent(createAccount.this, ViewPatients.class);
+                        next_activity = new Intent(createAccount.this, CaregiverHome.class);
                     }
                     startActivity(next_activity);
                 } else {
