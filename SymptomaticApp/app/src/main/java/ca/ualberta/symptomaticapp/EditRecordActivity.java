@@ -433,7 +433,7 @@ public class EditRecordActivity extends AppCompatActivity {
 
         CollectionReference records = db.collection("records");
 
-        Query recordsQuery = records.whereEqualTo("problem", record.getProblem()).whereEqualTo("user", Login.thisUser.username);
+        Query recordsQuery = records.whereEqualTo("problem", record.getProblem()).whereEqualTo("user", Login.thisUser.username).whereEqualTo("title",record.getTitle());
 
         recordsQuery.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
@@ -457,7 +457,7 @@ public class EditRecordActivity extends AppCompatActivity {
 
         CollectionReference records = db.collection("records");
 
-        Query recordsQuery = records.whereEqualTo("problem",record.getProblem()).whereEqualTo("user",Login.thisUser.username);
+        Query recordsQuery = records.whereEqualTo("problem", record.getProblem()).whereEqualTo("user", Login.thisUser.username).whereEqualTo("title",record.getTitle());
 
         recordsQuery.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override

@@ -49,8 +49,7 @@ public class ListRecordsActivity extends AppCompatActivity {
     ListView recordslistview;
     RecordListViewAdapter recordListViewAdapter;
 
-    RecordList thisRecordList;
-
+    static RecordList thisRecordList;
 
     FirebaseFirestore db;
 
@@ -167,7 +166,6 @@ public class ListRecordsActivity extends AppCompatActivity {
 
     private void getRecords(){
         db = FirebaseFirestore.getInstance();
-        thisRecordList.empty();
 
         final CollectionReference records = db.collection("records");
 
@@ -176,9 +174,12 @@ public class ListRecordsActivity extends AppCompatActivity {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
                 if(task.isSuccessful()){
+                    ListRecordsActivity.thisRecordList.empty();
                     for(QueryDocumentSnapshot document: task.getResult()){
                         Record newRecord = document.toObject(Record.class);
-                        thisRecordList.addRecord(newRecord);
+                        ListRecordsActivity.thisRecordList.addRecord(newRecord);
+                        ListProblemsActivity.thisProbList.getProblem(problem).updateRecords();
+                        ListProblemsActivity.listAdapter.notifyDataSetChanged();
                     }
                 }
                 recordListViewAdapter.notifyDataSetChanged();
