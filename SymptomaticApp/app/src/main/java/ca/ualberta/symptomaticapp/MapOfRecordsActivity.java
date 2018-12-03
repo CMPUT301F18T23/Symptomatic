@@ -1,3 +1,18 @@
+/*
+ * MapOfRecordsActivity.java
+ *
+ * Version 1
+ *
+ * November, 30, 2018.
+ *
+ * This file is subject to the terms and conditions defined in
+ * file 'LICENSE', which is part of this source code package.
+ *
+ * Shows a map of records within a problem.
+ *
+ * Issues: No current issues.
+ *
+ */
 package ca.ualberta.symptomaticapp;
 
 import android.Manifest;
@@ -96,28 +111,10 @@ public class MapOfRecordsActivity extends FragmentActivity implements OnMapReady
         recordList = new RecordList();
 
 
-        //thisRecList = new RecordList();
+
 
 
         getRecords();
-
-
-       /* for (int i = 0; i < thisRecList.getSize(); i++){
-            currentRec = thisRecList.getRecords().get(i);
-            if (currentRec.geolocation != null){
-                String[] latlng = currentRec.geolocation.split(",");
-                double latitude = Double.parseDouble(latlng[0]);
-                double longitude = Double.parseDouble(latlng[1]);
-
-                LatLng location = new LatLng(latitude, longitude);
-                MarkerOptions options = new MarkerOptions().position(location).title(currentRec.recordTitle);
-                mMap.addMarker(options);
-            }
-
-
-        } */
-
-
         getLocationPermission();
 
 
@@ -267,8 +264,6 @@ public class MapOfRecordsActivity extends FragmentActivity implements OnMapReady
     }
 
 
-
-
     /**
      * Manipulates the map once available.
      * This callback is triggered when the map is ready to be used.
@@ -297,10 +292,6 @@ public class MapOfRecordsActivity extends FragmentActivity implements OnMapReady
             init();
         }
 
-        // Add a marker in Sydney and move the camera
-        //LatLng sydney = new LatLng(-34, 151);
-        //mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
-        //mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
     }
 
     @Override
@@ -337,27 +328,6 @@ public class MapOfRecordsActivity extends FragmentActivity implements OnMapReady
         }
     };
 
-  /*  private void getProblems(String username){
-        FirebaseFirestore db = FirebaseFirestore.getInstance();
-
-        CollectionReference problems = db.collection("problems");
-
-        Query problemsQuery = problems.whereEqualTo("user",username);
-
-        problemsQuery.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                if (task.isSuccessful()) {
-                    thisProbList.empty();
-                    for (QueryDocumentSnapshot document : task.getResult()) {
-                        Problem problem = document.toObject(Problem.class);
-                        thisProbList.addProblem(problem);
-                    }
-                }
-            }
-
-        });
-    } */
 
     private void getRecords(){
         final ArrayList<Record> foundRecords = new ArrayList<Record>();

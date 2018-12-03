@@ -1,3 +1,20 @@
+/*
+ * ViewQRCode.java
+ *
+ * Version 1
+ *
+ * November, 26, 2018.
+ *
+ * This file is subject to the terms and conditions defined in
+ * file 'LICENSE', which is part of this source code package.
+ *
+ * Allows caregivers and patients to view their QR Code.
+ *
+ * Issues:
+ *
+ */
+
+
 package ca.ualberta.symptomaticapp;
 
 import android.content.Intent;
@@ -40,16 +57,6 @@ public class ViewQRCode extends AppCompatActivity {
         String encoded = username + ","+type;
 
         createPatientQRCode(encoded);
-//        MultiFormatWriter mfr = new MultiFormatWriter();
-//        ImageView qrdisplay = (ImageView) findViewById(R.id.iv_qrcode);
-//        try{
-//            BitMatrix bitMatrix = mfr.encode(encoded, BarcodeFormat.QR_CODE,600,600);
-//            BarcodeEncoder barcodeEncoder = new BarcodeEncoder();
-//            Bitmap bitmap = barcodeEncoder.createBitmap(bitMatrix);
-//            qrdisplay.setImageBitmap(bitmap);
-//        }catch(WriterException e){
-//            e.printStackTrace();
-//        }
 
         returnbutton.setOnClickListener(new View.OnClickListener() {
             @Override

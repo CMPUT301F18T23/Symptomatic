@@ -14,7 +14,6 @@ import android.widget.ImageView;
 
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.MultiFormatWriter;
-import com.google.zxing.Writer;
 import com.google.zxing.WriterException;
 import com.google.zxing.common.BitMatrix;
 import com.journeyapps.barcodescanner.BarcodeEncoder;
@@ -92,7 +91,7 @@ public class CaregiverViewQRCode extends AppCompatActivity {
     }
 
     public void viewAddPatients(MenuItem menu) { //open add patients activity
-        Intent intent = new Intent(CaregiverViewQRCode.this, AddPatient.class);
+        Intent intent = new Intent(CaregiverViewQRCode.this, AddPatientActivity.class);
         startActivity(intent);
     }
 

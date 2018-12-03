@@ -1,3 +1,19 @@
+/*
+ * EditAccountActivity.java
+ *
+ * Version 2
+ *
+ * December, 3, 2018.
+ *
+ * This file is subject to the terms and conditions defined in
+ * file 'LICENSE', which is part of this source code package.
+ *
+ * Activity that allows a user to edit account.
+ *
+ * Issues:
+ *
+ */
+
 package ca.ualberta.symptomaticapp;
 
 import android.app.AlertDialog;
@@ -95,20 +111,6 @@ public class EditAccountActivity extends AppCompatActivity {
 
     }
 
-    // Confirm with user that they want to exit without saving changes
-//    @Override
-//    public void onBackPressed() {
-//        new AlertDialog.Builder(this)
-//                .setMessage("Are you sure you want to exit without saving?")
-//                .setCancelable(false)
-//                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-//                    public void onClick(DialogInterface dialog, int id) {
-//                        EditAccountActivity.super.onBackPressed();
-//                    }
-//                })
-//                .setNegativeButton("No", null)
-//                .show();
-//    }
 
     // Confirm with user that they want to exit without saving changes
     @Override

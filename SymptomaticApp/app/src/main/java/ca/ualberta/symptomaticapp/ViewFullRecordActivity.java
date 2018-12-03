@@ -1,3 +1,19 @@
+/*
+ * ViewFullRecordActivity.java
+ *
+ * Version 1
+ *
+ * November, 25, 2018.
+ *
+ * This file is subject to the terms and conditions defined in
+ * file 'LICENSE', which is part of this source code package.
+ *
+ * User can view the full record.
+ *
+ * Issues:
+ *
+ */
+
 package ca.ualberta.symptomaticapp;
 
 import android.app.AlertDialog;
@@ -176,11 +192,7 @@ public class ViewFullRecordActivity extends AppCompatActivity {
 
     }
 
-    // setListViewHeightBasedonChildren class reference:
-//    Skidan, Oleg. “ListView inside ScrollView. Solve the Problem. – Oleg Skidan – Medium.” Medium.com, Medium,
-//    5 Feb. 2016, medium.com/@skidanolegs/listview-inside-scrollview-solve-the-problem-a06fdff2a4e0.
-//    Accessed: 25th November, 2018
-
+    //Resource: https://medium.com/@skidanolegs/listview-inside-scrollview-solve-the-problem-a06fdff2a4e0
     public static void setListViewHeightBasedOnChildren(ListView listView) {
         ListAdapter listAdapter = listView.getAdapter();
         if (listAdapter == null) return;

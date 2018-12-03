@@ -57,7 +57,7 @@
             android:parentActivityName=".ListProblemsActivity" />
         <activity android:name=".EditProblemActivity" />
         <activity android:name=".ViewPatients" />
-        <activity android:name=".AddPatient" />
+        <activity android:name=".AddPatientActivity" />
         <activity android:name=".ViewContactInfo" />
         <activity android:name=".CaregiverHome" />
         <activity android:name=".EditRecordActivity" />

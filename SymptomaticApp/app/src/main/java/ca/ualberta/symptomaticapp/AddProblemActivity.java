@@ -1,9 +1,9 @@
 /*
  * AddProblemActivity.java
  *
- * Version 1
+ * Version 2
  *
- * November, 20, 2018.
+ * December, 3, 2018.
  *
  * This file is subject to the terms and conditions defined in
  * file 'LICENSE', which is part of this source code package.
@@ -199,8 +199,7 @@ public class AddProblemActivity extends AppCompatActivity {
                     }
                 }
             });
-            //Intent intent = new Intent(AddProblemActivity.this, ListProblemsActivity.class);
-            //startActivity(intent);
+
         }
     }
 

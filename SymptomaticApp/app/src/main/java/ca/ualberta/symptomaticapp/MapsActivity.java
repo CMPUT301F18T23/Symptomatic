@@ -1,3 +1,18 @@
+/*
+ * MapsActivity.java
+ *
+ * Version 1
+ *
+ * November, 30, 2018.
+ *
+ * This file is subject to the terms and conditions defined in
+ * file 'LICENSE', which is part of this source code package.
+ *
+ * Shows a map.
+ *
+ * Issues: No current issues.
+ *
+ */
 package ca.ualberta.symptomaticapp;
 
 import android.Manifest;
@@ -285,10 +300,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             init();
         }
 
-        // Add a marker in Sydney and move the camera
-        //LatLng sydney = new LatLng(-34, 151);
-        //mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
-        //mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
     }
 
     @Override

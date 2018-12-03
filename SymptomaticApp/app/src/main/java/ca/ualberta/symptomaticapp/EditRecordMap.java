@@ -1,3 +1,19 @@
+/*
+ * EditRecordMap.java
+ *
+ * Version 2
+ *
+ * December, 3, 2018.
+ *
+ * This file is subject to the terms and conditions defined in
+ * file 'LICENSE', which is part of this source code package.
+ *
+ * Activity that allows a user to edit the geolocation of a record
+ *
+ * Issues:
+ *
+ */
+
 package ca.ualberta.symptomaticapp;
 
 import android.Manifest;
@@ -294,10 +310,7 @@ public class EditRecordMap extends FragmentActivity implements OnMapReadyCallbac
             init();
         }
 
-        // Add a marker in Sydney and move the camera
-        //LatLng sydney = new LatLng(-34, 151);
-        //mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
-        //mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
+
     }
 
     @Override

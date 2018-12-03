@@ -105,18 +105,33 @@ public class CViewProblems extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.cview_problems_menu, menu);
+        inflater.inflate(R.menu.caregiver_general_menu, menu);
         return true;
     }
     public void viewHome(MenuItem menu) {
         Intent intent = new Intent(CViewProblems.this, CaregiverHome.class);
         startActivity(intent);
     }
-    public void viewViewRecords(MenuItem menu) {
-        Intent intent = new Intent(CViewProblems.this, CViewRecords.class);
-        startActivity(intent);
-    }public void viewViewPatients(MenuItem menu) {
+    public void viewViewPatients(MenuItem menu) { //open viewpatients activity
         Intent intent = new Intent(CViewProblems.this, ViewPatients.class);
+        startActivity(intent);
+    }
+
+    public void viewAddPatients(MenuItem menu) { //open add patients activity
+        Intent intent = new Intent(CViewProblems.this, AddPatientActivity.class);
+        startActivity(intent);
+    }
+
+    public void viewViewQR(MenuItem menu) {
+        //adds the view problems button to the menu
+        Intent intent = new Intent(CViewProblems.this, CaregiverViewQRCode.class);
+        startActivity(intent);
+    }
+
+    public void viewLogout(MenuItem menu){ //log current caregiver out and open login page
+        Login.thisCaregiver = null;
+        Login.thisUser = null;
+        Intent intent = new Intent(CViewProblems.this, MainActivity.class);
         startActivity(intent);
     }
     /**

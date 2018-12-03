@@ -45,9 +45,11 @@ public class Record implements Serializable {
 
 
     /**
-     * Creates the instance of a record object
-     * @param probName: The problem associated with the record
-     * @param date: The date of the record
+     * The coonstructor for a new record
+     * @param probName
+     * @param date
+     * @param username
+     * @param title
      */
     public Record(String probName,Date date,String username,String title) {
       this.recordDate = date;
@@ -160,7 +162,7 @@ public class Record implements Serializable {
     }
 
     /**
-     * Adds photo to a record
+     * Sets the photos of a record
      * @param photos
      */
 
@@ -175,17 +177,6 @@ public class Record implements Serializable {
     public ArrayList<Photo> getPhotoList() {
         return this.photoList.getPhotos();
     }
-//
-//    /**
-//     * removes the photo of a record
-//     */
-//    public void removePhoto(Photo photo) {
-//        this.photoList.deletePhoto(photo);
-//    }
-//
-//    public void pushPhoto(Photo photo){
-//        this.photoList.addPhoto(photo);
-//    }
 
 
     /**
