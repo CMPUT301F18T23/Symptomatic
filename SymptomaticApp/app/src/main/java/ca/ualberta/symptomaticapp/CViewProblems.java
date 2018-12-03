@@ -154,9 +154,6 @@ public class CViewProblems extends AppCompatActivity {
                 }
             }
         });
-        for(Problem problem: displayList){
-            problem.updateRecords();
-        }
     }
 
 }

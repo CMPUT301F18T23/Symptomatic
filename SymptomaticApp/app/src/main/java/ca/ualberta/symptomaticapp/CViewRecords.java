@@ -60,7 +60,7 @@ public class CViewRecords extends AppCompatActivity {
 
         // get all ui elements
         numrecords = (TextView) findViewById(R.id.tv_numprob);
-        numrecords.setText("Number of records: " + records.size());
+
         Button viewgeolocations = (Button) findViewById(R.id.btn_ViewGeos);
         Button viewcontactinfo = (Button) findViewById(R.id.btn_ViewContactInfo);
         ListView recordview = (ListView) findViewById(R.id.lv_records);
@@ -111,6 +111,7 @@ public class CViewRecords extends AppCompatActivity {
                         records.add(record);
                         recordtitles.add(record.getTitle());
                         recordadapter.notifyDataSetChanged();
+                        numrecords.setText("Number of records: " + records.size());
                     }
                 }
             }

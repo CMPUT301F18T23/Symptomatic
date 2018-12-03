@@ -65,7 +65,8 @@ public class CProblemsAdapter extends BaseAdapter implements ListAdapter {
 
         //Handle UI elements and assign them the correct values
         TextView listItemText = view.findViewById(R.id.list_item_string);
-        listItemText.setText(problemList.get(position).toString());
+        String vtext= problemList.get(position).getTitle() +"\n"+ problemList.get(position).getDate().toString();
+        listItemText.setText(vtext);
         Button viewRecordsButton = view.findViewById(R.id.viewRecordsButton);
 
         viewRecordsButton.setOnClickListener(new View.OnClickListener(){
