@@ -58,20 +58,9 @@ public class MainActivity extends AppCompatActivity {
         //initialize the welcome text message
         TextView textView = (TextView) findViewById(R.id.HelloUserTextView);
 
-        //initialize the add problem button, and set it on click 
-        Button AddProblemButton = (Button) findViewById(R.id.AddProblemButton);
-        AddProblemButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //sends user to the add problem activity
-                Intent intent = new Intent(MainActivity.this, AddProblemActivity.class);
-                startActivity(intent);
-            }
-        });
-
-        //initialize the add record button, and set it on click 
-        Button AddRecordButton = (Button) findViewById(R.id.ViewProblemsButton);
-        AddRecordButton.setOnClickListener(new View.OnClickListener() {
+        //initialize the add view problems button, and set it on click
+        Button ViewProblemsButton = (Button) findViewById(R.id.ViewProblemsButton);
+        ViewProblemsButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //sends user to the view problems activity
