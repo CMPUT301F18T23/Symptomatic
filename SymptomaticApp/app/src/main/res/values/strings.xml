@@ -97,6 +97,7 @@
     <string name="comment">Comment:</string>
     <string name="body_location">Body Location:</string>
     <string name="geolocation">Geolocation:</string>
+    <string name="viewgeolocation">Geolocation</string>
     <string name="photos">Photos:</string>
     <string name="view_all_records">View All Records</string>
     <string name="title_activity_map_of_single_record">Map</string>

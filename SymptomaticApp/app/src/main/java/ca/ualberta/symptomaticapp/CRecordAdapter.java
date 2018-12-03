@@ -30,6 +30,7 @@ import android.widget.ListAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.CollectionReference;
@@ -87,7 +88,7 @@ public class CRecordAdapter extends BaseAdapter implements ListAdapter {
         //Handle buttons
         Button AddCommentButton = view.findViewById( R.id.AddCommentButton);
         Button viewPhotoButton = view.findViewById(R.id.viewPhotoButton);
-
+        Button viewGeoButton = view.findViewById(R.id.viewGeoButton);
 
         AddCommentButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -102,6 +103,20 @@ public class CRecordAdapter extends BaseAdapter implements ListAdapter {
             public void onClick(View v) {
                 Intent intent = new Intent(context, SlideShowModeActivity.class);
                 intent.putExtra("record", recordList.get(position));
+                context.startActivity(intent);
+            }
+        });
+
+        viewGeoButton.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                String[] latlng = recordList.get(position).geolocation.split(",");
+                double latitude = Double.parseDouble(latlng[0]);
+                double longitude = Double.parseDouble(latlng[1]);
+                LatLng location = new LatLng(latitude, longitude);
+                Intent intent = new Intent(context, MapOfSingleRecordActivity.class);
+                intent.putExtra("title", recordList.get(position).getTitle());
+                intent.putExtra("geolocation", location);
                 context.startActivity(intent);
             }
         });
