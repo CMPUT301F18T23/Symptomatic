@@ -22,6 +22,7 @@ import android.widget.Toast;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
@@ -83,7 +84,7 @@ public class AddPatient extends AppCompatActivity {
             Toast.makeText(this, "User is not a patient!", Toast.LENGTH_SHORT).show();
             return false;
         }
-        FirebaseFirestore db = FirebaseFirestore.getInstance(); //get our db
+        final FirebaseFirestore db = FirebaseFirestore.getInstance(); //get our db
         CollectionReference active_users = db.collection("users"); //looking at collection patients
 
         //Build the query
@@ -100,6 +101,22 @@ public class AddPatient extends AppCompatActivity {
                         //A user with that username exists
                         for(QueryDocumentSnapshot document: task.getResult()){
                             caregiver.addPatient(username); //add the patient
+                            CollectionReference caregivers = db.collection("caregivers");
+                            Query cgquery = caregivers.whereEqualTo("username", Login.thisCaregiver.returnUsername());
+
+                            cgquery.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                                @Override
+                                public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                                    for (QueryDocumentSnapshot document: task.getResult()) {
+                                        String userDocID = document.getId();
+                                        DocumentReference thisDocument = db.collection("caregivers").document(userDocID);
+                                        thisDocument.update("patients", caregiver.getPatients());
+                                    }
+                                }
+                            });
+
+
+
                             Toast.makeText(AddPatient.this, "Patient added!", Toast.LENGTH_SHORT).show(); //display message.
                             Intent intent = new Intent(AddPatient.this, ViewPatients.class);
                             startActivity(intent); //go to the view patients activity.

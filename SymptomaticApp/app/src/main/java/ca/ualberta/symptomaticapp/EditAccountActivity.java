@@ -248,7 +248,6 @@ public class EditAccountActivity extends AppCompatActivity {
                     }
                 }
             });
-
         }
     }
 
