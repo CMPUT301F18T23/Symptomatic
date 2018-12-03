@@ -103,7 +103,6 @@ public class AddPatient extends AppCompatActivity {
                             caregiver.addPatient(username); //add the patient
                             CollectionReference caregivers = db.collection("caregivers");
                             Query cgquery = caregivers.whereEqualTo("username", Login.thisCaregiver.returnUsername());
-
                             cgquery.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                                 @Override
                                 public void onComplete(@NonNull Task<QuerySnapshot> task) {

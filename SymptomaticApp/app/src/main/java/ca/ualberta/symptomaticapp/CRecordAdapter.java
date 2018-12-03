@@ -18,14 +18,17 @@ package ca.ualberta.symptomaticapp;
 
 import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.text.InputType;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ListAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -34,12 +37,18 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 import ca.ualberta.symptomaticapp.AddRecordActivity;
 import ca.ualberta.symptomaticapp.Problem;
@@ -61,7 +70,7 @@ public class CRecordAdapter extends BaseAdapter implements ListAdapter {
     }
 
     @Override
-    public Object getItem(int pos) {
+    public Record getItem(int pos) {
         return recordList.get(pos);
     }
 
@@ -93,7 +102,36 @@ public class CRecordAdapter extends BaseAdapter implements ListAdapter {
         AddCommentButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(context);
+                builder.setTitle("Add Comment");
 
+// Set up the input
+                final EditText input = new EditText(context);
+// Specify the type of input expected; this, for example, sets the input as a password, and will mask the text
+                input.setInputType(InputType.TYPE_CLASS_TEXT );
+                builder.setView(input);
+
+// Set up the buttons
+                builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        final String comment = input.getText().toString();
+                        final Record rec = getItem(position);
+                        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                        String dateString = simpleDateFormat.format(new Date());
+                        final Comment newcomment = new Comment(Login.thisCaregiver.returnUsername(), dateString, comment);
+                        Toast.makeText(context, newcomment.toString(), Toast.LENGTH_LONG);
+                        update(newcomment, rec);
+                        dialog.cancel();
+                    }
+                });
+                builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.cancel();
+                    }
+                });
+                builder.show();
 
             }
         });
@@ -123,5 +161,22 @@ public class CRecordAdapter extends BaseAdapter implements ListAdapter {
         return view;
     }
 
+    public void update(final Comment comment, Record rec){
+        final FirebaseFirestore db = FirebaseFirestore.getInstance();
+        CollectionReference records = db.collection("records");
+        Query recquery = records.whereEqualTo("recordTitle", rec.getTitle()).whereEqualTo("user", rec.user);
 
+        recquery.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                if (task.isSuccessful()) {
+                    for (QueryDocumentSnapshot document : task.getResult()) {
+                        String recordDocId = document.getId();
+                        DocumentReference thisDocument = db.collection("records").document(recordDocId);
+                        thisDocument.update("comments", FieldValue.arrayUnion(comment.toString()));
+                    }
+                }
+            }
+        });
+    }
 }

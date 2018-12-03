@@ -34,7 +34,7 @@ public class Record implements Serializable {
     protected String recordTitle,recordComment,user,problem;
 
     protected String geolocation;
-
+    protected ArrayList<String> comments;
     protected ArrayList<String> bodyLocation;
 
     protected PhotoList photoList;
@@ -56,6 +56,7 @@ public class Record implements Serializable {
       this.recordTitle = title;
       this.bodyLocation = null;
       this.recordComment = null;
+      this.comments = new ArrayList<>();
       this.geolocation = null;
       this.photoList = new PhotoList();
 
@@ -109,6 +110,22 @@ public class Record implements Serializable {
      */
     public void removeComment() {
         this.recordComment = "";
+    }
+
+    /**
+     * Adds a comment to the record
+     * @param  comment
+     */
+    public void addComments(Comment comment) {
+        this.comments.add(comment.toString());
+    }
+
+    /**
+     * Gets all comments on the record
+     *
+     */
+    public ArrayList<String> getComments() {
+        return this.comments;
     }
 
     /**
