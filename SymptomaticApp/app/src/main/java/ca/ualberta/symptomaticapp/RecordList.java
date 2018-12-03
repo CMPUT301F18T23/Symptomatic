@@ -68,6 +68,7 @@ public class RecordList implements Serializable {
         }
     }
 
+
     public void empty(){
         int i = 0;
         while(i<this.recordList.size()){
