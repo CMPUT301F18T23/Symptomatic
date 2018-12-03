@@ -56,7 +56,16 @@ public class RecordList implements Serializable {
      * @param thisRecord
      */
     public void addRecord(Record thisRecord) {
-        this.recordList.add(thisRecord);
+        if (!this.recordList.contains(thisRecord)) {
+            int putPlace = this.recordList.size();
+            for(Record tempRecord: this.recordList){
+                if(tempRecord.getTimeStamp().before(thisRecord.getTimeStamp())){
+                    putPlace = this.recordList.indexOf(tempRecord);
+                    break;
+                }
+            }
+            this.recordList.add(putPlace,thisRecord);
+        }
     }
 
     public void empty(){
