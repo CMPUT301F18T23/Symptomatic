@@ -72,7 +72,7 @@ public class CaregiverHome extends AppCompatActivity {
 
     public void viewViewQR(MenuItem menu) {
         //adds the view problems button to the menu
-        Intent intent = new Intent(CaregiverHome.this, ViewQRCode.class);
+        Intent intent = new Intent(CaregiverHome.this, CaregiverViewQRCode.class);
         startActivity(intent);
     }
 

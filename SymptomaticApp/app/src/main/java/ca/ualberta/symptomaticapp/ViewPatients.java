@@ -92,6 +92,11 @@ public class ViewPatients extends AppCompatActivity {
         Intent intent = new Intent(ViewPatients.this, AddPatient.class);
         startActivity(intent);
     }
+    public void viewViewQR(MenuItem menu) {
+        //adds the view problems button to the menu
+        Intent intent = new Intent(ViewPatients.this, CaregiverViewQRCode.class);
+        startActivity(intent);
+    }
     public void viewLogout(MenuItem menu){ //logs user out
         Login.thisCaregiver = null;
         Login.thisUser = null;

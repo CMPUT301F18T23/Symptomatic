@@ -102,6 +102,7 @@
             android:name=".EditRecordMap"
             android:label="@string/title_activity_edit_record_map" />
         <activity android:name=".CMapOfRecords"></activity>
+        <activity android:name=".CaregiverViewQRCode"></activity>
     </application>
 
 </manifest>
