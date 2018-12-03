@@ -164,13 +164,12 @@ public class ListRecordsActivity extends AppCompatActivity {
         db = FirebaseFirestore.getInstance();
 
         final CollectionReference records = db.collection("records");
-
+        thisRecordList.empty();
         Query recordsQuery = records.whereEqualTo("problem",problem.getTitle()).whereEqualTo("user",Login.thisUser.returnUsername());
         recordsQuery.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
                 if(task.isSuccessful()){
-                    thisRecordList.empty();
                     int x = 0;
                     for(QueryDocumentSnapshot document: task.getResult()){
                         thisRecordList.addRecord(document.toObject(Record.class));
