@@ -1,3 +1,20 @@
+/*
+ * ViewQRCode.java
+ *
+ * Version 1
+ *
+ * November, 26, 2018.
+ *
+ * This file is subject to the terms and conditions defined in
+ * file 'LICENSE', which is part of this source code package.
+ *
+ * Allows caregivers and patients to view their QR Code.
+ *
+ * Issues:
+ *
+ */
+
+
 package ca.ualberta.symptomaticapp;
 
 import android.content.Intent;

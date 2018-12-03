@@ -1,9 +1,26 @@
 /*
-Activity for the caregiver to view the number of patients and the patients they are currently
-taking care of. The ListView will allow the caregiver to view the patient, their problems or remove
-a patient entirely. At the bottom of the activity lies a button 'Add Patient' which will take the
-caregiver to a new page where they can add a patient.
+ * ViewPatients.java
+ *
+ * Version 1
+ *
+ * November, 26, 2018.
+ *
+ * This file is subject to the terms and conditions defined in
+ * file 'LICENSE', which is part of this source code package.
+ *
+ * Activity for the caregiver to view the number of patients and the patients they are currently
+ * taking care of. The ListView will allow the caregiver to view the patient, their problems or remove
+ * a patient entirely. At the bottom of the activity lies a button 'Add Patient' which will take the
+ * caregiver to a new page where they can add a patient.
+ *
+ * Issues:
+ *
  */
+
+
+
+
+
 
 package ca.ualberta.symptomaticapp;
 

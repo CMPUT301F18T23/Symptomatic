@@ -1,3 +1,19 @@
+/*
+ * ViewComments.java
+ *
+ * Version 1
+ *
+ * December, 1, 2018.
+ *
+ * This file is subject to the terms and conditions defined in
+ * file 'LICENSE', which is part of this source code package.
+ *
+ * View Comments of the caregiver.
+ *
+ * Issues:
+ *
+ */
+
 package ca.ualberta.symptomaticapp;
 
 import android.content.Intent;
