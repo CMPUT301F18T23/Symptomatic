@@ -15,13 +15,11 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class ViewPatients extends AppCompatActivity {
     public Caregiver caregiver; //current caregiver
@@ -61,7 +59,7 @@ public class ViewPatients extends AppCompatActivity {
             addpatient.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    startActivity(new Intent(ViewPatients.this, AddPatient.class));
+                    startActivity(new Intent(ViewPatients.this, AddPatientActivity.class));
                 }
             });
         } else {
@@ -89,7 +87,7 @@ public class ViewPatients extends AppCompatActivity {
     }
 
     public void viewAddPatients(MenuItem menu) {
-        Intent intent = new Intent(ViewPatients.this, AddPatient.class);
+        Intent intent = new Intent(ViewPatients.this, AddPatientActivity.class);
         startActivity(intent);
     }
     public void viewViewQR(MenuItem menu) {

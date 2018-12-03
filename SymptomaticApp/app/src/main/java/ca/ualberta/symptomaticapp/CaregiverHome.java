@@ -42,7 +42,7 @@ public class CaregiverHome extends AppCompatActivity {
         ViewPatientButton.setOnClickListener(new View.OnClickListener() { //viewpatient button listener
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(CaregiverHome.this, AddPatient.class);
+                Intent intent = new Intent(CaregiverHome.this, AddPatientActivity.class);
                 startActivity(intent); //open viewpatients activity
             }
         });
@@ -70,7 +70,7 @@ public class CaregiverHome extends AppCompatActivity {
     }
 
     public void viewAddPatients(MenuItem menu) { //open add patients activity
-        Intent intent = new Intent(CaregiverHome.this, AddPatient.class);
+        Intent intent = new Intent(CaregiverHome.this, AddPatientActivity.class);
         startActivity(intent);
     }
 
