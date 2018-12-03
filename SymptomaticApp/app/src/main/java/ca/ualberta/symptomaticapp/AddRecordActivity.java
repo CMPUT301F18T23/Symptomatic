@@ -87,7 +87,6 @@ public class AddRecordActivity extends AppCompatActivity {
 
     String currProbName,comment,title;
 
-//    PhotoList photoList = new PhotoList();
 
     String mCurrentPhotoPath; // the photo's file path
 
@@ -120,7 +119,6 @@ public class AddRecordActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("Add Record");
         final Calendar cal = Calendar.getInstance();
-//        ListView photoListView = findViewById(R.id.photoListView);
 
         bodyPartsSelected = new ArrayList<>();
 
@@ -206,7 +204,6 @@ public class AddRecordActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(AddRecordActivity.this, MapsActivity.class);
-                //startActivity(intent);
                 startActivityForResult(intent, GET_GEOLOCATION);
             }
         });
@@ -267,7 +264,6 @@ public class AddRecordActivity extends AppCompatActivity {
 
                 // Obtaining the user's input fields
                 currProbName = problem.getTitle();
-                //Date currDate = Calendar.getInstance().getTime();
 
                 comment = commentEdit.getText().toString();
                 title = titleEdit.getText().toString();
@@ -280,13 +276,6 @@ public class AddRecordActivity extends AppCompatActivity {
                     goodRecord = false;
                 }
 
-//                if (displayPhotos.size() < 2) {
-//                    // Check whether the minimum of two photos were added to the record
-//                    AlertDialog.Builder twoPhotosMinDialog = new AlertDialog.Builder(AddRecordActivity.this);
-//                    twoPhotosMinDialog.setMessage("A minimum of 2 photos for the record needed.");
-//                    twoPhotosMinDialog.show();
-//                    goodRecord = false;
-//                }
 
                 if (goodRecord) {
                     FirebaseFirestore db = FirebaseFirestore.getInstance();
@@ -377,10 +366,7 @@ public class AddRecordActivity extends AppCompatActivity {
 
     }
 
-    // setListViewHeightBasedonChildren class reference:
-//    Skidan, Oleg. “ListView inside ScrollView. Solve the Problem. – Oleg Skidan – Medium.” Medium.com, Medium,
-//    5 Feb. 2016, medium.com/@skidanolegs/listview-inside-scrollview-solve-the-problem-a06fdff2a4e0.
-//    Accessed: 25th November, 2018
+
     public static void setListViewHeightBasedOnChildren(ListView listView) {
         ListAdapter listAdapter = listView.getAdapter();
         if (listAdapter == null) return;
@@ -419,22 +405,18 @@ public class AddRecordActivity extends AppCompatActivity {
                     try {
                         // Convert the photo selected from gallery into a bitmap and display it
                         bmp = MediaStore.Images.Media.getBitmap(getContentResolver(), selectedImage);
-//                        iv.setImageBitmap(bmp);
+//
 
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
 
                     // Create an instance of the Photo class
-//                    Photo photo = new Photo(bmp);
 
                     String image = formatPhoto(bmp);
                     Photo photo = new Photo(image);
 
-//                    ByteArrayOutputStream stream = new ByteArrayOutputStream();
-//                    bmp.compress(Bitmap.CompressFormat.JPEG, 40, stream);
-//                    photoByteArray = stream.toByteArray();
-//                    String imageB64 = Base64.encodeToString(photoByteArray, Base64.DEFAULT);
+
 
                     if (displayPhotos.size() < 10) {
                         displayPhotos.add(photo);
@@ -455,15 +437,9 @@ public class AddRecordActivity extends AppCompatActivity {
                         bmp = BitmapFactory.decodeFile(mCurrentPhotoPath);
 
                         // Store the image as a Photo object
-
-//                        ByteArrayOutputStream stream = new ByteArrayOutputStream();
-//                        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, stream);
-//                        photoByteArray = stream.toByteArray();
-//                        String imageB64 = Base64.encodeToString(photoByteArray, Base64.DEFAULT);
-
                         String image = formatPhoto(bmp);
                         Photo photo = new Photo(image);
-//                        photo.setPhotoBitmap(bmp);
+
 
                         if (displayPhotos.size() < 10) {
                             displayPhotos.add(photo);

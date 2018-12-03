@@ -199,8 +199,7 @@ public class AddProblemActivity extends AppCompatActivity {
                     }
                 }
             });
-            //Intent intent = new Intent(AddProblemActivity.this, ListProblemsActivity.class);
-            //startActivity(intent);
+
         }
     }
 

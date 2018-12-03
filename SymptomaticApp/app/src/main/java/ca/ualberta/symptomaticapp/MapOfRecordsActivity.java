@@ -313,7 +313,7 @@ public class MapOfRecordsActivity extends FragmentActivity implements OnMapReady
         }
     };
 
-    
+
     private void getRecords(){
         final ArrayList<Record> foundRecords = new ArrayList<Record>();
         db = FirebaseFirestore.getInstance();

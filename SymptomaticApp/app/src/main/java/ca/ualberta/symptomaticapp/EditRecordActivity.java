@@ -378,10 +378,7 @@ public class EditRecordActivity extends AppCompatActivity {
         return image;
     }
 
-    // setListViewHeightBasedonChildren class reference:
-//    Skidan, Oleg. “ListView inside ScrollView. Solve the Problem. – Oleg Skidan – Medium.” Medium.com, Medium,
-//    5 Feb. 2016, medium.com/@skidanolegs/listview-inside-scrollview-solve-the-problem-a06fdff2a4e0.
-//    Accessed: 25th November, 2018
+
     public static void setListViewHeightBasedOnChildren(ListView listView) {
         ListAdapter listAdapter = listView.getAdapter();
         if (listAdapter == null) return;
