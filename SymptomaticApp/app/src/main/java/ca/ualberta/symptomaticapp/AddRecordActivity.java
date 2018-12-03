@@ -292,7 +292,7 @@ public class AddRecordActivity extends AppCompatActivity {
                     FirebaseFirestore db = FirebaseFirestore.getInstance();
                     CollectionReference records = db.collection("records");
 
-                    Query recordsQuery = records.whereEqualTo("user",Login.thisUser.returnUsername()).whereEqualTo("problem",problem.getTitle()).whereEqualTo("recordTitle",currProbName);
+                    Query recordsQuery = records.whereEqualTo("user",Login.thisUser.returnUsername()).whereEqualTo("problem",currProbName).whereEqualTo("recordTitle",title);
 
                     recordsQuery.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                         @Override
