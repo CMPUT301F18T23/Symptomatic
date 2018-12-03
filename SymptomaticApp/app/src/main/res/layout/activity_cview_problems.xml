@@ -15,7 +15,7 @@
         android:id="@+id/cviewProblems_toolbar"
         android:layout_width="match_parent"
         android:layout_height="?android:attr/actionBarSize"
-        android:background="@color/colorPrimary"
+        android:background="@color/logoColor"
         android:elevation="4dp"
         android:theme="@style/AppTheme"
         app:popupTheme="@style/ThemeOverlay.AppCompat.Light"

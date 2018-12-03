@@ -6,6 +6,8 @@
     android:layout_height="match_parent"
     tools:context=".CViewRecords">
 
+
+
     <Spinner
         android:id="@+id/sp_Patient"
         android:layout_width="220dp"

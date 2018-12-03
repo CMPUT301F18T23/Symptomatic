@@ -46,6 +46,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 
 public class EditRecordActivity extends AppCompatActivity {
 
@@ -60,6 +61,8 @@ public class EditRecordActivity extends AppCompatActivity {
     int day;
     int hour;
     int min;
+    TextView timeTextView;
+    Date currentTime;
 
     private static final int PICK_IMAGE_REQUEST = 100; // to access the gallery to choose an image
     static final int REQUEST_IMAGE_CAPTURE = 1; // to access the camera to take an image
@@ -100,13 +103,14 @@ public class EditRecordActivity extends AppCompatActivity {
 
         cal = Calendar.getInstance();
         cal.setTime(record.recordDate);
+        currentTime = cal.getTime();
 
         // Input the title
         titleEditText = findViewById(R.id.editTitleEditText);
         titleEditText.setText(record.recordTitle);
 
         // Input the time stamp
-        TextView timeTextView = findViewById(R.id.currentTimeTextView);
+        timeTextView = findViewById(R.id.currentTimeTextView);
         timeTextView.setText(record.recordDate.toString());
 
         // Input the comment
@@ -158,6 +162,7 @@ public class EditRecordActivity extends AppCompatActivity {
             public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
                 hour = hourOfDay;
                 min = minute;
+                updateTime();
 
             }
         };
@@ -240,6 +245,15 @@ public class EditRecordActivity extends AppCompatActivity {
         });
 
     }
+
+    public void updateTime(){
+        final Calendar cal = Calendar.getInstance();
+        cal.set(year, month, day, hour, min);
+        timeTextView.setText(cal.getTime().toString());
+        currentTime = cal.getTime();
+    }
+
+
 
     private void initPhotoListView() {
         if(photoListViewAdapter == null){
@@ -433,7 +447,7 @@ public class EditRecordActivity extends AppCompatActivity {
 
         CollectionReference records = db.collection("records");
 
-        Query recordsQuery = records.whereEqualTo("problem", record.getProblem()).whereEqualTo("user", Login.thisUser.username).whereEqualTo("title",record.getTitle());
+        Query recordsQuery = records.whereEqualTo("problem", record.getProblem()).whereEqualTo("user", Login.thisUser.username).whereEqualTo("recordTitle",record.getTitle());
 
         recordsQuery.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
@@ -444,7 +458,7 @@ public class EditRecordActivity extends AppCompatActivity {
                         //update problem to new information
                         String recordDocId = document.getId();
                         DocumentReference thisDocument = db.collection("records").document(recordDocId);
-                        thisDocument.update("recordTitle",titleEditText.getText().toString(),"recordComment",commentEditText.getText().toString(),"bodyLocation",thisDialog.returnPartsSelected(),"geolocation",newGeolocationString/*,"photoList",photoList*/);
+                        thisDocument.update("recordTitle",titleEditText.getText().toString(),"recordComment",commentEditText.getText().toString(),"bodyLocation",thisDialog.returnPartsSelected(),"geolocation",newGeolocationString,"recordDate",currentTime/*,"photoList",photoList*/);
                     }
                 }
                 finish();
@@ -457,7 +471,7 @@ public class EditRecordActivity extends AppCompatActivity {
 
         CollectionReference records = db.collection("records");
 
-        Query recordsQuery = records.whereEqualTo("problem", record.getProblem()).whereEqualTo("user", Login.thisUser.username).whereEqualTo("title",record.getTitle());
+        Query recordsQuery = records.whereEqualTo("problem", record.getProblem()).whereEqualTo("user", Login.thisUser.username).whereEqualTo("recordTitle",record.getTitle());
 
         recordsQuery.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
