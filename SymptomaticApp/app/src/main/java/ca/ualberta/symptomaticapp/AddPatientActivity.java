@@ -61,7 +61,7 @@ public class AddPatientActivity extends AppCompatActivity {
             public void onClick(View v) { //add patient button listener
                 EditText entry = (EditText) findViewById(R.id.et_username); //find the edittext
                 final String content= entry.getText().toString(); //get their entry
-                validEntry(content, "patient");
+                validEntryAndQuery(content, "patient");
             }
         });
     }
@@ -74,12 +74,12 @@ public class AddPatientActivity extends AppCompatActivity {
         if (scanResult != null && scanResult.getContents()!=null) {
 
             String entry = scanResult.getContents();
-            validEntry(entry.split(",")[0],entry.split(",")[1]);
+            validEntryAndQuery(entry.split(",")[0],entry.split(",")[1]);
 
         }
 
     }
-    public boolean validEntry(final String username, String type){
+    public boolean validEntryAndQuery(final String username, String type){
         //check if scanned user is a patient/caregiver
         if (type.contains("caregiver")){
             Toast.makeText(this, "User is not a patient!", Toast.LENGTH_SHORT).show();
