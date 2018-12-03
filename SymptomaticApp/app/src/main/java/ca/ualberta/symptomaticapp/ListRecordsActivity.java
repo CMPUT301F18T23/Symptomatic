@@ -153,9 +153,7 @@ public class ListRecordsActivity extends AppCompatActivity {
         Intent intent = new Intent(ListRecordsActivity.this, MapOfRecordsActivity.class);
         intent.putExtra("problem", problem);
         startActivity(intent);
-
     }
-
 
     private void initRecordView(){
         if(recordListViewAdapter == null){

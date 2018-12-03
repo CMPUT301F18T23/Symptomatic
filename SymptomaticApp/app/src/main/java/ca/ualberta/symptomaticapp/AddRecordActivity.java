@@ -29,6 +29,7 @@ import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.support.annotation.NonNull;
 import android.support.v4.content.FileProvider;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -53,6 +54,12 @@ import android.widget.TimePicker;
 import android.widget.Toast;
 
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.Query;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -77,6 +84,8 @@ public class AddRecordActivity extends AppCompatActivity {
 
     Bitmap bmp;
     Context context = this;
+
+    String currProbName,comment,title;
 
 //    PhotoList photoList = new PhotoList();
 
@@ -257,11 +266,11 @@ public class AddRecordActivity extends AppCompatActivity {
                 boolean goodRecord = true;
 
                 // Obtaining the user's input fields
-                String currProbName = problem.getTitle();
+                currProbName = problem.getTitle();
                 //Date currDate = Calendar.getInstance().getTime();
 
-                String comment = commentEdit.getText().toString();
-                String title = titleEdit.getText().toString();
+                comment = commentEdit.getText().toString();
+                title = titleEdit.getText().toString();
 
                 if (title.length() == 0) {
                     // Check whether a title for the record was inputted
@@ -280,35 +289,51 @@ public class AddRecordActivity extends AppCompatActivity {
 //                }
 
                 if (goodRecord) {
-                    // Prepare the attributes required to instantiate the Record class
-                    if (timeChanged){
-                        final Calendar cal = Calendar.getInstance();
-                        cal.set(year, month, day, hour, min);
-                        timeStamp = cal.getTime();
+                    FirebaseFirestore db = FirebaseFirestore.getInstance();
+                    CollectionReference problems = db.collection("problems");
 
+                    Query problemsQuery = problems.whereEqualTo("user",Login.thisUser.returnUsername()).whereEqualTo("problem",problem.getTitle()).whereEqualTo("recordTitle",currProbName);
 
-                    } else{
-                        // If no specific date was inputted, just current time instance
-                        timeStamp = Calendar.getInstance().getTime();
-                    }
+                    problemsQuery.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                        @Override
+                        public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                            if(task.isSuccessful()){
+                                if (task.getResult().size()>0){
+                                    AlertDialog.Builder noDescriptionDialog = new AlertDialog.Builder(AddRecordActivity.this);
+                                    noDescriptionDialog.setMessage("Please rename your record.\nYou already have a record with that name.");
+                                    noDescriptionDialog.show();
+                                } else {
+                                    // Prepare the attributes required to instantiate the Record class
+                                    if (timeChanged){
+                                        final Calendar cal = Calendar.getInstance();
+                                        cal.set(year, month, day, hour, min);
+                                        timeStamp = cal.getTime();
+                                    } else{
+                                        // If no specific date was inputted, just current time instance
+                                        timeStamp = Calendar.getInstance().getTime();
+                                    }
 
-                    // Create the new record
-                    Record currRecord = new Record(currProbName, timeStamp,Login.thisUser.returnUsername(),title);
-                    currRecord.addComment(comment);
-                    currRecord.addBodyLocation(bodyPartDialog.returnPartsSelected());
+                                    // Create the new record
+                                    Record currRecord = new Record(currProbName, timeStamp,Login.thisUser.returnUsername(),title);
+                                    currRecord.addComment(comment);
+                                    currRecord.addBodyLocation(bodyPartDialog.returnPartsSelected());
 
-                    currRecord.setPhotoList(displayPhotos);
-                    currRecord.addGeolocation(geolocationString);
+                                    currRecord.setPhotoList(displayPhotos);
+                                    currRecord.addGeolocation(geolocationString);
 
-              //so     currRecord.setPhotoList(displayPhotos);
+                                    //so     currRecord.setPhotoList(displayPhotos);
 
 //                    Log.d("photos length", String.valueOf(displayPhotos.size()));
-                    currRecord.addRecToDb();
+                                    currRecord.addRecToDb();
 
-                    // Switch back to the previous activity
-                    Intent intent = new Intent(AddRecordActivity.this, ListRecordsActivity.class);
-                    intent.putExtra("problem", problem);
-                    startActivity(intent);
+                                    // Switch back to the previous activity
+                                    Intent intent = new Intent(AddRecordActivity.this, ListRecordsActivity.class);
+                                    intent.putExtra("problem", problem);
+                                    startActivity(intent);
+                                }
+                            }
+                        }
+                    });
                 }
 
             }
