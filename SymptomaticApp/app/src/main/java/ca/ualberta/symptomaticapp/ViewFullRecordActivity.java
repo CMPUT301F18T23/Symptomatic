@@ -73,6 +73,7 @@ public class ViewFullRecordActivity extends AppCompatActivity {
         TextView commentTextView = findViewById(R.id.addCommentTextView);
         commentTextView.setText(record.recordComment);
 
+
         Button mapButton = findViewById(R.id.mapButton);
         mapButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -101,9 +102,11 @@ public class ViewFullRecordActivity extends AppCompatActivity {
         viewComments.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(ViewFullRecordActivity.this, ViewComments.class);
-                intent.putExtra("record", record);
-                startActivity(intent);
+                if (record.getComments() != null) {
+                    Intent intent = new Intent(ViewFullRecordActivity.this, ViewComments.class);
+                    intent.putExtra("record", record);
+                    startActivity(intent);
+                }
             }
         });
 
