@@ -96,6 +96,7 @@ public class ListRecordsActivity extends AppCompatActivity {
     @Override
     protected void onResume(){
         super.onResume();
+        thisRecordList.empty();
         getRecords();
     }
     @Override
@@ -169,7 +170,6 @@ public class ListRecordsActivity extends AppCompatActivity {
         db = FirebaseFirestore.getInstance();
 
         final CollectionReference records = db.collection("records");
-        //thisRecordList.empty();
 
         Query recordsQuery = records.whereEqualTo("problem",problem.getTitle()).whereEqualTo("user",Login.thisUser.returnUsername());
         recordsQuery.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
@@ -178,7 +178,8 @@ public class ListRecordsActivity extends AppCompatActivity {
                 if(task.isSuccessful()){
                     int x = 0;
                     for(QueryDocumentSnapshot document: task.getResult()){
-                        thisRecordList.addRecord(document.toObject(Record.class));
+                        Record newRecord = document.toObject(Record.class);
+                        thisRecordList.addRecord(newRecord);
                     }
                 }
                 recordListViewAdapter.notifyDataSetChanged();

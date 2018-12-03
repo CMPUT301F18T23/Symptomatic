@@ -69,7 +69,7 @@ public class RecordList implements Serializable {
     }
 
     public void empty(){
-        this.recordList = new ArrayList<Record>();
+        this.recordList.clear();
     }
 
     /**
