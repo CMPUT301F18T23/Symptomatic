@@ -73,7 +73,7 @@ public class CProblemsAdapter extends BaseAdapter implements ListAdapter {
             public void onClick(View v) { //view records button to open the view records page
                 Intent intent = new Intent(context, CViewRecords.class);
                 //pass selected problem and patient to view records.
-                intent.putExtra("problem", getItem(position).getTitle());
+                intent.putExtra("problem", getItem(position));
                 intent.putExtra("username", CViewProblems.currentpatient);
                 context.startActivity(intent); //open the activity
             }

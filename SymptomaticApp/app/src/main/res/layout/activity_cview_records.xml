@@ -6,57 +6,6 @@
     android:layout_height="match_parent"
     tools:context=".CViewRecords">
 
-    <Spinner
-        android:id="@+id/sp_Patient"
-        android:layout_width="220dp"
-        android:layout_height="40dp"
-        android:layout_marginLeft="24dp"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="8dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <Button
-        android:id="@+id/btn_ViewPatient"
-        android:layout_width="88dp"
-        android:layout_height="40dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/sp_Patient"
-        app:layout_constraintTop_toTopOf="parent"
-        android:text="@string/view_problems" />
-
-    <Spinner
-        android:id="@+id/sp_Problems"
-        android:layout_width="220dp"
-        android:layout_height="40dp"
-        android:layout_marginLeft="24dp"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="8dp"
-        android:textColor="#000000"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/sp_Patient" />
-
-    <Button
-        android:id="@+id/btn_ViewProblems"
-        android:layout_width="88dp"
-        android:layout_height="40dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/sp_Problems"
-        app:layout_constraintTop_toBottomOf="@+id/btn_ViewPatient"
-        android:text="@string/view_records" />
-
     <TextView
         android:id="@+id/tv_numprob"
         android:layout_width="wrap_content"
@@ -69,19 +18,19 @@
         android:text="TextView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/sp_Problems" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_problem" />
 
     <Button
-        android:id="@+id/btn_ViewPhotos"
-        android:layout_width="wrap_content"
+        android:id="@+id/btn_ViewGeos"
+        android:layout_width="170dp"
         android:layout_height="wrap_content"
         android:layout_marginLeft="16dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
 
+        android:text="@string/view_map"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_numprob"
-        android:text="@string/view_photo_album" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_numprob" />
 
     <Button
         android:id="@+id/btn_ViewContactInfo"
@@ -109,4 +58,56 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_numprob" />
+
+    <TextView
+        android:id="@+id/tv_PatLab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="32dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="24dp"
+
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:text="@string/username2" />
+
+    <TextView
+        android:id="@+id/tv_ProbLab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="32dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="24dp"
+
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_PatLab"
+        android:text="@string/problem" />
+
+    <TextView
+        android:id="@+id/tv_username"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="14dp"
+        android:layout_marginStart="14dp"
+        android:layout_marginTop="24dp"
+        android:text="TextView"
+        android:textSize="18sp"
+        app:layout_constraintStart_toEndOf="@+id/tv_PatLab"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_problem"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="28dp"
+        android:layout_marginStart="28dp"
+        android:layout_marginTop="24dp"
+        android:text="TextView"
+        android:textSize="18sp"
+        app:layout_constraintStart_toEndOf="@+id/tv_ProbLab"
+        app:layout_constraintTop_toBottomOf="@+id/tv_username" />
 </android.support.constraint.ConstraintLayout>
