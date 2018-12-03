@@ -96,8 +96,18 @@ public class CRecordAdapter extends BaseAdapter implements ListAdapter {
 
         //Handle buttons
         Button AddCommentButton = view.findViewById( R.id.AddCommentButton);
+
         Button viewPhotoButton = view.findViewById(R.id.viewPhotoButton);
         Button viewGeoButton = view.findViewById(R.id.viewGeoButton);
+        //disable respective buttons if no photos/geolocation exists to prevent future problems
+        if(recordList.get(position).getPhotoList().size() ==0){
+            viewPhotoButton.setEnabled(false);
+        }
+        if(recordList.get(position).getGeolocation() == null){
+            viewGeoButton.setEnabled(false);
+        }
+
+
 
         AddCommentButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -139,14 +149,12 @@ public class CRecordAdapter extends BaseAdapter implements ListAdapter {
         viewPhotoButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-                if(recordList.get(position).getPhotoList().size()>0){
-                    //photos exist
-                    Intent intent = new Intent(context, SlideShowModeActivity.class);
-                    intent.putExtra("record", recordList.get(position));
-                    context.startActivity(intent);
-                }else{
-                    Toast.makeText(context, "No Photos attached", Toast.LENGTH_SHORT);
-                }
+
+                //photos exist
+                Intent intent = new Intent(context, SlideShowModeActivity.class);
+                intent.putExtra("record", recordList.get(position));
+                context.startActivity(intent);
+
 
             }
         });
@@ -154,19 +162,14 @@ public class CRecordAdapter extends BaseAdapter implements ListAdapter {
         viewGeoButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-                if(recordList.get(position).geolocation != null){
-                    String[] latlng = recordList.get(position).geolocation.split(",");
-                    double latitude = Double.parseDouble(latlng[0]);
-                    double longitude = Double.parseDouble(latlng[1]);
-                    LatLng location = new LatLng(latitude, longitude);
-                    Intent intent = new Intent(context, MapOfSingleRecordActivity.class);
-                    intent.putExtra("title", recordList.get(position).getTitle());
-                    intent.putExtra("geolocation", location);
-                    context.startActivity(intent);
-                }else{
-                    Toast.makeText(context, "No Geolocation attached", Toast.LENGTH_SHORT);
-                }
-
+                String[] latlng = recordList.get(position).geolocation.split(",");
+                double latitude = Double.parseDouble(latlng[0]);
+                double longitude = Double.parseDouble(latlng[1]);
+                LatLng location = new LatLng(latitude, longitude);
+                Intent intent = new Intent(context, MapOfSingleRecordActivity.class);
+                intent.putExtra("title", recordList.get(position).getTitle());
+                intent.putExtra("geolocation", location);
+                context.startActivity(intent);
             }
         });
         return view;
