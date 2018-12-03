@@ -70,7 +70,7 @@
             android:grantUriPermissions="true">
             <meta-data
                 android:name="android.support.FILE_PROVIDER_PATHS"
-                android:resource="@xml/file_paths"></meta-data>
+                android:resource="@xml/file_paths" />
         </provider>
 
         <activity android:name=".ListRecordsActivity" />
@@ -101,8 +101,9 @@
         <activity
             android:name=".EditRecordMap"
             android:label="@string/title_activity_edit_record_map" />
-        <activity android:name=".CMapOfRecords"></activity>
-        <activity android:name=".CaregiverViewQRCode"></activity>
+        <activity android:name=".CMapOfRecords" />
+        <activity android:name=".CaregiverViewQRCode" />
+        <activity android:name=".ViewComments"></activity>
     </application>
 
 </manifest>

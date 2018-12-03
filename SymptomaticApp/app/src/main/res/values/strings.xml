@@ -109,7 +109,7 @@
     <string name="modify_geolocation">Modify the geolocation:</string>
 
     <string name="title_activity_edit_map_of_record">Map</string>
-
+    <string name="view_author">View Author</string>
     <string name="keyword_search">Search by Keywords</string>
     <string name="geolocation_search">Search by Geo Location</string>
     <string name="bodylocation_search">Search by Body Location</string>
@@ -129,6 +129,7 @@
     <string name="search_records">Search Records</string>
     <string name="enter_distance">Enter distance in KM</string>
     <string name="profile">Profile</string>
+    <string name="caregiver_comments">Careprovider Comments:</string>
     />
     />
 

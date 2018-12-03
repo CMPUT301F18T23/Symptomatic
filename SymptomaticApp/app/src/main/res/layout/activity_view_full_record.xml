@@ -256,6 +256,30 @@
                 app:layout_constraintVertical_bias="0.984" />
 
             <TextView
+                android:id="@+id/cgcomments"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                android:textColor="#000000"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:text="@string/caregiver_comments" />
+
+            <Button
+                android:id="@+id/btn_viewcomments"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginBottom="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:text="View Comments" />
+
+            <TextView
                 android:id="@+id/photoTextView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

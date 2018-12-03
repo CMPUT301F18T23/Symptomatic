@@ -1,3 +1,4 @@
+
 /*
 Activity for the caregiver to enter a patient's username that they wish to add to their list of patients.
 Username will be verified and added upon verification. Caregiver can also cancel the activity to return
