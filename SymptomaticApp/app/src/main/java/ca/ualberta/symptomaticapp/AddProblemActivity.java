@@ -24,6 +24,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -37,6 +38,14 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TextView;
 
+
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.Query;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -169,10 +178,27 @@ public class AddProblemActivity extends AppCompatActivity {
         }
 
         if (goodProblem) {
-            Problem newProblem = new Problem(title, cal.getTime(), description);
-            Context context = this;
-            newProblem.addProbToDb();
-            finish();
+            FirebaseFirestore db = FirebaseFirestore.getInstance();
+            CollectionReference problems = db.collection("problems");
+
+            Query problemsQuery = problems.whereEqualTo("user",Login.thisUser.returnUsername()).whereEqualTo("title",title);
+
+            problemsQuery.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                @Override
+                public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                    if(task.isSuccessful()){
+                        if (task.getResult().size()>0){
+                            AlertDialog.Builder noDescriptionDialog = new AlertDialog.Builder(AddProblemActivity.this);
+                            noDescriptionDialog.setMessage("Please rename your problem.\nYou already have a problem with that name.");
+                            noDescriptionDialog.show();
+                        } else {
+                            Problem newProblem = new Problem(title, cal.getTime(), description);
+                            newProblem.addProbToDb();
+                            finish();
+                        }
+                    }
+                }
+            });
             //Intent intent = new Intent(AddProblemActivity.this, ListProblemsActivity.class);
             //startActivity(intent);
         }
