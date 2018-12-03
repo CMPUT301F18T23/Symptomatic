@@ -1,3 +1,19 @@
+/*
+ * EditRecordActivity.java
+ *
+ * Version 2
+ *
+ * December, 3, 2018.
+ *
+ * This file is subject to the terms and conditions defined in
+ * file 'LICENSE', which is part of this source code package.
+ *
+ * Activity that allows a user to edit a record.
+ *
+ * Issues:
+ *
+ */
+
 package ca.ualberta.symptomaticapp;
 
 import android.app.AlertDialog;
