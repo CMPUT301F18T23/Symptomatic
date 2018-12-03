@@ -22,11 +22,13 @@ public class CaregiverHome extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_caregiver_home);
+
         //setup custom toolbar
         Toolbar toolbar = findViewById(R.id.caregiver_home_toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("Home Page");
         //end of toolbar setup
+
         Typeface iconFont = FontManager.getTypeface(getApplicationContext(), FontManager.REGULARFONTAWESOME);
         FontManager.markAsIconContainer(findViewById(R.id.buttoncontainer), iconFont);
 

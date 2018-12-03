@@ -1,3 +1,18 @@
+/*
+ * createAccount.java
+ *
+ * Version 2
+ *
+ * December, 3, 2018.
+ *
+ * This file is subject to the terms and conditions defined in
+ * file 'LICENSE', which is part of this source code package.
+ *
+ * Activity that allows a user to create an account.
+ *
+ * Issues:
+ *
+ */
 package ca.ualberta.symptomaticapp;
 
 import android.app.AlertDialog;
@@ -199,43 +214,6 @@ public class createAccount extends AppCompatActivity implements View.OnClickList
         }
     }
 
-/*
-    public void check_unique(){
-        //Access Firestore database
-        FirebaseFirestore db = FirebaseFirestore.getInstance();
-        CollectionReference active_users;
-
-        if (caregiverButton.isChecked()){
-            active_users = db.collection("caregivers");
-        } else {
-            active_users = db.collection("users");
-        }
-
-        //Build the query
-        Query query = active_users
-                .whereEqualTo("username",username.getText().toString());
-
-        query.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-            //If Query Worked on not
-            @Override
-            public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                if(task.isSuccessful()){
-                    //Query Worked
-                    int temp = task.getResult().size();
-                    if (task.getResult().size() > 0) {
-                        //A user with that username already exists
-                        isUserUnique = false;
-                    } else {
-                        isUserUnique = true;
-                    }
-                } else {
-                    //Query Did not Work
-                    Toast.makeText(createAccount.this, "Load Error", Toast.LENGTH_SHORT).show();
-                }
-            }
-        });
-    }
-*/
     @Override
     public void onClick(View v){
 

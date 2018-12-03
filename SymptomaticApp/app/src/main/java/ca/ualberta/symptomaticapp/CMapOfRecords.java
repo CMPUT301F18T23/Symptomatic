@@ -1,3 +1,18 @@
+/*
+ * bodyPartDialog.java
+ *
+ * Version 1
+ *
+ * December, 3, 2018.
+ *
+ * This file is subject to the terms and conditions defined in
+ * file 'LICENSE', which is part of this source code package.
+ *
+ * Displays a map of a user's records.
+ *
+ * Issues:
+ *
+ */
 package ca.ualberta.symptomaticapp;
 
 import android.Manifest;
