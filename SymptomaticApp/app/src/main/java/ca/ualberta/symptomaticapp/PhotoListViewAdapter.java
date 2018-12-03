@@ -30,10 +30,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
-// Custom list view adapter with image view reference:
-//AZZOLA, FRANCESCO. “Android ListView Tutorial: Custom Adapter, ImageView Rows, Checkbox.” SwA, 19 Nov. 2018,
-// www.survivingwithandroid.com/2012/10/android-listview-custom-adapter-and.html#android_listview_with_custom_layout_using_image_imageview.
-// Accessed: 24th November, 2018
+// Reference: https://www.survivingwithandroid.com/2012/10/android-listview-custom-adapter-and.html#android_listview_with_custom_layout_using_image_imageview
 
 public class PhotoListViewAdapter extends ArrayAdapter<Photo> {
     private ArrayList<Photo> photoList;
