@@ -429,6 +429,9 @@ public class EditRecordActivity extends AppCompatActivity {
     public void saveRecord(){
         final FirebaseFirestore db = FirebaseFirestore.getInstance();
 
+        final PhotoList photoList = new PhotoList();
+        photoList.setPhotos(displayPhotos);
+
         CollectionReference records = db.collection("records");
 
         Query recordsQuery = records.whereEqualTo("problem", record.getProblem()).whereEqualTo("user", Login.thisUser.username);
@@ -441,7 +444,7 @@ public class EditRecordActivity extends AppCompatActivity {
                         //update problem to new information
                         String recordDocId = document.getId();
                         DocumentReference thisDocument = db.collection("records").document(recordDocId);
-                        thisDocument.update("recordTitle",titleEditText.getText().toString(),"recordComment",commentEditText.getText().toString(),"bodyLocation",thisDialog.returnPartsSelected(),"geolocation",newGeolocationString/*,"photoList",<insert photo list object here>*/);
+                        thisDocument.update("recordTitle",titleEditText.getText().toString(),"recordComment",commentEditText.getText().toString(),"bodyLocation",thisDialog.returnPartsSelected(),"geolocation",newGeolocationString,"photoList",photoList);
                     }
                 }
                 finish();

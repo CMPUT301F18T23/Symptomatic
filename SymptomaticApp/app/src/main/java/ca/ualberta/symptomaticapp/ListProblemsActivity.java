@@ -74,10 +74,7 @@ public class ListProblemsActivity extends AppCompatActivity {
         if(Login.thisUser != null) {
             getProblems(Login.thisUser.returnUsername());
         }
-
-
-
-
+        
     }
 
     @Override
@@ -92,7 +89,30 @@ public class ListProblemsActivity extends AppCompatActivity {
             listAdapter.notifyDataSetChanged();
 
         }
+    }
+    @Override
+    protected void onPause(){
+        super.onPause();
+        if(Login.thisUser != null) {
+            getProblems(Login.thisUser.returnUsername());
 
+        }
+        for (Problem thisProblem: thisProbList.getProblems()){
+            thisProblem.updateRecords();
+            listAdapter.notifyDataSetChanged();
+
+        }
+    }
+    @Override
+    protected void onStart(){
+        super.onStart();
+        if(Login.thisUser != null) {
+            getProblems(Login.thisUser.returnUsername());
+        }
+        for (Problem thisProblem: thisProbList.getProblems()){
+            thisProblem.updateRecords();
+            listAdapter.notifyDataSetChanged();
+        }
     }
 
     @Override
