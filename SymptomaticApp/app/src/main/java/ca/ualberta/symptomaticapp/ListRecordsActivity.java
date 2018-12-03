@@ -168,6 +168,7 @@ public class ListRecordsActivity extends AppCompatActivity {
 
     private void getRecords(){
         db = FirebaseFirestore.getInstance();
+        thisRecordList.empty();
 
         final CollectionReference records = db.collection("records");
 
@@ -176,7 +177,6 @@ public class ListRecordsActivity extends AppCompatActivity {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
                 if(task.isSuccessful()){
-                    int x = 0;
                     for(QueryDocumentSnapshot document: task.getResult()){
                         Record newRecord = document.toObject(Record.class);
                         thisRecordList.addRecord(newRecord);
