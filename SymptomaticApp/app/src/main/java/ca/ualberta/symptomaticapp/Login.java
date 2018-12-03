@@ -144,7 +144,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener{
 
                         else {
                             //No users with that username exists
-                            Toast.makeText(Login.this, "User Does Not Exist.", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(Login.this, "You entered a non-existing username.", Toast.LENGTH_SHORT).show();
                         }
                     } else {
                         //Query Did not Work
