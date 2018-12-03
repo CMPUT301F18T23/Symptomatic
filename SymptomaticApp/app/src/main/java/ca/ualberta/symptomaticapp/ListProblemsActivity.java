@@ -157,7 +157,6 @@ public class ListProblemsActivity extends AppCompatActivity {
 
     public static void getProblems(String username){
         FirebaseFirestore db = FirebaseFirestore.getInstance();
-        ListProblemsActivity.thisProbList.empty();
         CollectionReference problems = db.collection("problems");
 
         Query problemsQuery = problems.whereEqualTo("user",username);
@@ -166,6 +165,7 @@ public class ListProblemsActivity extends AppCompatActivity {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
                 if(task.isSuccessful()){
+                    ListProblemsActivity.thisProbList.empty();
                     for(QueryDocumentSnapshot document: task.getResult()) {
                         Problem problem = document.toObject(Problem.class);
                         problem.updateRecords();
