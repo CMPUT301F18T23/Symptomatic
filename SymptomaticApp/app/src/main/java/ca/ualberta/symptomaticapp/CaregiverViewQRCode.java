@@ -21,6 +21,7 @@ import com.journeyapps.barcodescanner.BarcodeEncoder;
 
 public class CaregiverViewQRCode extends AppCompatActivity {
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,6 +40,27 @@ public class CaregiverViewQRCode extends AppCompatActivity {
         }
         String encoded = username + ","+type;
 
+//        MultiFormatWriter mfr = new MultiFormatWriter()
+        createQRCode(encoded);
+//        try{
+//            BitMatrix bitMatrix = mfr.encode(encoded, BarcodeFormat.QR_CODE,600,600);
+//            BarcodeEncoder barcodeEncoder = new BarcodeEncoder();
+//            Bitmap bitmap = barcodeEncoder.createBitmap(bitMatrix);
+//            qrdisplay.setImageBitmap(bitmap);
+//        }catch(WriterException e){
+//            e.printStackTrace();
+//        }
+
+        returnbutton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+    }
+
+
+    public void createQRCode(String encoded) {
         MultiFormatWriter mfr = new MultiFormatWriter();
         ImageView qrdisplay = (ImageView) findViewById(R.id.iv_qrcode);
         try{
@@ -49,13 +71,6 @@ public class CaregiverViewQRCode extends AppCompatActivity {
         }catch(WriterException e){
             e.printStackTrace();
         }
-
-        returnbutton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
     }
 
 

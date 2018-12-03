@@ -39,6 +39,27 @@ public class ViewQRCode extends AppCompatActivity {
         }
         String encoded = username + ","+type;
 
+        createQRCode(encoded);
+//        MultiFormatWriter mfr = new MultiFormatWriter();
+//        ImageView qrdisplay = (ImageView) findViewById(R.id.iv_qrcode);
+//        try{
+//            BitMatrix bitMatrix = mfr.encode(encoded, BarcodeFormat.QR_CODE,600,600);
+//            BarcodeEncoder barcodeEncoder = new BarcodeEncoder();
+//            Bitmap bitmap = barcodeEncoder.createBitmap(bitMatrix);
+//            qrdisplay.setImageBitmap(bitmap);
+//        }catch(WriterException e){
+//            e.printStackTrace();
+//        }
+
+        returnbutton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+    }
+
+    public void createQRCode(String encoded) {
         MultiFormatWriter mfr = new MultiFormatWriter();
         ImageView qrdisplay = (ImageView) findViewById(R.id.iv_qrcode);
         try{
@@ -50,14 +71,7 @@ public class ViewQRCode extends AppCompatActivity {
             e.printStackTrace();
         }
 
-        returnbutton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
     }
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
