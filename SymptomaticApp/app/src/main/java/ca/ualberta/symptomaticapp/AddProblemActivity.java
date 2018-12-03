@@ -153,27 +153,7 @@ public class AddProblemActivity extends AppCompatActivity {
         if (goodProblem) {
             Problem newProblem = new Problem(title, cal.getTime(), description);
             Context context = this;
-            LocalSave localSaveProblem = new LocalSave(context);
-            if (!(localSaveProblem.checkConnectivity())) {
-                // If the user is offline
-
-                // Get current timestamp
-                String timestampStr = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
-//                String timestampStr = timestamp.format(timestamp);
-//
-                // Create filename
-                String fileName = "SymptomaticProblem" + timestampStr;
-//
-                // Create and write the file   to cache
-                FileOutputStream offlineFile = localSaveProblem.createTempCacheFile(fileName);
-//                Log.d("Save location", AddProblemActivity.this.getFilesDir().getAbsolutePath());
-                localSaveProblem.writeToCacheFile(offlineFile, newProblem);
-
-            }
-            else {
-                // The user is online. Add newProblem to database
-                newProblem.addProbToDb();
-            }
+            newProblem.addProbToDb();
             finish();
             //Intent intent = new Intent(AddProblemActivity.this, ListProblemsActivity.class);
             //startActivity(intent);

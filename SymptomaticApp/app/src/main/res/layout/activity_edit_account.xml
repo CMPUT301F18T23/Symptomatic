@@ -19,86 +19,124 @@
         app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
         app:titleTextColor="@android:color/background_light" />
 
-
     <LinearLayout
+        android:id="@+id/contactIcons"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@id/editAccount_toolbar">
 
-        <TextView
-            android:id="@+id/usernameTextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="25dp"
-            android:text="@string/username2"
-            android:textColor="@android:color/black"
-            android:textSize="25sp"
-            android:textStyle="bold"
-            android:layout_gravity="center_horizontal"/>
 
-        <TextView
-            android:id="@+id/usernameEditText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAlignment="center"
-            android:textSize="20sp"
-            android:layout_marginTop="10dp"
-            android:ems="10"
-            android:layout_gravity="center_horizontal"/>
+        <LinearLayout
+            android:layout_width="300dp"
+            android:layout_height="50dp">
 
-        <TextView
-            android:id="@+id/emailAddressTextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="50dp"
-            android:text="@string/email_address"
-            android:textColor="@android:color/black"
-            android:textSize="25sp"
-            android:textStyle="bold"
-            android:layout_gravity="center_horizontal"/>
+            <TextView
+                android:id="@+id/usernameTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="@string/fa_icon_user"
+                android:textColor="@color/colorAccent"
+                android:textSize="25sp"
+                android:layout_gravity="center_horizontal"/>
 
-        <EditText
-            android:id="@+id/emailAddressEditText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:textAlignment="center"
-            android:ems="10"
-            android:layout_gravity="center_horizontal"/>
+            <TextView
+                android:id="@+id/usernameEditText"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:textSize="25sp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginStart="15dp"
+                android:ems = "10"
+                android:enabled="false"
+                android:layout_gravity="center_horizontal"/>
 
-        <TextView
-            android:id="@+id/phoneNumberTextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="50dp"
-            android:text="@string/phone_number"
-            android:textColor="@android:color/black"
-            android:textSize="25sp"
-            android:textStyle="bold"
-            android:layout_gravity="center_horizontal"/>
+        </LinearLayout>
 
-        <EditText
-            android:id="@+id/phoneNumberEditText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAlignment="center"
-            android:layout_marginTop="10dp"
-            android:ems="10"
-            android:inputType="phone"
-            android:layout_gravity="center_horizontal"/>
+        <LinearLayout
+            android:layout_width="300dp"
+            android:layout_height="50dp">
 
-        <Button
-            android:id="@+id/saveInfoButton"
+            <TextView
+                android:id="@+id/phoneNumberTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="@string/fa_icon_phone"
+                android:textColor="@color/colorAccent"
+                android:textSize="25sp"
+                android:layout_gravity="center_horizontal"/>
+
+            <EditText
+                android:id="@+id/phoneNumberEditText"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:ems="10"
+                android:layout_marginLeft="10dp"
+                android:layout_marginStart="10dp"
+                android:textSize="25sp"
+                android:enabled="false"
+                android:inputType="phone"
+                android:layout_gravity="center_horizontal"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="300dp"
+            android:layout_height="50dp">
+
+            <TextView
+                android:id="@+id/emailAddressTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="@string/fa_icon_email"
+                android:textColor="@color/colorAccent"
+                android:textSize="25sp"
+                android:layout_gravity="center_horizontal"/>
+
+            <EditText
+                android:id="@+id/emailAddressEditText"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="10dp"
+                android:layout_marginStart="10dp"
+                android:textSize="25sp"
+                android:enabled="false"
+                android:ems="10"
+                android:layout_gravity="center_horizontal"/>
+
+        </LinearLayout>
+
+
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:layout_marginBottom="8dp"
-            android:text="@string/save_info"
-            android:onClick="editInfo"
-            android:layout_gravity="center_horizontal"/>
+            android:layout_gravity="center_horizontal">
+
+            <Button
+                android:id="@+id/editSaveButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
+                android:layout_marginRight="8dp"
+                android:layout_marginEnd="8dp"
+                android:text="Edit Info"
+                android:layout_gravity="center_horizontal"/>
+
+            <Button
+                android:id="@+id/closeButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
+                android:text="Close"
+                android:layout_gravity="center_horizontal"/>
+
+        </LinearLayout>
 
 
     </LinearLayout>

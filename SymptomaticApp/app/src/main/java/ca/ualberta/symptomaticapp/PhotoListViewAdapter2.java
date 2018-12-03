@@ -1,6 +1,9 @@
 package ca.ualberta.symptomaticapp;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.util.Base64;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -42,7 +45,11 @@ public class PhotoListViewAdapter2 extends ArrayAdapter<Photo> {
         ImageView img = (ImageView) view.findViewById(R.id.photoImage2);
         Photo p = photoList.get(position);
         date.setText("" + p.getTimestamp());
-        img.setImageBitmap(p.getPhotoBitmap());
+
+        String stringPhoto = p.getPhotoString();
+        byte[] bytePhoto = Base64.decode(stringPhoto, Base64.DEFAULT);
+        Bitmap photoBitmap = BitmapFactory.decodeByteArray(bytePhoto, 0, bytePhoto.length);
+        img.setImageBitmap(photoBitmap);
 
 
 

@@ -8,12 +8,14 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="116dp">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical" >
+            android:orientation="vertical">
 
             <android.support.v7.widget.Toolbar
                 android:id="@+id/viewFullRecord_toolbar"
@@ -29,12 +31,12 @@
                 android:id="@+id/problemTextView"
                 android:layout_width="match_parent"
                 android:layout_height="29dp"
-                android:layout_marginStart="8dp"
-                android:layout_marginLeft="8dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="8dp"
-                android:layout_marginRight="8dp"
                 android:layout_marginBottom="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
                 android:text="@string/regarding_problem"
                 android:textColor="@android:color/black"
                 android:textSize="18sp"
@@ -45,16 +47,16 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/addRecord_toolbar" />
 
-            <TextView
+            <EditText
                 android:id="@+id/InputProblemTextView"
                 android:layout_width="match_parent"
                 android:layout_height="29dp"
-                android:layout_marginStart="8dp"
-                android:layout_marginLeft="8dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="8dp"
-                android:layout_marginRight="8dp"
                 android:layout_marginBottom="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
                 android:textColor="@android:color/black"
                 android:textSize="18sp"
                 app:layout_constraintBottom_toTopOf="@+id/titleTextView"
@@ -67,12 +69,12 @@
                 android:id="@+id/titleTextView"
                 android:layout_width="match_parent"
                 android:layout_height="23dp"
-                android:layout_marginStart="8dp"
-                android:layout_marginLeft="8dp"
-                android:layout_marginTop="16dp"
-                android:layout_marginEnd="8dp"
-                android:layout_marginRight="8dp"
                 android:layout_marginBottom="12dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="16dp"
                 android:text="@string/title"
                 android:textColor="@android:color/black"
                 android:textSize="18sp"
@@ -83,15 +85,15 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/InputProblemTextView" />
 
-            <TextView
+            <EditText
                 android:id="@+id/addTitleTextView"
                 android:layout_width="match_parent"
                 android:layout_height="29dp"
-                android:layout_marginStart="8dp"
-                android:layout_marginLeft="8dp"
-                android:layout_marginTop="12dp"
                 android:layout_marginEnd="8dp"
+                android:layout_marginLeft="8dp"
                 android:layout_marginRight="8dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="12dp"
                 android:ems="10"
                 android:textColor="@android:color/black"
                 android:textSize="18sp"
@@ -105,12 +107,12 @@
                 android:id="@+id/timeTextView"
                 android:layout_width="match_parent"
                 android:layout_height="23dp"
-                android:layout_marginStart="8dp"
-                android:layout_marginLeft="8dp"
-                android:layout_marginTop="16dp"
-                android:layout_marginEnd="8dp"
-                android:layout_marginRight="8dp"
                 android:layout_marginBottom="12dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="16dp"
                 android:text="@string/time_stamp2"
                 android:textColor="@android:color/black"
                 android:textSize="18sp"
@@ -121,16 +123,16 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/addTitleEditText" />
 
-            <TextView
+            <EditText
                 android:id="@+id/InputDateTextView"
                 android:layout_width="match_parent"
                 android:layout_height="29dp"
-                android:layout_marginStart="8dp"
-                android:layout_marginLeft="8dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="8dp"
-                android:layout_marginRight="8dp"
                 android:layout_marginBottom="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
                 android:textColor="@android:color/black"
                 android:textSize="18sp"
                 app:layout_constraintBottom_toTopOf="@+id/timeTextView"
@@ -143,11 +145,11 @@
                 android:id="@+id/commentTextView"
                 android:layout_width="match_parent"
                 android:layout_height="27dp"
-                android:layout_marginStart="8dp"
-                android:layout_marginLeft="8dp"
-                android:layout_marginTop="8dp"
                 android:layout_marginEnd="8dp"
+                android:layout_marginLeft="8dp"
                 android:layout_marginRight="8dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
                 android:text="@string/comment"
                 android:textColor="@android:color/black"
                 android:textSize="18sp"
@@ -157,15 +159,15 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/changeDateButton" />
 
-            <TextView
+            <EditText
                 android:id="@+id/addCommentTextView"
                 android:layout_width="match_parent"
                 android:layout_height="29dp"
-                android:layout_marginStart="8dp"
-                android:layout_marginLeft="8dp"
-                android:layout_marginTop="12dp"
                 android:layout_marginEnd="8dp"
+                android:layout_marginLeft="8dp"
                 android:layout_marginRight="8dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="12dp"
                 android:ems="10"
                 android:textColor="@android:color/black"
                 android:textSize="18sp"
@@ -178,12 +180,12 @@
                 android:id="@+id/bodyLocationTextView"
                 android:layout_width="match_parent"
                 android:layout_height="26dp"
-                android:layout_marginStart="8dp"
-                android:layout_marginLeft="8dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="8dp"
-                android:layout_marginRight="8dp"
                 android:layout_marginBottom="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
                 android:text="@string/body_location"
                 android:textColor="@android:color/black"
                 android:textSize="18sp"
@@ -219,12 +221,12 @@
                 android:id="@+id/geolocationTextView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginLeft="8dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="8dp"
-                android:layout_marginRight="8dp"
                 android:layout_marginBottom="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
                 android:text="@string/geolocation"
                 android:textColor="@android:color/black"
                 android:textSize="18sp"
@@ -257,11 +259,11 @@
                 android:id="@+id/photoTextView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginLeft="8dp"
-                android:layout_marginTop="8dp"
                 android:layout_marginEnd="8dp"
+                android:layout_marginLeft="8dp"
                 android:layout_marginRight="8dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
                 android:text="@string/photos"
                 android:textColor="@android:color/black"
                 android:textSize="18sp"
@@ -272,28 +274,49 @@
                 app:layout_constraintTop_toBottomOf="@+id/geolocationTextView" />
 
 
+            <Button
+                android:id="@+id/slideShowMode"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="5dp"
+                android:text="@string/sideShow"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/takePhoto"
+                app:layout_constraintVertical_bias="0.984" />
+
             <ListView
                 android:id="@+id/fullRPhotoListView"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content">
+
+            </ListView>
 
             <android.support.v7.widget.LinearLayoutCompat
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
                 android:layout_gravity="center_horizontal"
+                android:orientation="horizontal"
                 app:layout_constraintTop_toBottomOf="@+id/bodyLocationTextView">
 
                 <Button
                     android:id="@+id/editRecordBtn"
                     android:layout_width="180dp"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
                     android:text="@string/edit_record" />
 
                 <Button
                     android:id="@+id/viewAllRecordsBtn"
                     android:layout_width="180dp"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
                     android:text="@string/view_all_records" />
 
             </android.support.v7.widget.LinearLayoutCompat>

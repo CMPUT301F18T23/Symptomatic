@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <TextView
+        android:id="@+id/recordList_item_string"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="0dp"
+        android:layout_marginTop="18dp"
+        android:paddingLeft="8dp"
+        android:textColor="@android:color/black"
+        android:textSize="18sp" />
+
+    <Button
+        android:id="@+id/viewPhotoButton"
+        android:layout_width="wrap_content"
+        android:layout_height="62dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginBottom="60dp"
+        android:layout_marginRight="140dp"
+        android:text="@string/view_photo" />
+
+    <Button
+        android:id="@+id/AddCommentButton"
+        android:layout_width="wrap_content"
+        android:layout_height="62dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="60dp"
+        android:layout_marginLeft="10dp"
+        android:layout_toLeftOf="@id/viewPhotoButton"
+        android:text="@string/addcomment" />
+
+
+</RelativeLayout>

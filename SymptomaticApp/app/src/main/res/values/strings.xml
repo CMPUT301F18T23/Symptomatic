@@ -21,6 +21,7 @@
     <string name="enter_username_please">Please enter your desired username below</string>
     <string name="unique_username">It must be unique, and at least 8 characters</string>
     <string name="enter_username">Enter username here</string>
+    <string name="addcomment">Add Comment</string>
     <string name="enter_email_please">Please enter your email address</string>
     <string name="enter_email">Enter email address here</string>
     <string name="enter_number_please">Please enter your phone number</string>
@@ -42,6 +43,7 @@
     <string name="edit_problem2">Edit Problem</string>
     <string name="view_problems">View Patient</string>
     <string name="view_photo_album">View Photo Album</string>
+    <string name="view_photo">View Photo</string>
     <string name="add_patient">Add Patient</string>
     <string name="patuser">Patient Username:</string>
     <string name="edit_title">Modify the problem\'s title:</string>
@@ -107,18 +109,27 @@
 
     <string name="title_activity_edit_map_of_record">Map</string>
 
-    <string name="keyword_search">Search by Keywords:</string>
-    <string name="geolocation_search">Search by Geo-Location:</string>
-    <string name="bodylocation_search">Search by Body Location:</string>
+    <string name="keyword_search">Search by Keywords</string>
+    <string name="geolocation_search">Search by Geo Location</string>
+    <string name="bodylocation_search">Search by Body Location</string>
     <string name="search_separator">Please separate keywords by a semicolon (;)</string>
     <string name="search">Search</string>
     <string name="keyword">Keyword;</string>
     <string name="change_timestamp">Select to Change Time Stamp</string>
     <string name="title_activity_edit_record_map">Map</string>
+    <string name="sideShow">Slide Show Mode</string>
     <string name="view_front_body_parts">View Front Body Parts</string>
     <string name="view_back_body_parts">View Back Body Parts</string>
     <string name="done">Done</string>
     <string name="map_of_records">Map of Records</string>
+    <string name="select_geolocation">Select Geolocation</string>
+    <string name="select_body_location">Select body location</string>
+    <string name="search_problems">Search Problems</string>
+    <string name="search_records">Search Records</string>
+    <string name="enter_distance">Enter distance in KM</string>
+    />
+    />
+
 
 
 </resources>
