@@ -31,7 +31,7 @@ import com.google.firebase.firestore.QuerySnapshot;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 
-public class AddPatient extends AppCompatActivity {
+public class AddPatientActivity extends AppCompatActivity {
     public static User addedpatient;
     private Caregiver caregiver;
     @Override
@@ -118,23 +118,23 @@ public class AddPatient extends AppCompatActivity {
 
 
 
-                            Toast.makeText(AddPatient.this, "Patient added!", Toast.LENGTH_SHORT).show(); //display message.
-                            Intent intent = new Intent(AddPatient.this, ViewPatients.class);
+                            Toast.makeText(AddPatientActivity.this, "Patient added!", Toast.LENGTH_SHORT).show(); //display message.
+                            Intent intent = new Intent(AddPatientActivity.this, ViewPatients.class);
                             startActivity(intent); //go to the view patients activity.
                         }
                     } else if (username=="") {
                         //No users with that username exists
-                        Toast.makeText(AddPatient.this, "Username not entered.", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(AddPatientActivity.this, "Username not entered.", Toast.LENGTH_SHORT).show();
                         return;
 
                     }
                     else {
                         //No users with that username exists
-                        Toast.makeText(AddPatient.this, "User Does Not Exist.", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(AddPatientActivity.this, "User Does Not Exist.", Toast.LENGTH_SHORT).show();
                     }
                 } else {
                     //Query Did not Work
-                    Toast.makeText(AddPatient.this, "Load Error", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(AddPatientActivity.this, "Load Error", Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -150,7 +150,7 @@ public class AddPatient extends AppCompatActivity {
                 .setCancelable(false)
                 .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
-                        AddPatient.super.onBackPressed();
+                        AddPatientActivity.super.onBackPressed();
                     }
                 })
                 .setNegativeButton("No", null)
@@ -164,24 +164,24 @@ public class AddPatient extends AppCompatActivity {
         return true;
     }
     public void viewHome(MenuItem menu) { //opens home page for caregiver
-        Intent intent = new Intent(AddPatient.this, CaregiverHome.class);
+        Intent intent = new Intent(AddPatientActivity.this, CaregiverHome.class);
         startActivity(intent);
     }
 
     public void viewViewPatients(MenuItem menu) { //opens view patients for caregiver
-        Intent intent = new Intent(AddPatient.this, ViewPatients.class);
+        Intent intent = new Intent(AddPatientActivity.this, ViewPatients.class);
         startActivity(intent);
     }
 
     public void viewViewQR(MenuItem menu) {
         //adds the view problems button to the menu
-        Intent intent = new Intent(AddPatient.this, CaregiverViewQRCode.class);
+        Intent intent = new Intent(AddPatientActivity.this, CaregiverViewQRCode.class);
         startActivity(intent);
     }
     public void viewLogout(MenuItem menu){ //logs user out, and sends them to the login screen
         Login.thisCaregiver = null;
         Login.thisUser = null;
-        Intent intent = new Intent(AddPatient.this, MainActivity.class);
+        Intent intent = new Intent(AddPatientActivity.this, MainActivity.class);
         startActivity(intent);
     }
 }
