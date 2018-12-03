@@ -32,8 +32,8 @@ public class CaregiverHome extends AppCompatActivity {
 
         //get ui elements
         TextView hellouser = (TextView) findViewById(R.id.HelloCareProviderTextView);
-        Button ViewPatientButton = (Button) findViewById(R.id.ViewPatientButton);
-        Button AddPatientButton = (Button) findViewById(R.id.AddPatientButton);
+        Button AddPatientButton = (Button) findViewById(R.id.ViewPatientButton);
+        Button ViewPatientButton = (Button) findViewById(R.id.AddPatientButton);
         //end of getting ui elements
 
         //set welcome message for current caregiver
