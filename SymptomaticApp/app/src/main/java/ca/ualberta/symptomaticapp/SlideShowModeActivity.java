@@ -1,3 +1,21 @@
+/*
+ * SlideShowModeActivity.java
+ *
+ * Version 1
+ *
+ * November, 27, 2018.
+ *
+ * This file is subject to the terms and conditions defined in
+ * file 'LICENSE', which is part of this source code package.
+ *
+ * This activity displays the photos in a record along with
+ * 2 buttons that get the next and previous photo
+ *
+ * Issues:
+ *
+ */
+
+
 package ca.ualberta.symptomaticapp;
 
 import android.graphics.Bitmap;
@@ -33,9 +51,11 @@ public class SlideShowModeActivity extends AppCompatActivity implements View.OnC
         record = (Record) getIntent().getSerializableExtra("record");
         displayList = record.getPhotoList();
 
+        // checks if photoList is empty and sets the position to 0
         empty = isEmpty();
         position = 0;
-//
+
+        // initializes the buttons
         previous = findViewById(R.id.previousBttn);
         next = findViewById(R.id.nextBttn);
         photoImage = findViewById(R.id.slideShow);
@@ -44,6 +64,7 @@ public class SlideShowModeActivity extends AppCompatActivity implements View.OnC
         next.setOnClickListener(this);
         previous.setOnClickListener(this);
 
+        // if the photoList isn't empty, display the first photo and its timestamp
         if (!isEmpty()) {
             Photo p = displayList.get(position);
             String stringPhoto = p.getPhotoString();
@@ -55,6 +76,7 @@ public class SlideShowModeActivity extends AppCompatActivity implements View.OnC
         }
     }
 
+    // tests if the photoList is empty and returns true if empty and false if not
     private boolean isEmpty() {
         if (displayList.size() == 0) {
             String text = "NO PHOTOS";
@@ -63,23 +85,13 @@ public class SlideShowModeActivity extends AppCompatActivity implements View.OnC
         }
         return false;
     }
-//
-//
+
+
     @Override
     public void onClick(View v) {
         int viewId = v.getId();
 
-//        if (viewId == R.id.nextBttn) {
-//            Log.d("clicked next", "clicked");
-//             Photo photo = displayList.get(1);
-//            String stringPhoto = photo.getPhotoString();
-//            byte[] bytePhoto = Base64.decode(stringPhoto, Base64.DEFAULT);
-//            Bitmap photoBitmap = BitmapFactory.decodeByteArray(bytePhoto, 0, bytePhoto.length);
-//
-//            photoImage.setImageBitmap(photoBitmap);
-//
-//        }
-
+        // get previous photo unless there is no previous photo
         if ((viewId == R.id.previousBttn) && !empty)  {
             position--;
             if ((position >= 0) && (position < displayList.size())) {
@@ -96,6 +108,7 @@ public class SlideShowModeActivity extends AppCompatActivity implements View.OnC
 
         }
 
+        //get next photo unless there is no next photo
         if ((viewId == R.id.nextBttn) && !empty)  {
             position++;
             if ((position >= 0) && (position < displayList.size())) {
@@ -112,6 +125,5 @@ public class SlideShowModeActivity extends AppCompatActivity implements View.OnC
             }
 
         }
-//
     }
 }

@@ -5,6 +5,7 @@ to choose from. Add patient and View Patient opens their respective activities.
 package ca.ualberta.symptomaticapp;
 
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -26,10 +27,13 @@ public class CaregiverHome extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("Home Page");
         //end of toolbar setup
+        Typeface iconFont = FontManager.getTypeface(getApplicationContext(), FontManager.REGULARFONTAWESOME);
+        FontManager.markAsIconContainer(findViewById(R.id.buttoncontainer), iconFont);
+
         //get ui elements
         TextView hellouser = (TextView) findViewById(R.id.HelloCareProviderTextView);
-        Button ViewPatientButton = (Button) findViewById(R.id.ViewPatientButton);
-        Button AddPatientButton = (Button) findViewById(R.id.AddPatientButton);
+        Button AddPatientButton = (Button) findViewById(R.id.ViewPatientButton);
+        Button ViewPatientButton = (Button) findViewById(R.id.AddPatientButton);
         //end of getting ui elements
 
         //set welcome message for current caregiver

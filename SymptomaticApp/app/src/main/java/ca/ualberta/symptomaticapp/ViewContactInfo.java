@@ -8,6 +8,10 @@ import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -33,6 +37,12 @@ public class ViewContactInfo extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_contact_info);
+
+        Toolbar toolbar = findViewById(R.id.viewContactInfo_toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle("View Contact Info");
+
+
         Intent intent = getIntent();
         user = intent.getExtras().getString("username");
         type = intent.getExtras().getString("usertype");
@@ -103,5 +113,30 @@ public class ViewContactInfo extends AppCompatActivity {
                 }
             }
         });
+    }
+    //toolbar functions
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.viewcontactinfo_menu, menu);
+        return true;
+    }
+
+    public void viewHome(MenuItem menu) {
+        //adds the view problems button to the menu
+        Intent intent;
+        if(Login.thisCaregiver ==null){
+            intent = new Intent(ViewContactInfo.this, MainActivity.class);
+        }else{
+            intent = new Intent(ViewContactInfo.this, CaregiverHome.class);
+        }
+        startActivity(intent);
+    }
+
+    public void viewLogout(MenuItem menu){ //log current caregiver out and open login page
+        Login.thisCaregiver = null;
+        Login.thisUser = null;
+        Intent intent = new Intent(ViewContactInfo.this, MainActivity.class);
+        startActivity(intent);
     }
 }
