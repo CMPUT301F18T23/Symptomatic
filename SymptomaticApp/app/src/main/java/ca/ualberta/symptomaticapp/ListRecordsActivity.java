@@ -177,8 +177,8 @@ public class ListRecordsActivity extends AppCompatActivity {
                     ListRecordsActivity.thisRecordList.empty();
                     for(QueryDocumentSnapshot document: task.getResult()){
                         Record newRecord = document.toObject(Record.class);
-                        /*ListRecordsActivity.thisRecordList.addRecord(newRecord);
-                        ListProblemsActivity.thisProbList.getProblem(problem).updateRecords();
+                        ListRecordsActivity.thisRecordList.addRecord(newRecord);
+                        /*ListProblemsActivity.thisProbList.getProblem(problem).updateRecords();
                         ListProblemsActivity.listAdapter.notifyDataSetChanged();*/
                     }
                 }
