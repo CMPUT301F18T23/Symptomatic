@@ -69,7 +69,10 @@ public class RecordList implements Serializable {
     }
 
     public void empty(){
-        this.recordList = new ArrayList<Record>();
+        int i = 0;
+        while(i<this.recordList.size()){
+            this.recordList.remove(this.recordList.get(i));
+        }
     }
 
     /**

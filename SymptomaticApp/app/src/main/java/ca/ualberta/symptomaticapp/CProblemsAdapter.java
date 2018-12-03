@@ -80,7 +80,4 @@ public class CProblemsAdapter extends BaseAdapter implements ListAdapter {
         });
         return view;
     }
-
-
 }
-
