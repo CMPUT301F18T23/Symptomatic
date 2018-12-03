@@ -1,5 +1,4 @@
 # Symptomatic
----
 Nick Byrne <br/>
 Ryan Pineo <br/>
 Ahzam Ahmad <br/>
