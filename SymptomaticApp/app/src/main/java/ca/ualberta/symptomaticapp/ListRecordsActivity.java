@@ -102,19 +102,16 @@ public class ListRecordsActivity extends AppCompatActivity {
     @Override
     protected void onPause(){
         super.onPause();
-        thisRecordList.empty();
         getRecords();
     }
     @Override
     protected void onStart(){
         super.onStart();
-        thisRecordList.empty();
         getRecords();
     }
     @Override
     public void onRestart(){
         super.onRestart();
-        thisRecordList.empty();
         getRecords();
     }
 
