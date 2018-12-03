@@ -159,7 +159,7 @@ public class ViewFullRecordActivity extends AppCompatActivity {
         editRecordButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(ViewFullRecordActivity.this, ViewFullRecordActivity.class);
+                Intent intent = new Intent(ViewFullRecordActivity.this, EditRecordActivity.class);
                 intent.putExtra("record", record);
                 startActivity(intent);
             }

@@ -454,7 +454,7 @@ public class EditRecordActivity extends AppCompatActivity {
         recordsQuery.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                Map<String, Object> dataMap = new HashMap();
+                Map<String, Object> photoMap = new HashMap();
                 ArrayList<Map<String,Object>> transferPhotos =new ArrayList<>();
                 for (Photo photo: displayPhotos) {
                     Map<String,Object> photos =new HashMap<>();
@@ -462,7 +462,7 @@ public class EditRecordActivity extends AppCompatActivity {
                     photos.put("timestamp",photo.getTimestamp());
                     transferPhotos.add(photos);
                 }
-                dataMap.put("photoList",transferPhotos);
+                photoMap.put("photoList",transferPhotos);
 
                 if (task.isSuccessful()) {
                     for (QueryDocumentSnapshot document : task.getResult()) {
@@ -470,7 +470,7 @@ public class EditRecordActivity extends AppCompatActivity {
                         String recordDocId = document.getId();
                         DocumentReference thisDocument = db.collection("records").document(recordDocId);
                         thisDocument.update("recordTitle",titleEditText.getText().toString(),"recordComment",commentEditText.getText().toString(),"bodyLocation",thisDialog.returnPartsSelected(),"geolocation",newGeolocationString,"recordDate",currentTime);
-                        thisDocument.update(dataMap);
+                        thisDocument.update(photoMap);
                     }
                 }
                 finish();
