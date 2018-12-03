@@ -68,6 +68,10 @@ public class RecordList implements Serializable {
         recordList.add(putPlace,thisRecord);
     }
 
+    public void empty(){
+        this.recordList = new ArrayList<Record>();
+    }
+
     /**
      * Deletes record from record list
      * @param testRecord

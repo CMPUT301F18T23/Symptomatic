@@ -77,12 +77,12 @@ public class EditAccountActivity extends AppCompatActivity {
 
         editSave.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
+                editing = true;
                 if (editSave.getText().toString().equals("Edit Info")){
                     enableEdit();
                     editSave.setText("Save");
                 } else {
                     editInfo();
-
                 }
             }
         });
@@ -95,7 +95,41 @@ public class EditAccountActivity extends AppCompatActivity {
 
     }
 
+    // Confirm with user that they want to exit without saving changes
+//    @Override
+//    public void onBackPressed() {
+//        new AlertDialog.Builder(this)
+//                .setMessage("Are you sure you want to exit without saving?")
+//                .setCancelable(false)
+//                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+//                    public void onClick(DialogInterface dialog, int id) {
+//                        EditAccountActivity.super.onBackPressed();
+//                    }
+//                })
+//                .setNegativeButton("No", null)
+//                .show();
+//    }
 
+    // Confirm with user that they want to exit without saving changes
+    @Override
+    public void onBackPressed() {
+        if (editing) {
+            new AlertDialog.Builder(this)
+                    .setMessage("Are you sure you want to exit without saving?")
+                    .setCancelable(false)
+                    .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+                            EditAccountActivity.super.onBackPressed();
+                        }
+                    })
+                    .setNegativeButton("No", null)
+                    .show();
+        }
+        else {
+            super.onBackPressed();
+        }
+
+    }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
@@ -154,7 +188,7 @@ public class EditAccountActivity extends AppCompatActivity {
 
         if (phoneNumber.length() == 0){
             goodPhone = false;
-            emailError = "Phone cannot be empty";
+            phoneError = "Phone cannot be empty";
         } else if (!User.validatePhone(phoneNumber)){
             goodPhone = false;
             phoneError = "Phone is not in a valid format";
@@ -166,6 +200,11 @@ public class EditAccountActivity extends AppCompatActivity {
             AlertDialog.Builder badUsernameDialog = new AlertDialog.Builder(EditAccountActivity.this);
             badUsernameDialog.setMessage(phoneError);
             badUsernameDialog.show();
+            if (!goodEmail) {
+                AlertDialog.Builder badEmailDialog = new AlertDialog.Builder(EditAccountActivity.this);
+                badEmailDialog.setMessage(emailError);
+                badEmailDialog.show();
+            }
         }
         if (!goodEmail){
             AlertDialog.Builder badUsernameDialog = new AlertDialog.Builder(EditAccountActivity.this);

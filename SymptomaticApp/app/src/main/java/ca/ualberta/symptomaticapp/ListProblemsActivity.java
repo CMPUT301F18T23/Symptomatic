@@ -75,12 +75,9 @@ public class ListProblemsActivity extends AppCompatActivity {
             getProblems(Login.thisUser.returnUsername());
         }
 
-
-
-
     }
 
-    @Override
+   /* @Override
     public void onResume(){
         super.onResume();
         if(Login.thisUser != null) {
@@ -92,7 +89,30 @@ public class ListProblemsActivity extends AppCompatActivity {
             listAdapter.notifyDataSetChanged();
 
         }
+    }*/
+    @Override
+    protected void onPause(){
+        super.onPause();
+        if(Login.thisUser != null) {
+            getProblems(Login.thisUser.returnUsername());
 
+        }
+        for (Problem thisProblem: thisProbList.getProblems()){
+            thisProblem.updateRecords();
+            listAdapter.notifyDataSetChanged();
+
+        }
+    }
+    @Override
+    protected void onStart(){
+        super.onStart();
+        if(Login.thisUser != null) {
+            getProblems(Login.thisUser.returnUsername());
+        }
+        for (Problem thisProblem: thisProbList.getProblems()){
+            thisProblem.updateRecords();
+            listAdapter.notifyDataSetChanged();
+        }
     }
 
     @Override
@@ -137,7 +157,6 @@ public class ListProblemsActivity extends AppCompatActivity {
 
     public static void getProblems(String username){
         FirebaseFirestore db = FirebaseFirestore.getInstance();
-
         CollectionReference problems = db.collection("problems");
 
         Query problemsQuery = problems.whereEqualTo("user",username);
