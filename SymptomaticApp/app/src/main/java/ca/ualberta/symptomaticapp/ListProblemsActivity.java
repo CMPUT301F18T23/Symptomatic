@@ -78,6 +78,19 @@ public class ListProblemsActivity extends AppCompatActivity {
     }
 
     @Override
+    public void onRestart(){
+        super.onRestart();
+        if(Login.thisUser != null) {
+            getProblems(Login.thisUser.returnUsername());
+
+        }
+        for (Problem thisProblem: thisProbList.getProblems()){
+            thisProblem.updateRecords();
+            listAdapter.notifyDataSetChanged();
+        }
+    }
+
+    @Override
     public void onResume(){
         super.onResume();
         if(Login.thisUser != null) {

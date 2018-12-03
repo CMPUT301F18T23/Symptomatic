@@ -108,6 +108,11 @@ public class ListRecordsActivity extends AppCompatActivity {
         super.onStart();
         getRecords();
     }
+    @Override
+    public void onRestart(){
+        super.onRestart();
+        getRecords();
+    }
 
 
     @Override
