@@ -21,6 +21,7 @@
     <string name="enter_username_please">Please enter your desired username below</string>
     <string name="unique_username">It must be unique, and at least 8 characters</string>
     <string name="enter_username">Enter username here</string>
+    <string name="addcomment">Add Comment</string>
     <string name="enter_email_please">Please enter your email address</string>
     <string name="enter_email">Enter email address here</string>
     <string name="enter_number_please">Please enter your phone number</string>
@@ -42,6 +43,7 @@
     <string name="edit_problem2">Edit Problem</string>
     <string name="view_problems">View Patient</string>
     <string name="view_photo_album">View Photo Album</string>
+    <string name="view_photo">View Photo</string>
     <string name="add_patient">Add Patient</string>
     <string name="patuser">Patient Username:</string>
     <string name="edit_title">Modify the problem\'s title:</string>
