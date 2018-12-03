@@ -166,7 +166,6 @@ public class ListRecordsActivity extends AppCompatActivity {
 
     private void getRecords(){
         db = FirebaseFirestore.getInstance();
-        thisRecordList.empty();
 
         final CollectionReference records = db.collection("records");
 
