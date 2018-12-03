@@ -1,6 +1,8 @@
 package ca.ualberta.symptomaticapp;
 
 import android.app.AlertDialog;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.support.annotation.NonNull;
@@ -40,6 +42,7 @@ public class EditAccountActivity extends AppCompatActivity {
     EditText emailTextView,phoneNumberEditText;
 
     Button editSave,close;
+    boolean editing = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -79,6 +82,7 @@ public class EditAccountActivity extends AppCompatActivity {
                     editSave.setText("Save");
                 } else {
                     editInfo();
+
                 }
             }
         });
@@ -90,6 +94,7 @@ public class EditAccountActivity extends AppCompatActivity {
         });
 
     }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -131,6 +136,7 @@ public class EditAccountActivity extends AppCompatActivity {
     }
 
     public void editInfo() {
+
 
         email = emailTextView.getText().toString();
         phoneNumber = phoneNumberEditText.getText().toString();
