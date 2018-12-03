@@ -41,7 +41,7 @@ public class CaregiverViewQRCode extends AppCompatActivity {
         String encoded = username + ","+type;
 
 //        MultiFormatWriter mfr = new MultiFormatWriter()
-        createQRCode(encoded);
+        createCaregiverQRCode(encoded);
 //        try{
 //            BitMatrix bitMatrix = mfr.encode(encoded, BarcodeFormat.QR_CODE,600,600);
 //            BarcodeEncoder barcodeEncoder = new BarcodeEncoder();
@@ -60,7 +60,7 @@ public class CaregiverViewQRCode extends AppCompatActivity {
     }
 
 
-    public void createQRCode(String encoded) {
+    public void createCaregiverQRCode(String encoded) {
         MultiFormatWriter mfr = new MultiFormatWriter();
         ImageView qrdisplay = (ImageView) findViewById(R.id.iv_qrcode);
         try{

@@ -39,7 +39,7 @@ public class ViewQRCode extends AppCompatActivity {
         }
         String encoded = username + ","+type;
 
-        createQRCode(encoded);
+        createPatientQRCode(encoded);
 //        MultiFormatWriter mfr = new MultiFormatWriter();
 //        ImageView qrdisplay = (ImageView) findViewById(R.id.iv_qrcode);
 //        try{
@@ -59,7 +59,7 @@ public class ViewQRCode extends AppCompatActivity {
         });
     }
 
-    public void createQRCode(String encoded) {
+    public void createPatientQRCode(String encoded) {
         MultiFormatWriter mfr = new MultiFormatWriter();
         ImageView qrdisplay = (ImageView) findViewById(R.id.iv_qrcode);
         try{
