@@ -165,8 +165,3 @@ public class CViewRecords extends AppCompatActivity {
         });
     }
 }
-/**
- String[] latlng = currRecord.geolocation.split(",");
- double latitude = Double.parseDouble(latlng[0]);
- double longitude = Double.parseDouble(latlng[1]);
- */

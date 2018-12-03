@@ -22,8 +22,17 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
         android:layout_marginBottom="60dp"
-        android:layout_marginRight="140dp"
+        android:layout_toLeftOf="@id/viewGeoButton"
         android:text="@string/view_photo" />
+    <Button
+        android:id="@+id/viewGeoButton"
+        android:layout_width="wrap_content"
+        android:layout_height="62dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginBottom="60dp"
+        android:layout_marginRight="70dp"
+        android:text="@string/viewgeolocation" />
 
     <Button
         android:id="@+id/AddCommentButton"
