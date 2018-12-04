@@ -10,7 +10,7 @@
  *
  * Activity to log a patient in to the app.
  *
- * Issues: 
+ * Issues:
  *
  */
 
@@ -128,7 +128,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener{
                                 //sends the user to the Caregiver homepage if the caregiver button is checked
                                 next_activity = new Intent(Login.this,CaregiverHome.class);
                             }
-                            if(ListProblemsActivity.thisProbList != null) {
+                            if(ListProblemsActivity.thisProbList != null && Login.thisUser != null) {
                                 ListProblemsActivity.thisProbList.empty();
                                 ListProblemsActivity.getProblems(thisUser.returnUsername());
                                // ListProblemsActivity.listAdapter.notifyDataSetChanged();
